@@ -33,7 +33,7 @@ class BankInformationWidget extends StatelessWidget {
           label: 'Name of the account',
         ),
         SizedBox(
-          height: 32.25,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Account number',
@@ -42,21 +42,21 @@ class BankInformationWidget extends StatelessWidget {
           suffixIconColor: Pallets.disabledIconColor,
         ),
         SizedBox(
-          height: 32,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Name of bank',
           label: 'Name of bank',
         ),
         SizedBox(
-          height: 32,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Sort code',
           label: 'Sort code',
         ),
         SizedBox(
-          height: 32,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Swift code (If any)',

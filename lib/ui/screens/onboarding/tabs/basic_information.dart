@@ -35,21 +35,21 @@ class BasicInformationWidget extends StatelessWidget {
           textAlign: TextAlign.left,
         ),
         SizedBox(
-          height: 32.25,
+                height: 8,
         ),
         EditFormField(
           floatingLabel: 'Full name',
           label: 'Full name',
         ),
         SizedBox(
-          height: 32.25,
+                height: 8,
         ),
         EditFormField(
           floatingLabel: 'Phone number',
           label: 'Phone number',
         ),
         SizedBox(
-          height: 32.25,
+                height: 8,
         ),
         EditFormField(
           floatingLabel: 'State/province',
@@ -58,14 +58,14 @@ class BasicInformationWidget extends StatelessWidget {
           suffixIconColor: Pallets.disabledIconColor,
         ),
         SizedBox(
-          height: 32.25,
+                height: 8,
         ),
         EditFormField(
           floatingLabel: 'Address',
           label: 'Address',
         ),
         SizedBox(
-          height: 32.25,
+                height: 8,
         ),
         EditFormField(
           floatingLabel: 'Sex',
@@ -74,7 +74,7 @@ class BasicInformationWidget extends StatelessWidget {
           suffixIconColor: Pallets.disabledIconColor,
         ),
         SizedBox(
-          height: 32.25,
+                height: 8,
         ),
         EditFormField(
           floatingLabel: 'Date of Birth',

@@ -35,25 +35,25 @@ class WorkInformationWidget extends StatelessWidget {
           textAlign: TextAlign.left,
         ),
         SizedBox(
-          height: 32.25,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Occupation / work',
           label: 'Occupation / work',
         ),
         SizedBox(
-          height: 32.25,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Industry',
           label: 'Industry',
         ),
         SizedBox(
-          height: 32.25,
+          height: 8,
         ),
         EditFormField(
-          floatingLabel: 'Offical address',
-          label: 'Offical address',
+          floatingLabel: 'Official address',
+          label: 'Official address',
           suffixIcon: Icons.keyboard_arrow_down_sharp,
           suffixIconColor: Pallets.disabledIconColor,
         ),

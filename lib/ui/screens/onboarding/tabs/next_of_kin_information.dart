@@ -25,14 +25,14 @@ class NextOfKinInformationWidget extends StatelessWidget {
           textAlign: TextAlign.left,
         ),
         SizedBox(
-          height: 32,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Next of kin full name',
           label: 'Next of kin full name',
         ),
         SizedBox(
-          height: 32.25,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Relationship',
@@ -41,14 +41,14 @@ class NextOfKinInformationWidget extends StatelessWidget {
           suffixIconColor: Pallets.disabledIconColor,
         ),
         SizedBox(
-          height: 32,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Next of kin phone number',
           label: 'Phone number',
         ),
         SizedBox(
-          height: 32,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Email address',

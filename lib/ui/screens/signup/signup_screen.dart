@@ -56,9 +56,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 color: Pallets.grey700,
                 textAlign: TextAlign.left,
               ),
-              SizedBox(
-                height: 32.25,
-              ),
+
               EditFormField(
                 floatingLabel: 'Enter referral code (If any)',
                 label: 'Referral code (if any)',
@@ -66,7 +64,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 prefixIconColor: Pallets.disabledIconColor,
               ),
               SizedBox(
-                height: 32.25,
+                height: 8,
               ),
               EditFormField(
                 floatingLabel: 'Email address',
@@ -74,7 +72,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 prefixIcon: Icons.email_outlined,
               ),
               SizedBox(
-                height: 32.25,
+                height: 8,
               ),
               EditFormField(
                 floatingLabel: 'Enter password',
@@ -85,7 +83,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 suffixIconColor: Pallets.disabledIconColor,
               ),
               SizedBox(
-                height: 32.25,
+                height: 8,
               ),
               EditFormField(
                 floatingLabel: 'Re-enter password',
@@ -96,7 +94,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 suffixIconColor: Pallets.disabledIconColor,
               ),
               SizedBox(
-                height: 64,
+                height: 23,
               ),
               ButtonWidget(
                 width: getDeviceWidth(context),
@@ -110,7 +108,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     PageRouter.gotoNamed(Routes.getStarted, context),
               ),
               SizedBox(
-                height: 67,
+                height: 23,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +121,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
-                    width: 16,
+                    width: 8,
                   ),
                   TextView(
                     text: 'Login here',

@@ -31,7 +31,7 @@ class EditFormField extends StatelessWidget {
       this.maxLines = 1,
       this.minLines = 1,
       this.maxLength,
-      this.floatingLabelBehavior,
+      this.floatingLabelBehavior = FloatingLabelBehavior.never,
       this.inputFormatters,
       this.focusedColorBorder,
       this.suffixIconColor,
