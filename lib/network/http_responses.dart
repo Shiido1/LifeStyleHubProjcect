@@ -14,13 +14,12 @@ dynamic returnResponse(http.Response response) {
       throw BadRequestException(response.body.toString());
     case 401:
       var responseJson = json.decode(response.body.toString());
-
       throw BadRequestException(responseJson['message']);
     case 403:
       throw UnauthorisedException(response.body.toString());
     case 500:
     default:
       throw FetchDataException(
-          'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
+          'Error occurred while Communicating with Server with StatusCode : ${response.statusCode}');
   }
 }

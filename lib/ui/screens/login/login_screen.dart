@@ -33,11 +33,11 @@ class _LoginScreenState extends State<LoginScreen> {
   String _passwordValueDetector = '';
   bool _onPasswordToggle = true;
 
-  LoginViewmodel? _login;
+  LoginViewModel? _login;
 
   @override
   void initState() {
-    _login = Provider.of<LoginViewmodel>(context, listen: false);
+    _login = Provider.of<LoginViewModel>(context, listen: false);
     _login!.init(context);
     _initControllers();
     super.initState();
@@ -63,8 +63,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<LoginViewmodel>.withConsumer(
-      viewModelBuilder: () => LoginViewmodel(),
+    return ViewModelProvider<LoginViewModel>.withConsumer(
+      viewModelBuilder: () => LoginViewModel(),
       builder: (context, loginModel, _) => LoadingOverlay(
         isLoading: loginModel.loading,
         child: Scaffold(
@@ -115,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           floatingLabel: 'Email address',
                           label: 'Email address',
                           controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
                           onChange: (value) =>
                               setState(() => _emailValueDetector = value),
                           prefixIcon: Icons.email_outlined,
@@ -130,6 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         EditFormField(
                           floatingLabel: 'Password',
                           label: 'Password',
+                          keyboardType: TextInputType.text,
                           controller: _passwordController,
                           obscureText: _onPasswordToggle,
                           onChange: (value) =>

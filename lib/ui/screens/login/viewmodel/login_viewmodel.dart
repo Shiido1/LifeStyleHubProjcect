@@ -6,7 +6,7 @@ import 'package:lifestyle_hub/ui/screens/login/repository/login_repository.dart'
 
 LoginRepository _loginRepository = LoginRepository();
 
-class LoginViewmodel extends BaseViewModel {
+class LoginViewModel extends BaseViewModel {
   late BuildContext _context;
   bool _loading = false;
 
@@ -18,18 +18,19 @@ class LoginViewmodel extends BaseViewModel {
     this._context = context;
   }
 
-  void isReady() {}
-
+  /// show loading indicator
   void _showLoading() {
     _loading = true;
     notifyListeners();
   }
 
+  /// hide loading indicator
   void _hideLoading() {
     _loading = false;
     notifyListeners();
   }
 
+  /// perform login request
   Future<void> login({required Map map}) async {
     try {
       _showLoading();

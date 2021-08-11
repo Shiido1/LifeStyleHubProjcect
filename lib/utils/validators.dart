@@ -186,23 +186,20 @@ class Validators {
 
   /// compares users input to that of a different
   /// field
-  static String Function(String) validateDiffChange(
+  static String? Function(String?)? validateDiffChange(
     FormFieldState<String> field, [
     String? error,
   ]) {
-    return (String value) {
+    return (String? value) {
       if (field.value != value) {
         return error ?? 'Values don\'t match';
       }
-      return '';
+      return null;
     };
   }
 
-  /// ensures that the password used in the main field
-  /// is equal to that used in the confirmed password field
-  static String Function(String) validateMainPasswordWithConfirmPassword(
-      FormFieldState<String> passwordField) {
-    return (String value) {
+  static String? Function(String?)? validatePassword(FormFieldState<String> passwordField) {
+    return (String? value) {
       if (passwordField == null) {
         return 'Please enter a password.';
       }
@@ -212,7 +209,26 @@ class Validators {
       return validateDiffChange(
         passwordField,
         'The passwords don\'t match',
-      )(value);
+      )!(value!);
+    };
+  }
+
+
+  /// ensures that the password used in the main field
+  /// is equal to that used in the confirmed password field
+  static String? Function(String?)? validateMainPasswordWithConfirmPassword(
+       passwordField) {
+    return (String? value) {
+      if (passwordField == null) {
+        return 'Please enter a password.';
+      }
+      if (passwordField.value == null || passwordField.value!.isEmpty) {
+        return 'Please enter a password.';
+      }
+      return validateDiffChange(
+        passwordField,
+        'The passwords don\'t match',
+      )!(value!);
     };
   }
 

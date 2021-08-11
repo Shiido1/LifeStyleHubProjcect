@@ -7,7 +7,7 @@ import 'package:provider/single_child_widget.dart';
 class Providers {
   static List<SingleChildWidget> getProviders = [
     ChangeNotifierProvider<TabViewModel>(create: (_) => TabViewModel()),
-    ChangeNotifierProvider<SignupViewModel>(create: (_) => SignupViewModel()),
-    ChangeNotifierProvider<LoginViewmodel>(create: (_) => LoginViewmodel()),
+    ChangeNotifierProvider<RegisterViewModel>(create: (_) => RegisterViewModel()),
+    ChangeNotifierProvider<LoginViewModel>(create: (_) => LoginViewModel()),
   ];
 }
