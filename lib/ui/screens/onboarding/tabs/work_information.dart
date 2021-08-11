@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/provider/tab_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/provider/tab_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/information_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/tabs/bank_information_widget.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/tabs/next_of_kin_information.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
+import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/utils/images.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
@@ -10,25 +12,22 @@ import 'package:provider/provider.dart';
 import 'tabs/basic_information.dart';
 import 'tabs/work_information.dart';
 
-class GetStartedScreen extends StatefulWidget {
+class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({Key? key}) : super(key: key);
 
   @override
-  _GetStartedScreenState createState() => _GetStartedScreenState();
-}
-
-class _GetStartedScreenState extends State<GetStartedScreen> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          automaticallyImplyLeading: false,
-        ),
-        body: Consumer<TabViewModel>(
-          builder: (context, provider, child) {
-            return SingleChildScrollView(
+    return Consumer2<TabViewModel, InformationViewModel>(
+      builder: (context, provider, info, child) {
+        return LoadingOverlay(
+          isLoading: info.loading,
+          child: Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              automaticallyImplyLeading: false,
+            ),
+            body: SingleChildScrollView(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
@@ -55,7 +54,27 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                         Expanded(
                           child: Divider(
                             thickness: 4,
-                            color: provider.isNextTab
+                            color: provider.index >= 1
+                                ? Pallets.orange500
+                                : Pallets.grey200,
+                          ),
+                        ),
+
+                        SizedBox(width: 17),
+                        Expanded(
+                          child: Divider(
+                            thickness: 4,
+                            color: provider.index >= 2
+                                ? Pallets.orange500
+                                : Pallets.grey200,
+                          ),
+                        ),
+
+                        SizedBox(width: 17),
+                        Expanded(
+                          child: Divider(
+                            thickness: 4,
+                            color: provider.index >= 3
                                 ? Pallets.orange500
                                 : Pallets.grey200,
                           ),
@@ -69,10 +88,13 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   ],
                 ),
               ),
-            );
-          },
-        ));
+            ),
+          ),
+        );
+      },
+    );
   }
+
 
   Widget _switchTabs(TabViewModel provider) {
     if (provider.index == 0) {
@@ -84,7 +106,6 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
     if (provider.index == 3) {
       return BankInformationWidget();
     }
-
     return WorkInformationWidget();
   }
 }

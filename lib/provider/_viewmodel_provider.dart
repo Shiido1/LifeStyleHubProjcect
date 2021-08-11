@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 enum _ViewModelProviderType { WithoutConsumer, WithConsumer }
 
-/// A widget that provides base functionality for the Mvvm style provider architecture by FilledStacks.
+/// A widget that provides base functionality for the Mvvm style viewmodel architecture by FilledStacks.
 class ViewModelProvider<T extends ChangeNotifier> extends StatefulWidget {
   final Widget? staticChild;
 
@@ -37,7 +37,7 @@ class ViewModelProvider<T extends ChangeNotifier> extends StatefulWidget {
 
   final _ViewModelProviderType providerType;
 
-  /// Constructs a viewmodel provider that will not rebuild the provided widget when notifyListeners is called.
+  /// Constructs a viewmodel viewmodel that will not rebuild the provided widget when notifyListeners is called.
   ViewModelProvider.withoutConsumer({
     required this.builder,
     required this.viewModelBuilder,
@@ -55,7 +55,7 @@ class ViewModelProvider<T extends ChangeNotifier> extends StatefulWidget {
         'You have to provide a viewmodel or a viewmodel builder');
   }
 
-  /// Constructs a viewmodel provider that fires the builder function when notifyListeners is called in the viewmodel.
+  /// Constructs a viewmodel viewmodel that fires the builder function when notifyListeners is called in the viewmodel.
   ViewModelProvider.withConsumer({
     required this.builder,
     required this.viewModelBuilder,

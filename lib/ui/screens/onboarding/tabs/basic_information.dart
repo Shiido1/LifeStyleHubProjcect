@@ -1,14 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/provider/tab_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/tabs/model/temp_basic_information_model.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/information_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 
-class BasicInformationWidget extends StatelessWidget {
+class BasicInformationWidget extends StatefulWidget {
   const BasicInformationWidget({Key? key}) : super(key: key);
+
+  @override
+  _BasicInformationWidgetState createState() => _BasicInformationWidgetState();
+}
+
+class _BasicInformationWidgetState extends State<BasicInformationWidget> {
+  TextEditingController _fullNameController =
+      TextEditingController(text: TempBasicInformationHolder.fullName ?? '');
+  TextEditingController _phoneNumberController =
+      TextEditingController(text: TempBasicInformationHolder.phoneNumber ?? '');
+  TextEditingController _stateController =
+      TextEditingController(text: TempBasicInformationHolder.state ?? '');
+  TextEditingController _addressController =
+      TextEditingController(text: TempBasicInformationHolder.address ?? '');
+  TextEditingController _sexController =
+      TextEditingController(text: TempBasicInformationHolder.sex ?? '');
+  TextEditingController _dobController =
+      TextEditingController(text: TempBasicInformationHolder.dateOfBirth ?? '');
+
+  InformationViewModel? _informationViewModel;
+
+  @override
+  void initState() {
+    _informationViewModel = Provider.of<InformationViewModel>(context, listen: false);
+    _informationViewModel!.init(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final _tabViewModel = Provider.of<TabViewModel>(context);
@@ -35,52 +65,58 @@ class BasicInformationWidget extends StatelessWidget {
           textAlign: TextAlign.left,
         ),
         SizedBox(
-                height: 8,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Full name',
           label: 'Full name',
+          controller: _fullNameController,
         ),
         SizedBox(
-                height: 8,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Phone number',
           label: 'Phone number',
+          controller: _phoneNumberController,
         ),
         SizedBox(
-                height: 8,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'State/province',
           label: 'Select state',
           suffixIcon: Icons.keyboard_arrow_down_sharp,
           suffixIconColor: Pallets.disabledIconColor,
+          controller: _stateController,
         ),
         SizedBox(
-                height: 8,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Address',
           label: 'Address',
+          controller: _addressController,
         ),
         SizedBox(
-                height: 8,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Sex',
           label: 'Select sex',
           suffixIcon: Icons.keyboard_arrow_down_sharp,
           suffixIconColor: Pallets.disabledIconColor,
+          controller: _sexController,
         ),
         SizedBox(
-                height: 8,
+          height: 8,
         ),
         EditFormField(
           floatingLabel: 'Date of Birth',
           label: 'Date of Birth',
           suffixIcon: Icons.calendar_today_outlined,
           suffixIconColor: Pallets.disabledIconColor,
+          controller: _dobController,
         ),
         SizedBox(
           height: 32,
@@ -93,12 +129,22 @@ class BasicInformationWidget extends StatelessWidget {
           textAlign: TextAlign.center,
           fontStyle: FontStyle.normal,
           primary: Pallets.orange600,
-          onPressed: () => _tabViewModel.switchIndex(1),
+          onPressed: () => _cacheTemporer(_tabViewModel),
         ),
         SizedBox(
           height: 32,
         ),
       ],
     );
+  }
+
+  void _cacheTemporer(TabViewModel _tabViewModel) {
+    TempBasicInformationHolder.fullName = _fullNameController.text;
+    TempBasicInformationHolder.phoneNumber = _phoneNumberController.text;
+    TempBasicInformationHolder.state = _stateController.text;
+    TempBasicInformationHolder.address = _addressController.text;
+    TempBasicInformationHolder.sex = _sexController.text;
+    TempBasicInformationHolder.dateOfBirth = _dobController.text;
+    _tabViewModel.switchIndex(1);
   }
 }

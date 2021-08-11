@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/helper/routes/routes.dart';
@@ -15,7 +14,7 @@ class RegisterViewModel extends BaseViewModel {
   BuildContext get buildContext => _context;
   bool get loading => _loading;
 
-  /// initialize auth provider
+  /// initialize auth viewmodel
   void init(BuildContext context) {
     this._context = context;
   }
