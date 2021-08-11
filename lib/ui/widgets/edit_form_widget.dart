@@ -50,6 +50,7 @@ class EditFormField extends StatelessWidget {
       this.fillColor = true,
       this.counterLength = 0,
       this.isTyping = false,
+      this.autoValidate = false,
       this.showMaxLengthCounter = false,
       this.radius = 5});
 
@@ -99,6 +100,7 @@ class EditFormField extends StatelessWidget {
   final EdgeInsetsGeometry? edgeInsetsGeometry;
   final FocusNode? focusNode;
   bool fillColor;
+  bool autoValidate;
   bool showMaxLengthCounter;
   final int counterLength;
   double radius;
@@ -129,10 +131,12 @@ class EditFormField extends StatelessWidget {
           focusNode: focusNode,
           textInputAction: textInputAction,
           textCapitalization: textCapitalization!,
-          autovalidateMode: autoValidateMode,
+          // autovalidateMode: autoValidateMode,
           onSaved: onSaved,
           onChanged: onChange,
           maxLines: maxLines,
+          // ignore: deprecated_member_use
+          autovalidate: autoValidate,
           style: GoogleFonts.montserrat(
               color: Pallets.grey800,
               fontWeight: FontWeight.w500,
@@ -153,7 +157,7 @@ class EditFormField extends StatelessWidget {
                           '$counterLength/$maxLength characters',
                           style: TextStyle(color: Colors.green),
                         )
-                      : Container(),
+                      : null,
                   fillColor: focusedColorBorder,
                   filled: fillColor,
                   floatingLabelBehavior: floatingLabelBehavior,

@@ -22,6 +22,7 @@ dependencies:
   provider: ^5.0.0
   observable_ish: ^3.0.0
   logger: ^1.0.0
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
 
-class TabViewModel extends ChangeNotifier {
+class TabViewModel extends BaseViewModel {
   int _index = 0;
 
   int get index => _index;
