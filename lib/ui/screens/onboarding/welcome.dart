@@ -1,10 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
+import 'package:lifestyle_hub/ui/screens/login/viewmodel/login_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/images.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-import 'dart:async';
+import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -16,12 +21,26 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   double _progress = 0;
 
+  LoginViewModel? _login;
+
   @override
   void initState() {
-    _startTimer();
+    _login = Provider.of<LoginViewModel>(context, listen: false);
+    _loginUser();
     super.initState();
   }
 
+  /// login user
+  void _loginUser() {
+    _login!.init(context);
+    _login!.login(
+        map: LoginModel.sendData(
+            email: AppConstants.tempEmail!,
+            password: AppConstants.tempPassword!));
+    _startTimer();
+  }
+
+  /// set timer for loading indicator
   void _startTimer() {
     new Timer.periodic(
       Duration(seconds: 1),
@@ -29,8 +48,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         () {
           if (_progress == 1) {
             timer.cancel();
+            _startTimer();
           } else {
-            _progress += 0.2;
+            _progress += 0.1;
           }
         },
       ),

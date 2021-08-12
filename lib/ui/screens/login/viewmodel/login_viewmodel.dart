@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/helper/routes/routes.dart';
 import 'package:lifestyle_hub/provider/provider_architecture.dart';
 import 'package:lifestyle_hub/ui/screens/login/repository/login_repository.dart';
 
@@ -11,11 +12,12 @@ class LoginViewModel extends BaseViewModel {
   bool _loading = false;
 
   BuildContext get buildContext => _context;
+
   bool get loading => _loading;
 
   /// initialize auth viewmodel
-  void init(BuildContext context) {
-    this._context = context;
+  void init(BuildContext context, {bool initialize = true}) {
+    if (initialize) this._context = context;
   }
 
   /// show loading indicator
@@ -34,8 +36,8 @@ class LoginViewModel extends BaseViewModel {
   Future<void> login({required Map map}) async {
     try {
       _showLoading();
-      final _response = await _loginRepository.login(map: map);
-      logger.d(_response.user!.toJson());
+      await _loginRepository.login(map: map);
+      PageRouter.gotoNamed(Routes.home, _context, clearStack: true);
       _hideLoading();
     } catch (e) {
       _hideLoading();

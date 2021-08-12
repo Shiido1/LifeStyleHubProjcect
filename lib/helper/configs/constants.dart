@@ -3,6 +3,9 @@ class AppConstants {
 
   static int timeOutDuration = 30;
   static String? tempToken;
+  static String? tempEmail;
+  static String? tempPassword;
+  static String? usersPrefKey = 'user';
 
   static List<String> getStates() {
     List<String> _states = [];

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/constants.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/helper/routes/routes.dart';
@@ -34,14 +33,16 @@ class RegisterViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  /// perform Register request
-  ///cache token temporery for other network request
-  /// during the onBoarding
+  /// perform Register request & cache token temporery for other network request
+  /// during the onBoarding and also cache email and password to log user in when all
+  /// other onBoarding are successful
   Future<void> register({required Map map}) async {
     try {
       _showLoading();
       final _response = await _registerRepository.register(map: map);
       AppConstants.tempToken = _response.token;
+      AppConstants.tempEmail = map['email'];
+      AppConstants.tempPassword = map['password'];
       _hideLoading();
       PageRouter.gotoNamed(Routes.getStarted, _context);
     } catch (e) {

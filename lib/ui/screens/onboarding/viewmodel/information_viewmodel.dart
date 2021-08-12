@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/helper/routes/routes.dart';
@@ -37,9 +36,7 @@ class InformationViewModel extends BaseViewModel {
   Future<bool> registerBasicInformation({required Map map}) async {
     try {
       _showLoading();
-      final _response =
-          await _informationRepository.registerBasicInformation(map: map);
-      logger.d(_response.user!.toJson());
+      await _informationRepository.registerBasicInformation(map: map);
       _hideLoading();
       return true;
     } catch (e) {
