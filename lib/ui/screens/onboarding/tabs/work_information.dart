@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/tabs/model/work_and_bank_information_model.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
@@ -7,8 +8,21 @@ import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 
-class WorkInformationWidget extends StatelessWidget {
+class WorkInformationWidget extends StatefulWidget {
   const WorkInformationWidget({Key? key}) : super(key: key);
+
+  @override
+  _WorkInformationWidgetState createState() => _WorkInformationWidgetState();
+}
+
+class _WorkInformationWidgetState extends State<WorkInformationWidget> {
+  TextEditingController _occupationController = TextEditingController(
+      text: TempWorkAndBankInformationHolder.occupation ?? '');
+  TextEditingController _industryController = TextEditingController(
+      text: TempWorkAndBankInformationHolder.industry ?? '');
+  TextEditingController _officialAddressController = TextEditingController(
+      text: TempWorkAndBankInformationHolder.officialAddress ?? '');
+
   @override
   Widget build(BuildContext context) {
     final _tabViewModel = Provider.of<TabViewModel>(context);
@@ -40,6 +54,7 @@ class WorkInformationWidget extends StatelessWidget {
         EditFormField(
           floatingLabel: 'Occupation / work',
           label: 'Occupation / work',
+          controller: _occupationController,
         ),
         SizedBox(
           height: 8,
@@ -47,6 +62,7 @@ class WorkInformationWidget extends StatelessWidget {
         EditFormField(
           floatingLabel: 'Industry',
           label: 'Industry',
+          controller: _industryController,
         ),
         SizedBox(
           height: 8,
@@ -56,6 +72,7 @@ class WorkInformationWidget extends StatelessWidget {
           label: 'Official address',
           suffixIcon: Icons.keyboard_arrow_down_sharp,
           suffixIconColor: Pallets.disabledIconColor,
+          controller: _officialAddressController,
         ),
         SizedBox(
           height: 32,
@@ -68,7 +85,7 @@ class WorkInformationWidget extends StatelessWidget {
           textAlign: TextAlign.center,
           fontStyle: FontStyle.normal,
           primary: Pallets.orange600,
-          onPressed: () => _tabViewModel.switchIndex(3),
+          onPressed: () => _cacheTemporer(_tabViewModel),
         ),
         SizedBox(
           height: 24,
@@ -88,5 +105,13 @@ class WorkInformationWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _cacheTemporer(_tabViewModel) {
+    TempWorkAndBankInformationHolder.occupation = _occupationController.text;
+    TempWorkAndBankInformationHolder.industry = _industryController.text;
+    TempWorkAndBankInformationHolder.officialAddress =
+        _officialAddressController.text;
+    _tabViewModel.switchIndex(3);
   }
 }

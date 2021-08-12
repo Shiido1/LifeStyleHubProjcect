@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/constants.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/helper/routes/routes.dart';
@@ -12,6 +14,7 @@ class RegisterViewModel extends BaseViewModel {
   bool _loading = false;
 
   BuildContext get buildContext => _context;
+
   bool get loading => _loading;
 
   /// initialize auth viewmodel
@@ -32,10 +35,13 @@ class RegisterViewModel extends BaseViewModel {
   }
 
   /// perform Register request
+  ///cache token temporery for other network request
+  /// during the onBoarding
   Future<void> register({required Map map}) async {
     try {
       _showLoading();
       final _response = await _registerRepository.register(map: map);
+      AppConstants.tempToken = _response.token;
       _hideLoading();
       PageRouter.gotoNamed(Routes.getStarted, _context);
     } catch (e) {

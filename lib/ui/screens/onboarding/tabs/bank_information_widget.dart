@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/helper/routes/routes.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/information_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
@@ -9,8 +9,37 @@ import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 
-class BankInformationWidget extends StatelessWidget {
+import 'model/work_and_bank_information_model.dart';
+
+class BankInformationWidget extends StatefulWidget {
   const BankInformationWidget({Key? key}) : super(key: key);
+
+  @override
+  _BankInformationWidgetState createState() => _BankInformationWidgetState();
+}
+
+class _BankInformationWidgetState extends State<BankInformationWidget> {
+  TextEditingController _nameOfAcctController = TextEditingController(
+      text: TempWorkAndBankInformationHolder.nameOfAccount ?? '');
+  TextEditingController _acctNumberController = TextEditingController(
+      text: TempWorkAndBankInformationHolder.accountNumber ?? '');
+  TextEditingController _bankNameController = TextEditingController(
+      text: TempWorkAndBankInformationHolder.nameOfBank ?? '');
+  TextEditingController _sortController = TextEditingController(
+      text: TempWorkAndBankInformationHolder.sortCode ?? '');
+  TextEditingController _swiftController = TextEditingController(
+      text: TempWorkAndBankInformationHolder.swiftCode ?? '');
+
+  InformationViewModel? _informationModel;
+
+  @override
+  void initState() {
+    _informationModel =
+        Provider.of<InformationViewModel>(context, listen: false);
+    _informationModel!.init(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final _tabViewModel = Provider.of<TabViewModel>(context);
@@ -31,6 +60,7 @@ class BankInformationWidget extends StatelessWidget {
         EditFormField(
           floatingLabel: 'Name of the account',
           label: 'Name of the account',
+          controller: _nameOfAcctController,
         ),
         SizedBox(
           height: 8,
@@ -40,6 +70,7 @@ class BankInformationWidget extends StatelessWidget {
           label: 'Account number',
           suffixIcon: Icons.keyboard_arrow_down_sharp,
           suffixIconColor: Pallets.disabledIconColor,
+          controller: _acctNumberController,
         ),
         SizedBox(
           height: 8,
@@ -47,6 +78,7 @@ class BankInformationWidget extends StatelessWidget {
         EditFormField(
           floatingLabel: 'Name of bank',
           label: 'Name of bank',
+          controller: _bankNameController,
         ),
         SizedBox(
           height: 8,
@@ -54,6 +86,7 @@ class BankInformationWidget extends StatelessWidget {
         EditFormField(
           floatingLabel: 'Sort code',
           label: 'Sort code',
+          controller: _sortController,
         ),
         SizedBox(
           height: 8,
@@ -61,6 +94,7 @@ class BankInformationWidget extends StatelessWidget {
         EditFormField(
           floatingLabel: 'Swift code (If any)',
           label: 'Swift code (If any)',
+          controller: _swiftController,
         ),
         SizedBox(
           height: 40,
@@ -74,7 +108,7 @@ class BankInformationWidget extends StatelessWidget {
           fontStyle: FontStyle.normal,
           borderColor: Color(0xff3F3F46),
           primary: Pallets.white,
-          onPressed: () => _tabViewModel.switchIndex(2),
+          onPressed: () => _cacheTemporer(_tabViewModel),
         ),
         SizedBox(
           height: 24,
@@ -87,7 +121,7 @@ class BankInformationWidget extends StatelessWidget {
           textAlign: TextAlign.center,
           fontStyle: FontStyle.normal,
           primary: Pallets.orange600,
-          onPressed: () => PageRouter.gotoNamed(Routes.welcome, context),
+          onPressed: () => _makeRequest(_tabViewModel),
         ),
         SizedBox(
           height: 24,
@@ -99,7 +133,7 @@ class BankInformationWidget extends StatelessWidget {
             fontSize: 14,
             color: Pallets.grey500,
             textAlign: TextAlign.center,
-            onTap: () {},
+            onTap: () => _makeRequest(_tabViewModel),
           ),
         ),
         SizedBox(
@@ -107,5 +141,27 @@ class BankInformationWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _cacheTemporer(_tabViewModel) {
+    TempWorkAndBankInformationHolder.nameOfAccount = _nameOfAcctController.text;
+    TempWorkAndBankInformationHolder.accountNumber = _acctNumberController.text;
+    TempWorkAndBankInformationHolder.nameOfBank = _bankNameController.text;
+    TempWorkAndBankInformationHolder.sortCode = _sortController.text;
+    TempWorkAndBankInformationHolder.swiftCode = _swiftController.text;
+    _tabViewModel.switchIndex(2);
+  }
+
+  void _makeRequest(TabViewModel _tabViewModel) async {
+    _informationModel!.registerWorkAndInInformation(
+        map: TempWorkAndBankInformationHolder.sendData(
+            occupation: TempWorkAndBankInformationHolder.occupation!,
+            industry: TempWorkAndBankInformationHolder.industry!,
+            address: TempWorkAndBankInformationHolder.officialAddress!,
+            bankName: _bankNameController.text,
+            accountName: _nameOfAcctController.text,
+            accountNumber: _acctNumberController.text,
+            sortCode: _sortController.text,
+            swiftCode: _swiftController.text));
   }
 }
