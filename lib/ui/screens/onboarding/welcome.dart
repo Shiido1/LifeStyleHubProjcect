@@ -20,8 +20,8 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   double _progress = 0;
-
   LoginViewModel? _login;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -32,7 +32,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   /// login user
   void _loginUser() {
-    _login!.init(context);
+    _login!.init(context, initialize: false);
     _login!.login(
         map: LoginModel.sendData(
             email: AppConstants.tempEmail!,
@@ -40,9 +40,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _startTimer();
   }
 
+  @override
+  void dispose() {
+    _timer!.cancel();
+    super.dispose();
+  }
+
   /// set timer for loading indicator
   void _startTimer() {
-    new Timer.periodic(
+    _timer = new Timer.periodic(
       Duration(seconds: 1),
       (Timer timer) => setState(
         () {
