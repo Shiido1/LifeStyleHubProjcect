@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/home/widget/contest_widget.dart';
+import 'package:lifestyle_hub/ui/screens/home/widget/drawer_widget.dart';
 import 'package:lifestyle_hub/ui/screens/home/widget/second_icon.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
@@ -51,11 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getCustomAppBar(context,
-          title: 'Marketting',
-          showLeadig: false,
-          onBurgerTapped: () {},
+          title: '',
+          showLeadig: true,
           image:
               'https://images.unsplash.com/photo-1558185348-fe8fa4cf631f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'),
+      drawer: getDrawer(context),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Stack(

@@ -12,6 +12,7 @@ class TextView extends StatelessWidget {
   final FontWeight? fontWeight;
   final FontStyle? fontStyle;
   final Function()? onTap;
+  final int? maxLines;
 
   TextView(
       {required this.text,
@@ -20,6 +21,7 @@ class TextView extends StatelessWidget {
       this.color,
       this.onTap,
       this.fontSize = 14.0,
+      this.maxLines,
       this.fontWeight = FontWeight.normal,
       this.fontStyle = FontStyle.normal});
   @override
@@ -35,6 +37,7 @@ class TextView extends StatelessWidget {
             fontStyle: fontStyle),
         textAlign: textAlign,
         overflow: textOverflow,
+        maxLines: maxLines,
       ),
     );
   }

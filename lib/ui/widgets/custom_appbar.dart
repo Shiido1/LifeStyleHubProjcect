@@ -11,18 +11,14 @@ AppBar getCustomAppBar(BuildContext context,
     bool showLeadig = false,
     bool showLeadingWidget = true,
     double? elevation = .0,
-    String image = '',
-    VoidCallback? onBurgerTapped}) {
+    String image = ''}) {
   return AppBar(
     automaticallyImplyLeading: showLeadig,
     elevation: elevation,
+    iconTheme: IconThemeData(
+      color: Colors.black, //change your color here
+    ),
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-    leading: showLeadingWidget
-        ? IconButton(
-            color: Pallets.black,
-            onPressed: onBurgerTapped,
-            icon: Icon(Icons.menu))
-        : null,
     title: TextView(
       text: title,
       fontWeight: FontWeight.w500,
