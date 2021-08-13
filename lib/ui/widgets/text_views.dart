@@ -24,9 +24,8 @@ class TextView extends StatelessWidget {
       this.fontStyle = FontStyle.normal});
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton(
-      onPressed: onTap,
-      padding: EdgeInsets.zero,
+    return InkWell(
+      onTap: onTap,
       child: Text(
         text,
         style: GoogleFonts.montserrat(
