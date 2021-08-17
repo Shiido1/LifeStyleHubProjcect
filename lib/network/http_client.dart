@@ -30,4 +30,24 @@ class ApiBaseHelper {
     }
     return _responseJson;
   }
+
+  /// make get requests
+  Future<dynamic> get(
+      {required String? url, Map<String, String>? header}) async {
+    var _responseJson;
+    try {
+      final response = await http
+          .get(Uri.parse('${Paths.baseUrl}$url'), headers: header)
+          .timeout(Duration(seconds: AppConstants.timeOutDuration));
+
+      _responseJson = returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    } on TimeoutException {
+      throw FetchDataException('Timeout');
+    } on FormatException {
+      throw FetchDataException('Bad response format');
+    }
+    return _responseJson;
+  }
 }

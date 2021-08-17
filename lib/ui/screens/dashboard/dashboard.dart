@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home_screen.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home/home_screen.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
 
-import 'fragments/marketting_screen.dart';
+import 'fragments/marketting/marketting_screen.dart';
 import 'widget/drawer_widget.dart';
 
 class DashboardScreen extends StatefulWidget {

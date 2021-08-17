@@ -6,8 +6,8 @@ import 'package:lifestyle_hub/ui/screens/dashboard/widget/second_icon.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
-import '../widget/active_packages.dart';
-import '../widget/first_icons.dart';
+import '../../widget/active_packages.dart';
+import '../../widget/first_icons.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

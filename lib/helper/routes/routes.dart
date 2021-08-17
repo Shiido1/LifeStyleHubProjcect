@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home_screen.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home/home_screen.dart';
 import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/informations.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/splashscreen.dart';
