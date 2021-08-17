@@ -105,6 +105,7 @@ class ButtomCountDownWidget extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   textAlign: TextAlign.center,
                   fontStyle: FontStyle.normal,
+                  borderColor: Pallets.orange500,
                   primary: Pallets.orange500,
                   onPressed: () => null,
                 ),

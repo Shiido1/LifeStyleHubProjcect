@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lifestyle_hub/ui/screens/home/home_screen.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home_screen.dart';
 import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/informations.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/splashscreen.dart';
@@ -17,6 +18,7 @@ class Routes {
   static const String getStarted = '/getStarted';
   static const String welcome = '/welcome';
   static const String home = '/home';
+  static const String dashboard = '/dashboard';
 
   static Map<String, Widget Function(BuildContext mainContext)> get getRoutes =>
       {
@@ -47,6 +49,10 @@ class Routes {
         home: (BuildContext context) {
           globalContext = context;
           return HomeScreen();
+        },
+        dashboard: (BuildContext context) {
+          globalContext = context;
+          return DashboardScreen();
         },
       };
 }

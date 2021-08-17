@@ -5,10 +5,8 @@ class TabViewModel extends BaseViewModel {
 
   int get index => _index;
 
-
   void switchIndex(int i) {
     _index = i;
-
     notifyListeners();
   }
 

@@ -26,36 +26,38 @@ class ContestWidget extends StatelessWidget {
             children: [
               Image.asset('assets/images/gold.png'),
               SizedBox(
-                width: 26,
+                width: getDeviceWidth(context) / 18,
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    height: 61,
-                    width: 61,
-                    margin: EdgeInsets.only(bottom: 8),
-                    decoration: BoxDecoration(
-                        color: Pallets.white,
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Center(
-                      child: TextView(
-                        text: percent!.toString(),
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24,
-                        color: Pallets.black,
-                        textAlign: TextAlign.left,
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      height: 61,
+                      width: 61,
+                      margin: EdgeInsets.only(bottom: 8),
+                      decoration: BoxDecoration(
+                          color: Pallets.white,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Center(
+                        child: TextView(
+                          text: percent!.toString(),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 24,
+                          color: Pallets.black,
+                          textAlign: TextAlign.left,
+                        ),
                       ),
                     ),
-                  ),
-                  TextView(
-                    text: 'Days left',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    color: Pallets.white,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                    TextView(
+                      text: 'Days left',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Pallets.white,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               )
             ],
           ),

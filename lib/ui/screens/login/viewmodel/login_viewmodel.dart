@@ -37,7 +37,7 @@ class LoginViewModel extends BaseViewModel {
     try {
       _showLoading();
       await _loginRepository.login(map: map);
-      PageRouter.gotoNamed(Routes.home, _context, clearStack: true);
+      PageRouter.gotoNamed(Routes.dashboard, _context, clearStack: true);
       _hideLoading();
     } catch (e) {
       _hideLoading();

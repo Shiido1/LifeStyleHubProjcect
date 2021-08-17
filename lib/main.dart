@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'helper/configs/providers.dart';
 import 'helper/routes/routes.dart';
+import 'ui/screens/dashboard/dashboard.dart';
 import 'ui/screens/onboarding/splashscreen.dart';
 
 void main() {
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           future: prefManager.getCachedData(key: AppConstants.usersPrefKey),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return HomeScreen();
+              return DashboardScreen();
             }
             return SplashScreen();
           },

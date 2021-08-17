@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
@@ -175,7 +176,7 @@ Consumer getDrawer(BuildContext context) {
 
 void _tap(BuildContext context, int i, TabViewModel tabNotifier) {
   tabNotifier.switchIndex(i);
-  PageRouter.goBack(context);
+  PageRouter.gotoWidget(DashboardScreen(index: i), context);
 }
 
 class CustomDrawerTabs extends StatelessWidget {
