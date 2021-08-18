@@ -13,7 +13,7 @@ class Paths {
   static String register = 'api/register';
   static String basicInformation = 'api/basic';
   static String workAndBanking = 'api/work-banking';
-
   static String addBankAccount = 'admin/bank-accounts';
   static String getBankAccount = 'bank-accounts';
+  static String packages = 'packages';
 }
