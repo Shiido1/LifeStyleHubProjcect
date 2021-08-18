@@ -53,7 +53,8 @@ void _buildCupertinoDatePicker(
                 mode: CupertinoDatePickerMode.date,
                 backgroundColor: Theme.of(context).cardColor,
                 onDateTimeChanged: (picked) {
-                  if (picked != date) date(DateFormat('yyyy-MM-dd').format(picked));
+                  if (picked != date)
+                    date(DateFormat('yyyy-MM-dd').format(picked));
                 },
                 initialDateTime: DateTime.now(),
                 minimumYear: 2000,

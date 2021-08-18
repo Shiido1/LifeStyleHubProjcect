@@ -29,6 +29,14 @@ dependencies:
   better_player: ^0.0.72
   hive_flutter: ^1.1.0
 
+jsonToDart:
+  outputFolder: lib/models #default: lib/
+  typeChecking: true  #default: undefined (Select from picker)
+  nullValueDataType: String #default: dynamic
+  nullSafety: true #default: false
+  copyWithMethod: false #default: false
+  mergeArrayApproach: false #default: true
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

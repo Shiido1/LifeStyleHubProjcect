@@ -27,8 +27,8 @@ class _NextOfKinInformationWidgetState
       TextEditingController(text: TempBasicInformationHolder.nxtFullName ?? '');
   TextEditingController _nxtRelationshipController = TextEditingController(
       text: TempBasicInformationHolder.nxtRelationship ?? '');
-  TextEditingController _nxtPhoneNumberController =
-      TextEditingController(text: TempBasicInformationHolder.nxtPhoneNumber ?? '');
+  TextEditingController _nxtPhoneNumberController = TextEditingController(
+      text: TempBasicInformationHolder.nxtPhoneNumber ?? '');
   TextEditingController _nxtEmailController =
       TextEditingController(text: TempBasicInformationHolder.nxtEmail ?? '');
 
@@ -38,7 +38,8 @@ class _NextOfKinInformationWidgetState
 
   @override
   void initState() {
-    _informationModel = Provider.of<InformationViewModel>(context, listen: false);
+    _informationModel =
+        Provider.of<InformationViewModel>(context, listen: false);
     _informationModel!.init(context);
     super.initState();
   }
@@ -72,15 +73,18 @@ class _NextOfKinInformationWidgetState
           floatingLabel: 'Relationship',
           label: 'Select relationship',
           suffixIcon: Icons.keyboard_arrow_down_sharp,
-          suffixIconColor: _relationshipSelected ? Pallets.activeIconColor : Pallets.disabledIconColor,
+          suffixIconColor: _relationshipSelected
+              ? Pallets.activeIconColor
+              : Pallets.disabledIconColor,
           controller: _nxtRelationshipController,
           onTapped: () => showCustomDialog(context,
-              title: 'Select relationship', items: AppConstants.getRelationship(), onTap: (value) {
-                _relationshipSelected = true;
-                _nxtRelationshipController.text = value;
-                setState(() {});
-                PageRouter.goBack(context);
-              }),
+              title: 'Select relationship',
+              items: AppConstants.getRelationship(), onTap: (value) {
+            _relationshipSelected = true;
+            _nxtRelationshipController.text = value;
+            setState(() {});
+            PageRouter.goBack(context);
+          }),
         ),
         SizedBox(
           height: 8,
@@ -154,7 +158,6 @@ class _NextOfKinInformationWidgetState
             relationshipOfNextOfKin: _nxtRelationshipController.text,
             phoneOfNextOfKin: _nxtPhoneNumberController.text,
             emailOfNextOfKin: _nxtEmailController.text));
-    if (_value)
-      _tabViewModel.switchIndex(2);
+    if (_value) _tabViewModel.switchIndex(2);
   }
 }

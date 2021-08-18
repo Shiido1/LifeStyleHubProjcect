@@ -100,12 +100,13 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           controller: _stateController,
           readOnly: true,
           onTapped: () => showCustomDialog(context,
-              title: 'Select state', items: AppConstants.getStates(), onTap: (value) {
-                _stateSelected = true;
-                _stateController.text = value;
-                setState(() {});
-                PageRouter.goBack(context);
-              }),
+              title: 'Select state',
+              items: AppConstants.getStates(), onTap: (value) {
+            _stateSelected = true;
+            _stateController.text = value;
+            setState(() {});
+            PageRouter.goBack(context);
+          }),
         ),
         SizedBox(
           height: 8,
@@ -127,9 +128,9 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           readOnly: true,
           onTapped: () => showCustomDialog(context,
               title: 'Select sex', items: ['Male', 'Female'], onTap: (value) {
-                _sexSelected = true;
-                _sexController.text = value;
-                setState(() {});
+            _sexSelected = true;
+            _sexController.text = value;
+            setState(() {});
             PageRouter.goBack(context);
           }),
         ),

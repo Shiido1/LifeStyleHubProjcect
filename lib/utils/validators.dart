@@ -198,7 +198,8 @@ class Validators {
     };
   }
 
-  static String? Function(String?)? validatePassword(FormFieldState<String> passwordField) {
+  static String? Function(String?)? validatePassword(
+      FormFieldState<String> passwordField) {
     return (String? value) {
       if (passwordField == null) {
         return 'Please enter a password.';
@@ -213,11 +214,10 @@ class Validators {
     };
   }
 
-
   /// ensures that the password used in the main field
   /// is equal to that used in the confirmed password field
   static String? Function(String?)? validateMainPasswordWithConfirmPassword(
-       passwordField) {
+      passwordField) {
     return (String? value) {
       if (passwordField == null) {
         return 'Please enter a password.';

@@ -239,12 +239,11 @@ class _SignupScreenState extends State<SignupScreen> {
     if (_globalFormKey.currentState!.validate()) {
       _registerViewModel!.register(
           map: RegisterModel.sendData(
-            email: _emailController.text,
-            password: _passwordController.text,
-            passwordConfirmation: _reEnterPasswordController.text,
-            referral: _referralCodeController.text
-          ));
-    } else{
+              email: _emailController.text,
+              password: _passwordController.text,
+              passwordConfirmation: _reEnterPasswordController.text,
+              referral: _referralCodeController.text));
+    } else {
       setState(() => _autoValidate = true);
     }
   }

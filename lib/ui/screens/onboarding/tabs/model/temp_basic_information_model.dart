@@ -1,4 +1,4 @@
-class TempBasicInformationHolder{
+class TempBasicInformationHolder {
   static String? fullName;
   static String? phoneNumber;
   static String? state;
@@ -10,7 +10,6 @@ class TempBasicInformationHolder{
   static String? nxtRelationship;
   static String? nxtFullName;
   static String? nxtEmail;
-
 
   static Map<String, dynamic> sendData({
     required String name,

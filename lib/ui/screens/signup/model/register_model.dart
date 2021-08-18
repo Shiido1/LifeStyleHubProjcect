@@ -22,12 +22,11 @@ class RegisterModel {
     return data;
   }
 
-  static Map<String, dynamic> sendData({
-    required String email,
-    required String password,
-    required String passwordConfirmation,
-    required String referral
-  }) {
+  static Map<String, dynamic> sendData(
+      {required String email,
+      required String password,
+      required String passwordConfirmation,
+      required String referral}) {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data["email"] = email;
     data["password"] = password;

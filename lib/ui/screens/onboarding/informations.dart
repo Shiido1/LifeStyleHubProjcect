@@ -59,7 +59,6 @@ class GetStartedScreen extends StatelessWidget {
                                 : Pallets.grey200,
                           ),
                         ),
-
                         SizedBox(width: 17),
                         Expanded(
                           child: Divider(
@@ -69,7 +68,6 @@ class GetStartedScreen extends StatelessWidget {
                                 : Pallets.grey200,
                           ),
                         ),
-
                         SizedBox(width: 17),
                         Expanded(
                           child: Divider(
@@ -94,7 +92,6 @@ class GetStartedScreen extends StatelessWidget {
       },
     );
   }
-
 
   Widget _switchTabs(TabViewModel provider) {
     if (provider.index == 0) {
