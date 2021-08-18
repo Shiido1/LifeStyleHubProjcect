@@ -6,6 +6,7 @@ class AppConstants {
   static String? tempEmail;
   static String? tempPassword;
   static String? usersPrefKey = 'user';
+  static String? bearer = 'Bearer ';
 
   static List<String> getStates() {
     List<String> _states = [];

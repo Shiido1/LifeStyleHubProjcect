@@ -1,3 +1,5 @@
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+
 class TempBasicInformationHolder {
   static String? fullName;
   static String? phoneNumber;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
@@ -7,18 +8,21 @@ import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_dialog_menu_pop.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
+import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:provider/provider.dart';
 
 import 'model/temp_basic_information_model.dart';
 
 class NextOfKinInformationWidget extends StatefulWidget {
-  const NextOfKinInformationWidget({Key? key}) : super(key: key);
+  final Function(int index) index;
+
+  const NextOfKinInformationWidget({Key? key, required this.index})
+      : super(key: key);
 
   @override
   _NextOfKinInformationWidgetState createState() =>
-      _NextOfKinInformationWidgetState();
+      _NextOfKinInformationWidgetState(index);
 }
 
 class _NextOfKinInformationWidgetState
@@ -35,18 +39,22 @@ class _NextOfKinInformationWidgetState
   bool _relationshipSelected = false;
 
   InformationViewModel? _informationModel;
+  final Function(int index) index;
+
+  _NextOfKinInformationWidgetState(this.index);
+
+  final _inforProvider =
+      ChangeNotifierProvider((ref) => InformationViewModel());
 
   @override
   void initState() {
-    _informationModel =
-        Provider.of<InformationViewModel>(context, listen: false);
+    _informationModel = context.read(_inforProvider);
     _informationModel!.init(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final _tabViewModel = Provider.of<TabViewModel>(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +122,7 @@ class _NextOfKinInformationWidgetState
           fontStyle: FontStyle.normal,
           borderColor: Color(0xff3F3F46),
           primary: Pallets.white,
-          onPressed: () => _cacheTemporer(_tabViewModel),
+          onPressed: () => _cacheTemporer(),
         ),
         SizedBox(
           height: 24,
@@ -127,7 +135,7 @@ class _NextOfKinInformationWidgetState
           textAlign: TextAlign.center,
           fontStyle: FontStyle.normal,
           primary: Pallets.orange600,
-          onPressed: () => _makeRequest(_tabViewModel),
+          onPressed: () => _makeRequest(),
         ),
         SizedBox(
           height: 32,
@@ -136,16 +144,16 @@ class _NextOfKinInformationWidgetState
     );
   }
 
-  void _cacheTemporer(_tabViewModel) {
+  void _cacheTemporer() {
     TempBasicInformationHolder.nxtFullName = _nxtFullName.text;
     TempBasicInformationHolder.nxtPhoneNumber = _nxtPhoneNumberController.text;
     TempBasicInformationHolder.nxtRelationship =
         _nxtRelationshipController.text;
     TempBasicInformationHolder.nxtEmail = _nxtEmailController.text;
-    _tabViewModel.switchIndex(0);
+    index(0);
   }
 
-  void _makeRequest(TabViewModel _tabViewModel) async {
+  void _makeRequest() async {
     bool _value = await _informationModel!.registerBasicInformation(
         map: TempBasicInformationHolder.sendData(
             name: TempBasicInformationHolder.fullName!,
@@ -158,6 +166,6 @@ class _NextOfKinInformationWidgetState
             relationshipOfNextOfKin: _nxtRelationshipController.text,
             phoneOfNextOfKin: _nxtPhoneNumberController.text,
             emailOfNextOfKin: _nxtEmailController.text));
-    if (_value) _tabViewModel.switchIndex(2);
+    if (_value) index(2);
   }
 }

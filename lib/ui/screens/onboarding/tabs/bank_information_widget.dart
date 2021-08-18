@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/information_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
@@ -7,15 +7,18 @@ import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:provider/provider.dart';
 
 import 'model/work_and_bank_information_model.dart';
 
 class BankInformationWidget extends StatefulWidget {
-  const BankInformationWidget({Key? key}) : super(key: key);
+  final Function(int index) index;
+
+  const BankInformationWidget({Key? key, required this.index})
+      : super(key: key);
 
   @override
-  _BankInformationWidgetState createState() => _BankInformationWidgetState();
+  _BankInformationWidgetState createState() =>
+      _BankInformationWidgetState(index);
 }
 
 class _BankInformationWidgetState extends State<BankInformationWidget> {
@@ -31,115 +34,126 @@ class _BankInformationWidgetState extends State<BankInformationWidget> {
       text: TempWorkAndBankInformationHolder.swiftCode ?? '');
 
   InformationViewModel? _informationModel;
+  final _informationProvider =
+      ChangeNotifierProvider((ref) => InformationViewModel());
+  final _tabViewNotifier = ChangeNotifierProvider((ref) => TabViewModel());
+
+  final Function(int index) index;
+
+  _BankInformationWidgetState(this.index);
 
   @override
   void initState() {
-    _informationModel =
-        Provider.of<InformationViewModel>(context, listen: false);
+    _informationModel = context.read(_informationProvider);
     _informationModel!.init(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final _tabViewModel = Provider.of<TabViewModel>(context);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextView(
-          text: 'Banking Information',
-          fontWeight: FontWeight.w700,
-          fontSize: 20,
-          color: Pallets.grey800,
-          textAlign: TextAlign.left,
-        ),
-        SizedBox(
-          height: 32,
-        ),
-        EditFormField(
-          floatingLabel: 'Name of the account',
-          label: 'Name of the account',
-          controller: _nameOfAcctController,
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        EditFormField(
-          floatingLabel: 'Account number',
-          label: 'Account number',
-          suffixIcon: Icons.keyboard_arrow_down_sharp,
-          suffixIconColor: Pallets.disabledIconColor,
-          controller: _acctNumberController,
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        EditFormField(
-          floatingLabel: 'Name of bank',
-          label: 'Name of bank',
-          controller: _bankNameController,
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        EditFormField(
-          floatingLabel: 'Sort code',
-          label: 'Sort code',
-          controller: _sortController,
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        EditFormField(
-          floatingLabel: 'Swift code (If any)',
-          label: 'Swift code (If any)',
-          controller: _swiftController,
-        ),
-        SizedBox(
-          height: 40,
-        ),
-        ButtonWidget(
-          width: getDeviceWidth(context),
-          buttonText: 'Previous',
-          color: Pallets.grey800,
-          fontWeight: FontWeight.w500,
-          textAlign: TextAlign.center,
-          fontStyle: FontStyle.normal,
-          borderColor: Color(0xff3F3F46),
-          primary: Pallets.white,
-          onPressed: () => _cacheTemporer(_tabViewModel),
-        ),
-        SizedBox(
-          height: 24,
-        ),
-        ButtonWidget(
-          width: getDeviceWidth(context),
-          buttonText: 'Save & start 14 days free trial',
-          color: Pallets.white,
-          fontWeight: FontWeight.w500,
-          textAlign: TextAlign.center,
-          fontStyle: FontStyle.normal,
-          primary: Pallets.orange600,
-          onPressed: () => _makeRequest(_tabViewModel),
-        ),
-        SizedBox(
-          height: 24,
-        ),
-        Center(
-          child: TextView(
-            text: 'Skip & start 14 days free trial',
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-            color: Pallets.grey500,
-            textAlign: TextAlign.center,
-            onTap: () => _makeRequest(_tabViewModel),
-          ),
-        ),
-        SizedBox(
-          height: 32,
-        ),
-      ],
+    return Consumer(
+      builder: (context, watch, child) {
+        final _tabViewModel = watch(_tabViewNotifier);
+        _informationModel = watch(_informationProvider);
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextView(
+              text: 'Banking Information',
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
+              color: Pallets.grey800,
+              textAlign: TextAlign.left,
+            ),
+            SizedBox(
+              height: 32,
+            ),
+            EditFormField(
+              floatingLabel: 'Name of the account',
+              label: 'Name of the account',
+              controller: _nameOfAcctController,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            EditFormField(
+              floatingLabel: 'Account number',
+              label: 'Account number',
+              suffixIcon: Icons.keyboard_arrow_down_sharp,
+              suffixIconColor: Pallets.disabledIconColor,
+              controller: _acctNumberController,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            EditFormField(
+              floatingLabel: 'Name of bank',
+              label: 'Name of bank',
+              controller: _bankNameController,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            EditFormField(
+              floatingLabel: 'Sort code',
+              label: 'Sort code',
+              controller: _sortController,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            EditFormField(
+              floatingLabel: 'Swift code (If any)',
+              label: 'Swift code (If any)',
+              controller: _swiftController,
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            ButtonWidget(
+              width: getDeviceWidth(context),
+              buttonText: 'Previous',
+              color: Pallets.grey800,
+              fontWeight: FontWeight.w500,
+              textAlign: TextAlign.center,
+              fontStyle: FontStyle.normal,
+              borderColor: Color(0xff3F3F46),
+              primary: Pallets.white,
+              onPressed: () => _cacheTemporer(_tabViewModel),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            ButtonWidget(
+              width: getDeviceWidth(context),
+              buttonText: 'Save & start 14 days free trial',
+              color: Pallets.white,
+              fontWeight: FontWeight.w500,
+              textAlign: TextAlign.center,
+              fontStyle: FontStyle.normal,
+              primary: Pallets.orange600,
+              onPressed: () => _makeRequest(_tabViewModel),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            Center(
+              child: TextView(
+                text: 'Skip & start 14 days free trial',
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                color: Pallets.grey500,
+                textAlign: TextAlign.center,
+                onTap: () => _makeRequest(_tabViewModel),
+              ),
+            ),
+            SizedBox(
+              height: 32,
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -149,7 +163,7 @@ class _BankInformationWidgetState extends State<BankInformationWidget> {
     TempWorkAndBankInformationHolder.nameOfBank = _bankNameController.text;
     TempWorkAndBankInformationHolder.sortCode = _sortController.text;
     TempWorkAndBankInformationHolder.swiftCode = _swiftController.text;
-    _tabViewModel.switchIndex(2);
+    index(2);
   }
 
   void _makeRequest(TabViewModel _tabViewModel) async {

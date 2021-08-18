@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
@@ -44,7 +42,7 @@ class MarkettingRepository {
 
   /// [@Update] Resource marketting details
   Future<UpdateResourceModel> updateMarkettingDetails(String id,
-      {required FormData? formData}) async {
+      {required dynamic formData}) async {
     try {
       final _response = await apiBaseHelper.put(
           url: '${Paths.updateMarketting}/$id',

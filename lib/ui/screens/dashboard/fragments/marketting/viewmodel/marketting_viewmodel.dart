@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
@@ -80,7 +78,7 @@ class MarkettingViewmodel extends BaseViewModel {
   }
 
   /// updates a single marketting details
-  Future<void> updateMarkettingDetails(String id, {FormData? formData}) async {
+  Future<void> updateMarkettingDetails(String id, {dynamic formData}) async {
     try {
       _showLoading();
       final _reponse = await _markettingRepository.updateMarkettingDetails(id,

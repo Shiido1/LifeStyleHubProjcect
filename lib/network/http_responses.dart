@@ -1,17 +1,20 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 
 import 'exception.dart';
 
 dynamic returnResponse(http.Response response) {
+  logger.d(response.statusCode);
+  logger.d(response.body);
   switch (response.statusCode) {
     case 200:
     case 201:
       var responseJson = json.decode(response.body.toString());
       return responseJson;
+    case 302:
     case 400:
-      throw BadRequestException(response.body.toString());
     case 401:
       var responseJson = json.decode(response.body.toString());
       throw BadRequestException(responseJson['message']);
@@ -24,3 +27,4 @@ dynamic returnResponse(http.Response response) {
           'Error occurred while Communicating with Server with StatusCode : ${response.statusCode}');
   }
 }
+//cpei@ppetw.com

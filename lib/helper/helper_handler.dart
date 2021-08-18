@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -33,7 +32,6 @@ Future<Map<String, String>> getHeader() async {
 
   var _data = await prefManager.getCachedData(key: AppConstants.usersPrefKey);
   LoginModel _user = LoginModel.fromJson(_data);
-  // ignore: unnecessary_null_comparison
   String? _bearer = _user != null ? _user.token : AppConstants.tempToken;
   _header[HttpHeaders.authorizationHeader] = 'Bearer $_bearer';
   return _header;

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
@@ -9,7 +10,6 @@ import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/images.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -23,16 +23,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   LoginViewModel? _login;
   Timer? _timer;
 
+  final _loginNotifier = ChangeNotifierProvider((ref) => LoginViewModel());
+
   @override
   void initState() {
-    _login = Provider.of<LoginViewModel>(context, listen: false);
+    _login = context.read(_loginNotifier);
+    _login!.init(context);
     _loginUser();
     super.initState();
   }
 
   /// login user
   void _loginUser() {
-    _login!.init(context, initialize: false);
     _login!.login(
         map: LoginModel.sendData(
             email: AppConstants.tempEmail!,

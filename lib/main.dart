@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/database/hive_database.dart';
 import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/informations.dart';
 import 'package:provider/provider.dart';
 
 import 'helper/configs/providers.dart';

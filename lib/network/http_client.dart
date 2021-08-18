@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -55,7 +54,7 @@ class ApiBaseHelper {
   /// [@PUT REQUEST]
   Future<dynamic> put(
       {required String? url,
-      required FormData map,
+      required dynamic map,
       Map<String, String>? header}) async {
     var _responseJson;
     try {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/tabs/model/work_and_bank_information_model.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
@@ -6,13 +7,15 @@ import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:provider/provider.dart';
 
 class WorkInformationWidget extends StatefulWidget {
-  const WorkInformationWidget({Key? key}) : super(key: key);
+  final Function(int value) index;
+
+  WorkInformationWidget({Key? key, required this.index}) : super(key: key);
 
   @override
-  _WorkInformationWidgetState createState() => _WorkInformationWidgetState();
+  _WorkInformationWidgetState createState() =>
+      _WorkInformationWidgetState(index);
 }
 
 class _WorkInformationWidgetState extends State<WorkInformationWidget> {
@@ -23,9 +26,14 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
   TextEditingController _officialAddressController = TextEditingController(
       text: TempWorkAndBankInformationHolder.officialAddress ?? '');
 
+  final _tabViewNotifier = ChangeNotifierProvider((ref) => TabViewModel());
+
+  final Function(int value) index;
+
+  _WorkInformationWidgetState(this.index);
+
   @override
   Widget build(BuildContext context) {
-    final _tabViewModel = Provider.of<TabViewModel>(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +93,7 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
           textAlign: TextAlign.center,
           fontStyle: FontStyle.normal,
           primary: Pallets.orange600,
-          onPressed: () => _cacheTemporer(_tabViewModel),
+          onPressed: () => _cacheTemporer(),
         ),
         SizedBox(
           height: 24,
@@ -107,11 +115,11 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
     );
   }
 
-  void _cacheTemporer(_tabViewModel) {
+  void _cacheTemporer() {
     TempWorkAndBankInformationHolder.occupation = _occupationController.text;
     TempWorkAndBankInformationHolder.industry = _industryController.text;
     TempWorkAndBankInformationHolder.officialAddress =
         _officialAddressController.text;
-    _tabViewModel.switchIndex(3);
+    index(3);
   }
 }
