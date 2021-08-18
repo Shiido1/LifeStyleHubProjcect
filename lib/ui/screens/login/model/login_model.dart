@@ -25,9 +25,9 @@ class LoginModel {
   static Map<String, dynamic> sendData(
       {required String email, required String password}) {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-
     data["email"] = email;
     data["password"] = password;
+    data["role"] = 'user';
     return data;
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/marketting_details_screen.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/glass_container.dart';
@@ -93,7 +95,8 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
                             bottomRight: Radius.circular(15)),
                         border: Border.fromBorderSide(BorderSide.none),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () => PageRouter.gotoWidget(
+                              MarkettingDetailScreen(), context),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,

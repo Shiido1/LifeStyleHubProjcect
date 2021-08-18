@@ -33,6 +33,9 @@ class MyApp extends StatelessWidget {
         home: FutureBuilder(
           future: prefManager.getCachedData(key: AppConstants.usersPrefKey),
           builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Container();
+            }
             if (snapshot.hasData) {
               return DashboardScreen();
             }

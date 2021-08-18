@@ -9,10 +9,4 @@ class TabViewModel extends BaseViewModel {
     _index = i;
     notifyListeners();
   }
-
-  @override
-  void dispose() {
-    _index = 0;
-    super.dispose();
-  }
 }

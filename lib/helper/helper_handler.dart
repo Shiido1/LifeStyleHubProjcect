@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
 import 'configs/constants.dart';
@@ -24,9 +27,13 @@ void showsnackBarInfo(BuildContext? context, {required message}) {
 }
 
 /// get header
-Map<String, String> getHeader({String? token}) {
+Future<Map<String, String>> getHeader() async {
   Map<String, String> _header = Map<String, String>();
-  _header[HttpHeaders.authorizationHeader] =
-      'Bearer ${token != null ? token : AppConstants.tempToken}';
+
+  var _data = await prefManager.getCachedData(key: AppConstants.usersPrefKey);
+  LoginModel _user = LoginModel.fromJson(_data);
+  // ignore: unnecessary_null_comparison
+  String? _bearer = _user != null ? _user.token : AppConstants.tempToken;
+  _header[HttpHeaders.authorizationHeader] = 'Bearer $_bearer';
   return _header;
 }

@@ -12,7 +12,7 @@ class InformationRepository {
       {required Map map}) async {
     try {
       final _response = await apiBaseHelper.post(
-          url: Paths.basicInformation, map: map, header: getHeader());
+          url: Paths.basicInformation, map: map, header: await getHeader());
       return BasicInformationModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -24,7 +24,7 @@ class InformationRepository {
       {required Map map}) async {
     try {
       final _response = await apiBaseHelper.post(
-          url: Paths.workAndBanking, map: map, header: getHeader());
+          url: Paths.workAndBanking, map: map, header: await getHeader());
       return WorkInformationModel.fromJson(_response);
     } catch (e) {
       throw e;

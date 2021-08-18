@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
 import 'image_loader.dart';
@@ -10,11 +13,19 @@ AppBar getCustomAppBar(BuildContext context,
     VoidCallback? onTap,
     bool showLeadig = false,
     bool showLeadingWidget = true,
+    bool changeLeadingIcon = false,
     double? elevation = .0,
     String image = ''}) {
   return AppBar(
     automaticallyImplyLeading: showLeadig,
     elevation: elevation,
+    leading: changeLeadingIcon
+        ? IconButton(
+            onPressed: () => PageRouter.goBack(context),
+            icon: Platform.isIOS
+                ? Icon(Icons.navigate_before)
+                : Icon(Icons.keyboard_arrow_left))
+        : null,
     iconTheme: IconThemeData(
       color: Colors.black, //change your color here
     ),

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 
 import 'exception.dart';
 
@@ -19,7 +18,6 @@ dynamic returnResponse(http.Response response) {
     case 403:
       throw UnauthorisedException(response.body.toString());
     case 500:
-      logger.d(response.body.toString());
       throw FetchDataException('Server failure');
     default:
       throw FetchDataException(
