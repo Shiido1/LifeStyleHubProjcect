@@ -4,13 +4,14 @@ import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/marketting_details_screen.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/banner_content_widget.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/post_content_widget.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/video_content_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/glass_container.dart';
 import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-
-import 'data/mocked_data.dart';
 
 class MarkettingScreen extends StatefulWidget {
   MarkettingScreen({Key? key}) : super(key: key);
@@ -50,35 +51,41 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
                     color: Pallets.black),
                 child: Stack(
                   children: [
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 35),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ButtonWidget(
-                              buttonText: 'VIDEO',
-                              color: Pallets.white,
-                              fontWeight: FontWeight.w500,
-                              textAlign: TextAlign.center,
-                              fontStyle: FontStyle.normal,
-                              borderColor: Pallets.orange500,
-                              primary: Pallets.orange500,
-                              onPressed: () => null,
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            TextView(
-                              text:
-                                  'The Lifestyle Hub Alternative Real Estate (Housing) Solution',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18,
-                              color: Pallets.white,
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Visibility(
+                        visible: _response.getSingleContent() != null,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 35),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ButtonWidget(
+                                buttonText: 'VIDEO',
+                                color: Pallets.white,
+                                fontWeight: FontWeight.w500,
+                                textAlign: TextAlign.center,
+                                fontStyle: FontStyle.normal,
+                                borderColor: Pallets.orange500,
+                                primary: Pallets.orange500,
+                                onPressed: () => null,
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              TextView(
+                                text: _response.getSingleContent() != null
+                                    ? _response.getSingleContent().title!
+                                    : '',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18,
+                                color: Pallets.white,
+                                textAlign: TextAlign.left,
+                                maxLines: 2,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -121,65 +128,9 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 40,
-              ),
-              ...MockedData.getMockedData()
-                  .map((mocked) => Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextView(
-                                text: mocked.header!,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
-                                color: Pallets.grey500,
-                                textAlign: TextAlign.left,
-                              ),
-                              TextView(
-                                onTap: () {},
-                                text: 'View all',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: Pallets.grey500,
-                                textAlign: TextAlign.left,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 23,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: mocked.images!
-                                  .map(
-                                    (e) => Container(
-                                      margin: EdgeInsets.only(right: 16),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Image.asset(e),
-                                          SizedBox(height: 8),
-                                          Text(mocked.title!)
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 41,
-                          ),
-                        ],
-                      ))
-                  .toList(),
+              VideoContents(response: _response),
+              BannerContents(response: _response),
+              PostContents(response: _response),
               SizedBox(
                 height: 23,
               ),

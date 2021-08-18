@@ -115,7 +115,7 @@ class ImageLoader extends StatelessWidget {
                 value: progress.progress,
               )),
               errorWidget: (context, url, error) =>
-                  Center(child: Text('Error!')),
+                  Center(child: Image.asset('assets/images/video_placeholder.png')),
             ),
           ),
         );
@@ -138,7 +138,7 @@ class ImageLoader extends StatelessWidget {
               child: CircularProgressIndicator(
             value: progress.progress,
           )),
-          errorWidget: (context, url, error) => Center(child: Text('Error!')),
+          errorWidget: (context, url, error) => Center(child: Image.asset('assets/images/video_placeholder.png')),
         ),
       );
     } else {

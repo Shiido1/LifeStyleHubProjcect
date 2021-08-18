@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
@@ -16,11 +15,12 @@ class MarkettingViewmodel extends BaseViewModel {
 
   bool get loading => _loading;
 
-  GetResourcesModelList? _getResourcesModelList;
+  List<GetResourcesModel>? _getResourcesModelList;
 
-  GetResourcesModelList? get getResourceModelList => _getResourcesModelList;
+  List<GetResourcesModel>? get getResourceModelList => _getResourcesModelList;
 
   GetResourcesModel? _getResourceModel;
+
   GetResourcesModel? get getResourceModel => _getResourceModel;
 
   /// initialize auth viewmodel
@@ -56,12 +56,40 @@ class MarkettingViewmodel extends BaseViewModel {
     try {
       _showLoading();
       final _reponse = await _markettingRepository.getMarketting();
-      // markettingDao!.saveAll([]);
-      _getResourcesModelList = _reponse;
+      sortVideosByType(_reponse);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
     _hideLoading();
+  }
+
+  List<GetResourcesModel> videoContents = [];
+  List<GetResourcesModel> postsContents = [];
+  List<GetResourcesModel> bannerContents = [];
+
+  ///[Mock] sort video contents
+  void sortVideosByType(GetResourcesModelList? _getResourcesModelList) {
+    videoContents = _getResourcesModelList!.getResourceModel!
+        .where((element) => element.type!.toLowerCase() == 'video')
+        .toList();
+
+    postsContents = _getResourcesModelList.getResourceModel!
+        .where((element) => element.type!.toLowerCase() == 'post')
+        .toList();
+
+    bannerContents = _getResourcesModelList.getResourceModel!
+        .where((element) => element.type!.toLowerCase() == 'banner')
+        .toList();
+    notifyListeners();
+  }
+
+  /// @Return at least One content from either of the sorted
+  /// lists
+  dynamic getSingleContent(){
+    if(videoContents.isNotEmpty) return videoContents.first;
+    if(postsContents.isNotEmpty) return postsContents.first;
+    if(bannerContents.isNotEmpty) return bannerContents.first;
+    return null;
   }
 
   /// get single of marketting details

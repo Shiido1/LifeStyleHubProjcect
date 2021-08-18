@@ -1,9 +1,12 @@
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
+
 class MockedData {
   String? header;
   String? title;
   List<String>? images;
+  List<GetResourcesModel>? getResourceModel;
 
-  MockedData({this.header, this.title, this.images});
+  MockedData({this.header, this.title, this.images, this.getResourceModel});
 
   static List<MockedData> getMockedData() {
     List<MockedData> _data = [];
