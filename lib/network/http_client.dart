@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -9,7 +10,7 @@ import 'exception.dart';
 import 'http_responses.dart';
 
 class ApiBaseHelper {
-  /// make post requests
+  /// [@POST REQUEST]
   Future<dynamic> post(
       {required String? url,
       required Map map,
@@ -31,13 +32,55 @@ class ApiBaseHelper {
     return _responseJson;
   }
 
-  /// make get requests
+  /// [@GET REQUEST]
   Future<dynamic> get(
       {required String? url, Map<String, String>? header}) async {
     var _responseJson;
     try {
       final response = await http
           .get(Uri.parse('${Paths.baseUrl}$url'), headers: header)
+          .timeout(Duration(seconds: AppConstants.timeOutDuration));
+
+      _responseJson = returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    } on TimeoutException {
+      throw FetchDataException('Timeout');
+    } on FormatException {
+      throw FetchDataException('Bad response format');
+    }
+    return _responseJson;
+  }
+
+  /// [@PUT REQUEST]
+  Future<dynamic> put(
+      {required String? url,
+      required FormData map,
+      Map<String, String>? header}) async {
+    var _responseJson;
+    try {
+      final response = await http
+          .put(Uri.parse('${Paths.baseUrl}$url'), body: map, headers: header)
+          .timeout(Duration(seconds: AppConstants.timeOutDuration));
+
+      _responseJson = returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    } on TimeoutException {
+      throw FetchDataException('Timeout');
+    } on FormatException {
+      throw FetchDataException('Bad response format');
+    }
+    return _responseJson;
+  }
+
+  /// [@DELETE REQUEST]
+  Future<dynamic> delete(
+      {required String? url, Map<String, String>? header}) async {
+    var _responseJson;
+    try {
+      final response = await http
+          .delete(Uri.parse('${Paths.baseUrl}$url'), headers: header)
           .timeout(Duration(seconds: AppConstants.timeOutDuration));
 
       _responseJson = returnResponse(response);

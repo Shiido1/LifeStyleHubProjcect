@@ -19,10 +19,11 @@ double getDeviceHeight(BuildContext context) {
 }
 
 /// show snackbar
-void showsnackBarInfo(BuildContext? context, {required message}) {
+void showsnackBarInfo(BuildContext? context,
+    {required message, Color? bgColor}) {
   ScaffoldMessenger.of(context!).showSnackBar(SnackBar(
     content: Text(message),
-    backgroundColor: Pallets.orange500,
+    backgroundColor: bgColor != null ? bgColor : Pallets.orange500,
   ));
 }
 

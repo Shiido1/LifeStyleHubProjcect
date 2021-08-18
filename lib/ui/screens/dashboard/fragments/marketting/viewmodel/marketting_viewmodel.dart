@@ -1,9 +1,12 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/repository/marketting_repository.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 
 MarkettingRepository _markettingRepository = MarkettingRepository();
 
@@ -15,9 +18,12 @@ class MarkettingViewmodel extends BaseViewModel {
 
   bool get loading => _loading;
 
-  List<GetResourcesModel>? _getResourceModel;
+  GetResourcesModelList? _getResourcesModelList;
 
-  List<GetResourcesModel>? get getResourceModel => _getResourceModel;
+  GetResourcesModelList? get getResourceModelList => _getResourcesModelList;
+
+  GetResourcesModel? _getResourceModel;
+  GetResourcesModel? get getResourceModel => _getResourceModel;
 
   /// initialize auth viewmodel
   void init(BuildContext context) {
@@ -36,18 +42,67 @@ class MarkettingViewmodel extends BaseViewModel {
     notifyListeners();
   }
 
+  /// creates marketting
+  Future<void> createMarketting(Map map) async {
+    try {
+      _showLoading();
+      final _reponse = await _markettingRepository.createMarketting(map);
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
   /// get list of marketting
   Future<void> getMarketting() async {
     try {
       _showLoading();
       final _reponse = await _markettingRepository.getMarketting();
       // markettingDao!.saveAll([]);
-      logger.d(_reponse.getResourceModel!.length);
-      _getResourceModel = _reponse.getResourceModel;
+      _getResourcesModelList = _reponse;
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
+  /// get single of marketting details
+  Future<void> getMarkettingDetails(String id) async {
+    try {
+      _showLoading();
+      final _reponse = await _markettingRepository.getMarkettingDetails(id);
+      _getResourceModel = _reponse;
       _hideLoading();
     } catch (e) {
       _hideLoading();
       showsnackBarInfo(this._context, message: e.toString());
     }
+  }
+
+  /// updates a single marketting details
+  Future<void> updateMarkettingDetails(String id, {FormData? formData}) async {
+    try {
+      _showLoading();
+      final _reponse = await _markettingRepository.updateMarkettingDetails(id,
+          formData: formData);
+      showsnackBarInfo(_context,
+          message: _reponse.message, bgColor: Pallets.grey800);
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
+  /// deletes a single marketting details
+  Future<void> deleteMarketting(String id) async {
+    try {
+      _showLoading();
+      final _reponse = await _markettingRepository.deleteMarkettingDetails(id);
+      showsnackBarInfo(_context,
+          message: _reponse.message, bgColor: Pallets.grey800);
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
   }
 }
