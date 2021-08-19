@@ -15,13 +15,13 @@ class MarkettingViewmodel extends BaseViewModel {
 
   bool get loading => _loading;
 
-  List<GetResourcesModel>? _getResourcesModelList;
+  List<Data>? _getResourcesModelList;
 
-  List<GetResourcesModel>? get getResourceModelList => _getResourcesModelList;
+  List<Data>? get getResourceModelList => _getResourcesModelList;
 
-  GetResourcesModel? _getResourceModel;
+  Data? _getResourceModel;
 
-  GetResourcesModel? get getResourceModel => _getResourceModel;
+  Data? get getResourceModel => _getResourceModel;
 
   /// initialize auth viewmodel
   void init(BuildContext context) {
@@ -63,21 +63,21 @@ class MarkettingViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
-  List<GetResourcesModel> videoContents = [];
-  List<GetResourcesModel> postsContents = [];
-  List<GetResourcesModel> bannerContents = [];
+  List<Data> videoContents = [];
+  List<Data> postsContents = [];
+  List<Data> bannerContents = [];
 
   ///[Mock] sort video contents
   void sortVideosByType(GetResourcesModelList? _getResourcesModelList) {
-    videoContents = _getResourcesModelList!.getResourceModel!
+    videoContents = _getResourcesModelList!.data!
         .where((element) => element.type!.toLowerCase() == 'video')
         .toList();
 
-    postsContents = _getResourcesModelList.getResourceModel!
+    postsContents = _getResourcesModelList.data!
         .where((element) => element.type!.toLowerCase() == 'post')
         .toList();
 
-    bannerContents = _getResourcesModelList.getResourceModel!
+    bannerContents = _getResourcesModelList.data!
         .where((element) => element.type!.toLowerCase() == 'banner')
         .toList();
     notifyListeners();
@@ -85,10 +85,10 @@ class MarkettingViewmodel extends BaseViewModel {
 
   /// @Return at least One content from either of the sorted
   /// lists
-  dynamic getSingleContent(){
-    if(videoContents.isNotEmpty) return videoContents.first;
-    if(postsContents.isNotEmpty) return postsContents.first;
-    if(bannerContents.isNotEmpty) return bannerContents.first;
+  dynamic getSingleContent() {
+    if (videoContents.isNotEmpty) return videoContents.first;
+    if (postsContents.isNotEmpty) return postsContents.first;
+    if (bannerContents.isNotEmpty) return bannerContents.first;
     return null;
   }
 

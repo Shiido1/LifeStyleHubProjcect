@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/data/enum.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
@@ -59,11 +60,13 @@ class VideoContents extends StatelessWidget {
                               width: 218,
                               height: 127,
                               onTap: () => PageRouter.gotoWidget(
-                                  MarkettingDetailScreen(
-                                      getResourcesModel: element),
-                                  context,
-                                animationType: PageTransitionType.fade,
-                              ),
+                                    MarkettingDetailScreen(
+                                      getResourcesModel: element,
+                                      type: MarketingType.Video,
+                                    ),
+                                    context,
+                                    animationType: PageTransitionType.fade,
+                                  ),
                               path: element.featuredImage!),
                           SizedBox(height: 8),
                           Text(element.title!)

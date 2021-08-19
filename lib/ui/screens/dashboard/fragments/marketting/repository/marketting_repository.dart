@@ -30,11 +30,11 @@ class MarkettingRepository {
   }
 
   /// [@Get] Resource marketting details
-  Future<GetResourcesModel> getMarkettingDetails(String id) async {
+  Future<Data> getMarkettingDetails(String id) async {
     try {
       final _response = await apiBaseHelper.get(
           url: '${Paths.getMarketting}/$id', header: await getHeader());
-      return GetResourcesModel.fromJson(_response);
+      return Data.fromJson(_response);
     } catch (e) {
       throw e;
     }
