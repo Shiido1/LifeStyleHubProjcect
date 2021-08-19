@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle_hub/database/users_data_provider.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home/home_screen.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
@@ -33,6 +35,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _index = 0;
 
   _DashboardScreenState(this._index);
+
+  final _userModelProvider =
+  ChangeNotifierProvider((ref) => UsersInfoViewModel());
+
+  @override
+  void initState() {
+    context.read(_userModelProvider).getUsersData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

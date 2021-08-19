@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverPod;
 import 'package:lifestyle_hub/database/hive_database.dart';
 import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/informations.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 import 'helper/configs/providers.dart';
@@ -14,7 +14,7 @@ import 'ui/screens/onboarding/splashscreen.dart';
 
 void main() async {
   await initializeDatabase();
-  runApp(ProviderScope(child: MyApp()));
+  runApp(riverPod.ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
     return MultiProvider(
       providers: Providers.getProviders,
       child: MaterialApp(
@@ -35,7 +36,13 @@ class MyApp extends StatelessWidget {
           future: prefManager.getCachedData(key: AppConstants.usersPrefKey),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Container();
+              return Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(
+                    color: Pallets.orange600,
+                  ),
+                ),
+              );
             }
             if (snapshot.hasData) {
               return DashboardScreen();

@@ -79,16 +79,16 @@ class Wallet {
 
 class User {
   int? id;
-  dynamic? name;
+  String? name;
   String? email;
-  dynamic? emailVerifiedAt;
-  dynamic? phoneNo;
-  dynamic? state;
-  dynamic? address;
-  dynamic? sex;
-  dynamic? dob;
+  String? emailVerifiedAt;
+  String? phoneNo;
+  String? state;
+  String? address;
+  String? sex;
+  String? dob;
   String? status;
-  dynamic? referredBy;
+  String? referredBy;
   AffiliateId? affiliateId;
   String? trialEnds;
   int? isAdmin;
