@@ -1,3 +1,7 @@
+import 'dart:convert' as convert;
+
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+
 class GetResourcesModelList {
   final List<GetResourcesModel>? getResourceModel;
 
@@ -20,7 +24,7 @@ class GetResourcesModel {
   String? slug;
   String? featuredImage;
   String? type;
-  String? content;
+  Content? content;
   String? createdAt;
   String? updatedAt;
 
@@ -41,7 +45,8 @@ class GetResourcesModel {
     if (json["featured_image"] is String)
       this.featuredImage = json["featured_image"];
     if (json["type"] is String) this.type = json["type"];
-    if (json["content"] is String) this.content = json["content"];
+    if (json["content"] is String)
+      this.content = Content.fromJson(convert.json.decode(json["content"]));
     if (json["created_at"] is String) this.createdAt = json["created_at"];
     if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
   }
@@ -56,6 +61,25 @@ class GetResourcesModel {
     data["content"] = this.content;
     data["created_at"] = this.createdAt;
     data["updated_at"] = this.updatedAt;
+    return data;
+  }
+}
+
+class Content {
+  List<dynamic>? body;
+  String? path;
+
+  Content({this.body, this.path});
+
+  Content.fromJson(Map<String, dynamic> json) {
+    if (json["body"] is List) this.body = json["body"] ?? [];
+    if (json["path"] is String) this.path = json["path"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.body != null) data["body"] = this.body;
+    data["path"] = this.path;
     return data;
   }
 }

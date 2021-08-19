@@ -34,7 +34,7 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
       final _player = watch(_videoPlayerModel);
-      _player.playVideo(format(getResourcesModel!.content!));
+      _player.playVideo(format(getResourcesModel!.content!.path!));
       return Scaffold(
         appBar: getCustomAppBar(context,
             title: '',
