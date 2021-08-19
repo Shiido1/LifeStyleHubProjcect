@@ -5,6 +5,7 @@ import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
 class VideoPlayer extends BaseViewModel {
   late BetterPlayerController betterPlayerController;
   late BetterPlayerDataSource _betterPlayerDataSource;
+  late BetterPlayerConfiguration betterPlayerConfiguration;
 
   VideoPlayer() {
     _initializeVideoPlayer();
@@ -12,16 +13,17 @@ class VideoPlayer extends BaseViewModel {
 
   /// initialize video controller
   void _initializeVideoPlayer() {
-    BetterPlayerConfiguration betterPlayerConfiguration =
-        BetterPlayerConfiguration(
+    betterPlayerConfiguration = BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.contain,
       autoPlay: false,
     );
-    _betterPlayerDataSource = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-    );
+  }
+
+  /// play videos
+  void playVideo(String link) {
+    _betterPlayerDataSource =
+        BetterPlayerDataSource(BetterPlayerDataSourceType.network, link);
     betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     betterPlayerController.setupDataSource(_betterPlayerDataSource);
   }

@@ -99,70 +99,110 @@ Consumer getDrawer(BuildContext context) {
               CustomDrawerTabs(
                 title: 'Dashboard',
                 image: 'assets/svgs/square_box.svg',
-                onTap: () => _tap(context, 0),
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 0,
+                    providerIndex: _tabNotifier.index),
                 defaultIndex: 0,
                 newIndex: _tabNotifier.index,
               ),
               CustomDrawerTabs(
                 title: 'Marketting tools',
                 image: 'assets/svgs/marketing.svg',
-                onTap: () => _tap(context, 1),
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 1,
+                    providerIndex: _tabNotifier.index),
                 defaultIndex: 1,
                 newIndex: _tabNotifier.index,
               ),
               CustomDrawerTabs(
                 title: 'My network',
                 image: 'assets/svgs/network.svg',
-                onTap: () => _tap(context, 2),
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 2,
+                    providerIndex: _tabNotifier.index),
                 defaultIndex: 2,
                 newIndex: _tabNotifier.index,
               ),
               CustomDrawerTabs(
                 title: 'My commission',
                 image: 'assets/svgs/stack.svg',
-                onTap: () => _tap(context, 3),
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 3,
+                    providerIndex: _tabNotifier.index),
                 defaultIndex: 3,
                 newIndex: _tabNotifier.index,
               ),
               CustomDrawerTabs(
                 title: 'Contest & Reward',
                 image: 'assets/svgs/trophy.svg',
-                onTap: () => _tap(context, 4),
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 4,
+                    providerIndex: _tabNotifier.index),
                 defaultIndex: 4,
                 newIndex: _tabNotifier.index,
               ),
               CustomDrawerTabs(
                 title: 'Report',
                 image: 'assets/svgs/report.svg',
-                onTap: () => _tap(context, 5),
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 5,
+                    providerIndex: _tabNotifier.index),
                 defaultIndex: 5,
                 newIndex: _tabNotifier.index,
               ),
               CustomDrawerTabs(
                 title: 'Wallet',
                 image: 'assets/svgs/wallet.svg',
-                onTap: () => _tap(context, 6),
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 6,
+                    providerIndex: _tabNotifier.index),
                 defaultIndex: 6,
                 newIndex: _tabNotifier.index,
               ),
               CustomDrawerTabs(
                 title: 'Integrated point',
                 image: 'assets/svgs/point.svg',
-                onTap: () => _tap(context, 7),
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 7,
+                    providerIndex: _tabNotifier.index),
                 defaultIndex: 7,
                 newIndex: _tabNotifier.index,
               ),
               CustomDrawerTabs(
                 title: 'Messaging',
                 image: 'assets/svgs/messaging.svg',
-                onTap: () => _tap(context, 8),
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 8,
+                    providerIndex: _tabNotifier.index),
                 defaultIndex: 8,
                 newIndex: _tabNotifier.index,
               ),
               CustomDrawerTabs(
                 title: 'Ticketting',
                 image: 'assets/svgs/square_box.svg',
-                onTap: () => _tap(context, 9),
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 9,
+                    providerIndex: _tabNotifier.index),
                 defaultIndex: 9,
                 newIndex: _tabNotifier.index,
               )
@@ -174,10 +214,20 @@ Consumer getDrawer(BuildContext context) {
   );
 }
 
-void _tap(BuildContext context, int i) {
-  PageRouter.gotoWidget(DashboardScreen(index: i), context);
+void _tap(
+    {TabViewModel? tab,
+    BuildContext? context,
+    int? newIndex,
+    int? providerIndex}) {
+  if (newIndex == providerIndex) {
+    PageRouter.goBack(context!);
+    return;
+  }
+  tab!.switchIndex(newIndex!);
+  PageRouter.gotoWidget(DashboardScreen(index: newIndex), context);
 }
 
+/// Custom Tab
 class CustomDrawerTabs extends StatelessWidget {
   final String? title;
   final String? image;

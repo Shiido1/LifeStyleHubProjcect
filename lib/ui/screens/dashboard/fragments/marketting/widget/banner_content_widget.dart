@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+
+import '../marketting_details_screen.dart';
 
 
 class BannerContents extends StatelessWidget {
@@ -57,6 +60,10 @@ class BannerContents extends StatelessWidget {
                       ImageLoader(
                           width: 218,
                           height: 127,
+                          onTap: () => PageRouter.gotoWidget(
+                              MarkettingDetailScreen(
+                                  getResourcesModel: element),
+                              context),
                           path: element.featuredImage!),
                       SizedBox(height: 8),
                       Text(element.title!)

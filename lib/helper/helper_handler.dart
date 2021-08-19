@@ -36,3 +36,13 @@ Future<Map<String, String>> getHeader() async {
   _header[HttpHeaders.authorizationHeader] = 'Bearer $_bearer';
   return _header;
 }
+
+/// [Format] content strings
+String format(String values) {
+  // {\"path\":\"https:\\/\\/lsh.reimnet.com\\/storage\\/resource_videos\\/ape4gtFSgEfDOy7qTRIvwv5ZOPLOhEU6Zei5Qh10.mp4\"}
+  return values
+      .replaceAll('\\', '')
+      .replaceAll('path', '')
+      .replaceAll('{"":', '')
+      .replaceAll('}', '');
+}

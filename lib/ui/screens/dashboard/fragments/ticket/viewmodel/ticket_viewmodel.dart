@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/repository/ticket_repository.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
@@ -12,8 +13,11 @@ class TicketViewmodel extends BaseViewModel {
   bool _loading = false;
 
   BuildContext get buildContext => _context;
-
   bool get loading => _loading;
+
+  MyTicketModel? _myTicketModel = MyTicketModel();
+
+  MyTicketModel? get myTicketModel => _myTicketModel;
 
   /// initialize auth viewmodel
   void init(BuildContext context) {
@@ -48,12 +52,13 @@ class TicketViewmodel extends BaseViewModel {
   Future<void> getAllTickets() async {
     try {
       _showLoading();
-      final _reponse = await _ticketRepository.getMyTicket();
-      logger.d(_reponse.toJson());
+      final _response = await _ticketRepository.getMyTicket();
+      _myTicketModel = _response;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
     _hideLoading();
+    logger.d(_myTicketModel!.toJson());
   }
 
   /// get single of ticket details

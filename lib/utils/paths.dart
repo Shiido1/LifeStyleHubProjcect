@@ -16,5 +16,5 @@ class Paths {
   static String addBankAccount = 'admin/bank-accounts';
   static String getBankAccount = 'bank-accounts';
   static String packages = 'packages';
-  static String tickets = 'tickets';
+  static String tickets = 'api/tickets';
 }

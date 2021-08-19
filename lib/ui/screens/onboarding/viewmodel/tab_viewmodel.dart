@@ -1,3 +1,4 @@
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
 
 class TabViewModel extends BaseViewModel {
@@ -8,7 +9,6 @@ class TabViewModel extends BaseViewModel {
 
   void switchIndex(int i) {
     _index = i;
-
     notifyListeners();
   }
 
