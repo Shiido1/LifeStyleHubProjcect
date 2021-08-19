@@ -59,7 +59,7 @@ class _ViewMoreTicketsScreenState extends State<ViewMoreTicketsScreen> {
                     ..._response.myTicketModel!.data!
                         .map((element) => TicketListWidget(element))
                         .toList(),
-                    SizedBox(height: 33),
+                    SizedBox(height: 40),
                   ],
                 ),
               ),
