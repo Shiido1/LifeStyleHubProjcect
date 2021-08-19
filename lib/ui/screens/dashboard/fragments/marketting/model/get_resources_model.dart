@@ -58,7 +58,7 @@ class GetResourcesModel {
     data["slug"] = this.slug;
     data["featured_image"] = this.featuredImage;
     data["type"] = this.type;
-    data["content"] = this.content;
+    data["content"] = this.content!.toJson();
     data["created_at"] = this.createdAt;
     data["updated_at"] = this.updatedAt;
     return data;
