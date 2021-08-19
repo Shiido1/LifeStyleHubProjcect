@@ -4,6 +4,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmode
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../marketting_details_screen.dart';
 
@@ -60,7 +61,9 @@ class VideoContents extends StatelessWidget {
                               onTap: () => PageRouter.gotoWidget(
                                   MarkettingDetailScreen(
                                       getResourcesModel: element),
-                                  context),
+                                  context,
+                                animationType: PageTransitionType.fade,
+                              ),
                               path: element.featuredImage!),
                           SizedBox(height: 8),
                           Text(element.title!)

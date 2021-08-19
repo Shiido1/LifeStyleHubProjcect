@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/view_more_tickets.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/ticket_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'open_ticket_screen.dart';
 import 'widget/ticket_list_widget.dart';
@@ -55,7 +57,8 @@ class _TicketScreenState extends State<TicketScreen> {
                 textAlign: TextAlign.center,
                 fontStyle: FontStyle.normal,
                 primary: Pallets.orange600,
-                onPressed: () => PageRouter.gotoWidget(OpenTicketScreen(), context),
+                onPressed: () =>
+                    PageRouter.gotoWidget(OpenTicketScreen(), context),
               ),
               SizedBox(
                 height: 23,
@@ -109,7 +112,9 @@ class _TicketScreenState extends State<TicketScreen> {
                     textAlign: TextAlign.left,
                   ),
                   TextView(
-                    onTap: (){},
+                    onTap: () => PageRouter.gotoWidget(
+                        ViewMoreTicketsScreen(), context,
+                        animationType: PageTransitionType.fade),
                     text: 'View All',
                     fontWeight: FontWeight.w500,
                     fontSize: 14,

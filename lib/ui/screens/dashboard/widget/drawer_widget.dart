@@ -7,6 +7,7 @@ import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:page_transition/page_transition.dart';
 
 final _notifier = ChangeNotifierProvider((ref) => TabViewModel());
 
@@ -224,7 +225,9 @@ void _tap(
     return;
   }
   tab!.switchIndex(newIndex!);
-  PageRouter.gotoWidget(DashboardScreen(index: newIndex), context);
+
+  PageRouter.gotoWidget(DashboardScreen(index: newIndex), context,
+      animationType: PageTransitionType.fade);
 }
 
 /// Custom Tab
