@@ -36,15 +36,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   _DashboardScreenState(this._index);
 
-  final _userModelProvider =
-  ChangeNotifierProvider((ref) => UsersInfoViewModel());
-
-  @override
-  void initState() {
-    context.read(_userModelProvider).getUsersData();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

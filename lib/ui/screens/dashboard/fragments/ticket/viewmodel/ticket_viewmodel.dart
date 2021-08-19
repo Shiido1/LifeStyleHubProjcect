@@ -61,7 +61,6 @@ class TicketViewmodel extends BaseViewModel {
       showsnackBarInfo(this._context, message: e.toString());
     }
     _hideLoading();
-    logger.d(_myTicketModel!.toJson());
   }
 
   /// fetch first 5 items

@@ -165,7 +165,7 @@ class EditFormField extends StatelessWidget {
                   errorStyle: TextStyle(color: Colors.red),
                   contentPadding: edgeInsetsGeometry != null
                       ? edgeInsetsGeometry
-                      : EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                      : EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                         color: focusedColorBorder != null
