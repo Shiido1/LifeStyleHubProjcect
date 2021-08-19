@@ -14,11 +14,15 @@ AppBar getCustomAppBar(BuildContext context,
     bool showLeadig = false,
     bool showLeadingWidget = true,
     bool changeLeadingIcon = false,
+    bool showImage = true,
+    bool showMoreMenu = false,
+    bool centerTitle = false,
     double? elevation = .0,
     String image = ''}) {
   return AppBar(
     automaticallyImplyLeading: showLeadig,
     elevation: elevation,
+    centerTitle:centerTitle ,
     leading: changeLeadingIcon
         ? IconButton(
             onPressed: () => PageRouter.goBack(context),
@@ -38,17 +42,24 @@ AppBar getCustomAppBar(BuildContext context,
       textAlign: TextAlign.left,
     ),
     actions: [
-      Center(
-        child: Container(
-          margin: EdgeInsets.only(right: 10),
-          child: ImageLoader(
-            isCircular: true,
-            radius: 20,
-            path: image,
-            onTap: onTap,
+      Visibility(
+        visible: showImage,
+        child: Center(
+          child: Container(
+            margin: EdgeInsets.only(right: 10),
+            child: ImageLoader(
+              isCircular: true,
+              radius: 20,
+              path: image,
+              onTap: onTap,
+            ),
           ),
         ),
-      )
+      ),
+      Visibility(
+          visible: showMoreMenu,
+          child: IconButton(
+              onPressed: onTap, icon: Icon(Icons.more_vert_outlined)))
     ],
   );
 }

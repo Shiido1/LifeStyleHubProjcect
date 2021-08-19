@@ -27,7 +27,6 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
   void initState() {
     _ticketViewmodel = context.read(_ticketNotifier);
     _ticketViewmodel!.init(context);
-    _ticketViewmodel!.getAllTickets();
     super.initState();
   }
 
