@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
@@ -45,4 +46,11 @@ String format(String values) {
       .replaceAll('path', '')
       .replaceAll('{"":', '')
       .replaceAll('}', '');
+}
+
+
+/// format date
+String fomartDate(String date){
+  DateTime _dt = DateTime.parse(date);
+  return DateFormat("dd MMM, yyyy").format(_dt);
 }

@@ -19,6 +19,8 @@ class TicketViewmodel extends BaseViewModel {
 
   MyTicketModel? get myTicketModel => _myTicketModel;
 
+  List<Data>? data = [];
+
   /// initialize auth viewmodel
   void init(BuildContext context) {
     this._context = context;
@@ -54,11 +56,20 @@ class TicketViewmodel extends BaseViewModel {
       _showLoading();
       final _response = await _ticketRepository.getMyTicket();
       _myTicketModel = _response;
+      _fetchByFiveItems(_response);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
     _hideLoading();
     logger.d(_myTicketModel!.toJson());
+  }
+
+  /// fetch first 5 items
+  void _fetchByFiveItems(MyTicketModel response){
+    int _index = response.data!.length <= 5 ?  response.data!.length : 5;
+    for(int i = 0; i < _index; i++ ){
+      data!.add(response.data![i]);
+    }
   }
 
   /// get single of ticket details

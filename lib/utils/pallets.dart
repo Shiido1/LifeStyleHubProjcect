@@ -4,6 +4,9 @@ class Pallets {
   Pallets._();
 
   static Color black = Color(0xff000000);
+  static Color amber50 = Color(0xffFFFBEB);
+  static Color green500 = Color(0xff22C55E);
+  static Color amber500 = Color(0xffFBBF24);
   static Color orange100 = Color(0xffFFEDD5);
   static Color orange50 = Color(0xffFFF7ED);
   static Color orange500 = Color(0xffF97316);
@@ -25,4 +28,6 @@ class Pallets {
   static Color blue50 = Color(0xffEFF6FF);
   static Color blue200 = Color(0xffBFDBFE);
   static Color blue500 = Color(0xff3B82F6);
+  static Color purple50 = Color(0xffFAF5FF);
+  static Color red50 = Color(0xffFEF2F2);
 }

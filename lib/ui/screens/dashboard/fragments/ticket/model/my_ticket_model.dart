@@ -1,6 +1,6 @@
 class MyTicketModel {
   int? currentPage;
-  List<Data>? data;
+  List<Data>? data = [];
   String? firstPageUrl;
   int? from;
   int? lastPage;
