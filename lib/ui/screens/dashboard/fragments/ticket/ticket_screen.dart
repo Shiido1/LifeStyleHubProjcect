@@ -77,6 +77,10 @@ class _TicketScreenState extends State<TicketScreen> {
                         future: ticketDao!.getTicketStatus(),
                         builder: (context,
                             AsyncSnapshot<MyTicketStatusModel> snapshot) {
+                          if(snapshot.connectionState == ConnectionState.waiting){
+                            return Center(child: CircularProgressIndicator());
+                          }
+
                           return Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,

@@ -57,7 +57,7 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
                     VideoContents(response: _response),
                     BannerContents(response: _response),
                     PostContents(response: _response),
-                    SizedBox(height: getDeviceHeight(context) / 7)
+                    SizedBox(height: getDeviceHeight(context) / 6)
                   ],
                 ),
               ),

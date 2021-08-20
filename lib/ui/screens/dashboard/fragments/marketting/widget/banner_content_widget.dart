@@ -44,7 +44,7 @@ class BannerContents extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: response.videoContents
+              children: response.bannerContents
                   .map(
                     (element) => Container(
                       margin: EdgeInsets.only(right: 16),

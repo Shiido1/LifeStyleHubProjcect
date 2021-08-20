@@ -44,7 +44,6 @@ class TicketViewmodel extends BaseViewModel {
   Future<void> ticketStatus() async {
     try {
       final _response = await _ticketRepository.postMyTicketStatus();
-      logger.d(_response.toJson());
       ticketDao!.cacheTicketStatus(_response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
