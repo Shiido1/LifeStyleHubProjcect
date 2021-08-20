@@ -41,7 +41,7 @@ void showOpenedTicketModal(BuildContext context, String title, List items,
                         title: TextView(
                           text: e,
                           fontWeight: FontWeight.w500,
-                          fontSize: 20,
+                          fontSize: 16,
                           color: Pallets.grey700,
                           textAlign: TextAlign.left,
                         ),

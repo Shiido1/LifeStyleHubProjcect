@@ -10,6 +10,7 @@ import 'package:lifestyle_hub/utils/pallets.dart';
 
 import 'model/my_ticket_model.dart';
 import 'widget/chat_text_box.dart';
+import 'widget/show_ticket_menu.dart';
 
 class TicketDetailsSms extends StatefulWidget {
   final Data? element;
@@ -46,7 +47,7 @@ class _TicketDetailsSmsState extends State<TicketDetailsSms> {
           showImage: false,
           showMoreMenu: true,
           centerTitle: true,
-          onTap: () {}),
+          onTap: () => showOpenedTicketMenuModal(context, element)),
       body: Consumer(builder: (context, watch, child) {
         final _response = watch(_ticketNotifier);
 

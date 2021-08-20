@@ -11,6 +11,7 @@ class Pallets {
   static Color orange50 = Color(0xffFFF7ED);
   static Color orange500 = Color(0xffF97316);
   static Color red500 = Color(0xffEF4444);
+  static Color red600 = Color(0xffDC2626);
   static Color green50 = Color(0xffF0FDF4);
   static Color green200 = Color(0xffBBF7D0);
   static Color orange200 = Color(0xffFED7AA);
