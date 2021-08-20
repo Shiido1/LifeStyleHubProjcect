@@ -42,8 +42,13 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
           _marketting!.sortContentByType(_marketing);
           return Consumer(builder: (context, watch, child) {
             final _response = watch(_markettingViewModel);
+            if (_response.loading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
             return LoadingOverlay(
-              isLoading: _response.loading,
+              isLoading: false,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ListView(

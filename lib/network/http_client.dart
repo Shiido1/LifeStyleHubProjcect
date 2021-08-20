@@ -11,9 +11,7 @@ import 'http_responses.dart';
 class ApiBaseHelper {
   /// [@POST REQUEST]
   Future<dynamic> post(
-      {required String? url,
-      required Map map,
-      Map<String, String>? header}) async {
+      {required String? url, Map? map, Map<String, String>? header}) async {
     var _responseJson;
     try {
       final response = await http

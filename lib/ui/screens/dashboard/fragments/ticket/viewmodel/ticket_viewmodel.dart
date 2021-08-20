@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/repository/ticket_repository.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
@@ -13,6 +14,7 @@ class TicketViewmodel extends BaseViewModel {
   bool _loading = false;
 
   BuildContext get buildContext => _context;
+
   bool get loading => _loading;
 
   MyTicketModel? _myTicketModel = MyTicketModel();
@@ -39,11 +41,11 @@ class TicketViewmodel extends BaseViewModel {
   }
 
   ///
-  Future<void> ticketStatus(Map map) async {
+  Future<void> ticketStatus() async {
     try {
-      _showLoading();
-      final _reponse = await _ticketRepository.postMyTicketStatus(map);
-      logger.d(_reponse.toJson());
+      final _response = await _ticketRepository.postMyTicketStatus();
+      logger.d(_response.toJson());
+      ticketDao!.cacheTicketStatus(_response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
@@ -53,10 +55,9 @@ class TicketViewmodel extends BaseViewModel {
   /// get list of tickets
   Future<void> getAllTickets() async {
     try {
-      _showLoading();
+      if (ticketDao!.box!.isEmpty) _showLoading();
       final _response = await _ticketRepository.getMyTicket();
-      _myTicketModel = _response;
-      _fetchByFiveItems(_response);
+      ticketDao!.saveTickets(_response.data);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
@@ -64,10 +65,11 @@ class TicketViewmodel extends BaseViewModel {
   }
 
   /// fetch first 5 items
-  void _fetchByFiveItems(MyTicketModel response){
-    int _index = response.data!.length <= 5 ?  response.data!.length : 5;
-    for(int i = 0; i < _index; i++ ){
-      data!.add(response.data![i]);
+  void fetchFiveItems(List<Data> response) {
+    if (data!.isNotEmpty) data!.clear();
+    int _index = response.length <= 5 ? response.length : 5;
+    for (int i = 0; i < _index; i++) {
+      data!.add(response[i]);
     }
   }
 

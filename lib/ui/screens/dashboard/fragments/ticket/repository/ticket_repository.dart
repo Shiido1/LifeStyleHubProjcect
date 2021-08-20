@@ -7,10 +7,10 @@ import 'package:lifestyle_hub/utils/paths.dart';
 
 class TicketRepository {
   /// [@CREATE]
-  Future<MyTicketStatusModel> postMyTicketStatus(Map map) async {
+  Future<MyTicketStatusModel> postMyTicketStatus() async {
     try {
       final _response = await apiBaseHelper.post(
-          map: map, url: '${Paths.tickets}/status', header: await getHeader());
+          url: '${Paths.tickets}/status', header: await getHeader());
       return MyTicketStatusModel.fromJson(_response);
     } catch (e) {
       throw e;
