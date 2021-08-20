@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/filter_modal.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
@@ -89,6 +89,8 @@ class _ViewMoreTicketsScreenState extends State<ViewMoreTicketsScreen> {
                                 color: Pallets.orange500),
                             child: Center(
                                 child: ImageLoader(
+                                    onTap: () => showTicketFiltering(context,
+                                        callBack: (filter) {}),
                                     path: 'assets/svgs/filter.svg')),
                           ),
                         )
