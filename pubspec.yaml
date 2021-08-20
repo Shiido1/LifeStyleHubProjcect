@@ -11,7 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.2
   google_fonts: ^2.1.0
   lint: ^1.5.3
@@ -28,6 +27,7 @@ dependencies:
   shared_preferences: ^2.0.6
   better_player: ^0.0.72
   hive_flutter: ^1.1.0
+  hive: ^2.0.4
 
 jsonToDart:
   outputFolder: lib/models #default: lib/
@@ -41,6 +41,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^2.1.1
+  flutter_launcher_icons: ^0.9.1
 
 flutter:
 
@@ -49,16 +50,3 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
-
-
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700

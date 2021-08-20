@@ -10,10 +10,10 @@ Future<void> initializeDatabase() async {
 }
 
 class HiveBoxes {
-  static final marketting = 'marketting';
+  static final marketing = 'marketing';
 
   static Future openAllBox() async {
-    markettingDao = MarkettingDao();
+    markettingDao = MarketingDao();
   }
 
   static Future clearAllBox() async {
@@ -45,7 +45,7 @@ class HiveBoxes {
   }
 
   static Future<void> clearData() async {
-    await _clearBox<Map<String, dynamic>>(marketting);
+    await _clearBox<Map<String, dynamic>>(marketing);
   }
 
   static Future<void> _clearBox<T>(String name) async {

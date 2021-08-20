@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/dao/marketting_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/repository/marketting_repository.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
@@ -51,12 +53,12 @@ class MarkettingViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
-  /// get list of marketting
-  Future<void> getMarketting() async {
+  /// get list of marketing
+  Future<void> getMarketing() async {
     try {
-      _showLoading();
-      final _reponse = await _markettingRepository.getMarketting();
-      sortVideosByType(_reponse);
+      if (markettingDao!.box!.isEmpty) _showLoading();
+      final _response = await _markettingRepository.getMarketting();
+      markettingDao!.saveContents(_response.data!);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
@@ -68,19 +70,17 @@ class MarkettingViewmodel extends BaseViewModel {
   List<Data> bannerContents = [];
 
   ///[Mock] sort video contents
-  void sortVideosByType(GetResourcesModelList? _getResourcesModelList) {
-    videoContents = _getResourcesModelList!.data!
+  void sortContentByType(List<Data>? data) {
+    videoContents = data!
         .where((element) => element.type!.toLowerCase() == 'video')
         .toList();
 
-    postsContents = _getResourcesModelList.data!
-        .where((element) => element.type!.toLowerCase() == 'post')
-        .toList();
+    postsContents =
+        data.where((element) => element.type!.toLowerCase() == 'post').toList();
 
-    bannerContents = _getResourcesModelList.data!
+    bannerContents = data
         .where((element) => element.type!.toLowerCase() == 'banner')
         .toList();
-    notifyListeners();
   }
 
   /// @Return at least One content from either of the sorted

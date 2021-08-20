@@ -140,7 +140,7 @@ class Data {
     data["slug"] = this.slug;
     data["featured_image"] = this.featuredImage;
     data["type"] = this.type;
-    data["content"] = this.content!.toJson();
+    data["content"] = this.content != null ? this.content!.toJson() : null;
     data["created_at"] = this.createdAt;
     data["updated_at"] = this.updatedAt;
     return data;
