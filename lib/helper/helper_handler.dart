@@ -48,9 +48,23 @@ String format(String values) {
       .replaceAll('}', '');
 }
 
-
 /// format date
-String fomartDate(String date){
+String fomartDate(String date) {
   DateTime _dt = DateTime.parse(date);
   return DateFormat("dd MMM, yyyy").format(_dt);
+}
+
+/// get expiry date
+Future<Duration> getTrialDuration() async {
+  final _usersData =
+      await prefManager.getCachedData(key: AppConstants.usersPrefKey);
+  LoginModel _user = LoginModel.fromJson(_usersData);
+  DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+  DateTime duration = dateFormat.parse(_user.user!.trialEnds!);
+  DateTime presentDate = dateFormat.parse(DateTime.now().toIso8601String());
+  final _answer = duration.difference(presentDate);
+  return Duration(
+      days: _answer.inDays,
+      hours: DateTime.now().hour,
+      minutes: DateTime.now().minute);
 }
