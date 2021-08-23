@@ -40,7 +40,6 @@ Future<Map<String, String>> getHeader() async {
 
 /// [Format] content strings
 String format(String values) {
-  // {\"path\":\"https:\\/\\/lsh.reimnet.com\\/storage\\/resource_videos\\/ape4gtFSgEfDOy7qTRIvwv5ZOPLOhEU6Zei5Qh10.mp4\"}
   return values
       .replaceAll('\\', '')
       .replaceAll('path', '')
@@ -52,6 +51,11 @@ String format(String values) {
 String fomartDate(String date) {
   DateTime _dt = DateTime.parse(date);
   return DateFormat("dd MMM, yyyy").format(_dt);
+}
+
+String fomartTime(String date) {
+  DateTime _dt = DateTime.parse(date);
+  return DateFormat("HH:MM a").format(_dt);
 }
 
 /// get expiry date

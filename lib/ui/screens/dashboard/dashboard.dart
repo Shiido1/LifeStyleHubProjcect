@@ -6,6 +6,7 @@ import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
 
 import 'fragments/marketting/marketting_screen.dart';
+import 'fragments/messaging/messaging_screen.dart';
 import 'fragments/ticket/ticket_screen.dart';
 import 'widget/drawer_widget.dart';
 
@@ -28,7 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Container(),
     Container(),
     Container(),
-    Container(),
+    MessagingScreen(),
     TicketScreen(),
   ];
 
