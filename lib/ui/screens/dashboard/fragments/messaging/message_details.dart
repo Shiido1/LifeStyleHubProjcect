@@ -44,6 +44,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
 
   final _userModelProvider =
       ChangeNotifierProvider((ref) => UsersInfoViewModel());
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -57,6 +58,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
 
   final List<String> _dropdownValues = ["Today", "Yesterday"];
   String? _currentItemSelected;
+  ScrollController _scrollController = new ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -68,73 +70,86 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
           showMoreMenu: true,
           centerTitle: true,
           onTap: () => null),
-      body: FutureBuilder(
-        future: messageDao!.getChat(conversation!.id.toString()),
-        builder: (context, AsyncSnapshot<open.OpenMessageModel> snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          List<open.Data> _messages = snapshot.data!.data!.reversed.toList();
+      body: Consumer(builder: (context, watch, child) {
+        final _userData = watch(_userModelProvider);
+        final _cachedMessage = watch(_messageViewModel);
+        _cachedMessage.getCachedMessage(conversation!.id.toString());
 
-          return Consumer(builder: (context, watch, child) {
-            final _userData = watch(_userModelProvider);
-            return Stack(
-              children: [
-                LoadingOverlay(
-                  isLoading: false,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ListView(
-                      children: [
-                        Center(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 5),
-                            decoration: BoxDecoration(
-                                color: Pallets.grey100,
-                                borderRadius: BorderRadius.circular(30)),
-                            child: PopupMenuButton<String>(
-                              itemBuilder: (context) {
-                                return _dropdownValues.map((str) {
-                                  return PopupMenuItem(
-                                    value: str,
-                                    child: Text(str),
-                                  );
-                                }).toList();
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Text(_currentItemSelected!),
-                                  Icon(Icons.arrow_drop_down),
-                                ],
-                              ),
-                              onSelected: (v) {
-                                setState(() {
-                                  _currentItemSelected = v;
-                                });
-                              },
-                            ),
+        return Stack(
+          children: [
+            LoadingOverlay(
+              isLoading: false,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ListView(
+                  controller: _scrollController,
+                  reverse: true,
+                  children: [
+                    Center(
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Pallets.grey100,
+                            borderRadius: BorderRadius.circular(30)),
+                        child: PopupMenuButton<String>(
+                          itemBuilder: (context) {
+                            return _dropdownValues.map((str) {
+                              return PopupMenuItem(
+                                value: str,
+                                child: Text(str),
+                              );
+                            }).toList();
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Text(_currentItemSelected!),
+                              Icon(Icons.arrow_drop_down),
+                            ],
                           ),
+                          onSelected: (v) {
+                            setState(() {
+                              _currentItemSelected = v;
+                            });
+                          },
                         ),
-                        ..._messages.map((message) {
-                          if (message.sender?.id == _userData.user.id) {
-                            return SenderText(message);
-                          }
-                          return ReceiversText(message);
-                        }).toList(),
-                      ],
+                      ),
                     ),
-                  ),
+                    ..._cachedMessage.openedMessage.map((message) {
+                      if (message.sender?.id == _userData.user.id) {
+                        return SenderText(message);
+                      }
+                      return ReceiversText(message);
+                    }).toList(),
+                    SizedBox(
+                      height: 23,
+                    )
+                  ],
                 ),
-                ChatEditText()
-              ],
-            );
-          });
-        },
-      ),
+              ),
+            ),
+            ChatEditText(
+              controller: _controller,
+              onSubmit: (v) => _sendMessage(v),
+            )
+          ],
+        );
+      }),
     );
+  }
+
+  void _sendMessage(String? v) {
+    if (v!.isEmpty) {
+      return;
+    }
+    _messagingViewmodel!.sendMessage(conversation!.id.toString(), v);
+    _controller.text = '';
+    _scrollController.animateTo(
+      0.0,
+      curve: Curves.easeOut,
+      duration: const Duration(milliseconds: 300),
+    );
+    setState(() {});
   }
 }

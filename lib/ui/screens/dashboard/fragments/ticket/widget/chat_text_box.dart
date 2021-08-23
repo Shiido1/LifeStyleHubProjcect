@@ -3,8 +3,12 @@ import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
 class ChatEditText extends StatelessWidget {
-  const ChatEditText({Key? key}) : super(key: key);
+  final Function(String? value)? onSubmit;
 
+  ChatEditText({Key? key, required this.onSubmit, this.controller})
+      : super(key: key);
+
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -13,7 +17,7 @@ class ChatEditText extends StatelessWidget {
         color: Pallets.grey50,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 25),
         child: TextFormField(
-          controller: null,
+          controller: controller,
           style: TextStyle(
             fontSize: 16.0,
           ),
@@ -32,6 +36,7 @@ class ChatEditText extends StatelessWidget {
               hintStyle: TextStyle(color: Pallets.grey400),
               suffixIcon: ImageLoader(
                 path: 'assets/svgs/share.svg',
+                onTap: () => onSubmit!(controller!.text),
               )),
         ),
       ),

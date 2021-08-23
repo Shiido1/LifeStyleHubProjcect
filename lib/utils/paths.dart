@@ -4,6 +4,7 @@ class Paths {
   static String baseUrl = 'https://lsh.reimnet.com/';
   static String getLastMessages = 'api/chat/all';
   static String openMessage = 'api/chat/open';
+  static String sendMessage = 'api/chat/message';
   static String login = 'api/login';
   static String getMarketting = 'api/resources';
   static String updateMarketting = 'admin/resources/';

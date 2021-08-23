@@ -238,7 +238,7 @@ class _MessagingScreenState extends State<MessagingScreen>
   }
 
   String? _formatReceiver(Conversation? conversation, UsersInfoViewModel user) {
-    String? _receiver = 'Guest';
+    String? _receiver = '';
     conversation!.participants!.map((participant) {
       if (participant.messageable?.id != user.user.id)
         _receiver = participant.messageable?.name;

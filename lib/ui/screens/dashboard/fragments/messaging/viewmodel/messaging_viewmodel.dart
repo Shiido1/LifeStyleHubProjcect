@@ -5,6 +5,8 @@ import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/dao/messaging_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/get_last_messages_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/open_message_model.dart'
+    as open;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/repository/messaging_repository.dart';
 
 MessageRepository _messageRepository = MessageRepository();
@@ -69,5 +71,28 @@ class MessagingViewmodel extends BaseViewModel {
       showsnackBarInfo(this._context, message: e.toString());
     }
     _hideLoading();
+  }
+
+  /// open last messages
+  Future<void> sendMessage(String id, String message) async {
+    try {
+      _showLoading();
+      await _messageRepository
+          .sendMessage({'conversation_id': id, 'message': message});
+      openMessage(id);
+      getLastMessage();
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
+  List<open.Data> openedMessage = [];
+
+  /// get cached messages
+  Future<void> getCachedMessage(String id) async {
+    open.OpenMessageModel _model = await messageDao!.getChat(id);
+    openedMessage = _model.data!;
+    notifyListeners();
   }
 }

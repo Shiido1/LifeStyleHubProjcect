@@ -116,7 +116,9 @@ class _TicketDetailsSmsState extends State<TicketDetailsSms> {
                 ),
               ),
             ),
-            ChatEditText()
+            ChatEditText(
+              onSubmit: (v) {},
+            )
           ],
         );
       }),
