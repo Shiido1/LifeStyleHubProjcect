@@ -6,6 +6,7 @@ import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/contest_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/second_icon.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
@@ -171,25 +172,9 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 48,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextView(
-                    text: 'Active packages',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                    color: Pallets.grey500,
-                    textAlign: TextAlign.left,
-                  ),
-                  TextView(
-                    onTap: () {},
-                    text: 'View all',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                    color: Pallets.grey500,
-                    textAlign: TextAlign.left,
-                  ),
-                ],
+              ViewAllButton(
+                title: 'Active packages',
+                viewAll: () {},
               ),
               SizedBox(
                 height: 16,
@@ -215,25 +200,9 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 23,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextView(
-                    text: 'Contest',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                    color: Pallets.grey500,
-                    textAlign: TextAlign.left,
-                  ),
-                  TextView(
-                    onTap: () {},
-                    text: 'View all',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                    color: Pallets.grey500,
-                    textAlign: TextAlign.left,
-                  ),
-                ],
+              ViewAllButton(
+                title: 'Contest',
+                viewAll: () {},
               ),
               SizedBox(
                 height: 16,

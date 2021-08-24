@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/data/enum.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
@@ -21,25 +22,9 @@ class BannerContents extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 40),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextView(
-                text: 'Social media banners',
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
-                color: Pallets.grey500,
-                textAlign: TextAlign.left,
-              ),
-              TextView(
-                onTap: () {},
-                text: 'View all',
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: Pallets.grey500,
-                textAlign: TextAlign.left,
-              ),
-            ],
+          ViewAllButton(
+            title: 'Social media banners',
+            viewAll: () {},
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,

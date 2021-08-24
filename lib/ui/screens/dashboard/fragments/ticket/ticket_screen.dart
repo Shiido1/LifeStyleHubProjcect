@@ -7,6 +7,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_d
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/view_more_tickets.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/ticket_widget.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
@@ -77,7 +78,8 @@ class _TicketScreenState extends State<TicketScreen> {
                         future: ticketDao!.getTicketStatus(),
                         builder: (context,
                             AsyncSnapshot<MyTicketStatusModel> snapshot) {
-                          if(snapshot.connectionState == ConnectionState.waiting){
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
                             return Center(child: CircularProgressIndicator());
                           }
 
@@ -125,28 +127,9 @@ class _TicketScreenState extends State<TicketScreen> {
                                 ],
                               ),
                               SizedBox(height: 32),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextView(
-                                    text: 'Recent tickets',
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16,
-                                    color: Pallets.grey800,
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  TextView(
-                                    onTap: () => PageRouter.gotoWidget(
-                                        ViewMoreTicketsScreen(), context,
-                                        animationType: PageTransitionType.fade),
-                                    text: 'View All',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                    color: Pallets.grey800,
-                                    textAlign: TextAlign.right,
-                                  ),
-                                ],
+                              ViewAllButton(
+                                title: 'Recent tickets',
+                                viewAll: () {},
                               ),
                               SizedBox(height: 17),
                             ],

@@ -5,6 +5,7 @@ import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_transaction_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/wallet_balance_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
@@ -50,25 +51,9 @@ class _WalletScreenState extends State<WalletScreen> {
                 children: [
                   WalletBalanceWidget(),
                   SizedBox(height: 23),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextView(
-                        text: 'My wallet history',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                        color: Pallets.grey800,
-                        textAlign: TextAlign.left,
-                      ),
-                      TextView(
-                        onTap: () => null,
-                        text: 'View All',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                        color: Pallets.grey800,
-                        textAlign: TextAlign.right,
-                      ),
-                    ],
+                  ViewAllButton(
+                    title: 'My wallet history',
+                    viewAll: () {},
                   ),
                   SizedBox(height: 23),
                   ...walletList
