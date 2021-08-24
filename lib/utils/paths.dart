@@ -9,8 +9,8 @@ class Paths {
   static String login = 'api/login';
   static String getMarketting = 'api/resources';
   static String updateMarketting = 'admin/resources/';
-  static String viewWallet = 'wallet';
-  static String viewWalletTransactions = 'wallet-transactions/';
+  static String viewWallet = 'api/wallet';
+  static String viewWalletTransactions = 'api/wallet-transactions/';
   static String viewTransferWallet = 'wallet-to-wallet';
   static String createUpdateDeleteContest = 'admin/contests';
   static String viewContest = 'contests';

@@ -4,6 +4,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/dao/mark
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/dao/messaging_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
 
 /// initialize local data storage
 Future<void> initializeDatabase() async {
@@ -16,17 +17,20 @@ class HiveBoxes {
   static final ticket = 'ticket';
   static final message = 'message';
   static final open = 'open';
+  static final wallet = 'wallet';
 
   static Future openAllBox() async {
     markettingDao = MarketingDao();
     ticketDao = TicketDao();
     messageDao = MessageDao();
+    walletDao = WalletDao();
   }
 
   static Future clearAllBox() async {
     await markettingDao!.truncate();
     await ticketDao!.truncate();
     await messageDao!.truncate();
+    await walletDao!.truncate();
   }
 
   static Future<Box<T>> openBox<T>(String boxName) async {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/repository/wallet_repository.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
@@ -48,9 +49,8 @@ class WalletViewmodel extends BaseViewModel {
   /// check wallet
   Future<void> checkWallet() async {
     try {
-      _showLoading();
       final _reponse = await _walletRepository.viewWallet();
-      logger.d(_reponse.toJson());
+      walletDao!.cacheWallet(_reponse.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
@@ -60,13 +60,12 @@ class WalletViewmodel extends BaseViewModel {
   /// get wallet transactions
   Future<void> walletTransactions() async {
     try {
-      _showLoading();
+      if (walletDao!.box!.isEmpty) _showLoading();
       final _response = await _walletRepository.getWalletTransactions();
-      _hideLoading();
-      logger.d(_response.toJson());
+      walletDao!.saveTransactions(_response.walletTransactions!.data);
     } catch (e) {
       _hideLoading();
-      showsnackBarInfo(this._context, message: e.toString());
     }
+    _hideLoading();
   }
 }

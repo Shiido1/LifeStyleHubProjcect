@@ -72,3 +72,8 @@ Future<Duration> getTrialDuration() async {
       hours: DateTime.now().hour,
       minutes: DateTime.now().minute);
 }
+
+/// format currency
+String formatCurrency(dynamic i) {
+  return NumberFormat.simpleCurrency().format(i);
+}
