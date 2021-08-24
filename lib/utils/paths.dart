@@ -11,7 +11,7 @@ class Paths {
   static String updateMarketting = 'admin/resources/';
   static String viewWallet = 'api/wallet';
   static String viewWalletTransactions = 'api/wallet-transactions/';
-  static String viewTransferWallet = 'wallet-to-wallet';
+  static String viewTransferWallet = 'api/wallet-to-wallet';
   static String createUpdateDeleteContest = 'admin/contests';
   static String viewContest = 'contests';
   static String register = 'api/register';

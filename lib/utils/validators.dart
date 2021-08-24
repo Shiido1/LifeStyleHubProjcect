@@ -157,10 +157,10 @@ class Validators {
   }
 
   /// validates users input to a valid amount type
-  static String Function(String) validateAmount(
+  static String Function(String?)? validateAmount(
       {String? error, double? minAmount, double? maxAmount}) {
-    return (String value) {
-      value = value.replaceAll(",", "");
+    return (String? value) {
+      value = value!.replaceAll(",", "");
 
       if (value.isEmpty) {
         return error ?? 'Amount is required.';

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/modal/transfer_modal.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/modal/withdraw_modal.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_model.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
@@ -51,48 +53,54 @@ class WalletBalanceWidget extends StatelessWidget {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  color: Pallets.orange200,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Icon(Icons.call_made_outlined,
-                                  color: Pallets.grey600),
-                            ),
-                            SizedBox(height: 8),
-                            TextView(
-                              text: 'Withdraw',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                              color: Pallets.grey600,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                        InkWell(
+                          onTap: () => showWithdrawModal(context),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: Pallets.orange200,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Icon(Icons.call_made_outlined,
+                                    color: Pallets.grey600),
+                              ),
+                              SizedBox(height: 8),
+                              TextView(
+                                text: 'Withdraw',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                                color: Pallets.grey600,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(width: 23),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  color: Pallets.orange200,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Icon(Icons.swap_horiz_outlined,
-                                  color: Pallets.grey600),
-                            ),
-                            SizedBox(height: 8),
-                            TextView(
-                              text: 'Transfer',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                              color: Pallets.grey600,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                        InkWell(
+                          onTap: () => showTransferModal(context),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: Pallets.orange200,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Icon(Icons.swap_horiz_outlined,
+                                    color: Pallets.grey600),
+                              ),
+                              SizedBox(height: 8),
+                              TextView(
+                                text: 'Transfer',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                                color: Pallets.grey600,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),
