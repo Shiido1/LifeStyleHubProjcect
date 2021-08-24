@@ -8,6 +8,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/get
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/open_message_model.dart'
     as open;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/repository/messaging_repository.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 
 MessageRepository _messageRepository = MessageRepository();
 
@@ -46,6 +47,22 @@ class MessagingViewmodel extends BaseViewModel {
         .where((element) =>
             element.conversation!.lastMessage!.sender!.id != user!.user.id)
         .toList();
+  }
+
+  /// create conversation
+  Future<void> createConversation(String emailOrPhone) async {
+    try {
+      _showLoading();
+      await _messageRepository.createMessage({
+        'participants_email': [emailOrPhone].toString()
+      });
+      getLastMessage();
+      showsnackBarInfo(_context,
+          message: 'Successfuly created a message.', bgColor: Pallets.green500);
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
   }
 
   /// get last messages
@@ -92,7 +109,7 @@ class MessagingViewmodel extends BaseViewModel {
   /// get cached messages
   Future<void> getCachedMessage(String id) async {
     open.OpenMessageModel _model = await messageDao!.getChat(id);
-    openedMessage = _model.data!;
+    openedMessage = _model.data!.reversed.toList();
     notifyListeners();
   }
 }

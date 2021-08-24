@@ -4,7 +4,9 @@ import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/database/users_data_provider.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/create_message.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/dao/messaging_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/enum/message_enum.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/viewmodel/messaging_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/filter_modal.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
@@ -87,10 +89,11 @@ class _MessagingScreenState extends State<MessagingScreen>
 
   FloatingActionButton chat() {
     return FloatingActionButton(
-      backgroundColor: Pallets.white,
+      backgroundColor: Pallets.grey100,
       heroTag: 'one',
       elevation: 2,
-      onPressed: () {},
+      onPressed: () => PageRouter.gotoWidget(
+          CreateMessageScreen(messageEnum: MessageEnum.single), context),
       child: ImageLoader(
         path: 'assets/svgs/chat_dot.svg',
         dColor: Pallets.grey700,
@@ -100,10 +103,11 @@ class _MessagingScreenState extends State<MessagingScreen>
 
   FloatingActionButton speaker() {
     return FloatingActionButton(
-      backgroundColor: Pallets.white,
+      backgroundColor: Pallets.grey100,
       heroTag: 'two',
       elevation: 2,
-      onPressed: () {},
+      onPressed: () => PageRouter.gotoWidget(
+          CreateMessageScreen(messageEnum: MessageEnum.broadcast), context),
       child: ImageLoader(
           path: 'assets/svgs/mic_speaker.svg', dColor: Pallets.grey700),
     );
@@ -129,12 +133,12 @@ class _MessagingScreenState extends State<MessagingScreen>
               Transform(
                 transform: Matrix4.translationValues(
                     0.0, _translationButton!.value * 2.0, 0.0),
-                child: speaker(),
+                child: chat(),
               ),
               Transform(
                 transform: Matrix4.translationValues(
                     0.0, _translationButton!.value, 0.0),
-                child: chat(),
+                child: speaker(),
               ),
               toggle()
             ],
@@ -199,14 +203,14 @@ class _MessagingScreenState extends State<MessagingScreen>
                                 leading: CircleAvatar(
                                   backgroundColor: Pallets.amber500,
                                   child: TextView(
-                                      text: _formatReceiver(
-                                          elements.conversation, _user)![0],
+                                      text: '',
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400),
                                 ),
                                 title: TextView(
                                   text: _formatReceiver(
-                                      elements.conversation, _user)!,
+                                          elements.conversation, _user) ??
+                                      '',
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
                                   color: Pallets.grey700,
@@ -238,13 +242,13 @@ class _MessagingScreenState extends State<MessagingScreen>
   }
 
   String? _formatReceiver(Conversation? conversation, UsersInfoViewModel user) {
-    String? _receiver = '';
+    String? _receiver = 'Guest';
     conversation!.participants!.map((participant) {
       if (participant.messageable?.id != user.user.id)
         _receiver = participant.messageable?.name;
       else
         _receiver = 'Guest';
     }).toList();
-    return _receiver;
+    return _receiver ?? 'Guest';
   }
 }

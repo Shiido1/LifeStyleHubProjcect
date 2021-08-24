@@ -83,7 +83,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
                 padding: const EdgeInsets.all(16.0),
                 child: ListView(
                   controller: _scrollController,
-                  reverse: true,
+                  reverse: false,
                   children: [
                     Center(
                       child: Container(
