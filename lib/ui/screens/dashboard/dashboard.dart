@@ -35,6 +35,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
     TicketScreen(),
   ];
 
+  List<String> _titleList = [
+    'Dashboard',
+    'Marketting Tools',
+    'My network',
+    'My commission',
+    'Contest & Reward',
+    'Report',
+    'Wallet',
+    'Integrated point',
+    'Messaging',
+    'Ticketting'
+  ];
+
   int _index = 0;
 
   _DashboardScreenState(this._index);
@@ -43,8 +56,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getCustomAppBar(context,
-          title: '',
+          title: _titleList[_index],
           showLeadig: true,
+          centerTitle: true,
           image:
               'https://images.unsplash.com/photo-1558185348-fe8fa4cf631f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'),
       drawer: getDrawer(context),
