@@ -53,10 +53,19 @@ String fomartDate(String date) {
   return DateFormat("dd MMM, yyyy").format(_dt);
 }
 
+/// format time
 String fomartTime(String date) {
   DateTime _dt = DateTime.parse(date);
   return DateFormat("HH:MM a").format(_dt);
 }
+
+/// formart complete date
+String fomartCompleteDate(String date) {
+  DateTime _dt = DateTime.parse(date);
+  // return DateFormat('EEE, MMM d, ''yy').format(_dt);
+  return DateFormat('EEE d MMMM, yyyy').format(_dt);
+}
+
 
 /// get expiry date
 Future<Duration> getTrialDuration() async {
@@ -71,6 +80,15 @@ Future<Duration> getTrialDuration() async {
       days: _answer.inDays,
       hours: DateTime.now().hour,
       minutes: DateTime.now().minute);
+}
+
+/// get dates
+Duration getDateTime(String date) {
+  DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
+  DateTime _duration = _dateFormat.parse(date);
+  DateTime presentDate = _dateFormat.parse(DateTime.now().toIso8601String());
+  final _answer = _duration.difference(presentDate);
+  return _answer;
 }
 
 /// format currency

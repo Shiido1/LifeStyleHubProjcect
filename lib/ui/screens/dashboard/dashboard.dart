@@ -5,6 +5,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home/home_screen.da
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
 
+import 'fragments/contest/contest_screen.dart';
 import 'fragments/integrated/integrated_point_screen.dart';
 import 'fragments/marketting/marketting_screen.dart';
 import 'fragments/messaging/messaging_screen.dart';
@@ -27,7 +28,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     MarkettingScreen(),
     Container(),
     Container(),
-    Container(),
+    ContestScreen(),
     Container(),
     WalletScreen(),
     IntegratedPointScreen(),

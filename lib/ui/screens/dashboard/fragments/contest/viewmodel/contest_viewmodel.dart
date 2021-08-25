@@ -1,24 +1,24 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/dao/contest_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/repository/contest_repository.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/repository/marketting_repository.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 ContestRepository _contestRepository = ContestRepository();
 
-class ContestViewmodel extends BaseViewModel {
+class ContestViewModel extends BaseViewModel {
   late BuildContext _context;
   bool _loading = false;
 
   BuildContext get buildContext => _context;
 
   bool get loading => _loading;
+
+  final RefreshController _refreshController = RefreshController();
+
+  RefreshController get refreshController => _refreshController;
 
   /// initialize auth viewmodel
   void init(BuildContext context) {
@@ -66,10 +66,11 @@ class ContestViewmodel extends BaseViewModel {
     try {
       if (contestDao!.box!.isEmpty) _showLoading();
       final _response = await _contestRepository.getListContest();
-      logger.d(_response.viewContestModelList!.length);
       contestDao!.saveContests(_response.viewContestModelList);
+      _refreshController.refreshCompleted();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
+      _refreshController.refreshFailed();
     }
     _hideLoading();
   }

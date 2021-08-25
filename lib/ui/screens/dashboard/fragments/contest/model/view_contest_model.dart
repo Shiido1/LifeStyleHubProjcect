@@ -19,6 +19,7 @@ class ViewContestModel {
   String? startdate;
   String? enddate;
   int? directsRequired;
+  String? image;
   String? reward;
   String? createdAt;
   String? updatedAt;
@@ -30,6 +31,7 @@ class ViewContestModel {
       this.startdate,
       this.enddate,
       this.directsRequired,
+      this.image,
       this.reward,
       this.createdAt,
       this.updatedAt});
@@ -42,6 +44,7 @@ class ViewContestModel {
     if (json["enddate"] is String) this.enddate = json["enddate"];
     if (json["directs_required"] is int)
       this.directsRequired = json["directs_required"];
+    if (json["image"] is String) this.image = json["image"];
     if (json["reward"] is String) this.reward = json["reward"];
     if (json["created_at"] is String) this.createdAt = json["created_at"];
     if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
@@ -55,6 +58,7 @@ class ViewContestModel {
     data["startdate"] = this.startdate;
     data["enddate"] = this.enddate;
     data["directs_required"] = this.directsRequired;
+    data["image"] = this.image;
     data["reward"] = this.reward;
     data["created_at"] = this.createdAt;
     data["updated_at"] = this.updatedAt;

@@ -85,6 +85,7 @@ class SingleContentWidget extends StatelessWidget {
                 height: 56,
                 opacity: 0.3,
                 width: getDeviceWidth(context),
+
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15),
                     bottomRight: Radius.circular(15)),
