@@ -29,10 +29,10 @@ class WalletRepository {
   }
 
   /// [@View] Transactions
-  Future<ViewWalletTransactionModel> getWalletTransactions() async {
+  Future<ViewWalletTransactionModel> getWalletTransactions(int page) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.viewWalletTransactions}/', header: await getHeader());
+          url: '${Paths.viewWalletTransactions}$page', header: await getHeader());
       return ViewWalletTransactionModel.fromJson(_response);
     } catch (e) {
       throw e;

@@ -5,6 +5,7 @@ import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/repository/wallet_repository.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 WalletRepository _walletRepository = WalletRepository();
 
@@ -15,6 +16,16 @@ class WalletViewmodel extends BaseViewModel {
   BuildContext get buildContext => _context;
 
   bool get loading => _loading;
+
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: true);
+
+  RefreshController get refreshController => _refreshController;
+
+  int _currentPage = 1;
+  int? _totalPages = 0;
+
+  int get currentPage => _currentPage;
 
   /// initialize auth viewmodel
   void init(BuildContext context) {
@@ -58,14 +69,26 @@ class WalletViewmodel extends BaseViewModel {
   }
 
   /// get wallet transactions
-  Future<void> walletTransactions() async {
+  Future<void> walletTransactions(int index) async {
     try {
       if (walletDao!.box!.isEmpty) _showLoading();
-      final _response = await _walletRepository.getWalletTransactions();
+      final _response =
+          await _walletRepository.getWalletTransactions(index);
+      _totalPages = _response.walletTransactions!.total;
       walletDao!.saveTransactions(_response.walletTransactions!.data);
+      _refreshController.refreshCompleted();
     } catch (e) {
       _hideLoading();
     }
     _hideLoading();
+  }
+
+  /// paginate responses
+  void paginate() {
+    if (_currentPage <= _totalPages!) {
+      _currentPage++;
+      walletTransactions(_currentPage);
+    }
+    notifyListeners();
   }
 }
