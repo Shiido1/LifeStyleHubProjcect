@@ -13,7 +13,7 @@ class Paths {
   static String viewWalletTransactions = 'api/wallet-transactions/';
   static String viewTransferWallet = 'api/wallet-to-wallet';
   static String createUpdateDeleteContest = 'admin/contests';
-  static String viewContest = 'contests';
+  static String viewContest = 'api/contests';
   static String register = 'api/register';
   static String basicInformation = 'api/basic';
   static String workAndBanking = 'api/work-banking';

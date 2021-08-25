@@ -21,12 +21,22 @@ class ContestRepository {
     }
   }
 
-  /// [@Get] contest
-  Future<ViewContestModel> getContest({String id = ''}) async {
+  /// [@Get] contest list
+  Future<ViewContestModelList> getListContest() async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.viewContest}${id.isNotEmpty ? '/$id' : ''}',
-          header: await getHeader());
+          url: Paths.viewContest, header: await getHeader());
+      return ViewContestModelList.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /// [@Get] contest
+  Future<ViewContestModel> getContest({required String id}) async {
+    try {
+      final _response = await apiBaseHelper.get(
+          url: '${Paths.viewContest}/$id', header: await getHeader());
       return ViewContestModel.fromJson(_response);
     } catch (e) {
       throw e;
