@@ -7,6 +7,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/b
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/post_content_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/video_content_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/overlay.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'dao/marketting_dao.dart';
 import 'model/get_resources_model.dart';
@@ -47,10 +48,11 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
                 child: CircularProgressIndicator(),
               );
             }
-            return LoadingOverlay(
-              isLoading: false,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SmartRefresher(
+                controller: _marketting!.refreshController,
+                onRefresh: () => _marketting!.getMarketing(),
                 child: ListView(
                   children: [
                     SingleContentWidget(markettingViewmodel: _response),

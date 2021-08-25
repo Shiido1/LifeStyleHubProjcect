@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:lifestyle_hub/utils/timer/countdown.dart';
@@ -18,13 +19,10 @@ class ButtomCountDownWidget extends StatelessWidget {
     return FutureBuilder(
         future: getTrialDuration(),
         builder: (context, AsyncSnapshot<Duration> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting ||
+              !snapshot.hasData) {
             return Container();
           }
-          if (!snapshot.hasData) {
-            return Container();
-          }
-
           CountdownController _countdownController = CountdownController(
               duration: Duration(
                   days: snapshot.data!.inDays,

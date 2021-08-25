@@ -6,6 +6,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/dao/mark
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/repository/marketting_repository.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 MarkettingRepository _markettingRepository = MarkettingRepository();
 
@@ -24,6 +25,10 @@ class MarkettingViewmodel extends BaseViewModel {
   Data? _getResourceModel;
 
   Data? get getResourceModel => _getResourceModel;
+
+  final RefreshController _refreshController = RefreshController();
+
+  RefreshController get refreshController => _refreshController;
 
   /// initialize auth viewmodel
   void init(BuildContext context) {
@@ -59,8 +64,10 @@ class MarkettingViewmodel extends BaseViewModel {
       if (markettingDao!.box!.isEmpty) _showLoading();
       final _response = await _markettingRepository.getMarketting();
       markettingDao!.saveContents(_response.data!);
+      _refreshController.refreshCompleted();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
+      _refreshController.refreshFailed();
     }
     _hideLoading();
   }

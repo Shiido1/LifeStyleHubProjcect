@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/data/enum.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/glass_container.dart';
@@ -18,13 +19,15 @@ class SingleContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(markettingViewmodel!.getSingleContent() == null){
+    if (markettingViewmodel!.getSingleContent() == null) {
       return Container();
     }
     return GestureDetector(
       onTap: () => PageRouter.gotoWidget(
           MarkettingDetailScreen(
-              getResourcesModel: markettingViewmodel!.getSingleContent()),
+            getResourcesModel: markettingViewmodel!.getSingleContent(),
+            type: MarketingType.Video,
+          ),
           context),
       child: Container(
         height: 266,
