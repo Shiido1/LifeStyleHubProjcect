@@ -8,6 +8,7 @@ class Paths {
   static String createMessage = 'api/chat/new';
   static String login = 'api/login';
   static String getMarketting = 'api/resources';
+  static String getCommission = 'api/commissions';
   static String updateMarketting = 'admin/resources/';
   static String viewWallet = 'api/wallet';
   static String viewWalletTransactions = 'api/wallet-transactions?page=';
