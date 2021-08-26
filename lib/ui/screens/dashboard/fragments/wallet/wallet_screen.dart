@@ -6,6 +6,7 @@ import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_transaction_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/widget/multi_color_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/wallet_balance_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/overlay.dart';
@@ -66,70 +67,24 @@ class _WalletScreenState extends State<WalletScreen> {
                       title: 'My wallet history',
                       viewAll: () {},
                     ),
-                    SizedBox(height: 23),
-                    ...walletList
-                        .map((wallet) => Container(
-                              margin: EdgeInsets.only(bottom: 16),
-                              padding: EdgeInsets.all(23),
-                              decoration: BoxDecoration(
-                                  color: Pallets.orange100,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: TextView(
-                                          text: wallet.type ?? '',
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 14,
-                                          color: Pallets.grey800,
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: TextView(
-                                          text: formatCurrency(
-                                              wallet.amount ?? 0),
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 14,
-                                          color: Pallets.grey800,
-                                          textAlign: TextAlign.right,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 16),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: TextView(
-                                          text: wallet.referenceId ?? '',
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14,
-                                          color: Pallets.grey500,
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: TextView(
-                                          text: fomartDate(wallet.date!),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14,
-                                          color: Pallets.grey500,
-                                          textAlign: TextAlign.right,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ))
-                        .toList(),
+                    SizedBox(
+                      height: 23,
+                    ),
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: walletList.length,
+                        itemBuilder: (context, index) {
+                          final wallet = walletList[index];
+                          return MultiColorWidget(
+                              title: wallet.type,
+                              bgColor: index % 2 == 0
+                                  ? Pallets.orange100
+                                  : Pallets.white,
+                              package: wallet.referenceId,
+                              points: formatCurrency(wallet.amount ?? 0),
+                              date: fomartDate(wallet.date!));
+                        }),
                   ],
                 ),
               ));
