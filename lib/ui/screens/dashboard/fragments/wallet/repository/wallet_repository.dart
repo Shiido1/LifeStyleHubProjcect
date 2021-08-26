@@ -10,7 +10,7 @@ class WalletRepository {
   Future<TransferToWalletModel> transferToWallet(Map map) async {
     try {
       final _response = await apiBaseHelper.post(
-          map: map, url: Paths.viewTransferWallet, header: await getHeader());
+          map: map, url: Paths.viewTransferWallet, options: await getDioHeader());
       return TransferToWalletModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -21,7 +21,7 @@ class WalletRepository {
   Future<ViewWalletModel> viewWallet() async {
     try {
       final _response = await apiBaseHelper.get(
-          url: Paths.viewWallet, header: await getHeader());
+          url: Paths.viewWallet, options: await getDioHeader());
       return ViewWalletModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -32,7 +32,7 @@ class WalletRepository {
   Future<ViewWalletTransactionModel> getWalletTransactions(int page) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.viewWalletTransactions}$page', header: await getHeader());
+          url: '${Paths.viewWalletTransactions}$page', options: await getDioHeader());
       return ViewWalletTransactionModel.fromJson(_response);
     } catch (e) {
       throw e;

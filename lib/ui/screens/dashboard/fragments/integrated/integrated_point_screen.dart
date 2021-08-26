@@ -29,17 +29,16 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
       builder: (BuildContext context, Box<dynamic> box, Widget? child) {
         List<Data> walletList = walletDao!.convert(box).toList();
         return Consumer(builder: (context, watch, _) {
-          // final _wallet = watch(_walletProvider);
-          // if (_wallet.loading) {
-          //   return Center(
-          //     child: CircularProgressIndicator(),
-          //   );
-          // }
           return Padding(
               padding: const EdgeInsets.all(16.0),
               child: ListView(
                 children: [
-                  IntegratedPointWidget(),
+                  IntegratedPointAndCommissionWidget(
+                    total: 'Total point',
+                    totalPoint: '150',
+                    claimed: 'Claimed point',
+                    totalClaimed: '150',
+                  ),
                   SizedBox(height: 23),
                   TextView(
                     text: 'Point breakdown',

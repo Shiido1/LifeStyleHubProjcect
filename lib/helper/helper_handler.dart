@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
@@ -38,6 +39,16 @@ Future<Map<String, String>> getHeader() async {
   return _header;
 }
 
+/// @ get headers
+Future<Options> getDioHeader({String? token}) async {
+  Map<String, String> _header = Map<String, String>();
+  var _data = await prefManager.getCachedData(key: AppConstants.usersPrefKey);
+  LoginModel _user = LoginModel.fromJson(_data);
+  String? _bearer = _user != null ? _user.token : AppConstants.tempToken;
+  _header[HttpHeaders.authorizationHeader] = 'Bearer $_bearer';
+  return Options(headers: _header);
+}
+
 /// [Format] content strings
 String format(String values) {
   return values
@@ -65,7 +76,6 @@ String fomartCompleteDate(String date) {
   // return DateFormat('EEE, MMM d, ''yy').format(_dt);
   return DateFormat('EEE d MMMM, yyyy').format(_dt);
 }
-
 
 /// get expiry date
 Future<Duration> getTrialDuration() async {

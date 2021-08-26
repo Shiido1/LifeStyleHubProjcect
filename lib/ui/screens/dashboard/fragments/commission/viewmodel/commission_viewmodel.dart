@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/dao/commission_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/repository/commission_repository.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/dao/marketting_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
@@ -43,8 +44,9 @@ class CommissionViewmodel extends BaseViewModel {
   /// get commissions
   Future<void> getCommissions() async {
     try {
-      _showLoading();
-      final _reponse = await _commissionRepository.getCommissions();
+      if (commissionDao!.box!.isEmpty) _showLoading();
+      final _response = await _commissionRepository.getCommissions();
+      commissionDao!.saveContests(_response.commissionHistory);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

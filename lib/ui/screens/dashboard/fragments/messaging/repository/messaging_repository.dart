@@ -10,7 +10,7 @@ class MessageRepository {
   Future<GetLastMessagesModel> getLastMessages() async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.getLastMessages}/1', header: await getHeader());
+          url: '${Paths.getLastMessages}/1', options: await getDioHeader());
       return GetLastMessagesModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -20,7 +20,7 @@ class MessageRepository {
   Future<OpenMessageModel> openMessage(Map map) async {
     try {
       final _response = await apiBaseHelper.post(
-          url: '${Paths.openMessage}/1', header: await getHeader(), map: map);
+          url: '${Paths.openMessage}/1', options: await getDioHeader(), map: map);
       return OpenMessageModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -30,7 +30,7 @@ class MessageRepository {
   Future<SendMessageModel> sendMessage(Map map) async {
     try {
       final _response = await apiBaseHelper.post(
-          url: '${Paths.sendMessage}', header: await getHeader(), map: map);
+          url: '${Paths.sendMessage}', options: await getDioHeader(), map: map);
       return SendMessageModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -40,7 +40,7 @@ class MessageRepository {
   Future<CreateMessageModelList> createMessage(Map map) async {
     try {
       final _response = await apiBaseHelper.post(
-          url: '${Paths.createMessage}', header: await getHeader(), map: map);
+          url: '${Paths.createMessage}', options: await getDioHeader(), map: map);
       return CreateMessageModelList.fromJson(_response);
     } catch (e) {
       throw e;

@@ -3,8 +3,20 @@ import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
-class IntegratedPointWidget extends StatelessWidget {
-  const IntegratedPointWidget({Key? key}) : super(key: key);
+class IntegratedPointAndCommissionWidget extends StatelessWidget {
+  final String? total;
+  final String? claimed;
+  final String? totalPoint;
+  final String? totalClaimed;
+
+  const IntegratedPointAndCommissionWidget({
+    Key? key,
+    required this.total,
+    required this.claimed,
+    required this.totalPoint,
+    required this.totalClaimed,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,7 +31,7 @@ class IntegratedPointWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextView(
-                  text: '150',
+                  text: '$totalPoint',
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
                   color: Pallets.grey700,
@@ -27,9 +39,9 @@ class IntegratedPointWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextView(
-                  text: 'Total incomes',
+                  text: total ?? '',
                   fontWeight: FontWeight.w700,
-                  fontSize: 14,
+                  fontSize: 12,
                   color: Pallets.grey500,
                   textAlign: TextAlign.center,
                 ),
@@ -49,7 +61,7 @@ class IntegratedPointWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextView(
-                  text: '150',
+                  text: '$totalClaimed',
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
                   color: Pallets.grey700,
@@ -57,9 +69,9 @@ class IntegratedPointWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextView(
-                  text: 'Withdraws',
+                  text: claimed ?? '',
                   fontWeight: FontWeight.w700,
-                  fontSize: 14,
+                  fontSize: 12,
                   color: Pallets.grey500,
                   textAlign: TextAlign.center,
                 ),

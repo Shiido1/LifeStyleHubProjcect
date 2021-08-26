@@ -11,7 +11,7 @@ class MarkettingRepository {
   Future<dynamic> createMarketting(Map map) async {
     try {
       final _response = await apiBaseHelper.post(
-          map: map, url: Paths.getMarketting, header: await getHeader());
+          map: map, url: Paths.getMarketting, options: await getDioHeader());
       return null;
     } catch (e) {
       throw e;
@@ -22,7 +22,7 @@ class MarkettingRepository {
   Future<GetResourcesModelList> getMarketting() async {
     try {
       final _response = await apiBaseHelper.get(
-          url: Paths.getMarketting, header: await getHeader());
+          url: Paths.getMarketting, options: await getDioHeader());
       return GetResourcesModelList.fromJson(_response);
     } catch (e) {
       throw e;
@@ -33,7 +33,7 @@ class MarkettingRepository {
   Future<Data> getMarkettingDetails(String id) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.getMarketting}/$id', header: await getHeader());
+          url: '${Paths.getMarketting}/$id', options: await getDioHeader());
       return Data.fromJson(_response);
     } catch (e) {
       throw e;
@@ -47,7 +47,7 @@ class MarkettingRepository {
       final _response = await apiBaseHelper.put(
           url: '${Paths.updateMarketting}/$id',
           map: formData!,
-          header: await getHeader());
+          options: await getDioHeader());
       return UpdateResourceModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -58,7 +58,7 @@ class MarkettingRepository {
   Future<DeleteResourceModel> deleteMarkettingDetails(String id) async {
     try {
       final _response = await apiBaseHelper.delete(
-          url: '${Paths.updateMarketting}/$id', header: await getHeader());
+          url: '${Paths.updateMarketting}/$id', options: await getDioHeader());
       return DeleteResourceModel.fromJson(_response);
     } catch (e) {
       throw e;

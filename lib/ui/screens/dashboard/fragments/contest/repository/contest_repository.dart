@@ -14,7 +14,7 @@ class ContestRepository {
           map: map,
           url:
               '${Paths.createUpdateDeleteContest}${id.isNotEmpty ? '/$id' : ''}',
-          header: await getHeader());
+          options: await getDioHeader());
       return CreateOrUpdateContestModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -25,7 +25,7 @@ class ContestRepository {
   Future<ViewContestModelList> getListContest() async {
     try {
       final _response = await apiBaseHelper.get(
-          url: Paths.viewContest, header: await getHeader());
+          url: Paths.viewContest, options: await getDioHeader());
       return ViewContestModelList.fromJson(_response);
     } catch (e) {
       throw e;
@@ -36,7 +36,7 @@ class ContestRepository {
   Future<ViewContestModel> getContest({required String id}) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.viewContest}/$id', header: await getHeader());
+          url: '${Paths.viewContest}/$id', options: await getDioHeader());
       return ViewContestModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -48,7 +48,7 @@ class ContestRepository {
     try {
       final _response = await apiBaseHelper.delete(
           url: '${Paths.createUpdateDeleteContest}/$id',
-          header: await getHeader());
+          options: await getDioHeader());
       return DeleteContestModel.fromJson(_response);
     } catch (e) {
       throw e;

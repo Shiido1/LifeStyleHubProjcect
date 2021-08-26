@@ -10,7 +10,7 @@ class TicketRepository {
   Future<MyTicketStatusModel> postMyTicketStatus() async {
     try {
       final _response = await apiBaseHelper.post(
-          url: '${Paths.tickets}/status', header: await getHeader());
+          url: '${Paths.tickets}/status', options: await getDioHeader());
       return MyTicketStatusModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -21,7 +21,7 @@ class TicketRepository {
   Future<MyTicketModel> getMyTicket() async {
     try {
       final _response = await apiBaseHelper.get(
-          url: Paths.tickets, header: await getHeader());
+          url: Paths.tickets, options: await getDioHeader());
       return MyTicketModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -33,7 +33,7 @@ class TicketRepository {
     try {
       final _response = await apiBaseHelper.get(
           url: '${Paths.tickets}${id.isNotEmpty ? '$id' : ''}',
-          header: await getHeader());
+          options: await getDioHeader());
       return Data.fromJson(_response);
     } catch (e) {
       throw e;
@@ -46,7 +46,7 @@ class TicketRepository {
       final _response = await apiBaseHelper.post(
           map: map,
           url: '${Paths.tickets}/$ticket/reply',
-          header: await getHeader());
+          options: await getDioHeader());
       return MyTicketReplyModel.fromJson(_response);
     } catch (e) {
       throw e;

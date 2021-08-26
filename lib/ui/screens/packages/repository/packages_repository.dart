@@ -11,7 +11,7 @@ class PackageRepository {
       final _response = await apiBaseHelper.post(
           map: map,
           url: '${Paths.packages}/$id/subscribe',
-          header: await getHeader());
+          options: await getDioHeader());
       return PackagesPaymentModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -22,7 +22,7 @@ class PackageRepository {
   Future<ViewPackagesModelList> getListOfPackages() async {
     try {
       final _response = await apiBaseHelper.get(
-          url: Paths.packages, header: await getHeader());
+          url: Paths.packages, options: await getDioHeader());
       return ViewPackagesModelList.fromJson(_response);
     } catch (e) {
       throw e;
@@ -33,7 +33,7 @@ class PackageRepository {
   Future<ViewPackagesModel> getPackageDetail(String id) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.packages}/$id', header: await getHeader());
+          url: '${Paths.packages}/$id', options: await getDioHeader());
       return ViewPackagesModel.fromJson(_response);
     } catch (e) {
       throw e;
