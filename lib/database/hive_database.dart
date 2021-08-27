@@ -1,9 +1,10 @@
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/dao/commission_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/dao/contest_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/dao/point_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/dao/marketting_dao.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/dao/messaging_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
@@ -22,6 +23,7 @@ class HiveBoxes {
   static final wallet = 'wallet';
   static final contest = 'contest';
   static final commission = 'commission';
+  static final point = 'point';
 
   static Future openAllBox() async {
     markettingDao = MarketingDao();
@@ -30,6 +32,7 @@ class HiveBoxes {
     walletDao = WalletDao();
     contestDao = ContestDao();
     commissionDao = CommissionDao();
+    pointHistoryDao = PointHistoryDao();
   }
 
   static Future clearAllBox() async {
@@ -39,6 +42,7 @@ class HiveBoxes {
     await walletDao!.truncate();
     await contestDao!.truncate();
     await commissionDao!.truncate();
+    await pointHistoryDao!.truncate();
   }
 
   static Future<Box<T>> openBox<T>(String boxName) async {
