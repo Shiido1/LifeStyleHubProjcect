@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-class NetworkScreen extends StatefulWidget {
-  const NetworkScreen({Key? key}) : super(key: key);
+import 'model/generation_model.dart';
+import 'widget/matrix_widget.dart';
 
-  @override
-  _NetworkScreenState createState() => _NetworkScreenState();
-}
+class NetworkScreen extends StatelessWidget {
+  NetworkScreen({Key? key}) : super(key: key);
 
-class _NetworkScreenState extends State<NetworkScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ListView(
+        children: [MatrixDisplayWidget(me: Me.getMyDescendants())],
+      ),
+    );
   }
 }
