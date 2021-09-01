@@ -43,8 +43,7 @@ class _CommissionScreenState extends State<CommissionScreen> {
     return ValueListenableBuilder(
       valueListenable: commissionDao!.getListenable()!,
       builder: (BuildContext context, Box<dynamic> box, Widget? child) {
-        List<CommissionHistory> commissionList =
-            commissionDao!.convert(box).toList();
+        CommissionModel _commissionModel = commissionDao!.convert(box);
         return Consumer(builder: (context, watch, _) {
           final _commission = watch(_commissionProvider);
           if (_commission.loading) {
@@ -58,9 +57,9 @@ class _CommissionScreenState extends State<CommissionScreen> {
                 children: [
                   IntegratedPointAndCommissionWidget(
                     total: 'Total commission',
-                    totalPoint: formatCurrency(10),
+                    totalPoint: formatCurrency(_commissionModel.totalCommission ?? 0),
                     claimed: 'Claimed',
-                    totalClaimed: formatCurrency(10),
+                    totalClaimed: formatCurrency(_commissionModel.totalCommission ?? 0),
                   ),
                   SizedBox(height: 23),
                   TextView(
@@ -91,21 +90,21 @@ class _CommissionScreenState extends State<CommissionScreen> {
                   SizedBox(
                     height: 23,
                   ),
-                  ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: commissionList.length,
-                      itemBuilder: (context, index) {
-                        final commission = commissionList[index];
-                        return MultiColorWidget(
-                            title: commission.fullname,
-                            bgColor: index % 2 == 0
-                                ? Pallets.orange100
-                                : Pallets.white,
-                            package: commission.package,
-                            points: formatCurrency(commission.amount ?? 0),
-                            date: fomartDate(commission.date!));
-                      }),
+                  // ListView.builder(
+                  //     physics: NeverScrollableScrollPhysics(),
+                  //     shrinkWrap: true,
+                  //     itemCount: commissionList.length,
+                  //     itemBuilder: (context, index) {
+                  //       final commission = commissionList[index];
+                  //       return MultiColorWidget(
+                  //           title: commission.fullname,
+                  //           bgColor: index % 2 == 0
+                  //               ? Pallets.orange100
+                  //               : Pallets.white,
+                  //           package: commission.package,
+                  //           points: formatCurrency(commission.amount ?? 0),
+                  //           date: fomartDate(commission.date!));
+                  //     }),
                 ],
               ));
         });

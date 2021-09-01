@@ -46,7 +46,7 @@ class CommissionViewmodel extends BaseViewModel {
     try {
       if (commissionDao!.box!.isEmpty) _showLoading();
       final _response = await _commissionRepository.getCommissions();
-      commissionDao!.saveContests(_response.commissionHistory);
+      commissionDao!.saveContests(_response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

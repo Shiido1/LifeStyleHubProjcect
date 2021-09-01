@@ -24,20 +24,14 @@ class CommissionDao {
     return HiveBoxes.openBox<Map>(HiveBoxes.commission);
   }
 
-  Future<void> saveContests(List<CommissionHistory>? commissionHistory) async {
-    final map = Map<String, Map>.fromIterable(
-      commissionHistory!,
-      key: (g) => (g as CommissionHistory).email.toString(),
-      value: (g) => (g as CommissionHistory).toJson(),
-    );
-    await _box!.putAll(map);
+  Future<void> saveContests(Map map) async {
+    await _box!.put(HiveBoxes.commission, map);
   }
 
-  List<CommissionHistory> convert(Box box) {
+  CommissionModel convert(Box box) {
     Map<String, dynamic> raw = new Map<String, dynamic>.from(box.toMap());
-    return raw.values
-        .map((e) => CommissionHistory.fromJson(json.decode(json.encode(e))))
-        .toList();
+    return CommissionModel.fromJson(
+        json.decode(json.encode(raw[HiveBoxes.commission])));
   }
 
   ValueListenable<Box>? getListenable({List<String>? keys}) {
