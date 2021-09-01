@@ -4,10 +4,9 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/data/enu
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
 
 import '../marketting_details_screen.dart';
+import '../view_all_marketting_tools_screen.dart';
 
 class BannerContents extends StatelessWidget {
   final MarkettingViewmodel response;
@@ -24,7 +23,9 @@ class BannerContents extends StatelessWidget {
           SizedBox(height: 40),
           ViewAllButton(
             title: 'Social media banners',
-            viewAll: () {},
+            viewAll: () => PageRouter.gotoWidget(
+                ViewAllMarkettingScreen(marketingType: MarketingType.Banner),
+                context),
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,

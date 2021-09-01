@@ -6,7 +6,6 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmode
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/banner_content_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/post_content_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/video_content_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'dao/marketting_dao.dart';

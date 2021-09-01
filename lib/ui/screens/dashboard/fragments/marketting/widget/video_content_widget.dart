@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/data/enum.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/view_all_marketting_tools_screen.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../marketting_details_screen.dart';
@@ -25,7 +24,9 @@ class VideoContents extends StatelessWidget {
           SizedBox(height: 40),
           ViewAllButton(
             title: 'Videos',
-            viewAll: () {},
+            viewAll: () => PageRouter.gotoWidget(
+                ViewAllMarkettingScreen(marketingType: MarketingType.Video),
+                context),
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,

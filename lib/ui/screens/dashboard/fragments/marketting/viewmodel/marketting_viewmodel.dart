@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/dao/marketting_dao.dart';
@@ -64,6 +63,20 @@ class MarkettingViewmodel extends BaseViewModel {
       if (markettingDao!.box!.isEmpty) _showLoading();
       final _response = await _markettingRepository.getMarketting();
       markettingDao!.saveContents(_response.data!);
+      _refreshController.refreshCompleted();
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+      _refreshController.refreshFailed();
+    }
+    _hideLoading();
+  }
+
+  /// get list of marketing
+  Future<void> getMarketingViewAll(String path) async {
+    try {
+      _showLoading();
+      final _response = await _markettingRepository.getMarkettingAll(path);
+      _getResourcesModelList = _response.data;
       _refreshController.refreshCompleted();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());

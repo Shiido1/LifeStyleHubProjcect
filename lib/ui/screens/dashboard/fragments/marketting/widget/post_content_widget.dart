@@ -8,6 +8,7 @@ import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
 import '../marketting_details_screen.dart';
+import '../view_all_marketting_tools_screen.dart';
 
 class PostContents extends StatelessWidget {
   final MarkettingViewmodel response;
@@ -24,7 +25,9 @@ class PostContents extends StatelessWidget {
           SizedBox(height: 40),
           ViewAllButton(
             title: 'Posts',
-            viewAll: () {},
+            viewAll: () => PageRouter.gotoWidget(
+                ViewAllMarkettingScreen(marketingType: MarketingType.Post),
+                context),
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,

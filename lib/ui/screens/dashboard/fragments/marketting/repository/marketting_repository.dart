@@ -29,6 +29,17 @@ class MarkettingRepository {
     }
   }
 
+  /// [@Get] Resource marketting list
+  Future<GetResourcesModelList> getMarkettingAll(String type) async {
+    try {
+      final _response = await apiBaseHelper.get(
+          url: '${Paths.getMarketting}?type=$type', options: await getDioHeader());
+      return GetResourcesModelList.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
   /// [@Get] Resource marketting details
   Future<Data> getMarkettingDetails(String id) async {
     try {
