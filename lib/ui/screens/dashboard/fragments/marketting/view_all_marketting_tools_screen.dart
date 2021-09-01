@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/filter_modal.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
+import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -60,9 +64,7 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
             child: CircularProgressIndicator(),
           );
         }
-        if (_response.getResourceModel == null) {
-          return Container();
-        }
+
         return Padding(
           padding: const EdgeInsets.all(16.0),
           child: SmartRefresher(
@@ -70,6 +72,36 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
             onRefresh: () => _marketting!.getMarketingViewAll(_getType()),
             child: ListView(
               children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 7,
+                      child: EditFormField(
+                        label: 'Search tickets',
+                        controller: null,
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 48,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Pallets.orange500),
+                        child: Center(
+                            child: ImageLoader(
+                                onTap: () => showTicketFiltering(context,
+                                    callBack: (filter) {}),
+                                path: 'assets/svgs/filter.svg')),
+                      ),
+                    )
+                  ],
+                ),
                 ..._response.getResourceModelList!.map((element) {
                   return Container(
                     margin: EdgeInsets.only(bottom: 16),
@@ -81,8 +113,8 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
                           height: 16,
                         ),
                         ImageLoader(
-                            width: 218,
-                            height: 127,
+                            width: getDeviceWidth(context),
+                            height: getDeviceHeight(context) * .3,
                             isCurvedEdge: true,
                             curve: 10,
                             onTap: () => PageRouter.gotoWidget(
@@ -93,9 +125,13 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
                                   context,
                                   animationType: PageTransitionType.fade,
                                 ),
+                            fit: BoxFit.cover,
                             path: element.featuredImage!),
                         SizedBox(height: 8),
-                        Text(element.title!)
+                        Text(
+                          element.title!,
+                          style: TextStyle(fontSize: 16),
+                        )
                       ],
                     ),
                   );

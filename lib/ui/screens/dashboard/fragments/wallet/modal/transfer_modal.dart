@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/set_pin_modal.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
@@ -57,10 +55,11 @@ void showTransferModal(BuildContext context) {
                   ),
                   SizedBox(height: 32),
                   EditFormField(
-                    floatingLabel: 'Enter recipient number',
+                    floatingLabel: 'Enter recipient email',
                     label: '',
                     validator: Validators.validateEmail(),
                     controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 8),
                   Row(
@@ -84,6 +83,7 @@ void showTransferModal(BuildContext context) {
                     floatingLabel: 'Amount in local currency ',
                     label: ' ',
                     controller: _amountController,
+                    keyboardType: TextInputType.emailAddress,
                     validator: Validators.validateAmount(),
                   ),
                   SizedBox(height: 40),
@@ -97,7 +97,7 @@ void showTransferModal(BuildContext context) {
                     primary: Pallets.orange500,
                     borderColor: Pallets.orange500,
                     onPressed: () {
-                      PageRouter.goBack(context);
+                      // PageRouter.goBack(context);
                       // showPinModal(context);
 
                       _walletViewmodel!.transferToWallet({

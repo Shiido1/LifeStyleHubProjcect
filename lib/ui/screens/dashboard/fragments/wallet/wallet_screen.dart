@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_transaction_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/multi_color_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/wallet_balance_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/overlay.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import 'all_wallet_screens.dart';
 
 class WalletScreen extends StatefulWidget {
   WalletScreen({Key? key}) : super(key: key);
@@ -35,8 +35,9 @@ class _WalletScreenState extends State<WalletScreen> {
   }
 
   void _refresh() {
-    _walletViewmodel!.checkWallet();
-    _walletViewmodel!.walletTransactions(1);
+    _walletViewmodel!.awaitTwoProcesses(1);
+    // _walletViewmodel!.checkWallet();
+    // _walletViewmodel!.walletTransactions(1);
   }
 
   @override
@@ -65,7 +66,7 @@ class _WalletScreenState extends State<WalletScreen> {
                     SizedBox(height: 23),
                     ViewAllButton(
                       title: 'My wallet history',
-                      viewAll: () {},
+                      viewAll: () => PageRouter.gotoWidget(AllWalletScreen(), context),
                     ),
                     SizedBox(
                       height: 23,
@@ -73,7 +74,8 @@ class _WalletScreenState extends State<WalletScreen> {
                     ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: walletList.length,
+                        itemCount:
+                            walletList.length <= 5 ? walletList.length : 5,
                         itemBuilder: (context, index) {
                           final wallet = walletList[index];
                           return MultiColorWidget(

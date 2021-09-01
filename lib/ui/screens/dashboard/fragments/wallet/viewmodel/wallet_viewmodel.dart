@@ -18,7 +18,7 @@ class WalletViewmodel extends BaseViewModel {
   bool get loading => _loading;
 
   final RefreshController _refreshController =
-      RefreshController(initialRefresh: true);
+      RefreshController(initialRefresh: false);
 
   RefreshController get refreshController => _refreshController;
 
@@ -57,8 +57,18 @@ class WalletViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
+  void awaitTwoProcesses(int index) async {
+    try {
+      // _hideLoading();
+      await Future.wait([_checkWallet(), _walletTransactions(index)]);
+    } catch (e) {
+      logger.e('Error waiting for multiple process -> $e');
+    }
+    _hideLoading();
+  }
+
   /// check wallet
-  Future<void> checkWallet() async {
+  Future<void> _checkWallet() async {
     try {
       final _reponse = await _walletRepository.viewWallet();
       walletDao!.cacheWallet(_reponse.toJson());
@@ -69,11 +79,10 @@ class WalletViewmodel extends BaseViewModel {
   }
 
   /// get wallet transactions
-  Future<void> walletTransactions(int index) async {
+  Future<void> _walletTransactions(int index) async {
     try {
       if (walletDao!.box!.isEmpty) _showLoading();
-      final _response =
-          await _walletRepository.getWalletTransactions(index);
+      final _response = await _walletRepository.getWalletTransactions(index);
       _totalPages = _response.walletTransactions!.total;
       walletDao!.saveTransactions(_response.walletTransactions!.data);
       _refreshController.refreshCompleted();
@@ -87,7 +96,7 @@ class WalletViewmodel extends BaseViewModel {
   void paginate() {
     if (_currentPage <= _totalPages!) {
       _currentPage++;
-      walletTransactions(_currentPage);
+      _walletTransactions(_currentPage);
     }
     notifyListeners();
   }

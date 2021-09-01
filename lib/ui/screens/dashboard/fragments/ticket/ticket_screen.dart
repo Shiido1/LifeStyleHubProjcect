@@ -10,9 +10,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/ticke
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/overlay.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:page_transition/page_transition.dart';
 
 import 'model/my_ticket_model.dart';
 import 'model/my_ticket_status.dart';
@@ -129,7 +127,8 @@ class _TicketScreenState extends State<TicketScreen> {
                               SizedBox(height: 32),
                               ViewAllButton(
                                 title: 'Recent tickets',
-                                viewAll: () {},
+                                viewAll: () => PageRouter.gotoWidget(
+                                    ViewMoreTicketsScreen(), context),
                               ),
                               SizedBox(height: 17),
                             ],
