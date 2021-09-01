@@ -6,6 +6,8 @@ import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
+import 'widget/contest_time_left_widget.dart';
+
 class ContestDetails extends StatefulWidget {
   final ViewContestModel? contestModel;
 
@@ -127,6 +129,44 @@ class _ContestDetailsState extends State<ContestDetails> {
             ),
             SizedBox(
               height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ContestTimeLeftWidget(
+                  height: 96,
+                  timeLeft: 'Days left',
+                  textColor: Pallets.black,
+                  timeColor: Pallets.black,
+                  bgColor: Pallets.grey200,
+                  directs: getDateTime(contestModel!.enddate!).inDays,
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                ContestTimeLeftWidget(
+                  height: 96,
+                  textColor: Pallets.black,
+                  timeColor: Pallets.black,
+                  bgColor: Pallets.grey200,
+                  timeLeft: 'Hrs left',
+                  directs: getDateTime(contestModel!.enddate!).inHours,
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                ContestTimeLeftWidget(
+                  height: 96,
+                  textColor: Pallets.red600,
+                  timeColor: Pallets.red600,
+                  bgColor: Pallets.grey200,
+                  timeLeft: 'Mins left',
+                  directs: getDateTime(contestModel!.enddate!).inMinutes,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
