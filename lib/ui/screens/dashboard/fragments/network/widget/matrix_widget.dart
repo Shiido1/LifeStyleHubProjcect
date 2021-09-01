@@ -70,17 +70,17 @@ class MatrixDisplayWidget extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    height: getDeviceHeight(context) * .010,
-                                    margin: EdgeInsets.only(
-                                        left: getDeviceWidth(context) * .05),
-                                    width: getDeviceWidth(context) * .001,
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            left: BorderSide(
-                                                width: 1,
-                                                color: Pallets.grey400))),
-                                  ),
+                                  // Container(
+                                  //   height: getDeviceHeight(context) * .010,
+                                  //   margin: EdgeInsets.only(
+                                  //       left: getDeviceWidth(context) * .05),
+                                  //   width: getDeviceWidth(context) * .001,
+                                  //   decoration: BoxDecoration(
+                                  //       border: Border(
+                                  //           left: BorderSide(
+                                  //               width: 1,
+                                  //               color: Pallets.grey400))),
+                                  // ),
                                 ],
                               ),
                               Expanded(
@@ -119,7 +119,7 @@ class MatrixDisplayWidget extends StatelessWidget {
                           Expanded(
                             flex: 7,
                             child: Container(
-                                height: 45,
+                                height: 45 ,
                                 child: Row(children: [
                                   ..._data.myGrandChildren!
                                       .map((grandChild) => Expanded(
@@ -127,6 +127,20 @@ class MatrixDisplayWidget extends StatelessWidget {
                                           child: Container(
                                               child: Stack(
                                             children: [
+                                              Container(
+                                                // height:
+                                                //     getDeviceHeight(context) *
+                                                //         0.8,
+                                                transform:
+                                                Matrix4.translationValues(
+                                                    40, -35, 0),
+                                                width: 1,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Pallets.grey400,
+                                                      width: 1),
+                                                ),
+                                              ),
                                               CircleAvatar(
                                                 radius: 40,
                                                 backgroundColor:
@@ -153,20 +167,7 @@ class MatrixDisplayWidget extends StatelessWidget {
                                                         ),
                                                 ),
                                               ),
-                                              Container(
-                                                height:
-                                                    getDeviceHeight(context) *
-                                                        0.8,
-                                                transform:
-                                                    Matrix4.translationValues(
-                                                        40, -30, 0),
-                                                width: 1,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Pallets.grey400,
-                                                      width: 1),
-                                                ),
-                                              )
+
                                             ],
                                           ))))
                                       .toList()

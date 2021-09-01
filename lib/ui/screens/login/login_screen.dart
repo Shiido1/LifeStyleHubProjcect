@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Pallets.orange500,
                         textAlign: TextAlign.left,
                         onTap: () =>
-                            PageRouter.gotoNamed(Routes.resetPassword, context),
+                            PageRouter.gotoNamed(Routes.resetPassword, context, clearStack: true),
                       ),
                       SizedBox(
                         height: 36.25,

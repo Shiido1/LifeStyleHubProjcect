@@ -7,6 +7,7 @@ class Paths {
   static String sendMessage = 'api/chat/message';
   static String createMessage = 'api/chat/new';
   static String login = 'api/login';
+  static String forgotPassword = 'api/forgot-password';
   static String getMarketting = 'api/resources';
   static String getCommission = 'api/commissions';
   static String updateMarketting = 'admin/resources/';
