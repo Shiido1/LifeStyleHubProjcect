@@ -23,5 +23,6 @@ class Paths {
   static String getBankAccount = 'bank-accounts';
   static String packages = 'packages';
   static String tickets = 'api/tickets';
+  static String departments = 'api/departments';
   static String point = 'api/points';
 }

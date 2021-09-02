@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,11 @@ import 'package:intl/intl.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'configs/constants.dart';
+import 'package:path/path.dart';
 
 /// get device width
 double getDeviceWidth(BuildContext context) {
@@ -44,8 +48,11 @@ Future<Options> getDioHeader({String? token}) async {
   Map<String, String> _header = Map<String, String>();
   var _data = await prefManager.getCachedData(key: AppConstants.usersPrefKey);
   LoginModel _user = LoginModel.fromJson(_data);
-  String? _bearer = _user != null ? _user.token : AppConstants.tempToken;
+  String? _bearer = _user.token != null ? _user.token : AppConstants.tempToken;
   _header[HttpHeaders.authorizationHeader] = 'Bearer $_bearer';
+  _header[HttpHeaders.contentTypeHeader] = 'multipart/form-data';
+  _header[HttpHeaders.acceptHeader] = 'application/json';
+  _header[HttpHeaders.contentEncodingHeader] = 'gzip, deflate, br';
   return Options(headers: _header);
 }
 
@@ -104,4 +111,38 @@ Duration getDateTime(String date) {
 /// format currency
 String formatCurrency(dynamic i) {
   return NumberFormat.simpleCurrency().format(i);
+}
+
+//* getting local path
+Future<Directory?> findLocalPath() async {
+  final directory = Platform.isAndroid
+      ? await getExternalStorageDirectory()
+      : await getApplicationDocumentsDirectory();
+  return directory;
+}
+
+//* generate key
+const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+Random _rnd = Random();
+
+String generateKey(int length) => String.fromCharCodes(Iterable.generate(
+    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+
+//* generate id's
+int generateId(int length) => _rnd.nextInt(length);
+
+/// Compress images
+Future<File> compressImageFiles(File mFile) async {
+  final _dir = await findLocalPath();
+  final _targetPath = _dir!.absolute.path + "/${generateKey(15)}.jpg";
+  File? _result = await FlutterImageCompress.compressAndGetFile(
+      mFile.path, _targetPath,
+      quality: 10);
+  return _result!;
+}
+
+
+/// get file path
+String getFileName(File file){
+ return basename(file.path);
 }

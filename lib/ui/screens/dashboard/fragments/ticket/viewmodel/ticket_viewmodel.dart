@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/dept_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/repository/ticket_repository.dart';
@@ -40,6 +42,18 @@ class TicketViewmodel extends BaseViewModel {
     notifyListeners();
   }
 
+  Future<void> createTicket(FormData formData) async {
+    try {
+      _showLoading(notify: true);
+      final _response = await _ticketRepository.createNewTicket(formData);
+      showsnackBarInfo(_context,
+          message: _response.message ?? '', bgColor: Pallets.green600);
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
   ///
   Future<void> ticketStatus() async {
     try {
@@ -70,6 +84,18 @@ class TicketViewmodel extends BaseViewModel {
     for (int i = 0; i < _index; i++) {
       data!.add(response[i]);
     }
+  }
+
+  /// get single of ticket details
+  Future<void> getTicketDepartments() async {
+    try {
+      if (deptDao!.box!.isEmpty) _showLoading();
+      final _response = await _ticketRepository.getTicketDepartmental();
+      await deptDao!.saveDept(_response.dList);
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
   }
 
   /// get single of ticket details
