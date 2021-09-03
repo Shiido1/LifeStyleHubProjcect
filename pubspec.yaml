@@ -33,6 +33,7 @@ dependencies:
   image_cropper: ^1.4.1
   path_provider: ^2.0.2
   flutter_image_compress: ^1.1.0
+  device_preview: ^0.7.4
 
 jsonToDart:
   outputFolder: lib/models #default: lib/

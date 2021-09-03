@@ -114,7 +114,7 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
                         ),
                         ImageLoader(
                             width: getDeviceWidth(context),
-                            height: getDeviceHeight(context) * .3,
+                            height: getDeviceHeight(context) * .2,
                             isCurvedEdge: true,
                             curve: 10,
                             onTap: () => PageRouter.gotoWidget(

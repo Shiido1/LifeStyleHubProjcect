@@ -21,7 +21,7 @@ class TicketListWidget extends StatelessWidget {
           PageRouter.gotoWidget(TicketDetailsSms(element: element), context),
       child: Container(
         margin: EdgeInsets.only(bottom: 24),
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: _getBackgroundStatusColor(element!.status!)),
@@ -31,6 +31,7 @@ class TicketListWidget extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: TextView(
@@ -39,7 +40,7 @@ class TicketListWidget extends StatelessWidget {
                     fontSize: 16,
                     color: Pallets.grey800,
                     textAlign: TextAlign.left,
-                    maxLines: 1,
+                    maxLines: 2,
                     textOverflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -75,6 +76,7 @@ class TicketListWidget extends StatelessWidget {
             SizedBox(height: 18),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: TextView(

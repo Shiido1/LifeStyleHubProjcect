@@ -126,7 +126,7 @@ class _MessagingScreenState extends State<MessagingScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: Container(
-          margin: EdgeInsets.only(bottom: 90),
+          margin: EdgeInsets.only(bottom: 50),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -173,20 +173,19 @@ class _MessagingScreenState extends State<MessagingScreen>
                           ),
                         ),
                         SizedBox(
-                          width: 16,
+                          width: 10,
                         ),
-                        Expanded(
-                          child: Container(
-                            height: 48,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Pallets.orange500),
-                            child: Center(
-                                child: ImageLoader(
-                                    onTap: () => showTicketFiltering(context,
-                                        callBack: (filter) {}),
-                                    path: 'assets/svgs/filter.svg')),
-                          ),
+                        Container(
+                          height: 48,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Pallets.orange500),
+                          child: Center(
+                              child: ImageLoader(
+                                  onTap: () => showTicketFiltering(context,
+                                      callBack: (filter) {}),
+                                  path: 'assets/svgs/filter.svg')),
                         )
                       ],
                     ),

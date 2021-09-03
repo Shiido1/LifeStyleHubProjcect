@@ -29,7 +29,7 @@ class SecondIcon extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: mainBgColor, borderRadius: BorderRadius.circular(19)),
-      padding: EdgeInsets.only(top: 32, left: 33.5, bottom: 61, right: 42.5),
+      padding: EdgeInsets.only(top: 32, left: 32, bottom: 32, right: 42.5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

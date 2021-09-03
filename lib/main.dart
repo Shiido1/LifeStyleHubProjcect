@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverPod;
@@ -6,6 +7,7 @@ import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
+import 'package:device_preview/device_preview.dart';
 
 import 'helper/configs/providers.dart';
 import 'helper/routes/routes.dart';
@@ -14,7 +16,9 @@ import 'ui/screens/onboarding/splashscreen.dart';
 
 void main() async {
   await initializeDatabase();
-  runApp(riverPod.ProviderScope(child: MyApp()));
+  runApp(DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => riverPod.ProviderScope(child: MyApp())));
 }
 
 class MyApp extends StatelessWidget {
