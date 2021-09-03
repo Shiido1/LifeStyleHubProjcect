@@ -6,9 +6,14 @@ import 'package:lifestyle_hub/utils/pallets.dart';
 // ignore: must_be_immutable
 class ActivePackageWidget extends StatelessWidget {
   final String? title;
+  final String? subtitle;
   int? percent;
 
-  ActivePackageWidget({Key? key, required this.title, required this.percent})
+  ActivePackageWidget(
+      {Key? key,
+      required this.title,
+      required this.percent,
+      required this.subtitle})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -58,7 +63,7 @@ class ActivePackageWidget extends StatelessWidget {
             height: 10,
           ),
           TextView(
-            text: 'Extra Luxury',
+            text: subtitle!,
             fontWeight: FontWeight.w700,
             fontSize: 12,
             color: Pallets.white,

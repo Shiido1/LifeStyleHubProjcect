@@ -10,6 +10,7 @@ class Paths {
   static String forgotPassword = 'api/forgot-password';
   static String getMarketting = 'api/resources';
   static String getCommission = 'api/commissions';
+  static String dashboard = 'api/dashboard';
   static String updateMarketting = 'admin/resources/';
   static String viewWallet = 'api/wallet';
   static String viewWalletTransactions = 'api/wallet-transactions?page=';

@@ -7,8 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'configs/constants.dart';
 import 'package:path/path.dart';
@@ -110,6 +108,7 @@ Duration getDateTime(String date) {
 
 /// format currency
 String formatCurrency(dynamic i) {
+  logger.d(i);
   return NumberFormat.simpleCurrency().format(i);
 }
 
@@ -131,18 +130,7 @@ String generateKey(int length) => String.fromCharCodes(Iterable.generate(
 //* generate id's
 int generateId(int length) => _rnd.nextInt(length);
 
-/// Compress images
-Future<File> compressImageFiles(File mFile) async {
-  final _dir = await findLocalPath();
-  final _targetPath = _dir!.absolute.path + "/${generateKey(15)}.jpg";
-  File? _result = await FlutterImageCompress.compressAndGetFile(
-      mFile.path, _targetPath,
-      quality: 10);
-  return _result!;
-}
-
-
 /// get file path
-String getFileName(File file){
- return basename(file.path);
+String getFileName(File file) {
+  return basename(file.path);
 }

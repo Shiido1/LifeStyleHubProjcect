@@ -17,7 +17,7 @@ import 'ui/screens/onboarding/splashscreen.dart';
 void main() async {
   await initializeDatabase();
   runApp(DevicePreview(
-      enabled: !kReleaseMode,
+      enabled: kReleaseMode,
       builder: (context) => riverPod.ProviderScope(child: MyApp())));
 }
 

@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/dao/dashboardd_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/dao/commission_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/dao/contest_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/dao/point_dao.dart';
@@ -26,6 +27,7 @@ class HiveBoxes {
   static final commission = 'commission';
   static final point = 'point';
   static final department = 'department';
+  static final dashboard = 'dashboard';
 
   static Future openAllBox() async {
     markettingDao = MarketingDao();
@@ -36,6 +38,7 @@ class HiveBoxes {
     commissionDao = CommissionDao();
     pointHistoryDao = PointHistoryDao();
     deptDao = DeptDao();
+    dashboardDao = DashboardDao();
   }
 
   static Future clearAllBox() async {

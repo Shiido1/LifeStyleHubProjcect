@@ -5,9 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/provider/provider_architecture.dart';
-import 'package:provider/provider.dart';
 
 enum ProfileOptionAction {
   VIEW_IMAGE,
@@ -128,9 +125,6 @@ class ImagePickerHandler {
         iosUiSettings: IOSUiSettings(
           title: 'LifeStyleHub',
         ));
-    if (croppedFile != null) {
-      file = await compressImageFiles(croppedFile);
-    }
-    return file!;
+    return croppedFile!;
   }
 }
