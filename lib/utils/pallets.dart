@@ -27,6 +27,7 @@ class Pallets {
   static Color grey50 = Color(0xffFAFAFA);
   static Color grey700 = Color(0xff3F3F46);
   static Color grey400 = Color(0xffA1A1AA);
+  static Color grey300 = Color(0xffD4D4D8);
   static Color grey100 = Color(0xffF4F4F5);
   static Color grey200 = Color(0xffE4E4E7);
   static Color grey600 = Color(0xff52525B);
