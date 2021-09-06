@@ -22,7 +22,7 @@ class Paths {
   static String workAndBanking = 'api/work-banking';
   static String addBankAccount = 'admin/bank-accounts';
   static String getBankAccount = 'bank-accounts';
-  static String packages = 'packages';
+  static String packages = 'api/packages';
   static String tickets = 'api/tickets';
   static String departments = 'api/departments';
   static String point = 'api/points';

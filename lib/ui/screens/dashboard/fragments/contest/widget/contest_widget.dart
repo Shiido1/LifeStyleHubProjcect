@@ -95,7 +95,9 @@ class ContestWidget extends StatelessWidget {
             LinearProgressIndicator(
               backgroundColor: Pallets.grey600,
               valueColor: new AlwaysStoppedAnimation<Color>(Pallets.orange500),
-              value: 50 / 100,
+              value: getPercentage(
+                  directReferred: contest!.directsReferred ?? 0,
+                  directRequired: contest!.directsRequired ?? 0),
             ),
             SizedBox(
               height: 16,

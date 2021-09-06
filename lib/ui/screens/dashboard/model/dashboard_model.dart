@@ -26,7 +26,7 @@ class DashboardModel {
       this.referralLink,
       this.resources});
 
-  DashboardModel.fromJson(Map<String, dynamic> json) {
+  DashboardModel.fromJson(json) {
     if (json["name"] is String) this.name = json["name"];
     if (json["wallet_balance"] is int)
       this.walletBalance = json["wallet_balance"];
@@ -110,7 +110,7 @@ class Resources {
       this.createdAt,
       this.updatedAt});
 
-  Resources.fromJson(Map<String, dynamic> json) {
+  Resources.fromJson(json) {
     if (json["id"] is int) this.id = json["id"];
     if (json["title"] is String) this.title = json["title"];
     if (json["slug"] is String) this.slug = json["slug"];
@@ -144,7 +144,7 @@ class ActivePackages {
 
   ActivePackages({this.name, this.type});
 
-  ActivePackages.fromJson(Map<String, dynamic> json) {
+  ActivePackages.fromJson(json) {
     if (json["name"] is String) this.name = json["name"];
     if (json["type"] is String) this.type = json["type"];
   }
@@ -183,7 +183,7 @@ class FeaturedContest {
       this.createdAt,
       this.updatedAt});
 
-  FeaturedContest.fromJson(Map<String, dynamic> json) {
+  FeaturedContest.fromJson(json) {
     if (json["id"] is int) this.id = json["id"];
     if (json["name"] is String) this.name = json["name"];
     if (json["description"] is String) this.description = json["description"];
@@ -237,7 +237,7 @@ class FeaturedResource {
       this.createdAt,
       this.updatedAt});
 
-  FeaturedResource.fromJson(Map<String, dynamic> json) {
+  FeaturedResource.fromJson(json) {
     if (json["id"] is int) this.id = json["id"];
     if (json["title"] is String) this.title = json["title"];
     if (json["slug"] is String) this.slug = json["slug"];

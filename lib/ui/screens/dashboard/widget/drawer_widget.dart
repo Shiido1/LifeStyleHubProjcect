@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
+import 'package:lifestyle_hub/provider/_viewmodel_provider.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:page_transition/page_transition.dart';
 
 final _notifier = ChangeNotifierProvider((ref) => TabViewModel());
 
-Consumer getDrawer(BuildContext context) {
+Consumer getDrawer(BuildContext context, int index) {
   context.read(_notifier);
   return Consumer(
     builder: (context, watch, child) {
@@ -106,7 +106,7 @@ Consumer getDrawer(BuildContext context) {
                     newIndex: 0,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 0,
-                newIndex: _tabNotifier.index,
+                newIndex: index,
               ),
               CustomDrawerTabs(
                 title: 'Marketting tools',
@@ -117,7 +117,7 @@ Consumer getDrawer(BuildContext context) {
                     newIndex: 1,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 1,
-                newIndex: _tabNotifier.index,
+                newIndex: index,
               ),
               CustomDrawerTabs(
                 title: 'My network',
@@ -128,7 +128,7 @@ Consumer getDrawer(BuildContext context) {
                     newIndex: 2,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 2,
-                newIndex: _tabNotifier.index,
+                newIndex: _tabNotifier.index!,
               ),
               CustomDrawerTabs(
                 title: 'My commission',
@@ -139,7 +139,7 @@ Consumer getDrawer(BuildContext context) {
                     newIndex: 3,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 3,
-                newIndex: _tabNotifier.index,
+                newIndex: index,
               ),
               CustomDrawerTabs(
                 title: 'Contest & Reward',
@@ -150,7 +150,7 @@ Consumer getDrawer(BuildContext context) {
                     newIndex: 4,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 4,
-                newIndex: _tabNotifier.index,
+                newIndex: index,
               ),
               CustomDrawerTabs(
                 title: 'Report',
@@ -161,7 +161,7 @@ Consumer getDrawer(BuildContext context) {
                     newIndex: 5,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 5,
-                newIndex: _tabNotifier.index,
+                newIndex: index,
               ),
               CustomDrawerTabs(
                 title: 'Wallet',
@@ -172,7 +172,7 @@ Consumer getDrawer(BuildContext context) {
                     newIndex: 6,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 6,
-                newIndex: _tabNotifier.index,
+                newIndex: _tabNotifier.index!,
               ),
               CustomDrawerTabs(
                 title: 'Integrated point',
@@ -183,7 +183,7 @@ Consumer getDrawer(BuildContext context) {
                     newIndex: 7,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 7,
-                newIndex: _tabNotifier.index,
+                newIndex: index,
               ),
               CustomDrawerTabs(
                 title: 'Messaging',
@@ -194,7 +194,7 @@ Consumer getDrawer(BuildContext context) {
                     newIndex: 8,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 8,
-                newIndex: _tabNotifier.index,
+                newIndex: index,
               ),
               CustomDrawerTabs(
                 title: 'Ticketting',
@@ -205,7 +205,7 @@ Consumer getDrawer(BuildContext context) {
                     newIndex: 9,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 9,
-                newIndex: _tabNotifier.index,
+                newIndex: index,
               )
             ],
           ),
@@ -216,18 +216,17 @@ Consumer getDrawer(BuildContext context) {
 }
 
 void _tap(
-    {TabViewModel? tab,
+    {tab,
     BuildContext? context,
     int? newIndex,
-    int? providerIndex}) {
-  if (newIndex == providerIndex) {
+    int? providerIndex,
+    bool? drawer = true
+    }) {
+  if (newIndex == providerIndex && tab!.isFromDrawer) {
     PageRouter.goBack(context!);
     return;
   }
-  tab!.switchIndex(newIndex!);
-
-  PageRouter.gotoWidget(DashboardScreen(index: newIndex), context,
-      animationType: PageTransitionType.fade);
+  tab!.switchDrawerIndex(context!, newIndex!);
 }
 
 /// Custom Tab

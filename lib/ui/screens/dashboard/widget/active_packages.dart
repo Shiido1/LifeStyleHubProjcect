@@ -7,14 +7,10 @@ import 'package:lifestyle_hub/utils/pallets.dart';
 class ActivePackageWidget extends StatelessWidget {
   final String? title;
   final String? subtitle;
-  int? percent;
 
-  ActivePackageWidget(
-      {Key? key,
-      required this.title,
-      required this.percent,
-      required this.subtitle})
+  ActivePackageWidget({Key? key, required this.title, required this.subtitle})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +35,7 @@ class ActivePackageWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextView(
-                text: '$percent%',
+                text: '0%',
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
                 color: Pallets.white,
@@ -57,7 +53,7 @@ class ActivePackageWidget extends StatelessWidget {
           LinearProgressIndicator(
             backgroundColor: Pallets.grey600,
             valueColor: new AlwaysStoppedAnimation<Color>(Pallets.orange500),
-            value: percent! / 100,
+            value: 0 / 100,
           ),
           SizedBox(
             height: 10,
@@ -68,6 +64,7 @@ class ActivePackageWidget extends StatelessWidget {
             fontSize: 12,
             color: Pallets.white,
             textAlign: TextAlign.left,
+            maxLines: 2,
           ),
         ],
       ),

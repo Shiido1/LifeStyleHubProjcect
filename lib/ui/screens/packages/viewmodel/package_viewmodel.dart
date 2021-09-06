@@ -1,13 +1,9 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/repository/marketting_repository.dart';
+import 'package:lifestyle_hub/ui/screens/packages/dao/package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/packages/repository/packages_repository.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
 
 PackageRepository _packageRepository = PackageRepository();
 
@@ -51,9 +47,9 @@ class PackageViewmodel extends BaseViewModel {
   /// get list of packages
   Future<void> getPackages() async {
     try {
-      _showLoading();
-      final _reponse = await _packageRepository.getListOfPackages();
-      logger.d(_reponse.viewPackagesModel!.length);
+      if (packageDao!.box!.isEmpty) _showLoading();
+      final _response = await _packageRepository.getListOfPackages();
+      packageDao!.savePackages(_response.viewPackagesModel);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

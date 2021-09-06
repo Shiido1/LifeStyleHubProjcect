@@ -55,7 +55,7 @@ class GetStartedScreen extends StatelessWidget {
                           Expanded(
                             child: Divider(
                               thickness: 4,
-                              color: provider.index >= 1
+                              color: provider.index! >= 1
                                   ? Pallets.orange500
                                   : Pallets.grey200,
                             ),
@@ -65,7 +65,7 @@ class GetStartedScreen extends StatelessWidget {
                           Expanded(
                             child: Divider(
                               thickness: 4,
-                              color: provider.index >= 2
+                              color: provider.index! >= 2
                                   ? Pallets.orange500
                                   : Pallets.grey200,
                             ),
@@ -75,7 +75,7 @@ class GetStartedScreen extends StatelessWidget {
                           Expanded(
                             child: Divider(
                               thickness: 4,
-                              color: provider.index >= 3
+                              color: provider.index! >= 3
                                   ? Pallets.orange500
                                   : Pallets.grey200,
                             ),

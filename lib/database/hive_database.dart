@@ -10,6 +10,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/dao/messa
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/dept_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
+import 'package:lifestyle_hub/ui/screens/packages/dao/package_dao.dart';
 
 /// initialize local data storage
 Future<void> initializeDatabase() async {
@@ -28,6 +29,7 @@ class HiveBoxes {
   static final point = 'point';
   static final department = 'department';
   static final dashboard = 'dashboard';
+  static final package = 'package';
 
   static Future openAllBox() async {
     markettingDao = MarketingDao();
@@ -39,6 +41,7 @@ class HiveBoxes {
     pointHistoryDao = PointHistoryDao();
     deptDao = DeptDao();
     dashboardDao = DashboardDao();
+    packageDao = PackageDao();
   }
 
   static Future clearAllBox() async {
@@ -50,6 +53,7 @@ class HiveBoxes {
     await commissionDao!.truncate();
     await pointHistoryDao!.truncate();
     await deptDao!.truncate();
+    await packageDao!.truncate();
   }
 
   static Future<Box<T>> openBox<T>(String boxName) async {

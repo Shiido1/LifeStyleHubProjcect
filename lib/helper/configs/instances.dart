@@ -4,6 +4,5 @@ import 'package:lifestyle_hub/utils/paths.dart';
 import 'package:logger/logger.dart';
 
 final Logger logger = Logger();
-// final ApiBaseHelper apiBaseHelper = ApiBaseHelper();
 final DioClient apiBaseHelper = DioClient(Paths.baseUrl);
 final PrefManager prefManager = PrefManager();

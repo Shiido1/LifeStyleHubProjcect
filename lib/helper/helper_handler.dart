@@ -7,9 +7,10 @@ import 'package:intl/intl.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:path_provider/path_provider.dart';
-import 'configs/constants.dart';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'configs/constants.dart';
 
 /// get device width
 double getDeviceWidth(BuildContext context) {
@@ -108,7 +109,6 @@ Duration getDateTime(String date) {
 
 /// format currency
 String formatCurrency(dynamic i) {
-  logger.d(i);
   return NumberFormat.simpleCurrency().format(i);
 }
 
@@ -133,4 +133,11 @@ int generateId(int length) => _rnd.nextInt(length);
 /// get file path
 String getFileName(File file) {
   return basename(file.path);
+}
+
+/// percentage calculations
+double getPercentage({num? directReferred, num? directRequired}) {
+  double _answer = directReferred! / directRequired!;
+  double _percentage = _answer * 100;
+  return _percentage / 100;
 }
