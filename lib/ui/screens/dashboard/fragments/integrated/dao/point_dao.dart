@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
@@ -24,20 +23,13 @@ class PointHistoryDao {
     return HiveBoxes.openBox<Map>(HiveBoxes.point);
   }
 
-  Future<void> saveContests(List<PointHistory>? points) async {
-    final map = Map<String, Map>.fromIterable(
-      points!,
-      key: (g) => (g as PointHistory).email.toString(),
-      value: (g) => (g as PointHistory).toJson(),
-    );
-    await _box!.putAll(map);
+  Future<void> savePoints(Map map) async {
+    await _box!.put(HiveBoxes.point, map);
   }
 
-  List<PointHistory> convert(Box box) {
+  PointHistoryModel convert(Box box) {
     Map<String, dynamic> raw = new Map<String, dynamic>.from(box.toMap());
-    return raw.values
-        .map((e) => PointHistory.fromJson(json.decode(json.encode(e))))
-        .toList();
+    return PointHistoryModel.fromJson(raw[HiveBoxes.point]);
   }
 
   ValueListenable<Box>? getListenable({List<String>? keys}) {

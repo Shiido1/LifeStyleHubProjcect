@@ -49,7 +49,7 @@ class PointHistoryViewmodel extends BaseViewModel {
     try {
       if (pointHistoryDao!.box!.isEmpty) _showLoading();
       final _response = await _pointHistoryRepository.pointHistory();
-      pointHistoryDao!.saveContests(_response.pointHistory);
+      pointHistoryDao!.savePoints(_response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

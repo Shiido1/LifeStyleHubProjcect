@@ -4,8 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/dao/point_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/model/point_history_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_transaction_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
@@ -23,7 +21,7 @@ class IntegratedPointScreen extends StatefulWidget {
 
 class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
   final _pointHistoryProvider =
-  ChangeNotifierProvider((ref) => PointHistoryViewmodel());
+      ChangeNotifierProvider((ref) => PointHistoryViewmodel());
 
   PointHistoryViewmodel? _pointHistoryViewmodel;
 
@@ -40,7 +38,7 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
     return ValueListenableBuilder(
       valueListenable: pointHistoryDao!.getListenable()!,
       builder: (BuildContext context, Box<dynamic> box, Widget? child) {
-        List<PointHistory> _pointHistory = pointHistoryDao!.convert(box).toList();
+        PointHistoryModel _point = pointHistoryDao!.convert(box);
         return Consumer(builder: (context, watch, _) {
           final _pointWatch = watch(_pointHistoryProvider);
           if (_pointWatch.loading) {
@@ -54,9 +52,9 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
                 children: [
                   IntegratedPointAndCommissionWidget(
                     total: 'Total point',
-                    totalPoint: '150',
+                    totalPoint: '${_point.pointBalance ?? 0}',
                     claimed: 'Claimed point',
-                    totalClaimed: '150',
+                    totalClaimed: '${_point.pointBalance ?? 0}',
                   ),
                   SizedBox(height: 23),
                   TextView(
@@ -70,13 +68,15 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: [
-                        PointBreakDownWidget(),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        PointBreakDownWidget(),
-                      ],
+                      children: _point.pointBreakdown!
+                          .map((point) => PointBreakDownWidget(
+                                packageName: point.packageName ?? '',
+                                packageIcon: point.packageIcon ?? '',
+                                packageReward: point.reward ?? '',
+                                packageCheckOutPoint:
+                                    '${point.checkoutPoints ?? 0}',
+                              ))
+                          .toList(),
                     ),
                   ),
                   SizedBox(height: 23),
@@ -85,69 +85,67 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
                     viewAll: () {},
                   ),
                   SizedBox(height: 23),
-                  ..._pointHistory
-                      .map((point) =>
-                      Container(
-                        margin: EdgeInsets.only(bottom: 16),
-                        padding: EdgeInsets.all(23),
-                        decoration: BoxDecoration(
-                            color: Pallets.orange100,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
+                  ..._point.pointHistory!
+                      .map((point) => Container(
+                            margin: EdgeInsets.only(bottom: 16),
+                            padding: EdgeInsets.all(23),
+                            decoration: BoxDecoration(
+                                color: Pallets.orange100,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Column(
                               children: [
-                                Expanded(
-                                  child: TextView(
-                                    text: point.name ?? '',
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 14,
-                                    color: Pallets.grey800,
-                                    textAlign: TextAlign.left,
-                                  ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: TextView(
+                                        text: point.name ?? '',
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 14,
+                                        color: Pallets.grey800,
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: TextView(
+                                        text: point.points ?? 'N/A',
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 14,
+                                        color: Pallets.grey800,
+                                        textAlign: TextAlign.right,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Expanded(
-                                  child: TextView(
-                                    text:
-                                    point.points ?? 'N/A',
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 14,
-                                    color: Pallets.grey800,
-                                    textAlign: TextAlign.right,
-                                  ),
+                                SizedBox(height: 16),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: TextView(
+                                        text: point.package ?? '',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
+                                        color: Pallets.grey500,
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: TextView(
+                                        text: fomartDate(point.date!),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
+                                        color: Pallets.grey500,
+                                        textAlign: TextAlign.right,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                            SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: TextView(
-                                    text: point.package ?? '',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                    color: Pallets.grey500,
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: TextView(
-                                    text: fomartDate(point.date!),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                    color: Pallets.grey500,
-                                    textAlign: TextAlign.right,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ))
+                          ))
                       .toList(),
                 ],
               ));

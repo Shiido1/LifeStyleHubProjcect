@@ -219,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 48,
+                      height: 23,
                     ),
                     packageDao!.getListenable() == null
                         ? Container()

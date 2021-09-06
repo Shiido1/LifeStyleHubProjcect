@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
 class PointBreakDownWidget extends StatelessWidget {
-  const PointBreakDownWidget({Key? key}) : super(key: key);
+  String? packageIcon;
+  String? packageName;
+  String? packageReward;
+  String? packageCheckOutPoint;
+
+  PointBreakDownWidget(
+      {this.packageIcon,
+      this.packageName,
+      this.packageReward,
+      this.packageCheckOutPoint});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,11 +27,12 @@ class PointBreakDownWidget extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), color: Pallets.white),
+                borderRadius: BorderRadius.circular(10),
+                color: Pallets.orange500),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: SvgPicture.asset(
-                'assets/svgs/crown.svg',
+              child: ImageLoader(
+                path: packageIcon ?? '',
                 height: 35,
                 width: 35,
               ),
@@ -32,7 +44,7 @@ class PointBreakDownWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextView(
-                text: 'Solid Refuge',
+                text: packageName ?? '',
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
                 color: Pallets.grey800,
@@ -40,21 +52,24 @@ class PointBreakDownWidget extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
               SizedBox(height: 5),
-              TextView(
-                text: '3 bredroom apartment',
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-                color: Pallets.grey700,
-                maxLines: 1,
-                textAlign: TextAlign.left,
+              Container(
+                width: getDeviceWidth(context) / 3,
+                child: TextView(
+                  text: packageReward ?? '',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                  color: Pallets.grey700,
+                  maxLines: 1,
+                  textAlign: TextAlign.left,
+                ),
               ),
               SizedBox(height: 5),
               TextView(
-                text: '55 required',
+                text: '$packageCheckOutPoint required',
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
                 maxLines: 1,
-                color: Pallets.red600,
+                color: Pallets.orange500,
                 textAlign: TextAlign.left,
               ),
             ],
