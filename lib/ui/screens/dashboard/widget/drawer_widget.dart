@@ -37,6 +37,8 @@ Consumer getDrawer(BuildContext context, int index) {
                     child: Container(
                       margin: EdgeInsets.only(right: 10),
                       child: ImageLoader(
+                        onTap: ()=> _tap(tab: _tabNotifier,
+                            context: context, newIndex: 10),
                           isCircular: true,
                           radius: 40,
                           path:

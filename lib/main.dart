@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,16 +6,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as riverPod;
 import 'package:lifestyle_hub/database/hive_database.dart';
 import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/profile_screen.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home/home_screen.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
-import 'package:device_preview/device_preview.dart';
 
 import 'helper/configs/providers.dart';
 import 'helper/routes/routes.dart';
-import 'ui/screens/dashboard/dashboard.dart';
-import 'ui/screens/dashboard/fragments/profile/basic_informations.dart';
-import 'ui/screens/dashboard/fragments/profile/packages/packages.dart';
 import 'ui/screens/onboarding/splashscreen.dart';
 
 void main() async {
@@ -52,7 +50,7 @@ class MyApp extends StatelessWidget {
               );
             }
             if (snapshot.hasData) {
-              return BasicInformationsScreen();
+              return DashboardScreen();
             }
             return SplashScreen();
           },

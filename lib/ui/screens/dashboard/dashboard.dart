@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home/home_screen.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/profile_screen.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
 
@@ -35,6 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     IntegratedPointScreen(),
     MessagingScreen(),
     TicketScreen(),
+    ProfileScreen()
   ];
 
   List<String> _titleList = [
@@ -47,7 +49,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     'Wallet',
     'Integrated point',
     'Messaging',
-    'Ticketting'
+    'Ticketting',
+    'My profile'
   ];
 
   int _index = 0;
@@ -66,7 +69,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       drawer: getDrawer(context, _index),
       body: Stack(
         children: [_body[_index],
-          // ButtomCountDownWidget(),
+          ButtomCountDownWidget(),
         ],
       ),
     );
