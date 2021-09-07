@@ -78,9 +78,9 @@ class Validators {
   }
 
   /// validates users input to a valid phone number
-  static String Function(String) validatePhone({String? error}) {
-    return (String value) {
-      if (value.isEmpty) {
+  static String? Function(String?)? validatePhone({String? error}) {
+    return (String? value) {
+      if (value!.isEmpty) {
         return error ?? 'Enter a valid phone number';
       }
       if (!RegExp(r'^\d+?$').hasMatch(value) ||
@@ -91,7 +91,7 @@ class Validators {
           (value.startsWith(RegExp("0[789]")) && value.length != 11)) {
         return error ?? 'Not a valid phone number.';
       }
-      return '';
+      return null;
     };
   }
 
