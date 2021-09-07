@@ -26,4 +26,9 @@ class Paths {
   static String tickets = 'api/tickets';
   static String departments = 'api/departments';
   static String point = 'api/points';
+  static String user = 'api/user';
+  static String userNOK = 'api/nok';
+  static String profile = 'api/profile';
+  static String updateUsersWork = 'api/work';
+  static String updateUsersBank = 'api/bank';
 }
