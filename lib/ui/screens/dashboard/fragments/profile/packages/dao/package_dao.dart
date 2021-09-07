@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lifestyle_hub/database/hive_database.dart';
-import 'package:lifestyle_hub/ui/screens/packages/model/view_packages_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/view_packages_model.dart';
 
 PackageDao? packageDao;
 

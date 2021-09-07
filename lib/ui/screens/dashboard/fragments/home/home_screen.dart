@@ -9,15 +9,15 @@ import 'package:lifestyle_hub/ui/screens/dashboard/dao/dashboardd_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/dao/contest_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/model/view_contest_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/viewmodel/contest_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/package_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/view_packages_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/viewmodel/package_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/model/dashboard_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/viewmodel/dashboard_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/contest_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/second_icon.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/packages/dao/package_dao.dart';
-import 'package:lifestyle_hub/ui/screens/packages/model/view_packages_model.dart';
-import 'package:lifestyle_hub/ui/screens/packages/viewmodel/package_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 

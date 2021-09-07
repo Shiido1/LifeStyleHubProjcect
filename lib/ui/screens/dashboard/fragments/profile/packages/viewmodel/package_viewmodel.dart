@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/packages/dao/package_dao.dart';
-import 'package:lifestyle_hub/ui/screens/packages/repository/packages_repository.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/package_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/repository/packages_repository.dart';
 
 PackageRepository _packageRepository = PackageRepository();
 

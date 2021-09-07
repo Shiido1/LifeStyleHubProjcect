@@ -13,6 +13,7 @@ import 'package:device_preview/device_preview.dart';
 import 'helper/configs/providers.dart';
 import 'helper/routes/routes.dart';
 import 'ui/screens/dashboard/dashboard.dart';
+import 'ui/screens/dashboard/fragments/profile/packages/packages.dart';
 import 'ui/screens/onboarding/splashscreen.dart';
 
 void main() async {
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
               );
             }
             if (snapshot.hasData) {
-              return ProfileScreen();
+              return PackageScreen();
             }
             return SplashScreen();
           },

@@ -7,8 +7,9 @@ import 'package:lifestyle_hub/utils/pallets.dart';
 class ActivePackageWidget extends StatelessWidget {
   final String? title;
   final String? subtitle;
+  final double? spaceHeight;
 
-  ActivePackageWidget({Key? key, required this.title, required this.subtitle})
+  ActivePackageWidget({Key? key, required this.title, required this.subtitle, this.spaceHeight = 10})
       : super(key: key);
 
   @override
@@ -29,7 +30,7 @@ class ActivePackageWidget extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
           SizedBox(
-            height: 10,
+            height: spaceHeight!,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,7 +57,7 @@ class ActivePackageWidget extends StatelessWidget {
             value: 0 / 100,
           ),
           SizedBox(
-            height: 10,
+            height: spaceHeight,
           ),
           TextView(
             text: subtitle!,
