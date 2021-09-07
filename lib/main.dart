@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as riverPod;
 import 'package:lifestyle_hub/database/hive_database.dart';
 import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/profile_screen.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 import 'package:device_preview/device_preview.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
               );
             }
             if (snapshot.hasData) {
-              return DashboardScreen();
+              return ProfileScreen();
             }
             return SplashScreen();
           },
