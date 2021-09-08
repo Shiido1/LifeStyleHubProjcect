@@ -225,7 +225,6 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
     FocusScope.of(context).unfocus();
     if (_globalFormKey.currentState!.validate()) {
       final _mappedData = await _getMappedData();
-      _mappedData.fields.map((e) => logger.d(e.key)).toList();
       _ticketViewmodel!.createTicket(_mappedData);
     } else
       setState(() => _autoValidate = true);

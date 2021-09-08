@@ -26,7 +26,6 @@ class ProfileDao {
   }
 
   Future<void> saveProfile(UsersProfileModel usersProfileModel) async {
-    logger.d(usersProfileModel.toJson());
     await _box!.put(HiveBoxes.profile, usersProfileModel.toJson());
   }
 

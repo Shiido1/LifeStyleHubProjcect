@@ -98,7 +98,7 @@ class Validators {
   /// validates users input to String type _-=@,.;
   static final validCharacters = RegExp(r'^[a-z0-9_-]{3,30}$' "");
 
-  static String Function(String?)? validateString(
+  static String? Function(String?)? validateString(
       {String? error, bool validateSpecialChar = false}) {
     return (String? value) {
       if (value == null || value.isEmpty || value.trim().isEmpty) {
@@ -113,7 +113,7 @@ class Validators {
         }
       }
 
-      return '';
+      return null;
     };
   }
 

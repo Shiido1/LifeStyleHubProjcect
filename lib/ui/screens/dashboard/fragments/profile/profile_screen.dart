@@ -51,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       radius: 70,
                       path: _userInfo.profilePic ?? '',
                       showInitialTextAbovePicture: true,
-                      initial: _userInfo.name!.substring(0, 2) ?? '',
+                      initial: _userInfo.name!.substring(0, 2),
                     ),
                     SizedBox(height: 23),
                     TextView(
