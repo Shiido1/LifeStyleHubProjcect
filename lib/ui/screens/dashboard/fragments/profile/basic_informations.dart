@@ -203,6 +203,11 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
   Future<FormData> _getMappedData() async {
     return FormData.fromMap({
       '_method': 'PATCH',
+      'name': _fullNameController!.text,
+      'phone_no': _phoneNumberController!.text,
+      'sex': _radioID == 0 ? 'Male' : 'Female',
+      'state': _stateController!.text,
+      'address': _addressController!.text,
       'dob': _dobController!.text,
     });
   }

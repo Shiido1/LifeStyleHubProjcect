@@ -54,6 +54,7 @@ class ProfileViewmodel extends BaseViewModel {
     try {
       _showLoading();
       final _response = await _profileRepository.updateAUsersProfile(formData);
+      await getUsersProfile();
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
