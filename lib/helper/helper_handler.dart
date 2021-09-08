@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
@@ -140,4 +141,9 @@ double getPercentage({num? directReferred, num? directRequired}) {
   double _answer = directReferred! / directRequired!;
   double _percentage = _answer * 100;
   return _percentage / 100;
+}
+
+void copyToClipBoard(BuildContext? context, String text) {
+  Clipboard.setData(ClipboardData(text: text));
+  showsnackBarInfo(context, message: 'Copied to clip board');
 }

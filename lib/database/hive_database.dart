@@ -7,6 +7,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/dao/contest
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/dao/point_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/dao/marketting_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/dao/messaging_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/dept_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
@@ -30,6 +31,7 @@ class HiveBoxes {
   static final department = 'department';
   static final dashboard = 'dashboard';
   static final package = 'package';
+  static final profile = 'profile';
 
   static Future openAllBox() async {
     markettingDao = MarketingDao();
@@ -42,6 +44,7 @@ class HiveBoxes {
     deptDao = DeptDao();
     dashboardDao = DashboardDao();
     packageDao = PackageDao();
+    profileDao = ProfileDao();
   }
 
   static Future clearAllBox() async {
@@ -54,6 +57,7 @@ class HiveBoxes {
     await pointHistoryDao!.truncate();
     await deptDao!.truncate();
     await packageDao!.truncate();
+    await profileDao!.truncate();
   }
 
   static Future<Box<T>> openBox<T>(String boxName) async {

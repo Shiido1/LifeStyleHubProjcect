@@ -1,15 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/utils/paths.dart';
 
 class ProfileRepository {
   /// get users profile
-  Future<dynamic> getUsersProfile() async {
+  Future<UsersProfileModel> getUsersProfile() async {
     try {
       final _response = await apiBaseHelper.get(
           url: Paths.profile, options: await getDioHeader());
-      return null;
+      return UsersProfileModel.fromJson(_response);
     } catch (e) {
       throw e;
     }
