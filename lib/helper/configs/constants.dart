@@ -103,22 +103,16 @@ class Constants {
     _states.add(_s);
     _s = Constants(state: 'Plateau', statePosition: 30);
     _states.add(_s);
-
     _s = Constants(state: 'Rivers', statePosition: 31);
     _states.add(_s);
-
     _s = Constants(state: 'Sokoto', statePosition: 32);
     _states.add(_s);
-
     _s = Constants(state: 'Taraba', statePosition: 33);
     _states.add(_s);
-
     _s = Constants(state: 'Yobe', statePosition: 34);
     _states.add(_s);
-
     _s = Constants(state: 'Zamfara', statePosition: 35);
     _states.add(_s);
-
     _s = Constants(state: 'Abuja', statePosition: 36);
     _states.add(_s);
     return _states;

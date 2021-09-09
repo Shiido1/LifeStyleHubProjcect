@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/my_account_package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/repository/packages_repository.dart';
 
@@ -66,6 +67,20 @@ class PackageViewmodel extends BaseViewModel {
     } catch (e) {
       _hideLoading();
       showsnackBarInfo(this._context, message: e.toString());
+    }
+  }
+
+  /// get my account packages
+  Future<void> getMyAccountPackages() async {
+    try {
+      if (accountPackageDao!.box!.isEmpty) _showLoading();
+      final _reponse = await _packageRepository.getMyAccountPackages();
+      logger.d(_reponse.myAccountModelList!.length);
+      accountPackageDao!.saveAccountPackages(_reponse.myAccountModelList);
+      _hideLoading();
+    } catch (e) {
+      logger.e(e.toString());
+      _hideLoading();
     }
   }
 }

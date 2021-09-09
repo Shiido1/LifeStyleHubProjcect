@@ -23,14 +23,19 @@ class ViewPackagesModel {
   int? downlines;
   String? subscription;
   String? description;
+  int? uplinePointAcc;
   int? referralPoints;
-  int? referralBonus;
+  int? directBonus;
+  int? leadershipBonus;
   int? checkoutPoints;
   int? value;
+  String? rewards;
   String? createdAt;
   String? updatedAt;
+  String? image;
+  String? terms;
 
-  ViewPackagesModel({this.id, this.name, this.type, this.generations, this.downlines, this.subscription, this.description, this.referralPoints, this.referralBonus, this.checkoutPoints, this.value, this.createdAt, this.updatedAt});
+  ViewPackagesModel({this.id, this.name, this.type, this.generations, this.downlines, this.subscription, this.description, this.uplinePointAcc, this.referralPoints, this.directBonus, this.leadershipBonus, this.checkoutPoints, this.value, this.rewards, this.createdAt, this.updatedAt, this.image, this.terms});
 
   ViewPackagesModel.fromJson(Map<String, dynamic> json) {
     if(json["id"] is int)
@@ -47,18 +52,28 @@ class ViewPackagesModel {
       this.subscription = json["subscription"];
     if(json["description"] is String)
       this.description = json["description"];
+    if(json["upline_point_acc"] is int)
+      this.uplinePointAcc = json["upline_point_acc"];
     if(json["referral_points"] is int)
       this.referralPoints = json["referral_points"];
-    if(json["referral_bonus"] is int)
-      this.referralBonus = json["referral_bonus"];
+    if(json["direct_bonus"] is int)
+      this.directBonus = json["direct_bonus"];
+    if(json["leadership_bonus"] is int)
+      this.leadershipBonus = json["leadership_bonus"];
     if(json["checkout_points"] is int)
       this.checkoutPoints = json["checkout_points"];
     if(json["value"] is int)
       this.value = json["value"];
+    if(json["rewards"] is String)
+      this.rewards = json["rewards"];
     if(json["created_at"] is String)
       this.createdAt = json["created_at"];
     if(json["updated_at"] is String)
       this.updatedAt = json["updated_at"];
+    if(json["image"] is String)
+      this.image = json["image"];
+    if(json["terms"] is String)
+      this.terms = json["terms"];
   }
 
   Map<String, dynamic> toJson() {
@@ -70,12 +85,17 @@ class ViewPackagesModel {
     data["downlines"] = this.downlines;
     data["subscription"] = this.subscription;
     data["description"] = this.description;
+    data["upline_point_acc"] = this.uplinePointAcc;
     data["referral_points"] = this.referralPoints;
-    data["referral_bonus"] = this.referralBonus;
+    data["direct_bonus"] = this.directBonus;
+    data["leadership_bonus"] = this.leadershipBonus;
     data["checkout_points"] = this.checkoutPoints;
     data["value"] = this.value;
+    data["rewards"] = this.rewards;
     data["created_at"] = this.createdAt;
     data["updated_at"] = this.updatedAt;
+    data["image"] = this.image;
+    data["terms"] = this.terms;
     return data;
   }
 }

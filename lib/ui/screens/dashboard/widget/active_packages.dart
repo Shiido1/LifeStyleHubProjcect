@@ -8,8 +8,14 @@ class ActivePackageWidget extends StatelessWidget {
   final String? title;
   final String? subtitle;
   final double? spaceHeight;
+  final double? percentage;
 
-  ActivePackageWidget({Key? key, required this.title, required this.subtitle, this.spaceHeight = 10})
+  ActivePackageWidget(
+      {Key? key,
+      required this.title,
+      required this.subtitle,
+      this.spaceHeight = 10,
+      this.percentage = .0})
       : super(key: key);
 
   @override
@@ -54,7 +60,7 @@ class ActivePackageWidget extends StatelessWidget {
           LinearProgressIndicator(
             backgroundColor: Pallets.grey600,
             valueColor: new AlwaysStoppedAnimation<Color>(Pallets.orange500),
-            value: 0 / 100,
+            value: 0 /100,
           ),
           SizedBox(
             height: spaceHeight,

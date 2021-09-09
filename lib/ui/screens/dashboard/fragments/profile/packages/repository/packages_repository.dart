@@ -1,5 +1,6 @@
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/my_accounts_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/packages_payment_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/view_packages_model.dart';
 import 'package:lifestyle_hub/utils/paths.dart';
@@ -35,6 +36,17 @@ class PackageRepository {
       final _response = await apiBaseHelper.get(
           url: '${Paths.packages}/$id', options: await getDioHeader());
       return ViewPackagesModel.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /// [@Get] profile accounts
+  Future<MyAccountsModelList> getMyAccountPackages() async {
+    try {
+      final _response = await apiBaseHelper.get(
+          url: '${Paths.accounts}', options: await getDioHeader());
+      return MyAccountsModelList.fromJson(_response);
     } catch (e) {
       throw e;
     }

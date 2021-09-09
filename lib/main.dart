@@ -7,7 +7,6 @@ import 'package:lifestyle_hub/database/hive_database.dart';
 import 'package:lifestyle_hub/helper/configs/constants.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home/home_screen.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 

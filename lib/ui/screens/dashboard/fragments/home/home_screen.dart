@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // context.read(_notifier);
+    context.read(_notifier);
     return FutureBuilder(
         future: dashboardDao!.getUsersDashboard(),
         builder: (_, AsyncSnapshot<DashboardModel> snap) {
@@ -253,6 +253,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             title: _package.name ?? '',
                                             subtitle:
                                                 _package.description ?? '',
+                                            percentage: getPercentage(
+                                                directReferred:
+                                                    _package.referralPoints ??
+                                                        0,
+                                                directRequired:
+                                                    _package.directBonus ?? 0),
                                           ),
                                         );
                                       }),
