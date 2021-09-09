@@ -75,7 +75,6 @@ class PackageViewmodel extends BaseViewModel {
     try {
       if (accountPackageDao!.box!.isEmpty) _showLoading();
       final _reponse = await _packageRepository.getMyAccountPackages();
-      logger.d(_reponse.myAccountModelList!.length);
       accountPackageDao!.saveAccountPackages(_reponse.myAccountModelList);
       _hideLoading();
     } catch (e) {

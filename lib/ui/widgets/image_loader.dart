@@ -5,6 +5,7 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 
 // ignore: must_be_immutable
 class ImageLoader extends StatelessWidget {
@@ -79,7 +80,7 @@ class ImageLoader extends StatelessWidget {
       if (isCircular) {
         return CircularProfileAvatar(path!,
             radius: radius!,
-            backgroundColor: Colors.green,
+            backgroundColor: Pallets.orange600,
             borderWidth: borderWidth!,
             initialsText: Text(
               "",
@@ -228,7 +229,7 @@ class CircularImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircularProfileAvatar(path!,
         radius: radius!,
-        backgroundColor: Colors.green,
+        backgroundColor: Pallets.orange600,
         borderWidth: borderWidth!,
         initialsText: Text(
           initial!,

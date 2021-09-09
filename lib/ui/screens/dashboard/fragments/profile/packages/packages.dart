@@ -97,7 +97,9 @@ class _PackageScreenState extends State<PackageScreen> {
                                   if (_tabIndex! == 0)
                                     ..._packageList
                                         .map((package) => Visibility(
-                                            visible: true,
+                                            visible:
+                                                package.status!.toLowerCase() ==
+                                                    'active',
                                             child: Container(
                                                 margin:
                                                     EdgeInsets.only(bottom: 23),
