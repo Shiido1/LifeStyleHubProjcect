@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import '../../../../../database/users_data_provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../dao/dashboardd_dao.dart';
@@ -68,6 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    _initialize();
+    super.initState();
+  }
+
+  void _initialize() {
     _dashboardViewmodel = context.read(_dashboardProvider);
     _dashboardViewmodel!.init(context);
     _dashboardViewmodel!.getDashboards();
@@ -79,259 +85,268 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read(_userModelProvider).getUsersData();
     _contestViewModel!.getListContest();
     _initializeVideoPlayer();
-    super.initState();
+    setState(() {});
   }
 
   final _notifier = ChangeNotifierProvider((ref) => TabViewModel());
 
   @override
   Widget build(BuildContext context) {
-    context.read(_notifier);
     return FutureBuilder(
-        future: dashboardDao!.getUsersDashboard(),
-        builder: (_, AsyncSnapshot<DashboardModel> snap) {
-          if (snap.connectionState == ConnectionState.waiting ||
-              !snap.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          final _dashboard = snap.data!;
-          return Consumer(builder: (_, watch, __) {
-            final _tabNotifierWatch = watch(_notifier);
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextView(
-                      text: 'Welcome,',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Pallets.grey400,
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextView(
-                      text: _dashboard.name ?? '',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
-                      color: Pallets.grey700,
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(
-                      height: 23,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Pallets.green50,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Row(
+      future: Future.delayed(Duration(milliseconds: 500)),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting ||
+            snapshot.connectionState != ConnectionState.done) {
+          return Container();
+        }
+        return ValueListenableBuilder(
+            valueListenable: dashboardDao!.getListenable()!,
+            builder: (_, Box<dynamic> box, __) {
+              final _dashboard = dashboardDao!.convert(box);
+              return Consumer(builder: (_, watch, __) {
+                final _tabNotifierWatch = watch(_notifier);
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextView(
+                          text: 'Welcome,',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          color: Pallets.grey400,
+                          textAlign: TextAlign.left,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        TextView(
+                          text: _dashboard.name ?? '',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                          color: Pallets.grey700,
+                          textAlign: TextAlign.left,
+                        ),
+                        SizedBox(
+                          height: 23,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Pallets.green50,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(24.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                FirstIcons(
-                                  icon: 'assets/svgs/hash.svg',
-                                  bgColor: Pallets.green200,
+                                Row(
+                                  children: [
+                                    FirstIcons(
+                                      icon: 'assets/svgs/hash.svg',
+                                      bgColor: Pallets.green200,
+                                    ),
+                                    SizedBox(
+                                      width: 26.25,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          TextView(
+                                            text: 'Point Balance',
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 16,
+                                            color: Pallets.grey500,
+                                            textAlign: TextAlign.left,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          TextView(
+                                            text: formatCurrency(double.parse(
+                                                _dashboard.pointBalance!)),
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 36,
+                                            color: Pallets.grey700,
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 SizedBox(
-                                  width: 26.25,
+                                  height: 5,
                                 ),
-                                Expanded(
-                                  child: Column(
+                                TextView(
+                                  onTap: () {},
+                                  text: 'View all',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  color: Pallets.grey700,
+                                  textAlign: TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              SecondIcon(
+                                  icon: 'assets/svgs/wallet.svg',
+                                  text: 'Income received',
+                                  money: formatCurrency(
+                                      _dashboard.incomeReceived ?? 0),
+                                  mainBgColor: Pallets.orange50,
+                                  smallBgColor: Pallets.orange200,
+                                  textColor: Pallets.orange500,
+                                  onTaP: () {}),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              SecondIcon(
+                                  icon: 'assets/svgs/link.svg',
+                                  text: 'Referral link signup',
+                                  money: formatCurrency(
+                                      _dashboard.referralLinkSignup ?? 0),
+                                  mainBgColor: Pallets.blue50,
+                                  smallBgColor: Pallets.blue200,
+                                  textColor: Pallets.blue500,
+                                  onTaP: () {}),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 23,
+                        ),
+                        packageDao!.getListenable() == null
+                            ? Container()
+                            : ValueListenableBuilder(
+                                valueListenable: packageDao!.getListenable()!,
+                                builder: (_, Box<dynamic> box, __) {
+                                  List<ViewPackagesModel> _packageList =
+                                      packageDao!.convert(box).toList();
+                                  return Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      TextView(
-                                        text: 'Point Balance',
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 16,
-                                        color: Pallets.grey500,
-                                        textAlign: TextAlign.left,
+                                      ViewAllButton(
+                                        title: 'Active packages',
+                                        viewAll: () {},
                                       ),
                                       SizedBox(
-                                        height: 5,
+                                        height: 16,
                                       ),
-                                      TextView(
-                                        text: formatCurrency(double.parse(
-                                            _dashboard.pointBalance!)),
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 36,
-                                        color: Pallets.grey700,
-                                        textAlign: TextAlign.left,
+                                      SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          children: List.generate(
+                                              _packageList.length <= 5
+                                                  ? _packageList.length
+                                                  : 5, (index) {
+                                            final _package =
+                                                _packageList[index];
+                                            return Container(
+                                              margin:
+                                                  EdgeInsets.only(right: 23),
+                                              child: ActivePackageWidget(
+                                                title: _package.name ?? '',
+                                                subtitle:
+                                                    _package.description ?? '',
+                                                percentage: getPercentage(
+                                                    directReferred: _package
+                                                            .referralPoints ??
+                                                        0,
+                                                    directRequired:
+                                                        _package.directBonus ??
+                                                            0),
+                                              ),
+                                            );
+                                          }),
+                                        ),
                                       ),
                                     ],
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            TextView(
-                              onTap: () {},
-                              text: 'View all',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                              color: Pallets.grey700,
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
+                                  );
+                                }),
+                        SizedBox(
+                          height: 23,
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          SecondIcon(
-                              icon: 'assets/svgs/wallet.svg',
-                              text: 'Income received',
-                              money: formatCurrency(
-                                  _dashboard.incomeReceived ?? 0),
-                              mainBgColor: Pallets.orange50,
-                              smallBgColor: Pallets.orange200,
-                              textColor: Pallets.orange500,
-                              onTaP: () {}),
-                          SizedBox(
-                            width: 16,
+                        contestDao!.getListenable() == null
+                            ? Container()
+                            : ValueListenableBuilder(
+                                valueListenable: contestDao!.getListenable()!,
+                                builder: (_, Box<dynamic> box, __) {
+                                  List<ViewContestModel> _contestList =
+                                      contestDao!.convert(box).toList();
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ViewAllButton(
+                                        title: 'Contest',
+                                        viewAll: () {
+                                          _tabNotifierWatch.switchDrawerIndex(
+                                              context, 4,
+                                              drawer: false);
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          children: List.generate(
+                                              _contestList.length <= 5
+                                                  ? _contestList.length
+                                                  : 5, (index) {
+                                            final _contest =
+                                                _contestList[index];
+                                            return Container(
+                                              margin:
+                                                  EdgeInsets.only(right: 23),
+                                              child: ContestWidget(
+                                                  contest: _contest),
+                                            );
+                                          }),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }),
+                        SizedBox(
+                          height: 23,
+                        ),
+                        BetterPlayerMultipleGestureDetector(
+                          child: AspectRatio(
+                            aspectRatio: 16 / 9,
+                            child: BetterPlayer(
+                                controller: _betterPlayerController),
                           ),
-                          SecondIcon(
-                              icon: 'assets/svgs/link.svg',
-                              text: 'Referral link signup',
-                              money: formatCurrency(
-                                  _dashboard.referralLinkSignup ?? 0),
-                              mainBgColor: Pallets.blue50,
-                              smallBgColor: Pallets.blue200,
-                              textColor: Pallets.blue500,
-                              onTaP: () {}),
-                        ],
-                      ),
+                          onTap: () {
+                            print("Tap!");
+                          },
+                        ),
+                        SizedBox(
+                          height: getDeviceHeight(context) / 10,
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 23,
-                    ),
-                    packageDao!.getListenable() == null
-                        ? Container()
-                        : ValueListenableBuilder(
-                            valueListenable: packageDao!.getListenable()!,
-                            builder: (_, Box<dynamic> box, __) {
-                              List<ViewPackagesModel> _packageList =
-                                  packageDao!.convert(box).toList();
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ViewAllButton(
-                                    title: 'Active packages',
-                                    viewAll: () {},
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: List.generate(
-                                          _packageList.length <= 5
-                                              ? _packageList.length
-                                              : 5, (index) {
-                                        final _package = _packageList[index];
-                                        return Container(
-                                          margin: EdgeInsets.only(right: 23),
-                                          child: ActivePackageWidget(
-                                            title: _package.name ?? '',
-                                            subtitle:
-                                                _package.description ?? '',
-                                            percentage: getPercentage(
-                                                directReferred:
-                                                    _package.referralPoints ??
-                                                        0,
-                                                directRequired:
-                                                    _package.directBonus ?? 0),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }),
-                    SizedBox(
-                      height: 23,
-                    ),
-                    contestDao!.getListenable() == null
-                        ? Container()
-                        : ValueListenableBuilder(
-                            valueListenable: contestDao!.getListenable()!,
-                            builder: (_, Box<dynamic> box, __) {
-                              List<ViewContestModel> _contestList =
-                                  contestDao!.convert(box).toList();
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ViewAllButton(
-                                    title: 'Contest',
-                                    viewAll: () {
-                                      _tabNotifierWatch.switchDrawerIndex(
-                                          context, 4,
-                                          drawer: false);
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: List.generate(
-                                          _contestList.length <= 5
-                                              ? _contestList.length
-                                              : 5, (index) {
-                                        final _contest = _contestList[index];
-                                        return Container(
-                                          margin: EdgeInsets.only(right: 23),
-                                          child:
-                                              ContestWidget(contest: _contest),
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }),
-                    SizedBox(
-                      height: 23,
-                    ),
-                    BetterPlayerMultipleGestureDetector(
-                      child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child:
-                            BetterPlayer(controller: _betterPlayerController),
-                      ),
-                      onTap: () {
-                        print("Tap!");
-                      },
-                    ),
-                    SizedBox(
-                      height: getDeviceHeight(context) / 10,
-                    ),
-                  ],
-                ),
-              ),
-            );
-          });
-        });
+                  ),
+                );
+              });
+            });
+      },
+    );
   }
 }

@@ -1,5 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import '../../../helper/configs/instances.dart';
 import 'fragments/home/home_screen.dart';
 import 'fragments/profile/profile_screen.dart';
 import '../../widgets/bottom_count_down.dart';
@@ -56,6 +57,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _index = 0;
 
   _DashboardScreenState(this._index);
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
