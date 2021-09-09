@@ -17,33 +17,33 @@ class ProfileRepository {
   }
 
   /// updates a users profile
-  Future<dynamic> updateAUsersProfile(FormData body) async {
+  Future<UsersProfileModel> updateAUsersProfile(FormData body) async {
     try {
       final _response = await apiBaseHelper.post(
           map: body, url: Paths.user, options: await getDioHeader());
-      return null;
+      return UsersProfileModel.fromJson(_response);
     } catch (e) {
       throw e;
     }
   }
 
   /// updates a users next of kin
-  Future<dynamic> updateUsersNexOfKin(Map body) async {
+  Future<Nok> updateUsersNexOfKin(FormData body) async {
     try {
       final _response = await apiBaseHelper.post(
           map: body, url: Paths.userNOK, options: await getDioHeader());
-      return null;
+      return Nok.fromJson(_response);
     } catch (e) {
       throw e;
     }
   }
 
   /// updates a users next of kin
-  Future<dynamic> updateUsersWork(Map body) async {
+  Future<Work> updateUsersWork(FormData body) async {
     try {
       final _response = await apiBaseHelper.post(
           map: body, url: Paths.updateUsersWork, options: await getDioHeader());
-      return null;
+      return Work.fromJson(_response);
     } catch (e) {
       throw e;
     }

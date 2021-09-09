@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../../helper/helper_handler.dart';
-import '../../helper/routes/navigation.dart';
-import '../screens/dashboard/fragments/ticket/dao/dept_dao.dart';
-import '../screens/dashboard/fragments/ticket/model/dept_model.dart';
-import '../screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
-import '../../utils/pallets.dart';
+import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/dept_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/dept_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 
 import 'text_views.dart';
 

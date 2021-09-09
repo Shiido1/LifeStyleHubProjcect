@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/helper_handler.dart';
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
 import '../dao/profile_dao.dart';
@@ -52,9 +53,10 @@ class ProfileViewmodel extends BaseViewModel {
   /// update a users profile
   Future<void> updateUsersProfile(FormData formData) async {
     try {
-      _showLoading();
-      final _response = await _profileRepository.updateAUsersProfile(formData);
+      _showLoading(notify: true);
+      await _profileRepository.updateAUsersProfile(formData);
       await getUsersProfile();
+      showsnackBarInfo(_context, message: 'Update successful');
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
@@ -62,10 +64,11 @@ class ProfileViewmodel extends BaseViewModel {
   }
 
   /// update users next of kin
-  Future<void> updateUsersNextKin(Map map) async {
+  Future<void> updateUsersNextKin(FormData map) async {
     try {
-      _showLoading();
-      final _response = await _profileRepository.updateUsersNexOfKin(map);
+      _showLoading(notify: true);
+      await _profileRepository.updateUsersNexOfKin(map);
+      showsnackBarInfo(_context, message: 'Update successful');
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
@@ -73,10 +76,11 @@ class ProfileViewmodel extends BaseViewModel {
   }
 
   /// update users next work information
-  Future<void> updateUsersWorkInfo(Map map) async {
+  Future<void> updateUsersWorkInfo(FormData map) async {
     try {
       _showLoading();
-      final _response = await _profileRepository.updateUsersWork(map);
+      await _profileRepository.updateUsersWork(map);
+      showsnackBarInfo(_context, message: 'Update successful');
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
