@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../../../helper/configs/instances.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
-import '../../commission/dao/commission_dao.dart';
-import '../../commission/repository/commission_repository.dart';
 import '../dao/point_dao.dart';
-import '../model/point_history_model.dart';
 import '../repository/point_history_repository.dart';
-import '../../marketting/dao/marketting_dao.dart';
-import '../../marketting/model/get_resources_model.dart';
-import '../../marketting/repository/marketting_repository.dart';
-import '../../../../../../utils/pallets.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 PointHistoryRepository _pointHistoryRepository = PointHistoryRepository();
 

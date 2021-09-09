@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
+import '../../../../../helper/configs/instances.dart';
 import '../../../../../database/users_data_provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../dao/dashboardd_dao.dart';

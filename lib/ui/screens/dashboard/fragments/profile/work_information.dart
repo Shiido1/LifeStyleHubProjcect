@@ -18,29 +18,27 @@ import '../../../../../utils/validators.dart';
 import 'viewmodel/profile_viewmodel.dart';
 import 'widget/custom_radio_button.dart';
 
-class NextOfKinInformationScreen extends StatefulWidget {
-  final Nok? nok;
+class WorkInformationScreen extends StatefulWidget {
+  final Work? work;
 
-  const NextOfKinInformationScreen(this.nok, {Key? key}) : super(key: key);
+  const WorkInformationScreen(this.work, {Key? key}) : super(key: key);
 
   @override
-  _NextOfKinInformationScreenState createState() =>
-      _NextOfKinInformationScreenState(nok);
+  _WorkInformationScreenState createState() =>
+      _WorkInformationScreenState(work);
 }
 
-class _NextOfKinInformationScreenState
-    extends State<NextOfKinInformationScreen> {
-  final Nok? nok;
+class _WorkInformationScreenState extends State<WorkInformationScreen> {
+  final Work? work;
 
-  _NextOfKinInformationScreenState(this.nok);
+  _WorkInformationScreenState(this.work);
 
   final _profileProvider = ChangeNotifierProvider((_) => ProfileViewmodel());
   ProfileViewmodel? _profileViewmodel;
 
-  TextEditingController? _fullNameController;
-  TextEditingController? _phoneNumberController;
-  TextEditingController? _emailController;
-  TextEditingController? _relationShipController;
+  TextEditingController? _occupationController;
+  TextEditingController? _industryController;
+  TextEditingController? _addressController;
   var _globalFormKey = GlobalKey<FormState>();
   bool _autoValidate = false;
   bool _relationshipSelected = false;
@@ -54,11 +52,9 @@ class _NextOfKinInformationScreenState
   }
 
   void _initializeControllers() {
-    _fullNameController = TextEditingController(text: nok?.name ?? '');
-    _phoneNumberController = TextEditingController(text: nok?.phoneNo ?? '');
-    _emailController = TextEditingController(text: nok?.email ?? '');
-    _relationShipController =
-        TextEditingController(text: nok?.relationship ?? '');
+    _occupationController = TextEditingController(text: work?.occupation ?? '');
+    _industryController = TextEditingController(text: work?.industry ?? '');
+    _addressController = TextEditingController(text: work?.address ?? '');
   }
 
   @override
@@ -69,7 +65,7 @@ class _NextOfKinInformationScreenState
         isLoading: _profileWatcher.loading,
         child: Scaffold(
           appBar: getCustomAppBar(context,
-              title: 'Next of kin',
+              title: 'Work information',
               showLeadig: true,
               showImage: false,
               showMoreMenu: true,
@@ -85,46 +81,28 @@ class _NextOfKinInformationScreenState
                     child: ListView(
                       children: [
                         EditFormField(
-                          floatingLabel: 'Full name',
-                          label: 'Full name',
-                          controller: _fullNameController,
+                          floatingLabel: 'Occupation / Work',
+                          label: 'Occupation / Work',
+                          controller: _occupationController,
                           autoValidate: _autoValidate,
                           validator: Validators.validateString(),
                         ),
                         SizedBox(height: 40),
                         EditFormField(
-                          floatingLabel: 'Relationship',
-                          label: 'Select relationship',
+                          floatingLabel: 'Industry',
+                          label: 'Industry',
                           suffixIcon: Icons.keyboard_arrow_down_sharp,
-                          suffixIconColor: _relationshipSelected
-                              ? Pallets.activeIconColor
-                              : Pallets.disabledIconColor,
-                          controller: _relationShipController,
-                          onTapped: () => showCustomDialog(context,
-                              title: 'Select relationship',
-                              items: AppConstants.getRelationship(),
-                              onTap: (value) {
-                            _relationshipSelected = true;
-                            _relationShipController!.text = value;
-                            setState(() {});
-                            PageRouter.goBack(context);
-                          }),
-                        ),
-                        SizedBox(height: 40),
-                        EditFormField(
-                          floatingLabel: 'Phone number',
-                          label: 'Phone number',
-                          autoValidate: _autoValidate,
-                          controller: _phoneNumberController,
+                          suffixIconColor: Pallets.disabledIconColor,
+                          controller: _industryController,
                           validator: Validators.validateString(),
                         ),
                         SizedBox(height: 40),
                         EditFormField(
-                          floatingLabel: 'Email address',
-                          label: 'Email address',
+                          floatingLabel: 'Address',
+                          label: 'Address',
                           autoValidate: _autoValidate,
-                          controller: _emailController,
-                          validator: Validators.validateEmail(),
+                          controller: _addressController,
+                          validator: Validators.validateString(),
                         ),
                         SizedBox(height: 32),
                         ButtonWidget(
@@ -154,10 +132,9 @@ class _NextOfKinInformationScreenState
   Future<FormData> _getMappedData() async {
     return FormData.fromMap({
       '_method': 'PATCH',
-      'nok_name': _fullNameController!.text,
-      'nok_relation': _relationShipController!.text,
-      'nok_phone_no': _phoneNumberController!.text,
-      'nok_email': _emailController!.text,
+      'occupation': _occupationController!.text,
+      'industry': _industryController!.text,
+      'address': _addressController!.text,
     });
   }
 
@@ -165,7 +142,7 @@ class _NextOfKinInformationScreenState
     FocusScope.of(context).unfocus();
     if (_globalFormKey.currentState!.validate()) {
       final _mappedData = await _getMappedData();
-      _profileViewmodel!.updateUsersNextKin(_mappedData);
+      _profileViewmodel!.updateUsersWorkInfo(_mappedData);
     } else
       setState(() => _autoValidate = true);
   }

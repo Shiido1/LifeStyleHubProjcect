@@ -4,7 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/next_of_kin_information.dart';
+import 'next_of_kin_information.dart';
+import 'work_information.dart';
 import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
@@ -158,7 +159,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10)),
-                    onTap: () {},
+                    onTap: () => PageRouter.gotoWidget(
+                        WorkInformationScreen(_userInfo.work), context,
+                        animationType: PageTransitionType.fade),
                   ),
                   SizedBox(height: 32),
                   TextView(

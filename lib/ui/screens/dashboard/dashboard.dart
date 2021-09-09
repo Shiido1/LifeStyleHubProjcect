@@ -77,7 +77,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Stack(
           children: [
             _body[_index],
-            // ButtomCountDownWidget(),
+            ButtomCountDownWidget(),
           ],
         ),
       ),

@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
 import '../dao/profile_dao.dart';
 import '../repository/profile_repository.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 ProfileRepository _profileRepository = ProfileRepository();
 
@@ -68,6 +69,7 @@ class ProfileViewmodel extends BaseViewModel {
     try {
       _showLoading(notify: true);
       await _profileRepository.updateUsersNexOfKin(map);
+      await getUsersProfile();
       showsnackBarInfo(_context, message: 'Update successful');
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
@@ -80,6 +82,7 @@ class ProfileViewmodel extends BaseViewModel {
     try {
       _showLoading();
       await _profileRepository.updateUsersWork(map);
+      await getUsersProfile();
       showsnackBarInfo(_context, message: 'Update successful');
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
@@ -93,6 +96,7 @@ class ProfileViewmodel extends BaseViewModel {
       _showLoading();
       final _response =
           await _profileRepository.updateUsersBankInformation(map);
+      await getUsersProfile();
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }

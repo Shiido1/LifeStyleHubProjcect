@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../../helper/helper_handler.dart';
-import '../model/generation_model.dart';
 import '../../../../../../utils/pallets.dart';
+import '../model/generation_model.dart';
 
 class MatrixDisplayWidget extends StatelessWidget {
   final Me? me;

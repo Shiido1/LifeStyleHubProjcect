@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../../../../../database/users_data_provider.dart';
-import '../../../../../../helper/configs/instances.dart';
-import '../../../../../../helper/helper_handler.dart';
-import '../../../../../../provider/_base_viewmodels.dart';
-import '../dao/messaging_dao.dart';
-import '../model/get_last_messages_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/open_message_model.dart'
     as open;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/repository/messaging_repository.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+
+import '../../../../../../database/users_data_provider.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../../../provider/_base_viewmodels.dart';
+import '../dao/messaging_dao.dart';
+import '../model/get_last_messages_model.dart';
 
 MessageRepository _messageRepository = MessageRepository();
 
