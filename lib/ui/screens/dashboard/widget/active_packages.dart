@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../helper/helper_handler.dart';
+import '../../../widgets/text_views.dart';
+import '../../../../utils/pallets.dart';
 
 // ignore: must_be_immutable
 class ActivePackageWidget extends StatelessWidget {
@@ -60,7 +60,7 @@ class ActivePackageWidget extends StatelessWidget {
           LinearProgressIndicator(
             backgroundColor: Pallets.grey600,
             valueColor: new AlwaysStoppedAnimation<Color>(Pallets.orange500),
-            value: 0 /100,
+            value: 0 / 100,
           ),
           SizedBox(
             height: spaceHeight,

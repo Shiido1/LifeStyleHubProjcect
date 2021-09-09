@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/helper/routes/routes.dart';
-import 'package:lifestyle_hub/provider/provider_architecture.dart';
-import 'package:lifestyle_hub/ui/screens/reset_password/repository/reset_password_repository.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../helper/helper_handler.dart';
+import '../../../../helper/routes/navigation.dart';
+import '../../../../helper/routes/routes.dart';
+import '../../../../provider/provider_architecture.dart';
+import '../repository/reset_password_repository.dart';
+import '../../../../utils/pallets.dart';
 
 ResetPasswordRepository _repository = ResetPasswordRepository();
 

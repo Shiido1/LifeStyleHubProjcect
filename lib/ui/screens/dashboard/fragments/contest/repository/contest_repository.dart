@@ -1,9 +1,9 @@
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/model/create_contest.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/model/delete_contest_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/model/view_contest_model.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../model/create_contest.dart';
+import '../model/delete_contest_model.dart';
+import '../model/view_contest_model.dart';
+import '../../../../../../utils/paths.dart';
 
 class ContestRepository {
   /// [@CREATE] contest

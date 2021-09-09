@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/helper/configs/constants.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
-import 'package:lifestyle_hub/ui/screens/login/viewmodel/login_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/images.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../helper/configs/constants.dart';
+import '../../../helper/helper_handler.dart';
+import '../login/model/login_model.dart';
+import '../login/viewmodel/login_viewmodel.dart';
+import '../../widgets/image_loader.dart';
+import '../../widgets/text_views.dart';
+import '../../../utils/images.dart';
+import '../../../utils/pallets.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

@@ -1,11 +1,11 @@
 import 'dart:html';
 
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/model/add_bank_account_model.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/model/delete_bank_account_model.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/model/get_bank_account_model.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../../../../../helper/configs/instances.dart';
+import '../../../../../helper/helper_handler.dart';
+import '../model/add_bank_account_model.dart';
+import '../model/delete_bank_account_model.dart';
+import '../model/get_bank_account_model.dart';
+import '../../../../../utils/paths.dart';
 
 class BankAccountRepository {
   /// [@CREATE] bank account

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/model/view_contest_model.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../helper/helper_handler.dart';
+import 'model/view_contest_model.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../../../widgets/image_loader.dart';
+import '../../../../widgets/text_views.dart';
+import '../../../../../utils/pallets.dart';
 
 import 'widget/contest_time_left_widget.dart';
 

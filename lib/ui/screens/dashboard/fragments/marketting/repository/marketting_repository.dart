@@ -1,10 +1,10 @@
-import 'package:lifestyle_hub/helper/configs/constants.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/delete_marketting_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/update_resource_model.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../../../../../../helper/configs/constants.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../model/delete_marketting_model.dart';
+import '../model/get_resources_model.dart';
+import '../model/update_resource_model.dart';
+import '../../../../../../utils/paths.dart';
 
 class MarkettingRepository {
   /// [@CREATE] Resource marketting list
@@ -33,7 +33,8 @@ class MarkettingRepository {
   Future<GetResourcesModelList> getMarkettingAll(String type) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.getMarketting}?type=$type', options: await getDioHeader());
+          url: '${Paths.getMarketting}?type=$type',
+          options: await getDioHeader());
       return GetResourcesModelList.fromJson(_response);
     } catch (e) {
       throw e;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../widgets/image_loader.dart';
+import '../../../../../../utils/pallets.dart';
 
 class ChatEditText extends StatelessWidget {
   final Function(String? value)? onSubmit;

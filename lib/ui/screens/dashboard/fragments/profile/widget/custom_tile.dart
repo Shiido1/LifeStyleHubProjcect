@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
-
+import '../../../../../widgets/text_views.dart';
+import '../../../../../../utils/pallets.dart';
 
 class CustomTileWidget extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
@@ -17,7 +16,7 @@ class CustomTileWidget extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
         decoration:
-        BoxDecoration(borderRadius: borderRadius, color: Pallets.grey100),
+            BoxDecoration(borderRadius: borderRadius, color: Pallets.grey100),
         child: Row(
           children: [
             Expanded(

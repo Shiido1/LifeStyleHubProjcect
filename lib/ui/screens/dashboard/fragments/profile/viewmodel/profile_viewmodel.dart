@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/repository/profile_repository.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../provider/_base_viewmodels.dart';
+import '../dao/profile_dao.dart';
+import '../repository/profile_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 ProfileRepository _profileRepository = ProfileRepository();

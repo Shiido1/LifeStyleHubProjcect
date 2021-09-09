@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/generation_model.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../model/generation_model.dart';
+import '../../../../../../utils/pallets.dart';
 
 class MatrixDisplayWidget extends StatelessWidget {
   final Me? me;
@@ -119,7 +119,7 @@ class MatrixDisplayWidget extends StatelessWidget {
                           Expanded(
                             flex: 7,
                             child: Container(
-                                height: 45 ,
+                                height: 45,
                                 child: Row(children: [
                                   ..._data.myGrandChildren!
                                       .map((grandChild) => Expanded(
@@ -132,8 +132,8 @@ class MatrixDisplayWidget extends StatelessWidget {
                                                 //     getDeviceHeight(context) *
                                                 //         0.8,
                                                 transform:
-                                                Matrix4.translationValues(
-                                                    40, -35, 0),
+                                                    Matrix4.translationValues(
+                                                        40, -35, 0),
                                                 width: 1,
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
@@ -167,7 +167,6 @@ class MatrixDisplayWidget extends StatelessWidget {
                                                         ),
                                                 ),
                                               ),
-
                                             ],
                                           ))))
                                       .toList()

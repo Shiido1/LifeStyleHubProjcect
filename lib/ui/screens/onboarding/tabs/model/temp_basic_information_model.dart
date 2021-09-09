@@ -1,4 +1,4 @@
-import 'package:lifestyle_hub/helper/configs/instances.dart';
+import '../../../../../helper/configs/instances.dart';
 
 class TempBasicInformationHolder {
   static String? fullName;

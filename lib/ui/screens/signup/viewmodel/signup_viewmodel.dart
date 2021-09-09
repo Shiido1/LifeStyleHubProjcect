@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/constants.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/helper/routes/routes.dart';
-import 'package:lifestyle_hub/provider/provider_architecture.dart';
-import 'package:lifestyle_hub/ui/screens/signup/repository/register_repository.dart';
+
+import '../../../../helper/configs/constants.dart';
+import '../../../../helper/helper_handler.dart';
+import '../../../../helper/routes/navigation.dart';
+import '../../../../helper/routes/routes.dart';
+import '../../../../provider/provider_architecture.dart';
+import '../repository/register_repository.dart';
 
 RegisterRepository _registerRepository = RegisterRepository();
 

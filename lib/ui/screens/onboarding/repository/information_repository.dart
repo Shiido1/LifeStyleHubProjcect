@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:lifestyle_hub/helper/configs/constants.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/model/basic_information_model.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/model/work_information_model.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../../../../helper/configs/constants.dart';
+import '../../../../helper/configs/instances.dart';
+import '../model/basic_information_model.dart';
+import '../model/work_information_model.dart';
+import '../../../../utils/paths.dart';
 
 class InformationRepository {
   /// register basic information

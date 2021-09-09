@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home/home_screen.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/profile_screen.dart';
-import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
+import '../../../helper/configs/instances.dart';
+import 'fragments/home/home_screen.dart';
+import 'fragments/profile/profile_screen.dart';
+import '../../widgets/bottom_count_down.dart';
+import '../../widgets/custom_appbar.dart';
 
 import 'fragments/commission/commission_screen.dart';
 import 'fragments/contest/contest_screen.dart';

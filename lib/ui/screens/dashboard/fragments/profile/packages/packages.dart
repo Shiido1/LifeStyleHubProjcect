@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/my_account_package_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/active_packages.dart';
-import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import 'dao/my_account_package_dao.dart';
+import '../../../widget/active_packages.dart';
+import '../../../../../widgets/bottom_count_down.dart';
+import '../../../../../widgets/custom_appbar.dart';
+import '../../../../../../utils/pallets.dart';
 
 import 'model/my_accounts_model.dart';
 import 'viewmodel/package_viewmodel.dart';

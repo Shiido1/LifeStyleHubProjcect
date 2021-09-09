@@ -1,10 +1,10 @@
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/create_message_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/get_last_messages_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/open_message_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/send_message_model.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../model/create_message_model.dart';
+import '../model/get_last_messages_model.dart';
+import '../model/open_message_model.dart';
+import '../model/send_message_model.dart';
+import '../../../../../../utils/paths.dart';
 
 class MessageRepository {
   Future<GetLastMessagesModel> getLastMessages() async {
@@ -20,7 +20,9 @@ class MessageRepository {
   Future<OpenMessageModel> openMessage(Map map) async {
     try {
       final _response = await apiBaseHelper.post(
-          url: '${Paths.openMessage}/1', options: await getDioHeader(), map: map);
+          url: '${Paths.openMessage}/1',
+          options: await getDioHeader(),
+          map: map);
       return OpenMessageModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -40,7 +42,9 @@ class MessageRepository {
   Future<CreateMessageModelList> createMessage(Map map) async {
     try {
       final _response = await apiBaseHelper.post(
-          url: '${Paths.createMessage}', options: await getDioHeader(), map: map);
+          url: '${Paths.createMessage}',
+          options: await getDioHeader(),
+          map: map);
       return CreateMessageModelList.fromJson(_response);
     } catch (e) {
       throw e;

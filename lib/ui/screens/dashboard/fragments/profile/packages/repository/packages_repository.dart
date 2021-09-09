@@ -1,9 +1,9 @@
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/my_accounts_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/packages_payment_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/view_packages_model.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../../../../../../../helper/configs/instances.dart';
+import '../../../../../../../helper/helper_handler.dart';
+import '../model/my_accounts_model.dart';
+import '../model/packages_payment_model.dart';
+import '../model/view_packages_model.dart';
+import '../../../../../../../utils/paths.dart';
 
 class PackageRepository {
   /// [@PAYMENT] package subscription

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../utils/pallets.dart';
 
 class LoadingOverlay extends StatefulWidget {
   final bool isLoading;

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
-
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../../widgets/text_views.dart';
+import '../../../../../../utils/pallets.dart';
 
 class TicketBoxsWidget extends StatelessWidget {
   final int? number;
@@ -11,7 +10,11 @@ class TicketBoxsWidget extends StatelessWidget {
   final Color? color;
 
   const TicketBoxsWidget(
-      {Key? key, required this.number, required this.text, required this.onTap, required this.color})
+      {Key? key,
+      required this.number,
+      required this.text,
+      required this.onTap,
+      required this.color})
       : super(key: key);
 
   @override

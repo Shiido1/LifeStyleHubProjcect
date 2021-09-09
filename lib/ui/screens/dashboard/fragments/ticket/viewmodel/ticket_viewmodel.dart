@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/dept_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/repository/ticket_repository.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../../../provider/_base_viewmodels.dart';
+import '../dao/dept_dao.dart';
+import '../dao/ticket_dao.dart';
+import '../model/my_ticket_model.dart';
+import '../repository/ticket_repository.dart';
+import '../../../../../../utils/pallets.dart';
 
 TicketRepository _ticketRepository = TicketRepository();
 

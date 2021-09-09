@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/constants.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/information_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_dialog_menu_pop.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../helper/configs/constants.dart';
+import '../../../../helper/helper_handler.dart';
+import '../../../../helper/routes/navigation.dart';
+import '../viewmodel/information_viewmodel.dart';
+import '../viewmodel/tab_viewmodel.dart';
+import '../../../widgets/buttons.dart';
+import '../../../widgets/custom_dialog_menu_pop.dart';
+import '../../../widgets/edit_form_widget.dart';
+import '../../../widgets/text_views.dart';
+import '../../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 import 'model/temp_basic_information_model.dart';
@@ -24,13 +24,13 @@ class NextOfKinInformationWidget extends StatefulWidget {
 class _NextOfKinInformationWidgetState
     extends State<NextOfKinInformationWidget> {
   TextEditingController _nxtFullName =
-  TextEditingController(text: TempBasicInformationHolder.nxtFullName ?? '');
+      TextEditingController(text: TempBasicInformationHolder.nxtFullName ?? '');
   TextEditingController _nxtRelationshipController = TextEditingController(
       text: TempBasicInformationHolder.nxtRelationship ?? '');
-  TextEditingController _nxtPhoneNumberController =
-  TextEditingController(text: TempBasicInformationHolder.nxtPhoneNumber ?? '');
+  TextEditingController _nxtPhoneNumberController = TextEditingController(
+      text: TempBasicInformationHolder.nxtPhoneNumber ?? '');
   TextEditingController _nxtEmailController =
-  TextEditingController(text: TempBasicInformationHolder.nxtEmail ?? '');
+      TextEditingController(text: TempBasicInformationHolder.nxtEmail ?? '');
 
   bool _relationshipSelected = false;
 
@@ -38,7 +38,8 @@ class _NextOfKinInformationWidgetState
 
   @override
   void initState() {
-    _informationModel = Provider.of<InformationViewModel>(context, listen: false);
+    _informationModel =
+        Provider.of<InformationViewModel>(context, listen: false);
     _informationModel!.init(context);
     super.initState();
   }
@@ -72,15 +73,18 @@ class _NextOfKinInformationWidgetState
           floatingLabel: 'Relationship',
           label: 'Select relationship',
           suffixIcon: Icons.keyboard_arrow_down_sharp,
-          suffixIconColor: _relationshipSelected ? Pallets.activeIconColor : Pallets.disabledIconColor,
+          suffixIconColor: _relationshipSelected
+              ? Pallets.activeIconColor
+              : Pallets.disabledIconColor,
           controller: _nxtRelationshipController,
           onTapped: () => showCustomDialog(context,
-              title: 'Select relationship', items: AppConstants.getRelationship(), onTap: (value) {
-                _relationshipSelected = true;
-                _nxtRelationshipController.text = value;
-                setState(() {});
-                PageRouter.goBack(context);
-              }),
+              title: 'Select relationship',
+              items: AppConstants.getRelationship(), onTap: (value) {
+            _relationshipSelected = true;
+            _nxtRelationshipController.text = value;
+            setState(() {});
+            PageRouter.goBack(context);
+          }),
         ),
         SizedBox(
           height: 8,
@@ -154,7 +158,6 @@ class _NextOfKinInformationWidgetState
             relationshipOfNextOfKin: _nxtRelationshipController.text,
             phoneOfNextOfKin: _nxtPhoneNumberController.text,
             emailOfNextOfKin: _nxtEmailController.text));
-    if (_value)
-      _tabViewModel.switchIndex(2);
+    if (_value) _tabViewModel.switchIndex(2);
   }
 }

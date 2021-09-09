@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/database/hive_database.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
+import '../../../../../../database/hive_database.dart';
+import '../model/get_resources_model.dart';
 
 MarketingDao? markettingDao;
 

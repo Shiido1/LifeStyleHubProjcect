@@ -1,6 +1,6 @@
-import 'package:lifestyle_hub/helper/configs/pref_manager.dart';
-import 'package:lifestyle_hub/network/dio_client.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import 'pref_manager.dart';
+import '../../network/dio_client.dart';
+import '../../utils/paths.dart';
 import 'package:logger/logger.dart';
 
 final Logger logger = Logger();

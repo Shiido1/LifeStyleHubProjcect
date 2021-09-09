@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/filter_modal.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_transaction_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/multi_color_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../helper/helper_handler.dart';
+import '../ticket/widget/filter_modal.dart';
+import 'dao/wallet_dao.dart';
+import 'model/view_wallet_transaction_model.dart';
+import 'viewmodel/wallet_viewmodel.dart';
+import '../../widget/multi_color_widget.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../../../widgets/edit_form_widget.dart';
+import '../../../../widgets/image_loader.dart';
+import '../../../../../utils/pallets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class AllWalletScreen extends StatefulWidget {

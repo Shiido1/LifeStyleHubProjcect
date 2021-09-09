@@ -2,17 +2,17 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/video_player.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/data/enum.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/data/social_media.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/glass_container.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../helper/configs/instances.dart';
+import '../../../../../helper/helper_handler.dart';
+import '../../../../../helper/video_player.dart';
+import 'data/enum.dart';
+import 'data/social_media.dart';
+import '../../../../widgets/buttons.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../../../widgets/glass_container.dart';
+import '../../../../widgets/image_loader.dart';
+import '../../../../widgets/text_views.dart';
+import '../../../../../utils/pallets.dart';
 
 import 'model/get_resources_model.dart';
 

@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../helper/helper_handler.dart';
+import '../../utils/pallets.dart';
 
 void showCustomDialog(BuildContext context,
     {String? title,

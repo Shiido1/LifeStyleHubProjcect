@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/home/home_screen.dart';
-import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/informations.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/splashscreen.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/welcome.dart';
-import 'package:lifestyle_hub/ui/screens/reset_password/reset_password_screen.dart';
-import 'package:lifestyle_hub/ui/screens/signup/signup_screen.dart';
+import '../../ui/screens/dashboard/dashboard.dart';
+import '../../ui/screens/dashboard/fragments/home/home_screen.dart';
+import '../../ui/screens/login/login_screen.dart';
+import '../../ui/screens/onboarding/informations.dart';
+import '../../ui/screens/onboarding/splashscreen.dart';
+import '../../ui/screens/onboarding/welcome.dart';
+import '../../ui/screens/reset_password/reset_password_screen.dart';
+import '../../ui/screens/signup/signup_screen.dart';
 
 BuildContext? globalContext;
 

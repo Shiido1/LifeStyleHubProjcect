@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/create_ticket_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/dept_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_reply_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_status.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../model/create_ticket_model.dart';
+import '../model/dept_model.dart';
+import '../model/my_ticket_model.dart';
+import '../model/my_ticket_reply_model.dart';
+import '../model/my_ticket_status.dart';
+import '../../../../../../utils/paths.dart';
 
 class TicketRepository {
   /// [@CREATE]

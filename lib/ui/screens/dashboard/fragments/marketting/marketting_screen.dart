@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/banner_content_widget.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/post_content_widget.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/video_content_widget.dart';
+import '../../../../../helper/helper_handler.dart';
+import 'viewmodel/marketting_viewmodel.dart';
+import 'widget/banner_content_widget.dart';
+import 'widget/post_content_widget.dart';
+import 'widget/video_content_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'dao/marketting_dao.dart';

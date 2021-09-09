@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
+import '../../../../helper/routes/navigation.dart';
+import '../../../../provider/_base_viewmodels.dart';
+import '../../dashboard/dashboard.dart';
 import 'package:page_transition/page_transition.dart';
 
 class TabViewModel extends BaseViewModel {

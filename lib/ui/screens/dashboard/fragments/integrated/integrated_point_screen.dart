@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/dao/point_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/model/point_history_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../helper/helper_handler.dart';
+import 'dao/point_dao.dart';
+import 'model/point_history_model.dart';
+import '../../widget/view_all_widget.dart';
+import '../../../../widgets/text_views.dart';
+import '../../../../../utils/pallets.dart';
 
 import 'viewmodel/point_history_viewmodel.dart';
 import 'widgets/integrated_points_widget.dart';

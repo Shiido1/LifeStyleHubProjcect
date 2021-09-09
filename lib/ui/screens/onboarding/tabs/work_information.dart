@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/tabs/model/work_and_bank_information_model.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../helper/helper_handler.dart';
+import 'model/work_and_bank_information_model.dart';
+import '../viewmodel/tab_viewmodel.dart';
+import '../../../widgets/buttons.dart';
+import '../../../widgets/edit_form_widget.dart';
+import '../../../widgets/text_views.dart';
+import '../../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 class WorkInformationWidget extends StatefulWidget {
@@ -42,7 +42,7 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
         ),
         TextView(
           text:
-          'This is a KYC to  understand where and how money comes into our network',
+              'This is a KYC to  understand where and how money comes into our network',
           fontWeight: FontWeight.w500,
           fontSize: 12,
           color: Pallets.grey700,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../../widgets/text_views.dart';
+import '../../../../../../utils/pallets.dart';
 
 class IntegratedPointAndCommissionWidget extends StatelessWidget {
   final String? total;
@@ -49,13 +49,14 @@ class IntegratedPointAndCommissionWidget extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 23,),
+        SizedBox(
+          height: 23,
+        ),
         Container(
           width: getDeviceWidth(context),
           padding: EdgeInsets.symmetric(horizontal: 23, vertical: 23),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Pallets.purple50),
+              borderRadius: BorderRadius.circular(15), color: Pallets.purple50),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

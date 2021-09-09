@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/helper/routes/routes.dart';
-import 'package:lifestyle_hub/ui/screens/reset_password/viewmodel/login_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/overlay.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/images.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:lifestyle_hub/utils/validators.dart';
+import '../../../helper/helper_handler.dart';
+import '../../../helper/routes/navigation.dart';
+import '../../../helper/routes/routes.dart';
+import 'viewmodel/login_viewmodel.dart';
+import '../../widgets/buttons.dart';
+import '../../widgets/edit_form_widget.dart';
+import '../../widgets/image_loader.dart';
+import '../../widgets/overlay.dart';
+import '../../widgets/text_views.dart';
+import '../../../utils/images.dart';
+import '../../../utils/pallets.dart';
+import '../../../utils/validators.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({Key? key}) : super(key: key);

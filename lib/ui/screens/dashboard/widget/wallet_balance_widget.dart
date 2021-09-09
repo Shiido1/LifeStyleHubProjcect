@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/modal/transfer_modal.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/modal/withdraw_modal.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_model.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../helper/helper_handler.dart';
+import '../fragments/wallet/dao/wallet_dao.dart';
+import '../fragments/wallet/modal/transfer_modal.dart';
+import '../fragments/wallet/modal/withdraw_modal.dart';
+import '../fragments/wallet/model/view_wallet_model.dart';
+import '../../../widgets/text_views.dart';
+import '../../../../utils/pallets.dart';
 
 class WalletBalanceWidget extends StatelessWidget {
   const WalletBalanceWidget({Key? key}) : super(key: key);
@@ -110,8 +110,7 @@ class WalletBalanceWidget extends StatelessWidget {
               SizedBox(height: 24),
               Container(
                 width: getDeviceWidth(context),
-                padding:
-                EdgeInsets.symmetric(horizontal: 34, vertical: 34),
+                padding: EdgeInsets.symmetric(horizontal: 34, vertical: 34),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: Pallets.blue50),
@@ -128,7 +127,7 @@ class WalletBalanceWidget extends StatelessWidget {
                     SizedBox(height: 10),
                     TextView(
                       text:
-                      '${formatCurrency(_model.wallet?.totalIncome ?? 0)}',
+                          '${formatCurrency(_model.wallet?.totalIncome ?? 0)}',
                       fontWeight: FontWeight.w700,
                       fontSize: 24,
                       color: Pallets.grey700,
@@ -150,8 +149,7 @@ class WalletBalanceWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   TextView(
-                    text:
-                    '${formatCurrency(_model.wallet?.totalDebit ?? 0)}',
+                    text: '${formatCurrency(_model.wallet?.totalDebit ?? 0)}',
                     fontWeight: FontWeight.w700,
                     fontSize: 24,
                     color: Pallets.grey700,

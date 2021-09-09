@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/filter_modal.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../helper/helper_handler.dart';
+import '../../../../../helper/routes/navigation.dart';
+import 'viewmodel/marketting_viewmodel.dart';
+import '../ticket/widget/filter_modal.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../../../widgets/edit_form_widget.dart';
+import '../../../../widgets/image_loader.dart';
+import '../../../../../utils/pallets.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 

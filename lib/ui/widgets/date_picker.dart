@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
+import '../../helper/helper_handler.dart';
 
 pickDate(
     {@required BuildContext? context,

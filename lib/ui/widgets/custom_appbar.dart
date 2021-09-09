@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../helper/routes/navigation.dart';
+import '../../utils/pallets.dart';
 
 import 'image_loader.dart';
 import 'text_views.dart';
@@ -22,7 +22,7 @@ AppBar getCustomAppBar(BuildContext context,
   return AppBar(
     automaticallyImplyLeading: showLeadig,
     elevation: elevation,
-    centerTitle:centerTitle ,
+    centerTitle: centerTitle,
     leading: changeLeadingIcon
         ? IconButton(
             onPressed: () => PageRouter.goBack(context),

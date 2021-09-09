@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lifestyle_hub/ui/responsivenes/ui_utils.dart';
+import 'ui_utils.dart';
 
 class SizingInformation {
   final Orientation? orientation;

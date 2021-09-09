@@ -1,18 +1,18 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/dao/dashboardd_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/dao/commission_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/dao/contest_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/dao/point_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/dao/marketting_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/dao/messaging_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/my_account_package_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/package_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/dept_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
+import '../helper/configs/instances.dart';
+import '../ui/screens/dashboard/dao/dashboardd_dao.dart';
+import '../ui/screens/dashboard/fragments/commission/dao/commission_dao.dart';
+import '../ui/screens/dashboard/fragments/contest/dao/contest_dao.dart';
+import '../ui/screens/dashboard/fragments/integrated/dao/point_dao.dart';
+import '../ui/screens/dashboard/fragments/marketting/dao/marketting_dao.dart';
+import '../ui/screens/dashboard/fragments/messaging/dao/messaging_dao.dart';
+import '../ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import '../ui/screens/dashboard/fragments/profile/packages/dao/my_account_package_dao.dart';
+import '../ui/screens/dashboard/fragments/profile/packages/dao/package_dao.dart';
+import '../ui/screens/dashboard/fragments/ticket/dao/dept_dao.dart';
+import '../ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
+import '../ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
 
 /// initialize local data storage
 Future<void> initializeDatabase() async {

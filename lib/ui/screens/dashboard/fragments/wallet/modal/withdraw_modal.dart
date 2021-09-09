@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/set_pin_modal.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../../../helper/routes/navigation.dart';
+import '../../../widget/set_pin_modal.dart';
+import '../../../../../widgets/buttons.dart';
+import '../../../../../widgets/edit_form_widget.dart';
+import '../../../../../widgets/text_views.dart';
+import '../../../../../../utils/pallets.dart';
 
 TextEditingController _dateController = TextEditingController();
 

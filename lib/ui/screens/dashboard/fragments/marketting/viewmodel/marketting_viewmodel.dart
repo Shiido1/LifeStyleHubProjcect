@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/dao/marketting_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/repository/marketting_repository.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../../../provider/_base_viewmodels.dart';
+import '../dao/marketting_dao.dart';
+import '../model/get_resources_model.dart';
+import '../repository/marketting_repository.dart';
+import '../../../../../../utils/pallets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 MarkettingRepository _markettingRepository = MarkettingRepository();

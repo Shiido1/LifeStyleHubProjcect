@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../model/users_profile_model.dart';
+import '../../../../../../utils/paths.dart';
 
 class ProfileRepository {
   /// get users profile

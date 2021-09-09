@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/information_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../helper/configs/instances.dart';
+import '../../../../helper/helper_handler.dart';
+import '../viewmodel/information_viewmodel.dart';
+import '../viewmodel/tab_viewmodel.dart';
+import '../../../widgets/buttons.dart';
+import '../../../widgets/edit_form_widget.dart';
+import '../../../widgets/text_views.dart';
+import '../../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 import 'model/work_and_bank_information_model.dart';

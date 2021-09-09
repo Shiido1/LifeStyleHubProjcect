@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/dao/contest_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/repository/contest_repository.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../../../provider/_base_viewmodels.dart';
+import '../dao/contest_dao.dart';
+import '../repository/contest_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 ContestRepository _contestRepository = ContestRepository();

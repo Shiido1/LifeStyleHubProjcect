@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/database/hive_database.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/model/point_history_model.dart';
+import '../../../../../../database/hive_database.dart';
+import '../model/point_history_model.dart';
 
 PointHistoryDao? pointHistoryDao;
 

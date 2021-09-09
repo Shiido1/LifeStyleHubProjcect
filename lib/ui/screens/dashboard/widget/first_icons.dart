@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
+import '../../../widgets/image_loader.dart';
 
 class FirstIcons extends StatelessWidget {
   final String? icon;

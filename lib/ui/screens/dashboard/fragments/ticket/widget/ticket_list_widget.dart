@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_model.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../../../helper/routes/navigation.dart';
+import '../model/my_ticket_model.dart';
+import '../../../../../widgets/text_views.dart';
+import '../../../../../../utils/pallets.dart';
 
 import '../ticket_sms.dart';
 

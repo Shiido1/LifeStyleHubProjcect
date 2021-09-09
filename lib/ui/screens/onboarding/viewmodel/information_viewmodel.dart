@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/helper/routes/routes.dart';
-import 'package:lifestyle_hub/provider/provider_architecture.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/repository/information_repository.dart';
+import '../../../../helper/helper_handler.dart';
+import '../../../../helper/routes/navigation.dart';
+import '../../../../helper/routes/routes.dart';
+import '../../../../provider/provider_architecture.dart';
+import '../repository/information_repository.dart';
 
 InformationRepository _informationRepository = InformationRepository();
 

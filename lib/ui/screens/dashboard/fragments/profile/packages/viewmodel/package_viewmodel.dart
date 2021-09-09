@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/my_account_package_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/package_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/repository/packages_repository.dart';
+import '../../../../../../../helper/configs/instances.dart';
+import '../../../../../../../helper/helper_handler.dart';
+import '../../../../../../../provider/_base_viewmodels.dart';
+import '../dao/my_account_package_dao.dart';
+import '../dao/package_dao.dart';
+import '../repository/packages_repository.dart';
 
 PackageRepository _packageRepository = PackageRepository();
 

@@ -3,11 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverPod;
-import 'package:lifestyle_hub/database/hive_database.dart';
-import 'package:lifestyle_hub/helper/configs/constants.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import 'database/hive_database.dart';
+import 'helper/configs/constants.dart';
+import 'helper/configs/instances.dart';
+import 'ui/screens/dashboard/dashboard.dart';
+import 'utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 import 'helper/configs/providers.dart';

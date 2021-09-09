@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/repository/wallet_repository.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../../../provider/_base_viewmodels.dart';
+import '../dao/wallet_dao.dart';
+import '../repository/wallet_repository.dart';
+import '../../../../../../utils/pallets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 WalletRepository _walletRepository = WalletRepository();

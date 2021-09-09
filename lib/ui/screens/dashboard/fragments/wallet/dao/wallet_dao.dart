@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/database/hive_database.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_transaction_model.dart';
+import '../../../../../../database/hive_database.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../model/view_wallet_model.dart';
+import '../model/view_wallet_transaction_model.dart';
 
 WalletDao? walletDao;
 

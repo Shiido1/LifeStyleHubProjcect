@@ -1,20 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/contest_details.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/model/view_contest_model.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../helper/helper_handler.dart';
+import '../../../../helper/routes/navigation.dart';
+import '../fragments/contest/contest_details.dart';
+import '../fragments/contest/model/view_contest_model.dart';
+import '../../../widgets/image_loader.dart';
+import '../../../widgets/text_views.dart';
+import '../../../../utils/pallets.dart';
 
 // ignore: must_be_immutable
 class ContestWidget extends StatelessWidget {
   final ViewContestModel? contest;
 
-
-  ContestWidget({Key? key, required this.contest})
-      : super(key: key);
+  ContestWidget({Key? key, required this.contest}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
@@ -39,7 +37,8 @@ class ContestWidget extends StatelessWidget {
                     width: 100,
                     fit: BoxFit.cover,
                   ),
-                ),              SizedBox(
+                ),
+                SizedBox(
                   width: getDeviceWidth(context) / 18,
                 ),
                 Expanded(
@@ -55,7 +54,9 @@ class ContestWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15)),
                         child: Center(
                           child: TextView(
-                            text: getDateTime(contest!.enddate!).inDays.toString(),
+                            text: getDateTime(contest!.enddate!)
+                                .inDays
+                                .toString(),
                             fontWeight: FontWeight.w700,
                             fontSize: 24,
                             color: Pallets.black,

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/dao/contest_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/model/view_contest_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/viewmodel/contest_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/widget/contest_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../helper/configs/instances.dart';
+import '../../../../../helper/helper_handler.dart';
+import 'dao/contest_dao.dart';
+import 'model/view_contest_model.dart';
+import 'viewmodel/contest_viewmodel.dart';
+import 'widget/contest_widget.dart';
+import '../../../../widgets/image_loader.dart';
+import '../../../../widgets/text_views.dart';
+import '../../../../../utils/pallets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'widget/contest_time_left_widget.dart';

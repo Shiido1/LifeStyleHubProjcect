@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/dao/commission_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/model/commission_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/viewmodel/commission_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/widgets/integrated_points_widget.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/widgets/point_break_down_widget.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/dao/wallet_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_transaction_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/multi_color_widget.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/second_icon.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/wallet_balance_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../helper/helper_handler.dart';
+import 'dao/commission_dao.dart';
+import 'model/commission_model.dart';
+import 'viewmodel/commission_viewmodel.dart';
+import '../integrated/widgets/integrated_points_widget.dart';
+import '../integrated/widgets/point_break_down_widget.dart';
+import '../wallet/dao/wallet_dao.dart';
+import '../wallet/model/view_wallet_transaction_model.dart';
+import '../../widget/multi_color_widget.dart';
+import '../../widget/second_icon.dart';
+import '../../widget/view_all_widget.dart';
+import '../../widget/wallet_balance_widget.dart';
+import '../../../../widgets/text_views.dart';
+import '../../../../../utils/pallets.dart';
 
 class CommissionScreen extends StatefulWidget {
   CommissionScreen({Key? key}) : super(key: key);
@@ -57,9 +57,11 @@ class _CommissionScreenState extends State<CommissionScreen> {
                 children: [
                   IntegratedPointAndCommissionWidget(
                     total: 'Total commission',
-                    totalPoint: formatCurrency(_commissionModel.totalCommission ?? 0),
+                    totalPoint:
+                        formatCurrency(_commissionModel.totalCommission ?? 0),
                     claimed: 'Claimed',
-                    totalClaimed: formatCurrency(_commissionModel.totalCommission ?? 0),
+                    totalClaimed:
+                        formatCurrency(_commissionModel.totalCommission ?? 0),
                   ),
                   SizedBox(height: 23),
                   TextView(

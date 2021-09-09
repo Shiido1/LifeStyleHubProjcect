@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/database/hive_database.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/model/view_contest_model.dart';
+import '../../../../../../database/hive_database.dart';
+import '../model/view_contest_model.dart';
 
 ContestDao? contestDao;
 
@@ -16,7 +16,7 @@ class ContestDao {
 
   ContestDao() {
     openGraphsBox().then(
-          (value) => _box = value,
+      (value) => _box = value,
     );
   }
 
@@ -24,7 +24,8 @@ class ContestDao {
     return HiveBoxes.openBox<Map>(HiveBoxes.contest);
   }
 
-  Future<void> saveContests(List<ViewContestModel>? viewContestModelList) async {
+  Future<void> saveContests(
+      List<ViewContestModel>? viewContestModelList) async {
     final map = Map<String, Map>.fromIterable(
       viewContestModelList!,
       key: (g) => (g as ViewContestModel).id.toString(),

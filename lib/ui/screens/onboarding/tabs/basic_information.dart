@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/constants.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/tabs/model/temp_basic_information_model.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/information_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_dialog_menu_pop.dart';
-import 'package:lifestyle_hub/ui/widgets/date_picker.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:lifestyle_hub/utils/validators.dart';
+import '../../../../helper/configs/constants.dart';
+import '../../../../helper/helper_handler.dart';
+import '../../../../helper/routes/navigation.dart';
+import 'model/temp_basic_information_model.dart';
+import '../viewmodel/information_viewmodel.dart';
+import '../viewmodel/tab_viewmodel.dart';
+import '../../../widgets/buttons.dart';
+import '../../../widgets/custom_dialog_menu_pop.dart';
+import '../../../widgets/date_picker.dart';
+import '../../../widgets/edit_form_widget.dart';
+import '../../../widgets/text_views.dart';
+import '../../../../utils/pallets.dart';
+import '../../../../utils/validators.dart';
 import 'package:provider/provider.dart';
 
 class BasicInformationWidget extends StatefulWidget {
@@ -23,17 +23,17 @@ class BasicInformationWidget extends StatefulWidget {
 
 class _BasicInformationWidgetState extends State<BasicInformationWidget> {
   TextEditingController _fullNameController =
-  TextEditingController(text: TempBasicInformationHolder.fullName ?? '');
+      TextEditingController(text: TempBasicInformationHolder.fullName ?? '');
   TextEditingController _phoneNumberController =
-  TextEditingController(text: TempBasicInformationHolder.phoneNumber ?? '');
+      TextEditingController(text: TempBasicInformationHolder.phoneNumber ?? '');
   TextEditingController _stateController =
-  TextEditingController(text: TempBasicInformationHolder.state ?? '');
+      TextEditingController(text: TempBasicInformationHolder.state ?? '');
   TextEditingController _addressController =
-  TextEditingController(text: TempBasicInformationHolder.address ?? '');
+      TextEditingController(text: TempBasicInformationHolder.address ?? '');
   TextEditingController _sexController =
-  TextEditingController(text: TempBasicInformationHolder.sex ?? '');
+      TextEditingController(text: TempBasicInformationHolder.sex ?? '');
   TextEditingController _dobController =
-  TextEditingController(text: TempBasicInformationHolder.dateOfBirth ?? '');
+      TextEditingController(text: TempBasicInformationHolder.dateOfBirth ?? '');
 
   InformationViewModel? _informationViewModel;
   bool _dateSelected = false;
@@ -67,7 +67,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
         ),
         TextView(
           text:
-          'This builds up your profile on Lifestyle Asset Hub, ease of login, and other operations',
+              'This builds up your profile on Lifestyle Asset Hub, ease of login, and other operations',
           fontWeight: FontWeight.w500,
           fontSize: 12,
           color: Pallets.grey700,
@@ -100,12 +100,13 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           controller: _stateController,
           readOnly: true,
           onTapped: () => showCustomDialog(context,
-              title: 'Select state', items: AppConstants.getStates(), onTap: (value) {
-                _stateSelected = true;
-                _stateController.text = value;
-                setState(() {});
-                PageRouter.goBack(context);
-              }),
+              title: 'Select state',
+              items: AppConstants.getStates(), onTap: (value) {
+            _stateSelected = true;
+            _stateController.text = value;
+            setState(() {});
+            PageRouter.goBack(context);
+          }),
         ),
         SizedBox(
           height: 8,
@@ -127,11 +128,11 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           readOnly: true,
           onTapped: () => showCustomDialog(context,
               title: 'Select sex', items: ['Male', 'Female'], onTap: (value) {
-                _sexSelected = true;
-                _sexController.text = value;
-                setState(() {});
-                PageRouter.goBack(context);
-              }),
+            _sexSelected = true;
+            _sexController.text = value;
+            setState(() {});
+            PageRouter.goBack(context);
+          }),
         ),
         SizedBox(
           height: 8,

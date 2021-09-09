@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/data/enum.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
+import '../../../../../../helper/routes/navigation.dart';
+import '../data/enum.dart';
+import '../viewmodel/marketting_viewmodel.dart';
+import '../../../widget/view_all_widget.dart';
+import '../../../../../widgets/image_loader.dart';
 
 import '../marketting_details_screen.dart';
 import '../view_all_marketting_tools_screen.dart';

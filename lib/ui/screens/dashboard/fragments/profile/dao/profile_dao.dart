@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/database/hive_database.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
+import '../../../../../../database/hive_database.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../model/users_profile_model.dart';
 
 ProfileDao? profileDao;
 
@@ -17,7 +17,7 @@ class ProfileDao {
 
   ProfileDao() {
     openGraphsBox().then(
-          (value) => _box = value,
+      (value) => _box = value,
     );
   }
 

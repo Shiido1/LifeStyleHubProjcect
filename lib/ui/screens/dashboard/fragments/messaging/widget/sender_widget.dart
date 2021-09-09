@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/open_message_model.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../model/open_message_model.dart';
+import '../../../../../widgets/text_views.dart';
+import '../../../../../../utils/pallets.dart';
 
 class SenderText extends StatelessWidget {
   final Data? message;

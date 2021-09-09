@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/view_more_tickets.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/ticket_widget.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/overlay.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../helper/helper_handler.dart';
+import '../../../../../helper/routes/navigation.dart';
+import 'dao/ticket_dao.dart';
+import 'view_more_tickets.dart';
+import 'viewmodel/ticket_viewmodel.dart';
+import 'widget/ticket_widget.dart';
+import '../../widget/view_all_widget.dart';
+import '../../../../widgets/buttons.dart';
+import '../../../../widgets/overlay.dart';
+import '../../../../../utils/pallets.dart';
 
 import 'model/my_ticket_model.dart';
 import 'model/my_ticket_status.dart';

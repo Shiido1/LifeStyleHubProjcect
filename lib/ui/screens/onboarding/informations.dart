@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/information_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/tabs/bank_information_widget.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/tabs/next_of_kin_information.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/overlay.dart';
-import 'package:lifestyle_hub/utils/images.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import 'viewmodel/information_viewmodel.dart';
+import 'viewmodel/tab_viewmodel.dart';
+import 'tabs/bank_information_widget.dart';
+import 'tabs/next_of_kin_information.dart';
+import '../../widgets/image_loader.dart';
+import '../../widgets/overlay.dart';
+import '../../../utils/images.dart';
+import '../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 import 'tabs/basic_information.dart';
@@ -60,7 +60,6 @@ class GetStartedScreen extends StatelessWidget {
                                   : Pallets.grey200,
                             ),
                           ),
-
                           SizedBox(width: 17),
                           Expanded(
                             child: Divider(
@@ -70,7 +69,6 @@ class GetStartedScreen extends StatelessWidget {
                                   : Pallets.grey200,
                             ),
                           ),
-
                           SizedBox(width: 17),
                           Expanded(
                             child: Divider(
@@ -96,7 +94,6 @@ class GetStartedScreen extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _switchTabs(TabViewModel provider) {
     if (provider.index == 0) {

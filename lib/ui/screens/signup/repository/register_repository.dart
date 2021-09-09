@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/signup/model/register_model.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../../../../helper/configs/instances.dart';
+import '../model/register_model.dart';
+import '../../../../utils/paths.dart';
 
 class RegisterRepository {
   Future<RegisterModel> register({required Map map}) async {

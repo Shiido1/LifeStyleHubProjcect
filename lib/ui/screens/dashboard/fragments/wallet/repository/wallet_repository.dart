@@ -1,16 +1,18 @@
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/transfer_to_wallet.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_transaction_model.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../model/transfer_to_wallet.dart';
+import '../model/view_wallet_model.dart';
+import '../model/view_wallet_transaction_model.dart';
+import '../../../../../../utils/paths.dart';
 
 class WalletRepository {
   /// [@TRANSFER] to wallet
   Future<TransferToWalletModel> transferToWallet(Map map) async {
     try {
       final _response = await apiBaseHelper.post(
-          map: map, url: Paths.viewTransferWallet, options: await getDioHeader());
+          map: map,
+          url: Paths.viewTransferWallet,
+          options: await getDioHeader());
       return TransferToWalletModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -32,7 +34,8 @@ class WalletRepository {
   Future<ViewWalletTransactionModel> getWalletTransactions(int page) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.viewWalletTransactions}$page', options: await getDioHeader());
+          url: '${Paths.viewWalletTransactions}$page',
+          options: await getDioHeader());
       return ViewWalletTransactionModel.fromJson(_response);
     } catch (e) {
       throw e;

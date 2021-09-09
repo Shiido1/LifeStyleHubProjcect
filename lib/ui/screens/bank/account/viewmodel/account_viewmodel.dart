@@ -1,13 +1,13 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/repository/account_repository.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/repository/marketting_repository.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../helper/configs/instances.dart';
+import '../../../../../helper/helper_handler.dart';
+import '../../../../../provider/_base_viewmodels.dart';
+import '../repository/account_repository.dart';
+import '../../../dashboard/fragments/marketting/model/get_resources_model.dart';
+import '../../../dashboard/fragments/marketting/repository/marketting_repository.dart';
+import '../../../../../utils/pallets.dart';
 
 BankAccountRepository _accountRepository = BankAccountRepository();
 

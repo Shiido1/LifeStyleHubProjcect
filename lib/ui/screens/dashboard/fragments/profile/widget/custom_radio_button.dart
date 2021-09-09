@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
-
+import '../../../../../widgets/text_views.dart';
+import '../../../../../../utils/pallets.dart';
 
 class RadioButton extends StatelessWidget {
   final Function()? onTap;
@@ -11,9 +10,9 @@ class RadioButton extends StatelessWidget {
 
   RadioButton(
       {required this.onTap,
-        required this.title,
-        required this.defaultID,
-        required this.dynamicID});
+      required this.title,
+      required this.defaultID,
+      required this.dynamicID});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,8 @@ class RadioButton extends StatelessWidget {
               dynamicID == defaultID
                   ? Icons.radio_button_on_outlined
                   : Icons.radio_button_off_outlined,
-              color: dynamicID == defaultID ? Pallets.amber500 : Pallets.grey200,
+              color:
+                  dynamicID == defaultID ? Pallets.amber500 : Pallets.grey200,
             ),
             SizedBox(width: 12),
             TextView(

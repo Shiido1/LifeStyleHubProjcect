@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/provider/_viewmodel_provider.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../helper/configs/instances.dart';
+import '../../../../helper/helper_handler.dart';
+import '../../../../helper/routes/navigation.dart';
+import '../../../../provider/_viewmodel_provider.dart';
+import '../../onboarding/viewmodel/tab_viewmodel.dart';
+import '../../../widgets/image_loader.dart';
+import '../../../widgets/text_views.dart';
+import '../../../../utils/pallets.dart';
 
 final _notifier = ChangeNotifierProvider((ref) => TabViewModel());
 
@@ -37,8 +37,10 @@ Consumer getDrawer(BuildContext context, int index) {
                     child: Container(
                       margin: EdgeInsets.only(right: 10),
                       child: ImageLoader(
-                        onTap: ()=> _tap(tab: _tabNotifier,
-                            context: context, newIndex: 10),
+                          onTap: () => _tap(
+                              tab: _tabNotifier,
+                              context: context,
+                              newIndex: 10),
                           isCircular: true,
                           radius: 40,
                           path:
@@ -222,8 +224,7 @@ void _tap(
     BuildContext? context,
     int? newIndex,
     int? providerIndex,
-    bool? drawer = true
-    }) {
+    bool? drawer = true}) {
   if (newIndex == providerIndex && tab!.isFromDrawer) {
     PageRouter.goBack(context!);
     return;

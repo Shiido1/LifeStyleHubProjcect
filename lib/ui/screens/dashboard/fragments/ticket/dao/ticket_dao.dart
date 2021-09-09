@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/database/hive_database.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_status.dart';
+import '../../../../../../database/hive_database.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../model/my_ticket_model.dart';
+import '../model/my_ticket_status.dart';
 
 TicketDao? ticketDao;
 

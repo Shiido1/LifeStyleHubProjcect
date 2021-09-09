@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/modal.dart';
-import 'package:lifestyle_hub/ui/widgets/overlay.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:lifestyle_hub/utils/validators.dart';
+import '../../../../../helper/helper_handler.dart';
+import '../../../../widgets/buttons.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../../../widgets/edit_form_widget.dart';
+import '../../../../widgets/modal.dart';
+import '../../../../widgets/overlay.dart';
+import '../../../../widgets/text_views.dart';
+import '../../../../../utils/pallets.dart';
+import '../../../../../utils/validators.dart';
 
 import 'enum/message_enum.dart';
 import 'viewmodel/messaging_viewmodel.dart';

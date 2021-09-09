@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/overlay.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import 'viewmodel/ticket_viewmodel.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../../../widgets/image_loader.dart';
+import '../../../../widgets/overlay.dart';
+import '../../../../widgets/text_views.dart';
+import '../../../../../utils/pallets.dart';
 
 import 'model/my_ticket_model.dart';
 import 'widget/chat_text_box.dart';

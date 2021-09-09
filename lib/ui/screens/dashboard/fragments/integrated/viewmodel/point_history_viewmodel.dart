@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/dao/commission_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/repository/commission_repository.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/dao/point_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/model/point_history_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/repository/point_history_repository.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/dao/marketting_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/model/get_resources_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/repository/marketting_repository.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../../../provider/_base_viewmodels.dart';
+import '../../commission/dao/commission_dao.dart';
+import '../../commission/repository/commission_repository.dart';
+import '../dao/point_dao.dart';
+import '../model/point_history_model.dart';
+import '../repository/point_history_repository.dart';
+import '../../marketting/dao/marketting_dao.dart';
+import '../../marketting/model/get_resources_model.dart';
+import '../../marketting/repository/marketting_repository.dart';
+import '../../../../../../utils/pallets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 PointHistoryRepository _pointHistoryRepository = PointHistoryRepository();

@@ -1,7 +1,7 @@
-import 'package:lifestyle_hub/helper/configs/constants.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
-import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
+import '../helper/configs/constants.dart';
+import '../helper/configs/instances.dart';
+import '../provider/_base_viewmodels.dart';
+import '../ui/screens/login/model/login_model.dart';
 
 class UsersInfoViewModel extends BaseViewModel {
   User _user = User();
