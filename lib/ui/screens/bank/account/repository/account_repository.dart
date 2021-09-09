@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'package:dio/dio.dart';
 
 import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';

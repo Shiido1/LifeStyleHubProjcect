@@ -1,6 +1,6 @@
-import 'dart:html';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/bank/account/dao/account_dao.dart';
 import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../provider/_base_viewmodels.dart';
@@ -63,9 +63,9 @@ class BankAccountViewmodel extends BaseViewModel {
   /// get list of bank accounts
   Future<void> getBankAccounts() async {
     try {
-      _showLoading();
+      if (accountDao!.box!.isEmpty) _showLoading();
       final _response = await _accountRepository.getBankAccounts();
-      logger.d(_response.getBankAccountModel!.length);
+      accountDao!.saveBankAccounts(_response.getBankAccountModel);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

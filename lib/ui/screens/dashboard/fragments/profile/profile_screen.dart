@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'my_bank.dart';
 import 'next_of_kin_information.dart';
 import 'work_information.dart';
 import '../../../../../helper/configs/instances.dart';
@@ -177,7 +178,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10)),
-                    onTap: () {},
+                    onTap: () => PageRouter.gotoWidget(
+                        BankListScreen(), context,
+                        animationType: PageTransitionType.fade),
                   ),
                   CustomTileWidget(
                     title: 'Add bank account',

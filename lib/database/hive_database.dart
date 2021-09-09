@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lifestyle_hub/ui/screens/bank/account/dao/account_dao.dart';
 
 import '../helper/configs/instances.dart';
 import '../ui/screens/dashboard/dao/dashboardd_dao.dart';
@@ -35,6 +36,7 @@ class HiveBoxes {
   static final package = 'package';
   static final accountPackage = 'accountPackage';
   static final profile = 'profile';
+  static final account = 'account';
 
   static Future openAllBox() async {
     markettingDao = MarketingDao();
@@ -49,6 +51,7 @@ class HiveBoxes {
     packageDao = PackageDao();
     accountPackageDao = AccountPackageDao();
     profileDao = ProfileDao();
+    accountDao = AccountDao();
   }
 
   static Future clearAllBox() async {
