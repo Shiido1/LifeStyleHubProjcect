@@ -14,6 +14,7 @@ import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/images.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:lifestyle_hub/utils/validators.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -150,7 +151,8 @@ class _OtpScreenState extends State<OtpScreen> {
                         fontStyle: FontStyle.normal,
                         primary: Pallets.orange600,
                         onPressed: () => PageRouter.gotoWidget(
-                            CreateNewTransactionPINScreen(), context),
+                            CreateNewTransactionPINScreen(), context,
+                            animationType: PageTransitionType.fade),
                       ),
                       SizedBox(
                         height: 23,
