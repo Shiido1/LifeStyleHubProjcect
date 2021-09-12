@@ -20,7 +20,7 @@ class Paths {
   static String register = 'api/register';
   static String basicInformation = 'api/basic';
   static String workAndBanking = 'api/work-banking';
-  static String addBankAccount = 'admin/bank-accounts';
+  static String addBankAccount = 'api/user/bank-accounts';
   static String getBankAccount = 'api/bank-accounts';
   static String packages = 'api/packages';
   static String tickets = 'api/tickets';

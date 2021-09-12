@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/bank/account/add_bank_screen.dart';
 import 'package:lifestyle_hub/ui/screens/bank/account/dao/account_dao.dart';
 import 'package:lifestyle_hub/ui/screens/bank/account/model/get_bank_account_model.dart';
 import 'package:lifestyle_hub/ui/screens/bank/account/viewmodel/account_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
+import 'package:lifestyle_hub/ui/widgets/general_bottom_sheet.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:page_transition/page_transition.dart';
 import 'model/users_profile_model.dart';
 
 import 'viewmodel/profile_viewmodel.dart';
@@ -25,6 +30,8 @@ class _BankListScreenState extends State<BankListScreen> {
       ChangeNotifierProvider((_) => BankAccountViewmodel());
   BankAccountViewmodel? _accountViewmodel;
 
+  final List<String> _optionsList = ['Edit details', 'Delete bank'];
+
   @override
   void initState() {
     _accountViewmodel = context.read(_accountProvider);
@@ -35,26 +42,26 @@ class _BankListScreenState extends State<BankListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ValueListenableBuilder(
-        valueListenable: accountDao!.getListenable()!,
-        builder: (BuildContext context, dynamic value, Widget? child) {
-          List<GetBankAccountModel> _bankList =
-              accountDao!.convert(value).toList();
-          return Scaffold(
-              appBar: getCustomAppBar(context,
-                  title: 'My bankers',
-                  showLeadig: true,
-                  showImage: false,
-                  showMoreMenu: true,
-                  centerTitle: true,
-                  onTap: () => null),
-              body: Consumer(builder: (_, watch, __) {
-                final _accountWatcher = watch(_accountProvider);
-                if (_accountWatcher.loading) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                return Stack(
+    return ValueListenableBuilder(
+      valueListenable: accountDao!.getListenable()!,
+      builder: (BuildContext context, dynamic value, Widget? child) {
+        List<GetBankAccountModel> _bankList =
+            accountDao!.convert(value).toList();
+        return Scaffold(
+            appBar: getCustomAppBar(
+              context,
+              title: 'My banks',
+              showLeadig: true,
+              showImage: false,
+              centerTitle: true,
+            ),
+            body: Consumer(builder: (_, watch, __) {
+              final _accountWatcher = watch(_accountProvider);
+              if (_accountWatcher.loading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return SafeArea(
+                child: Stack(
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -95,7 +102,24 @@ class _BankListScreenState extends State<BankListScreen> {
                                         ),
                                       ),
                                       IconButton(
-                                          onPressed: () {},
+                                          onPressed: () => showGeneralSheet(
+                                                  context,
+                                                  'Select action',
+                                                  _optionsList,
+                                                  onPress: (value) {
+                                                PageRouter.goBack(context);
+
+                                                if (value == _optionsList.first)
+                                                  PageRouter.gotoWidget(
+                                                      AddOrEditBankAccountScreen(
+                                                          bank: bank),
+                                                      context,
+                                                      animationType:
+                                                          PageTransitionType
+                                                              .fade);
+                                                else
+                                                  logger.d(value);
+                                              }),
                                           icon: Icon(Icons.more_vert))
                                     ],
                                   ),
@@ -112,13 +136,15 @@ class _BankListScreenState extends State<BankListScreen> {
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: ButtonWidget(
                               width: getDeviceWidth(context),
-                              buttonText: 'Add new banker',
+                              buttonText: 'Add new bank',
                               color: Pallets.white,
                               fontWeight: FontWeight.w500,
                               textAlign: TextAlign.center,
                               fontStyle: FontStyle.normal,
                               primary: Pallets.orange600,
-                              onPressed: () => null,
+                              onPressed: () => PageRouter.gotoWidget(
+                                  AddOrEditBankAccountScreen(), context,
+                                  animationType: PageTransitionType.fade),
                             ),
                           ),
                           ButtomCountDownWidget(),
@@ -126,10 +152,10 @@ class _BankListScreenState extends State<BankListScreen> {
                       ),
                     ),
                   ],
-                );
-              }));
-        },
-      ),
+                ),
+              );
+            }));
+      },
     );
   }
 }

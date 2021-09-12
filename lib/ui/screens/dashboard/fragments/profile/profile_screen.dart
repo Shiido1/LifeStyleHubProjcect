@@ -4,6 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/ui/screens/bank/account/add_bank_screen.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/change_transaction_pin.dart';
+import 'change_password_screen.dart';
 import 'my_bank.dart';
 import 'next_of_kin_information.dart';
 import 'work_information.dart';
@@ -187,7 +190,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10)),
-                    onTap: () {},
+                    onTap: () => PageRouter.gotoWidget(
+                        AddOrEditBankAccountScreen(), context,
+                        animationType: PageTransitionType.fade),
                   ),
                   SizedBox(height: 32),
                   TextView(
@@ -203,17 +208,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10)),
-                    onTap: () {},
+                    onTap: () => PageRouter.gotoWidget(
+                        ChangePasswordScreen(), context,
+                        animationType: PageTransitionType.fade),
                   ),
                   CustomTileWidget(
                     title: 'Change transaction pin',
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10)),
-                    onTap: () {},
+                    onTap: () => PageRouter.gotoWidget(
+                        ChangePINScreen(), context,
+                        animationType: PageTransitionType.fade),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 90,
                   )
                 ],
               ),

@@ -44,6 +44,8 @@ class BankAccountViewmodel extends BaseViewModel {
       logger.d(_response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
+    } finally {
+      logger.d('finally called');
     }
     _hideLoading();
   }

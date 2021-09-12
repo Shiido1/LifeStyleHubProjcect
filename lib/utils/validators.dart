@@ -46,15 +46,15 @@ class Validators {
   }
 
   /// validates users input to int
-  static String Function(String) validateInt({String? error}) {
-    return (String value) {
+  static String? Function(String?)? validateInt({String? error}) {
+    return (String? value) {
       if (value == null || value.isEmpty) {
         return error ?? 'Field is required.';
       }
       if ((int.tryParse(value) ?? 0.0) <= 0) {
         return error ?? 'Not a valid number.';
       }
-      return '';
+      return null;
     };
   }
 

@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/widgets/general_bottom_sheet.dart';
 import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'dao/dept_dao.dart';
@@ -109,10 +111,12 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
                             keyboardType: TextInputType.text,
                             onChange: (value) {},
                             readOnly: true,
-                            onTapped: () => showOpenedTicketModal(context,
-                                'Select priority', ['Low', 'Medium', 'High'],
-                                onPress: (String? value) {
-                              _priorityController.text = value!;
+                            onTapped: () => showGeneralSheet(
+                                context,
+                                'Select priority',
+                                ['Low', 'Medium', 'High'], onPress: (value) {
+                              _priorityController.text = value;
+                              PageRouter.goBack(context);
                               setState(() {});
                             }),
                             suffixIcon: Icons.keyboard_arrow_down,

@@ -1,19 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import '../../helper/helper_handler.dart';
-import '../../helper/routes/navigation.dart';
-import '../screens/dashboard/fragments/ticket/dao/dept_dao.dart';
-import '../screens/dashboard/fragments/ticket/model/dept_model.dart';
-import '../screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
-import '../../utils/pallets.dart';
+import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 
 import 'text_views.dart';
 
-void showDepartmentModal(
-    BuildContext context, String title, List<DepartmentModel> items,
-    {Function(DepartmentModel value)? onPress}) {
+void showGeneralSheet(BuildContext context, String title, List items,
+    {Function(String value)? onPress}) {
   showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -43,18 +36,17 @@ void showDepartmentModal(
               SizedBox(height: 41),
               ...items
                   .map(
-                    (dept) => ListTile(
+                    (e) => ListTile(
                         contentPadding: EdgeInsets.zero,
                         title: TextView(
-                          text: dept.name ?? '',
+                          text: e,
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
                           color: Pallets.grey700,
                           textAlign: TextAlign.left,
                         ),
                         onTap: () {
-                          onPress!(dept);
-                          PageRouter.goBack(context);
+                          onPress!(e);
                         }),
                   )
                   .toList(),
