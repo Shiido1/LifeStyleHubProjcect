@@ -144,7 +144,8 @@ class DioClient {
   }
 
   Future<dynamic> patch(
-    String uri, {
+    String uri,
+    dynamic map, {
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
@@ -153,6 +154,7 @@ class DioClient {
     try {
       var response = await _dio!.patch(
         uri,
+        data: map,
         queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,

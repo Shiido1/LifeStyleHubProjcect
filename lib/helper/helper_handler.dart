@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'configs/instances.dart';
 import '../ui/screens/login/model/login_model.dart';
 import '../utils/pallets.dart';
@@ -85,27 +86,31 @@ String fomartCompleteDate(String date) {
 }
 
 /// get expiry date
-Future<Duration> getTrialDuration() async {
+Future<CountDownTimer> getTrialDuration() async {
+  DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
   final _usersData =
       await prefManager.getCachedData(key: AppConstants.usersPrefKey);
   LoginModel _user = LoginModel.fromJson(_usersData);
-  DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-  DateTime duration = dateFormat.parse(_user.user!.trialEnds!);
-  DateTime presentDate = dateFormat.parse(DateTime.now().toIso8601String());
-  final _answer = duration.difference(presentDate);
-  return Duration(
-      days: _answer.inDays,
-      hours: DateTime.now().hour,
-      minutes: DateTime.now().minute);
+  DateTime duration = _dateFormat.parse(_user.user!.trialEnds!);
+
+  final _answer = DateTime.now().difference(duration);
+
+  return CountDownTimer(
+      day: _answer.inDays,
+      hour: DateTime.now().hour,
+      miniute: DateTime.now().minute);
 }
 
 /// get dates
-Duration getDateTime(String date) {
+CountDownTimer getDateTime(String date) {
   DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
   DateTime _duration = _dateFormat.parse(date);
   DateTime presentDate = _dateFormat.parse(DateTime.now().toIso8601String());
   final _answer = _duration.difference(presentDate);
-  return _answer;
+  return CountDownTimer(
+      day: _answer.inDays,
+      hour: DateTime.now().hour,
+      miniute: DateTime.now().minute);
 }
 
 /// format currency

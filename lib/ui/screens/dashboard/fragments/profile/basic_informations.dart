@@ -216,7 +216,15 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
     FocusScope.of(context).unfocus();
     if (_globalFormKey.currentState!.validate()) {
       final _mappedData = await _getMappedData();
-      _profileViewmodel!.updateUsersProfile(_mappedData);
+      _profileViewmodel!.updateUsersProfile({
+        '_method': 'PATCH',
+        'name': _fullNameController!.text,
+        // 'phone_no': _phoneNumberController!.text,
+        'sex': _radioID == 0 ? 'Male' : 'Female',
+        'state': _stateController!.text,
+        'address': _addressController!.text,
+        'dob': _dobController!.text,
+      });
     } else
       setState(() => _autoValidate = true);
   }

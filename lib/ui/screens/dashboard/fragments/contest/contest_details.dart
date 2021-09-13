@@ -139,7 +139,7 @@ class _ContestDetailsState extends State<ContestDetails> {
                   textColor: Pallets.black,
                   timeColor: Pallets.black,
                   bgColor: Pallets.grey200,
-                  directs: getDateTime(contestModel!.enddate!).inDays,
+                  directs: getDateTime(contestModel!.enddate!).day,
                 ),
                 SizedBox(
                   width: 30,
@@ -150,7 +150,7 @@ class _ContestDetailsState extends State<ContestDetails> {
                   timeColor: Pallets.black,
                   bgColor: Pallets.grey200,
                   timeLeft: 'Hrs left',
-                  directs: getDateTime(contestModel!.enddate!).inHours,
+                  directs: getDateTime(contestModel!.enddate!).hour,
                 ),
                 SizedBox(
                   width: 30,
@@ -161,7 +161,7 @@ class _ContestDetailsState extends State<ContestDetails> {
                   timeColor: Pallets.red600,
                   bgColor: Pallets.grey200,
                   timeLeft: 'Mins left',
-                  directs: getDateTime(contestModel!.enddate!).inMinutes,
+                  directs: getDateTime(contestModel!.enddate!).miniute,
                 ),
               ],
             ),

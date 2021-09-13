@@ -52,7 +52,7 @@ class ProfileViewmodel extends BaseViewModel {
   }
 
   /// update a users profile
-  Future<void> updateUsersProfile(FormData formData) async {
+  Future<void> updateUsersProfile(formData) async {
     try {
       _showLoading(notify: true);
       await _profileRepository.updateAUsersProfile(formData);

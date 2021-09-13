@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
 
 class NetworkExceptions implements Exception {
   NetworkExceptions.fromDioError(DioError dioError) {
@@ -57,6 +59,9 @@ class NetworkExceptions implements Exception {
       case 400:
         return 'Bad request';
       case 401:
+        eventBus
+            .fire(UserLoggedInEvent(logUserOut: true, message: errorMessage));
+        return errorMessage;
       case 403:
       case 404:
         return errorMessage;

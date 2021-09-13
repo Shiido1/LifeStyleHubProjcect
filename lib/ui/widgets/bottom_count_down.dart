@@ -2,16 +2,25 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../helper/configs/instances.dart';
 import '../../helper/helper_handler.dart';
-import '../responsivenes/base_widget.dart';
 import '../../utils/pallets.dart';
 import '../../utils/timer/countdown.dart';
 import '../../utils/timer/countdown_controller.dart';
-
+import '../responsivenes/base_widget.dart';
 import 'buttons.dart';
 import 'glass_container.dart';
 import 'text_views.dart';
+
+class CountDownTimer {
+  int? day, hour, miniute;
+  CountDownTimer({
+    required this.day,
+    required this.hour,
+    required this.miniute,
+  });
+}
 
 class ButtomCountDownWidget extends StatelessWidget {
   ButtomCountDownWidget({Key? key}) : super(key: key);
@@ -22,134 +31,119 @@ class ButtomCountDownWidget extends StatelessWidget {
       builder: (context, size) {
         return FutureBuilder(
             future: getTrialDuration(),
-            builder: (context, AsyncSnapshot<Duration> snapshot) {
+            builder: (context, AsyncSnapshot<CountDownTimer> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting ||
                   !snapshot.hasData) {
                 return Container();
               }
-              CountdownController _countdownController = CountdownController(
-                  duration: Duration(
-                      days: snapshot.data!.inDays,
-                      minutes: snapshot.data!.inHours,
-                      seconds: snapshot.data!.inMinutes),
-                  onEnd: () {
-                    print('onEnd');
-                  });
-              _countdownController.start();
+              CountDownTimer _timer = snapshot.data!;
               return Align(
-                alignment: Alignment.bottomCenter,
-                child: Countdown(
-                  countdownController: _countdownController,
-                  builder: (_, duration) {
-                    return GlassContainer(
-                      blur: 10,
-                      shadowStrength: 10,
-                      opacity: 0.3,
-                      border: Border.fromBorderSide(BorderSide.none),
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(10),
-                          topLeft: Radius.circular(10)),
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        TextView(
-                                          text: '${duration.inDays}:',
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 28,
-                                          color: Pallets.red500,
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        TextView(
-                                          text: 'Day',
-                                          fontWeight: FontWeight.w700,
-                                          color: Pallets.grey600,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ],
-                                    ),
+                  alignment: Alignment.bottomCenter,
+                  child: GlassContainer(
+                    blur: 10,
+                    shadowStrength: 10,
+                    opacity: 0.3,
+                    border: Border.fromBorderSide(BorderSide.none),
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        topLeft: Radius.circular(10)),
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      TextView(
+                                        text: '${_timer.day}:',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 28,
+                                        color: Pallets.red500,
+                                        textAlign: TextAlign.left,
+                                      ),
+                                      TextView(
+                                        text: 'Day',
+                                        fontWeight: FontWeight.w700,
+                                        color: Pallets.grey600,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        TextView(
-                                          text: '${duration.inHours % 24}:',
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 28,
-                                          color: Pallets.red500,
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        TextView(
-                                          text: 'Hours',
-                                          fontWeight: FontWeight.w700,
-                                          color: Pallets.grey600,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ],
-                                    ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      TextView(
+                                        text: '${_timer.hour}:',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 28,
+                                        color: Pallets.red500,
+                                        textAlign: TextAlign.left,
+                                      ),
+                                      TextView(
+                                        text: 'Hours',
+                                        fontWeight: FontWeight.w700,
+                                        color: Pallets.grey600,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        TextView(
-                                          text: '${duration.inMinutes % 60}',
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 28,
-                                          color: Pallets.red500,
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        TextView(
-                                          text: 'Min',
-                                          fontWeight: FontWeight.w700,
-                                          color: Pallets.grey600,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      TextView(
+                                        text: '${_timer.miniute}',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 28,
+                                        color: Pallets.red500,
+                                        textAlign: TextAlign.left,
+                                      ),
+                                      TextView(
+                                        text: 'Min',
+                                        fontWeight: FontWeight.w700,
+                                        color: Pallets.grey600,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
-                            SizedBox(width: getDeviceWidth(context) / 20),
-                            Expanded(
-                              child: ButtonWidget(
-                                buttonText: 'Subscribe now',
-                                color: Pallets.white,
-                                fontWeight: FontWeight.w500,
-                                textAlign: TextAlign.center,
-                                fontStyle: FontStyle.normal,
-                                borderColor: Pallets.orange500,
-                                primary: Pallets.orange500,
-                                onPressed: () => null,
-                              ),
+                          ),
+                          SizedBox(width: getDeviceWidth(context) / 20),
+                          Expanded(
+                            child: ButtonWidget(
+                              buttonText: 'Subscribe now',
+                              color: Pallets.white,
+                              fontWeight: FontWeight.w500,
+                              textAlign: TextAlign.center,
+                              fontStyle: FontStyle.normal,
+                              borderColor: Pallets.orange500,
+                              primary: Pallets.orange500,
+                              onPressed: () => null,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                ),
-              );
+                    ),
+                  ));
             });
       },
     );

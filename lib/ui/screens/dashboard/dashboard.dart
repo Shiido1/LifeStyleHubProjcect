@@ -1,6 +1,14 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/database/hive_database.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/helper/routes/routes.dart';
+import 'package:lifestyle_hub/provider/provider_architecture.dart';
+import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';
+import 'package:page_transition/page_transition.dart';
 import 'fragments/home/home_screen.dart';
 import 'fragments/profile/profile_screen.dart';
 import '../../widgets/bottom_count_down.dart';
@@ -15,6 +23,12 @@ import 'fragments/network/network_screen.dart';
 import 'fragments/ticket/ticket_screen.dart';
 import 'fragments/wallet/wallet_screen.dart';
 import 'widget/drawer_widget.dart';
+
+class UserLoggedInEvent {
+  String? message;
+  bool? logUserOut;
+  UserLoggedInEvent({this.logUserOut = false, this.message});
+}
 
 class DashboardScreen extends StatefulWidget {
   int index;
@@ -60,6 +74,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   void initState() {
+    eventBus.on().listen((event) async {
+      if (event is UserLoggedInEvent && event.logUserOut!) {
+        await prefManager.remove();
+        await HiveBoxes.clearAllBox();
+        PageRouter.gotoWidget(LoginScreen(), context,
+            clearStack: true, animationType: PageTransitionType.fade);
+      }
+    });
     super.initState();
   }
 
@@ -69,7 +91,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: getCustomAppBar(context,
           title: _titleList[_index],
           showLeadig: true,
-          centerTitle: true,
+          centerTitle: true, onTap: () {
+        getTrialDuration();
+      },
           image:
               'https://images.unsplash.com/photo-1558185348-fe8fa4cf631f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'),
       drawer: getDrawer(context, _index),

@@ -34,6 +34,7 @@ dependencies:
   path_provider: ^2.0.2
   device_preview: ^0.7.4
   pin_code_fields: ^7.3.0
+  event_bus: ^2.0.0
 
 jsonToDart:
   outputFolder: lib/models #default: lib/

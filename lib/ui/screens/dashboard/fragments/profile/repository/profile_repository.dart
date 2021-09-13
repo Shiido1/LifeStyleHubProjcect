@@ -17,10 +17,10 @@ class ProfileRepository {
   }
 
   /// updates a users profile
-  Future<UsersProfileModel> updateAUsersProfile(FormData body) async {
+  Future<UsersProfileModel> updateAUsersProfile(body) async {
     try {
-      final _response = await apiBaseHelper.post(
-          map: body, url: Paths.user, options: await getDioHeader());
+      final _response = await apiBaseHelper.patch(Paths.user, body,
+          options: await getDioHeader());
       return UsersProfileModel.fromJson(_response);
     } catch (e) {
       throw e;
