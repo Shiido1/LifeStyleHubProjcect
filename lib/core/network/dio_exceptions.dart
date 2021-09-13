@@ -53,16 +53,10 @@ class NetworkExceptions implements Exception {
     final String errorMessage =
         NotFoundException(message: error["message"]).message!;
     switch (statusCode) {
-      case 200:
-      case 201:
-      case 302:
-      case 400:
-        return 'Bad request';
       case 401:
         eventBus
             .fire(UserLoggedInEvent(logUserOut: true, message: errorMessage));
         return errorMessage;
-      case 403:
       case 404:
         return errorMessage;
       case 500:

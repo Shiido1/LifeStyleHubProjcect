@@ -238,7 +238,6 @@ class CircularImage extends StatelessWidget {
         borderColor: borderColor != null ? borderColor! : Colors.transparent,
         elevation: elevation!,
         errorWidget: (ctx, _, __) => Icon(Icons.error),
-        foregroundColor: Colors.brown.withOpacity(0.5),
         onTap: onTap,
         showInitialTextAbovePicture: showInitialTextAbovePicture);
   }

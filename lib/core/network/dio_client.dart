@@ -5,8 +5,19 @@ import 'package:flutter/foundation.dart';
 
 import 'dio_exceptions.dart';
 
-const _defaultConnectTimeout = Duration.millisecondsPerMinute;
-const _defaultReceiveTimeout = Duration.millisecondsPerMinute;
+const _defaultConnectTimeout = 30000;
+const _defaultReceiveTimeout = 30000;
+
+/// A top level function to print dio logs
+void printDioLogs(Object object) {
+  printWrapped(object.toString());
+}
+
+
+void printWrapped(String text) {
+  final pattern = new RegExp('.{1,800}'); // 800 is the size of each chunk
+  pattern.allMatches(text).forEach((match) => print(match.group(0)));
+}
 
 class DioClient {
   final String baseUrl;
