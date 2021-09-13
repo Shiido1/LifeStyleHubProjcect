@@ -27,36 +27,36 @@ class DashboardModel {
       this.resources});
 
   DashboardModel.fromJson(json) {
-    if (json["name"] is String) this.name = json["name"];
-    if (json["wallet_balance"] is int)
+    if (json != null && json["name"] is String) this.name = json["name"];
+    if (json != null && json["wallet_balance"] is int)
       this.walletBalance = json["wallet_balance"];
-    if (json["income_received"] is int)
+    if (json != null && json["income_received"] is int)
       this.incomeReceived = json["income_received"];
-    if (json["referral_link_signup"] is int)
+    if (json != null && json["referral_link_signup"] is int)
       this.referralLinkSignup = json["referral_link_signup"];
-    if (json["upgraded_members"] is int)
+    if (json != null && json["upgraded_members"] is int)
       this.upgradedMembers = json["upgraded_members"];
-    if (json["point_balance"] is String)
+    if (json != null && json["point_balance"] is String)
       this.pointBalance = json["point_balance"];
-    if (json["featured_resource"] is Map)
+    if (json != null && json["featured_resource"] is Map)
       this.featuredResource = json["featured_resource"] == null
           ? null
           : FeaturedResource.fromJson(json["featured_resource"]);
-    if (json["featured_contest"] is Map)
+    if (json != null && json["featured_contest"] is Map)
       this.featuredContest = json["featured_contest"] == null
           ? null
           : FeaturedContest.fromJson(json["featured_contest"]);
-    if (json["recent_downlines"] is List)
+    if (json != null && json["recent_downlines"] is List)
       this.recentDownlines = json["recent_downlines"] ?? [];
-    if (json["active_packages"] is List)
+    if (json != null && json["active_packages"] is List)
       this.activePackages = json["active_packages"] == null
           ? null
           : (json["active_packages"] as List)
               .map((e) => ActivePackages.fromJson(e))
               .toList();
-    if (json["referral_link"] is String)
+    if (json != null && json["referral_link"] is String)
       this.referralLink = json["referral_link"];
-    if (json["resources"] is List)
+    if (json != null && json["resources"] is List)
       this.resources = json["resources"] == null
           ? null
           : (json["resources"] as List)
@@ -111,16 +111,19 @@ class Resources {
       this.updatedAt});
 
   Resources.fromJson(json) {
-    if (json["id"] is int) this.id = json["id"];
-    if (json["title"] is String) this.title = json["title"];
-    if (json["slug"] is String) this.slug = json["slug"];
-    if (json["featured_image"] is String)
+    if (json != null && json["id"] is int) this.id = json["id"];
+    if (json != null && json["title"] is String) this.title = json["title"];
+    if (json != null && json["slug"] is String) this.slug = json["slug"];
+    if (json != null && json["featured_image"] is String)
       this.featuredImage = json["featured_image"];
-    if (json["type"] is String) this.type = json["type"];
+    if (json != null && json["type"] is String) this.type = json["type"];
     this.content = json["content"];
-    if (json["featured"] is int) this.featured = json["featured"];
-    if (json["created_at"] is String) this.createdAt = json["created_at"];
-    if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
+    if (json != null && json["featured"] is int)
+      this.featured = json["featured"];
+    if (json != null && json["created_at"] is String)
+      this.createdAt = json["created_at"];
+    if (json != null && json["updated_at"] is String)
+      this.updatedAt = json["updated_at"];
   }
 
   Map<String, dynamic> toJson() {
@@ -145,8 +148,8 @@ class ActivePackages {
   ActivePackages({this.name, this.type});
 
   ActivePackages.fromJson(json) {
-    if (json["name"] is String) this.name = json["name"];
-    if (json["type"] is String) this.type = json["type"];
+    if (json != null && json["name"] is String) this.name = json["name"];
+    if (json != null && json["type"] is String) this.type = json["type"];
   }
 
   Map<String, dynamic> toJson() {
@@ -184,18 +187,24 @@ class FeaturedContest {
       this.updatedAt});
 
   FeaturedContest.fromJson(json) {
-    if (json["id"] is int) this.id = json["id"];
-    if (json["name"] is String) this.name = json["name"];
-    if (json["description"] is String) this.description = json["description"];
-    if (json["startdate"] is String) this.startdate = json["startdate"];
-    if (json["enddate"] is String) this.enddate = json["enddate"];
-    if (json["directs_required"] is int)
+    if (json != null && json["id"] is int) this.id = json["id"];
+    if (json != null && json["name"] is String) this.name = json["name"];
+    if (json != null && json["description"] is String)
+      this.description = json["description"];
+    if (json != null && json["startdate"] is String)
+      this.startdate = json["startdate"];
+    if (json != null && json["enddate"] is String)
+      this.enddate = json["enddate"];
+    if (json != null && json["directs_required"] is int)
       this.directsRequired = json["directs_required"];
-    if (json["image"] is String) this.image = json["image"];
-    if (json["reward"] is String) this.reward = json["reward"];
-    if (json["featured"] is int) this.featured = json["featured"];
-    if (json["created_at"] is String) this.createdAt = json["created_at"];
-    if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
+    if (json != null && json["image"] is String) this.image = json["image"];
+    if (json != null && json["reward"] is String) this.reward = json["reward"];
+    if (json != null && json["featured"] is int)
+      this.featured = json["featured"];
+    if (json != null && json["created_at"] is String)
+      this.createdAt = json["created_at"];
+    if (json != null && json["updated_at"] is String)
+      this.updatedAt = json["updated_at"];
   }
 
   Map<String, dynamic> toJson() {
@@ -238,16 +247,19 @@ class FeaturedResource {
       this.updatedAt});
 
   FeaturedResource.fromJson(json) {
-    if (json["id"] is int) this.id = json["id"];
-    if (json["title"] is String) this.title = json["title"];
-    if (json["slug"] is String) this.slug = json["slug"];
-    if (json["featured_image"] is String)
+    if (json != null && json["id"] is int) this.id = json["id"];
+    if (json != null && json["title"] is String) this.title = json["title"];
+    if (json != null && json["slug"] is String) this.slug = json["slug"];
+    if (json != null && json["featured_image"] is String)
       this.featuredImage = json["featured_image"];
-    if (json["type"] is String) this.type = json["type"];
+    if (json != null && json["type"] is String) this.type = json["type"];
     this.content = json["content"];
-    if (json["featured"] is int) this.featured = json["featured"];
-    if (json["created_at"] is String) this.createdAt = json["created_at"];
-    if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
+    if (json != null && json["featured"] is int)
+      this.featured = json["featured"];
+    if (json != null && json["created_at"] is String)
+      this.createdAt = json["created_at"];
+    if (json != null && json["updated_at"] is String)
+      this.updatedAt = json["updated_at"];
   }
 
   Map<String, dynamic> toJson() {
