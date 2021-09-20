@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/change_password.dart';
+
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
-import '../model/users_profile_model.dart';
 import '../../../../../../utils/paths.dart';
+import '../model/users_profile_model.dart';
 
 class ProfileRepository {
   /// get users profile
@@ -55,6 +57,17 @@ class ProfileRepository {
       final _response = await apiBaseHelper.post(
           map: body, url: Paths.updateUsersBank, options: await getDioHeader());
       return null;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /// change users password
+  Future<ChangePassword> changeUsersPassword(Map body) async {
+    try {
+      final _response = await apiBaseHelper.post(
+          map: body, url: Paths.changePassword, options: await getDioHeader());
+      return ChangePassword.fromJson(_response);
     } catch (e) {
       throw e;
     }

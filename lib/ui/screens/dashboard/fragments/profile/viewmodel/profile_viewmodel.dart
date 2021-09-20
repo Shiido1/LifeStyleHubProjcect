@@ -102,4 +102,17 @@ class ProfileViewmodel extends BaseViewModel {
     }
     _hideLoading();
   }
+
+  /// change users password
+  Future<void> changeUsersPassword(Map map) async {
+    try {
+      _showLoading();
+      final _response = await _profileRepository.changeUsersPassword(map);
+      showsnackBarInfo(_context, message: _response.message ?? '');
+    } catch (e) {
+      logger.wtf('An unexpected error occurred! => $e');
+      showsnackBarInfo(_context, message: e.toString());
+    }
+    _hideLoading();
+  }
 }
