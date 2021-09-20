@@ -1,3 +1,5 @@
+import 'package:lifestyle_hub/helper/helper_handler.dart';
+
 class DashboardModel {
   String? name;
   int? walletBalance;
@@ -6,6 +8,7 @@ class DashboardModel {
   int? upgradedMembers;
   String? pointBalance;
   FeaturedResource? featuredResource;
+  FeaturedVideo? featuredVideo;
   FeaturedContest? featuredContest;
   List<dynamic>? recentDownlines;
   List<ActivePackages>? activePackages;
@@ -21,6 +24,7 @@ class DashboardModel {
       this.pointBalance,
       this.featuredResource,
       this.featuredContest,
+      this.featuredVideo,
       this.recentDownlines,
       this.activePackages,
       this.referralLink,
@@ -46,6 +50,11 @@ class DashboardModel {
       this.featuredContest = json["featured_contest"] == null
           ? null
           : FeaturedContest.fromJson(json["featured_contest"]);
+
+    if (json != null && json["featured_video"] is Map)
+      this.featuredVideo = json["featured_video"] == null
+          ? null
+          : FeaturedVideo.fromJson(json["featured_video"]);
     if (json != null && json["recent_downlines"] is List)
       this.recentDownlines = json["recent_downlines"] ?? [];
     if (json != null && json["active_packages"] is List)
@@ -76,6 +85,8 @@ class DashboardModel {
       data["featured_resource"] = this.featuredResource?.toJson();
     if (this.featuredContest != null)
       data["featured_contest"] = this.featuredContest?.toJson();
+    if (this.featuredVideo != null)
+      data["featured_video"] = this.featuredVideo?.toJson();
     if (this.recentDownlines != null)
       data["recent_downlines"] = this.recentDownlines;
     if (this.activePackages != null)
@@ -273,6 +284,80 @@ class FeaturedResource {
     data["featured"] = this.featured;
     data["created_at"] = this.createdAt;
     data["updated_at"] = this.updatedAt;
+    return data;
+  }
+}
+
+class FeaturedVideo {
+  int? id;
+  String? title;
+  String? slug;
+  dynamic? description;
+  String? featuredImage;
+  String? type;
+  String? content;
+  int? featured;
+  String? createdAt;
+  String? updatedAt;
+
+  FeaturedVideo(
+      {this.id,
+      this.title,
+      this.slug,
+      this.description,
+      this.featuredImage,
+      this.type,
+      this.content,
+      this.featured,
+      this.createdAt,
+      this.updatedAt});
+
+  FeaturedVideo.fromJson(json) {
+    if (json["id"] is int) this.id = json["id"];
+    if (json["title"] is String) this.title = json["title"];
+    if (json["slug"] is String) this.slug = json["slug"];
+    this.description = json["description"];
+    if (json["featured_image"] is String)
+      this.featuredImage = json["featured_image"];
+    if (json["type"] is String) this.type = json["type"];
+    if (json["content"] is String)
+      this.content = format(json["content"]);
+    if (json["featured"] is int) this.featured = json["featured"];
+    if (json["created_at"] is String) this.createdAt = json["created_at"];
+    if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data["id"] = this.id;
+    data["title"] = this.title;
+    data["slug"] = this.slug;
+    data["description"] = this.description;
+    data["featured_image"] = this.featuredImage;
+    data["type"] = this.type;
+    data["content"] = this.content;
+    data["featured"] = this.featured;
+    data["created_at"] = this.createdAt;
+    data["updated_at"] = this.updatedAt;
+    return data;
+  }
+}
+
+class Content {
+  List<dynamic>? body;
+  String? path;
+
+  Content({this.body, this.path});
+
+  Content.fromJson(Map<String, dynamic> json) {
+    if (json["body"] is List) this.body = json["body"] ?? [];
+    if (json["path"] is String) this.path = json["path"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.body != null) data["body"] = this.body;
+    data["path"] = this.path;
     return data;
   }
 }

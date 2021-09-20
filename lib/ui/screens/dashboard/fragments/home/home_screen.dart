@@ -3,27 +3,29 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import '../../../../../helper/configs/instances.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/helper/video_player.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/model/dashboard_model.dart';
+import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
+
 import '../../../../../database/users_data_provider.dart';
 import '../../../../../helper/helper_handler.dart';
+import '../../../../../utils/pallets.dart';
+import '../../../../widgets/text_views.dart';
+import '../../../onboarding/viewmodel/tab_viewmodel.dart';
 import '../../dao/dashboardd_dao.dart';
+import '../../viewmodel/dashboard_viewmodel.dart';
+import '../../widget/active_packages.dart';
+import '../../widget/contest_widget.dart';
+import '../../widget/first_icons.dart';
+import '../../widget/second_icon.dart';
+import '../../widget/view_all_widget.dart';
 import '../contest/dao/contest_dao.dart';
 import '../contest/model/view_contest_model.dart';
 import '../contest/viewmodel/contest_viewmodel.dart';
 import '../profile/packages/dao/package_dao.dart';
 import '../profile/packages/model/view_packages_model.dart';
 import '../profile/packages/viewmodel/package_viewmodel.dart';
-import '../../model/dashboard_model.dart';
-import '../../viewmodel/dashboard_viewmodel.dart';
-import '../../widget/contest_widget.dart';
-import '../../widget/second_icon.dart';
-import '../../widget/view_all_widget.dart';
-import '../../../onboarding/viewmodel/tab_viewmodel.dart';
-import '../../../../widgets/text_views.dart';
-import '../../../../../utils/pallets.dart';
-
-import '../../widget/active_packages.dart';
-import '../../widget/first_icons.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -35,22 +37,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late BetterPlayerController _betterPlayerController;
   late BetterPlayerDataSource _betterPlayerDataSource;
-
-  /// initialize video controller
-  void _initializeVideoPlayer() {
-    BetterPlayerConfiguration betterPlayerConfiguration =
-        BetterPlayerConfiguration(
-      aspectRatio: 16 / 9,
-      fit: BoxFit.contain,
-      autoPlay: false,
-    );
-    _betterPlayerDataSource = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-    );
-    _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
-    _betterPlayerController.setupDataSource(_betterPlayerDataSource);
-  }
 
   final _userModelProvider =
       ChangeNotifierProvider((ref) => UsersInfoViewModel());
@@ -84,18 +70,21 @@ class _HomeScreenState extends State<HomeScreen> {
     _packageViewmodel!.getPackages();
     context.read(_userModelProvider).getUsersData();
     _contestViewModel!.getListContest();
-    _initializeVideoPlayer();
     setState(() {});
   }
 
   final _notifier = ChangeNotifierProvider((ref) => TabViewModel());
+  final _videoPlayerModel = ChangeNotifierProvider((ref) => VideoPlayer());
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: dashboardDao!.getListenable()!,
-        builder: (_, Box<dynamic> box, __) {
-          final _dashboard = dashboardDao!.convert(box);
+    return FutureBuilder(
+        future: dashboardDao!.getUsersInformation(),
+        builder: (_, AsyncSnapshot<DashboardModel> board) {
+          if (board.connectionState == ConnectionState.waiting) {
+            return Container();
+          }
+          final _dashboard = board.data;
           return Consumer(builder: (_, watch, __) {
             final _tabNotifierWatch = watch(_notifier);
             return Padding(
@@ -115,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 5,
                     ),
                     TextView(
-                      text: _dashboard.name ?? '',
+                      text: _dashboard?.name ?? '',
                       fontWeight: FontWeight.w700,
                       fontSize: 18,
                       color: Pallets.grey700,
@@ -160,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       TextView(
                                         text: formatCurrency(double.parse(
-                                            _dashboard.pointBalance ?? '0')),
+                                            _dashboard?.pointBalance ?? '0')),
                                         fontWeight: FontWeight.w700,
                                         fontSize: 36,
                                         color: Pallets.grey700,
@@ -197,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               icon: 'assets/svgs/wallet.svg',
                               text: 'Income received',
                               money: formatCurrency(
-                                  _dashboard.incomeReceived ?? 0),
+                                  _dashboard?.incomeReceived ?? 0),
                               mainBgColor: Pallets.orange50,
                               smallBgColor: Pallets.orange200,
                               textColor: Pallets.orange500,
@@ -209,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               icon: 'assets/svgs/link.svg',
                               text: 'Referral link signup',
                               money: formatCurrency(
-                                  _dashboard.referralLinkSignup ?? 0),
+                                  _dashboard?.referralLinkSignup ?? 0),
                               mainBgColor: Pallets.blue50,
                               smallBgColor: Pallets.blue200,
                               textColor: Pallets.blue500,
@@ -313,16 +302,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 23,
                     ),
-                    BetterPlayerMultipleGestureDetector(
-                      child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child:
-                            BetterPlayer(controller: _betterPlayerController),
-                      ),
-                      onTap: () {
-                        print("Tap!");
-                      },
-                    ),
+                    Consumer(builder: (_, watch, __) {
+                      final _player = watch(_videoPlayerModel);
+                      String _link = _dashboard?.featuredVideo?.content ?? '';
+                      if (_link.isNotEmpty)
+                        _player.playVideo(_link.substring(1, _link.length - 1));
+                      if (_link.isEmpty){
+                        return ImageLoader(
+                          path: _dashboard?.featuredResource?.featuredImage ?? '',
+                        );
+                      }
+                        return BetterPlayerMultipleGestureDetector(
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: BetterPlayer(
+                              controller: _player.betterPlayerController),
+                        ),
+                        onTap: () {
+                          print("Tap!");
+                        },
+                      );
+                    }),
                     SizedBox(
                       height: getDeviceHeight(context) / 10,
                     ),

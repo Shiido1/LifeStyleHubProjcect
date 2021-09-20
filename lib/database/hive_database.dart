@@ -104,4 +104,9 @@ class HiveBoxes {
       logger.e('clear $name error: ${_.toString()}');
     }
   }
+
+  static logOut()async{
+    await prefManager.remove();
+    await HiveBoxes.clearAllBox();
+  }
 }

@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
-import 'configs/instances.dart';
-import '../ui/screens/login/model/login_model.dart';
-import '../utils/pallets.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../ui/screens/login/model/login_model.dart';
+import '../utils/pallets.dart';
 import 'configs/constants.dart';
+import 'configs/instances.dart';
 
 /// get device width
 double getDeviceWidth(BuildContext context) {
@@ -63,7 +63,8 @@ String format(String values) {
       .replaceAll('\\', '')
       .replaceAll('path', '')
       .replaceAll('{"":', '')
-      .replaceAll('}', '');
+      .replaceAll('}', '')
+      .replaceAll('""', '');
 }
 
 /// format date

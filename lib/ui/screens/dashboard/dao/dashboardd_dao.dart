@@ -26,7 +26,12 @@ class DashboardDao {
   }
 
   Future<void> saveDashboard(Map map) async {
-    await _box!.put(HiveBoxes.dashboard, map);
+    await prefManager.saveValue(key: HiveBoxes.dashboard, value: map);
+  }
+
+  Future<DashboardModel> getUsersInformation() async{
+    final _response = await prefManager.getCachedData(key: HiveBoxes.dashboard);
+    return DashboardModel.fromJson(_response);
   }
 
   DashboardModel convert(Box box) {
@@ -37,10 +42,6 @@ class DashboardDao {
   ValueListenable<Box>? getListenable({List<String>? keys}) {
     return keys == null ? _box?.listenable() : _box?.listenable(keys: keys);
   }
-
-  Stream<dynamic> listen() => _box!.watch().map((event) {
-        return logger.d(event.key);
-      });
 
   Future truncate() async => await _box?.clear();
 }

@@ -54,7 +54,7 @@ class ContestWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15)),
                         child: Center(
                           child: TextView(
-                            text: getDateTime(contest!.enddate!).toString(),
+                            text: getDateTime(contest!.enddate!).day.toString(),
                             fontWeight: FontWeight.w700,
                             fontSize: 24,
                             color: Pallets.black,
@@ -83,7 +83,7 @@ class ContestWidget extends StatelessWidget {
               fontSize: 14,
               color: Pallets.white,
               textAlign: TextAlign.left,
-              maxLines: 2,
+              maxLines: 1,
             ),
             SizedBox(
               height: 17,
