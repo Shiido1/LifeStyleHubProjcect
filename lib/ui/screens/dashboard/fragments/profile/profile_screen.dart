@@ -6,25 +6,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/ui/screens/bank/account/add_bank_screen.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/change_transaction_pin.dart';
-import 'change_password_screen.dart';
-import 'my_bank.dart';
-import 'next_of_kin_information.dart';
-import 'work_information.dart';
+import 'package:page_transition/page_transition.dart';
+
 import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
-import 'basic_informations.dart';
-import 'dao/profile_dao.dart';
-import 'packages/packages.dart';
-import 'viewmodel/profile_viewmodel.dart';
-import '../../../../widgets/image_loader.dart';
-import '../../../../widgets/overlay.dart';
-import '../../../../widgets/text_views.dart';
 import '../../../../../utils/image_picker.dart';
 import '../../../../../utils/pallets.dart';
-import 'package:page_transition/page_transition.dart';
-
+import '../../../../widgets/image_loader.dart';
+import '../../../../widgets/text_views.dart';
+import 'basic_informations.dart';
+import 'change_password_screen.dart';
+import 'dao/profile_dao.dart';
+import 'my_bank.dart';
+import 'next_of_kin_information.dart';
+import 'packages/packages.dart';
+import 'viewmodel/profile_viewmodel.dart';
 import 'widget/custom_tile.dart';
+import 'work_information.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -68,6 +67,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onTap: () => _pickImages(),
                         radius: 70,
                         path: _userInfo.profilePic ?? '',
+                        initial: _userInfo.profilePic == null
+                            ? _userInfo.name?.substring(0, 2)
+                            : '',
                         showInitialTextAbovePicture: true,
                       ),
                       SizedBox(height: 23),

@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../helper/helper_handler.dart';
 import '../../utils/pallets.dart';
 
@@ -196,6 +197,7 @@ class CircularImage extends StatelessWidget {
       this.borderColor,
       this.radius = 16,
       this.borderWidth = .0,
+      this.textSize = 40,
       this.isOnline = false,
       this.isCircular = false,
       this.isCurvedEdge = false,
@@ -210,6 +212,7 @@ class CircularImage extends StatelessWidget {
   double? width;
   double? height;
   double? borderWidth;
+  double? textSize;
   double? radius;
   double? curve;
   String? path;
@@ -233,7 +236,7 @@ class CircularImage extends StatelessWidget {
         borderWidth: borderWidth!,
         initialsText: Text(
           initial!,
-          style: TextStyle(fontSize: 40, color: Colors.white),
+          style: TextStyle(fontSize: textSize, color: Colors.white),
         ),
         borderColor: borderColor != null ? borderColor! : Colors.transparent,
         elevation: elevation!,
