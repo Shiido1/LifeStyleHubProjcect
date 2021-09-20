@@ -2,7 +2,7 @@ class UsersProfileModel {
   int? id;
   String? name;
   String? email;
-  dynamic? emailVerifiedAt;
+  String? emailVerifiedAt;
   String? phoneNo;
   String? state;
   String? address;
@@ -45,41 +45,34 @@ class UsersProfileModel {
       this.nok});
 
   UsersProfileModel.fromJson(json) {
-    if (json != null && json["id"] is int) this.id = json["id"];
-    if (json != null && json["name"] is String) this.name = json["name"];
-    if (json != null && json["email"] is String) this.email = json["email"];
-    if (json != null && json["email_verified_at"] is String)
-      this.emailVerifiedAt = json["email_verified_at"];
-    if (json != null && json["phone_no"] is String) if (json != null &&
-        json["phone_no"] is String) this.phoneNo = json["phone_no"];
-    if (json != null && json["state"] is String) this.state = json["state"];
-    if (json != null && json["address"] is String) if (json != null &&
-        json["address"] is String) this.address = json["address"];
-    if (json != null && json["sex"] is String) this.sex = json["sex"];
-    if (json != null && json["dob"] is String) this.dob = json["dob"];
-    if (json != null && json["profile_pic"] is String)
-      this.profilePic = json["profile_pic"];
-    if (json != null && json["status"] is String) this.status = json["status"];
-    if (json != null && json["referred_by"] is String)
-      this.referredBy = json["referred_by"];
-    if (json != null && json["affiliate_id"] is Map)
+    if (json == null) return;
+
+    if (json["id"] is int) this.id = json["id"];
+    if (json["name"] is String) this.name = json["name"];
+    if (json["email"] is String) this.email = json["email"];
+    this.emailVerifiedAt = json["email_verified_at"];
+    if (json["phone_no"] is String) this.phoneNo = json["phone_no"];
+    if (json["state"] is String) this.state = json["state"];
+    if (json["address"] is String) this.address = json["address"];
+    if (json["sex"] is String) this.sex = json["sex"];
+    if (json["dob"] is String) this.dob = json["dob"];
+    this.profilePic = json["profile_pic"];
+    if (json["status"] is String) this.status = json["status"];
+    if (json["referred_by"] is String) this.referredBy = json["referred_by"];
+    if (json["affiliate_id"] is Map)
       this.affiliateId = json["affiliate_id"] == null
           ? null
           : AffiliateId.fromJson(json["affiliate_id"]);
-    if (json != null && json["trial_ends"] is String)
-      this.trialEnds = json["trial_ends"];
-    if (json != null && json["is_admin"] is int)
-      this.isAdmin = json["is_admin"];
-    if (json != null && json["role"] is String) this.role = json["role"];
-    if (json != null && json["created_at"] is String)
-      this.createdAt = json["created_at"];
-    if (json != null && json["updated_at"] is String)
-      this.updatedAt = json["updated_at"];
-    if (json != null && json["bank"] is Map)
+    if (json["trial_ends"] is String) this.trialEnds = json["trial_ends"];
+    if (json["is_admin"] is int) this.isAdmin = json["is_admin"];
+    if (json["role"] is String) this.role = json["role"];
+    if (json["created_at"] is String) this.createdAt = json["created_at"];
+    if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
+    if (json["bank"] is Map)
       this.bank = json["bank"] == null ? null : Bank.fromJson(json["bank"]);
-    if (json != null && json["work"] is Map)
+    if (json["work"] is Map)
       this.work = json["work"] == null ? null : Work.fromJson(json["work"]);
-    if (json != null && json["nok"] is Map)
+    if (json["nok"] is Map)
       this.nok = json["nok"] == null ? null : Nok.fromJson(json["nok"]);
   }
 
@@ -132,18 +125,15 @@ class Nok {
       this.updatedAt});
 
   Nok.fromJson(json) {
-    if (json != null && json["id"] is int) this.id = json["id"];
-    if (json != null && json["user_id"] is int) this.userId = json["user_id"];
-    if (json != null && json["name"] is String) this.name = json["name"];
-    if (json != null && json["relationship"] is String)
+    if (json["id"] is int) this.id = json["id"];
+    if (json["user_id"] is int) this.userId = json["user_id"];
+    if (json["name"] is String) this.name = json["name"];
+    if (json["relationship"] is String)
       this.relationship = json["relationship"];
-    if (json != null && json["phone_no"] is String)
-      this.phoneNo = json["phone_no"];
-    if (json != null && json["email"] is String) this.email = json["email"];
-    if (json != null && json["created_at"] is String)
-      this.createdAt = json["created_at"];
-    if (json != null && json["updated_at"] is String)
-      this.updatedAt = json["updated_at"];
+    if (json["phone_no"] is String) this.phoneNo = json["phone_no"];
+    if (json["email"] is String) this.email = json["email"];
+    if (json["created_at"] is String) this.createdAt = json["created_at"];
+    if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
   }
 
   Map<String, dynamic> toJson() {
@@ -179,18 +169,13 @@ class Work {
       this.updatedAt});
 
   Work.fromJson(json) {
-    if (json != null && json["id"] is int) this.id = json["id"];
-    if (json != null && json["user_id"] is int) this.userId = json["user_id"];
-    if (json != null && json["occupation"] is String)
-      this.occupation = json["occupation"];
-    if (json != null && json["industry"] is String)
-      this.industry = json["industry"];
-    if (json != null && json["address"] is String)
-      this.address = json["address"];
-    if (json != null && json["created_at"] is String)
-      this.createdAt = json["created_at"];
-    if (json != null && json["updated_at"] is String)
-      this.updatedAt = json["updated_at"];
+    if (json["id"] is int) this.id = json["id"];
+    if (json["user_id"] is int) this.userId = json["user_id"];
+    if (json["occupation"] is String) this.occupation = json["occupation"];
+    if (json["industry"] is String) this.industry = json["industry"];
+    if (json["address"] is String) this.address = json["address"];
+    if (json["created_at"] is String) this.createdAt = json["created_at"];
+    if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
   }
 
   Map<String, dynamic> toJson() {
@@ -231,20 +216,16 @@ class Bank {
       this.updatedAt});
 
   Bank.fromJson(json) {
-    if (json != null && json["id"] is int) this.id = json["id"];
-    if (json != null && json["user_id"] is int) this.userId = json["user_id"];
-    if (json != null && json["name"] is String) this.name = json["name"];
-    if (json != null && json["account_name"] is String)
-      this.accountName = json["account_name"];
-    if (json != null && json["account_no"] is String)
-      this.accountNo = json["account_no"];
-    if (json != null && json["currency"]) this.currency = json["currency"];
-    if (json != null && json["sort_code"]) this.sortCode = json["sort_code"];
-    if (json != null && json["swift_code"]) this.swiftCode = json["swift_code"];
-    if (json != null && json["created_at"] is String)
-      this.createdAt = json["created_at"];
-    if (json != null && json["updated_at"] is String)
-      this.updatedAt = json["updated_at"];
+    if (json["id"] is int) this.id = json["id"];
+    if (json["user_id"] is int) this.userId = json["user_id"];
+    if (json["name"] is String) this.name = json["name"];
+    if (json["account_name"] is String) this.accountName = json["account_name"];
+    if (json["account_no"] is String) this.accountNo = json["account_no"];
+    this.currency = json["currency"];
+    this.sortCode = json["sort_code"];
+    this.swiftCode = json["swift_code"];
+    if (json["created_at"] is String) this.createdAt = json["created_at"];
+    if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
   }
 
   Map<String, dynamic> toJson() {
@@ -270,8 +251,8 @@ class AffiliateId {
   AffiliateId({this.code, this.link});
 
   AffiliateId.fromJson(json) {
-    if (json != null && json["code"] is String) this.code = json["code"];
-    if (json != null && json["link"] is String) this.link = json["link"];
+    if (json["code"] is String) this.code = json["code"];
+    if (json["link"] is String) this.link = json["link"];
   }
 
   Map<String, dynamic> toJson() {

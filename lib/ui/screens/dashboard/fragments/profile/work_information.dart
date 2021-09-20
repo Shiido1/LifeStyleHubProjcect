@@ -91,9 +91,8 @@ class _WorkInformationScreenState extends State<WorkInformationScreen> {
                         EditFormField(
                           floatingLabel: 'Industry',
                           label: 'Industry',
-                          suffixIcon: Icons.keyboard_arrow_down_sharp,
-                          suffixIconColor: Pallets.disabledIconColor,
                           controller: _industryController,
+                          autoValidate: _autoValidate,
                           validator: Validators.validateString(),
                         ),
                         SizedBox(height: 40),
