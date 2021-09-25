@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import '../../../../../database/users_data_provider.dart';
-import '../../../../../helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
+
 import '../../../../../helper/routes/navigation.dart';
-import 'create_message.dart';
-import 'dao/messaging_dao.dart';
-import 'enum/message_enum.dart';
-import 'viewmodel/messaging_viewmodel.dart';
-import '../ticket/widget/filter_modal.dart';
+import '../../../../../utils/pallets.dart';
 import '../../../../widgets/edit_form_widget.dart';
 import '../../../../widgets/image_loader.dart';
 import '../../../../widgets/text_views.dart';
-import '../../../../../utils/pallets.dart';
-
+import '../ticket/widget/filter_modal.dart';
+import 'create_message.dart';
+import 'dao/messaging_dao.dart';
+import 'enum/message_enum.dart';
 import 'message_details.dart';
 import 'model/get_last_messages_model.dart';
+import 'viewmodel/messaging_viewmodel.dart';
 
 class MessagingScreen extends StatefulWidget {
   MessagingScreen({Key? key}) : super(key: key);
@@ -39,13 +39,9 @@ class _MessagingScreenState extends State<MessagingScreen>
 
   MessagingViewmodel? _messagingViewmodel;
 
-  final _userModelProvider =
-      ChangeNotifierProvider((ref) => UsersInfoViewModel());
-
   @override
   void initState() {
     _messagingViewmodel = context.read(_messageViewModel);
-    context.read(_userModelProvider).getUsersData();
     _messagingViewmodel!.init(context);
     _messagingViewmodel!.getLastMessage();
 
@@ -69,7 +65,15 @@ class _MessagingScreenState extends State<MessagingScreen>
             parent: _animationController!,
             curve: Interval(0.0, 0.75, curve: _curve)));
 
+    _getProfileData();
     super.initState();
+  }
+
+  UsersProfileModel? _usersProfileModel;
+
+  void _getProfileData() async {
+    _usersProfileModel = await profileDao!.convert();
+    setState(() {});
   }
 
   @override
@@ -150,7 +154,6 @@ class _MessagingScreenState extends State<MessagingScreen>
             List<Data> _messageList = messageDao!.convert(box).toList();
             return Consumer(builder: (context, watch, __) {
               final _provider = watch(_messageViewModel);
-              final _user = watch(_userModelProvider);
               if (_provider.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
@@ -207,8 +210,8 @@ class _MessagingScreenState extends State<MessagingScreen>
                                       fontWeight: FontWeight.w400),
                                 ),
                                 title: TextView(
-                                  text: _formatReceiver(
-                                          elements.conversation, _user) ??
+                                  text: _formatReceiver(elements.conversation,
+                                          _usersProfileModel!) ??
                                       '',
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
@@ -240,10 +243,10 @@ class _MessagingScreenState extends State<MessagingScreen>
         ));
   }
 
-  String? _formatReceiver(Conversation? conversation, UsersInfoViewModel user) {
+  String? _formatReceiver(Conversation? conversation, UsersProfileModel user) {
     String? _receiver = 'Guest';
     conversation!.participants!.map((participant) {
-      if (participant.messageable?.id != user.user.id)
+      if (participant.messageable?.id != user.id)
         _receiver = participant.messageable?.name;
       else
         _receiver = 'Guest';

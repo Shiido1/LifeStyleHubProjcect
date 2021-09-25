@@ -44,7 +44,8 @@ class PrefManager {
   /// get string values
   Future<String?> getStringValues({@required String? key}) async {
     _preferences = await SharedPreferences.getInstance();
-    return _preferences!.getString(key!) ?? null;
+    if (_preferences!.containsKey(key!))
+      return _preferences!.getString(key) ?? null;
   }
 
   /// get string values

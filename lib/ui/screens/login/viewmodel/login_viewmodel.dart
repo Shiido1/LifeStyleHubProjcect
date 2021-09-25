@@ -38,10 +38,9 @@ class LoginViewModel extends BaseViewModel {
       _showLoading();
       await _loginRepository.login(map: map);
       PageRouter.gotoNamed(Routes.dashboard, _context, clearStack: true);
-      _hideLoading();
     } catch (e) {
-      _hideLoading();
       showsnackBarInfo(this._context, message: e.toString());
     }
+    _hideLoading();
   }
 }

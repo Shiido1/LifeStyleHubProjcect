@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+
 import '../../../../../../database/hive_database.dart';
-import '../../../../../../helper/configs/instances.dart';
 import '../model/users_profile_model.dart';
 
 ProfileDao? profileDao;
@@ -26,14 +26,14 @@ class ProfileDao {
   }
 
   Future<void> saveProfile(UsersProfileModel usersProfileModel) async {
-    await _box!.put(HiveBoxes.profile, usersProfileModel.toJson());
+    await prefManager.saveValue(
+        key: HiveBoxes.profile, value: usersProfileModel.toJson());
   }
 
-  UsersProfileModel convert(Box box) {
-    Map<String, dynamic> raw = new Map<String, dynamic>.from(box.toMap());
-    return UsersProfileModel.fromJson(raw[HiveBoxes.profile]);
+  Future<UsersProfileModel> convert() async{
+    final _raw = await prefManager.getCachedData(key: HiveBoxes.profile);
+    return UsersProfileModel.fromJson(_raw);
   }
-
   ValueListenable<Box>? getListenable({List<String>? keys}) {
     return keys == null ? _box?.listenable() : _box?.listenable(keys: keys);
   }

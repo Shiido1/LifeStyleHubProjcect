@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+
 import '../../../../../helper/helper_handler.dart';
+import '../../../../../utils/pallets.dart';
+import '../../../../widgets/text_views.dart';
+import '../../widget/view_all_widget.dart';
 import 'dao/point_dao.dart';
 import 'model/point_history_model.dart';
-import '../../widget/view_all_widget.dart';
-import '../../../../widgets/text_views.dart';
-import '../../../../../utils/pallets.dart';
-
 import 'viewmodel/point_history_viewmodel.dart';
 import 'widgets/integrated_points_widget.dart';
 import 'widgets/point_break_down_widget.dart';
@@ -85,68 +85,73 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
                     viewAll: () {},
                   ),
                   SizedBox(height: 23),
-                  ..._point.pointHistory!
-                      .map((point) => Container(
-                            margin: EdgeInsets.only(bottom: 16),
-                            padding: EdgeInsets.all(23),
-                            decoration: BoxDecoration(
-                                color: Pallets.orange100,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: TextView(
-                                        text: point.name ?? '',
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 14,
-                                        color: Pallets.grey800,
-                                        textAlign: TextAlign.left,
-                                      ),
+                  _point.pointHistory == null
+                      ? Container()
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: _point.pointHistory!
+                              .map((point) => Container(
+                                    margin: EdgeInsets.only(bottom: 16),
+                                    padding: EdgeInsets.all(23),
+                                    decoration: BoxDecoration(
+                                        color: Pallets.orange100,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: TextView(
+                                                text: point.name ?? '',
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 14,
+                                                color: Pallets.grey800,
+                                                textAlign: TextAlign.left,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: TextView(
+                                                text: point.points ?? 'N/A',
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 14,
+                                                color: Pallets.grey800,
+                                                textAlign: TextAlign.right,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 16),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: TextView(
+                                                text: point.package ?? '',
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                                color: Pallets.grey500,
+                                                textAlign: TextAlign.left,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: TextView(
+                                                text: fomartDate(point.date!),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                                color: Pallets.grey500,
+                                                textAlign: TextAlign.right,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                    Expanded(
-                                      child: TextView(
-                                        text: point.points ?? 'N/A',
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 14,
-                                        color: Pallets.grey800,
-                                        textAlign: TextAlign.right,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 16),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: TextView(
-                                        text: point.package ?? '',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14,
-                                        color: Pallets.grey500,
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: TextView(
-                                        text: fomartDate(point.date!),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14,
-                                        color: Pallets.grey500,
-                                        textAlign: TextAlign.right,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ))
-                      .toList(),
+                                  ))
+                              .toList(),
+                        ),
                 ],
               ));
         });

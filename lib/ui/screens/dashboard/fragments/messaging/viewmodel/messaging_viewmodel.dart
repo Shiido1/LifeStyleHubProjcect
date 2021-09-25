@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/open_message_model.dart'
     as open;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/repository/messaging_repository.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
 import '../../../../../../database/users_data_provider.dart';
@@ -42,10 +43,10 @@ class MessagingViewmodel extends BaseViewModel {
   }
 
   ///[Mock] sort video contents
-  void sortContentById(List<Data>? data, [UsersInfoViewModel? user]) {
+  void sortContentById(List<Data>? data, [UsersProfileModel? user]) {
     _getLastMessages = data!
         .where((element) =>
-            element.conversation!.lastMessage!.sender!.id != user!.user.id)
+            element.conversation!.lastMessage!.sender!.id != user!.id)
         .toList();
   }
 

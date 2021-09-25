@@ -3,17 +3,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverPod;
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:provider/provider.dart';
+
 import 'core/data/session_manager.dart';
 import 'core/network/url_config.dart';
 import 'database/hive_database.dart';
-import 'helper/configs/constants.dart';
 import 'helper/configs/instances.dart';
-import 'ui/screens/dashboard/dashboard.dart';
-import 'utils/pallets.dart';
-import 'package:provider/provider.dart';
-
 import 'helper/configs/providers.dart';
 import 'helper/routes/routes.dart';
+import 'ui/screens/dashboard/dashboard.dart';
 import 'ui/screens/onboarding/splashscreen.dart';
 
 void main() async {
@@ -30,7 +29,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-
     return MultiProvider(
       providers: Providers.getProviders,
       child: MaterialApp(
@@ -41,23 +39,16 @@ class MyApp extends StatelessWidget {
         ),
         routes: Routes.getRoutes,
         home: FutureBuilder(
-          future: prefManager.getCachedData(key: AppConstants.usersPrefKey),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(
-                    color: Pallets.orange600,
-                  ),
-                ),
-              );
-            }
-            if (snapshot.hasData) {
+            future: prefManager.doesExists(key: HiveBoxes.profile),
+            builder: (_, AsyncSnapshot<bool> snap) {
+              if (snap.connectionState == ConnectionState.waiting) {
+                return Container();
+              }
+              if (!snap.data!) {
+                return SplashScreen();
+              }
               return DashboardScreen();
-            }
-            return SplashScreen();
-          },
-        ),
+            }),
       ),
     );
   }

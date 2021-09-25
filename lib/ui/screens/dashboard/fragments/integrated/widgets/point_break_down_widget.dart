@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../../helper/helper_handler.dart';
+import '../../../../../../utils/pallets.dart';
 import '../../../../../widgets/image_loader.dart';
 import '../../../../../widgets/text_views.dart';
-import '../../../../../../utils/pallets.dart';
 
 class PointBreakDownWidget extends StatelessWidget {
   String? packageIcon;
@@ -31,11 +32,16 @@ class PointBreakDownWidget extends StatelessWidget {
                 color: Pallets.orange500),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ImageLoader(
-                path: packageIcon ?? '',
-                height: 35,
-                width: 35,
-              ),
+              child: packageIcon!.isEmpty
+                  ? Container(
+                      height: 35,
+                      width: 35,
+                    )
+                  : ImageLoader(
+                      path: packageIcon ?? '',
+                      height: 35,
+                      width: 35,
+                    ),
             ),
           ),
           SizedBox(width: 14),
@@ -55,7 +61,7 @@ class PointBreakDownWidget extends StatelessWidget {
               Container(
                 width: getDeviceWidth(context) / 3,
                 child: TextView(
-                  text: packageReward ?? '',
+                  text: packageReward ?? 'N/A',
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
                   color: Pallets.grey700,

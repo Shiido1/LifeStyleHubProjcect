@@ -36,6 +36,7 @@ class TempBasicInformationHolder {
     data["nok_relation"] = relationshipOfNextOfKin;
     data["nok_phone_no"] = phoneOfNextOfKin;
     data["nok_email"] = emailOfNextOfKin;
+    data["country_id"] = '128';
     return data;
   }
 }

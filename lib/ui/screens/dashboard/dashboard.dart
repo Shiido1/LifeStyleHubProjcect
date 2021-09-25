@@ -17,6 +17,8 @@ import 'fragments/integrated/integrated_point_screen.dart';
 import 'fragments/marketting/marketting_screen.dart';
 import 'fragments/messaging/messaging_screen.dart';
 import 'fragments/network/network_screen.dart';
+import 'fragments/profile/dao/profile_dao.dart';
+import 'fragments/profile/model/users_profile_model.dart';
 import 'fragments/profile/profile_screen.dart';
 import 'fragments/ticket/ticket_screen.dart';
 import 'fragments/wallet/wallet_screen.dart';
@@ -80,7 +82,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
             clearStack: true, animationType: PageTransitionType.fade);
       }
     });
+    _getCatchedInfos();
     super.initState();
+  }
+
+  UsersProfileModel? _profileModel;
+
+  void _getCatchedInfos() async {
+    _profileModel = await profileDao!.convert();
+    setState(() {});
   }
 
   @override
@@ -91,10 +101,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
           showLeadig: true,
           centerTitle: true, onTap: () {
         getTrialDuration();
-      },
-          image:
-              'https://images.unsplash.com/photo-1558185348-fe8fa4cf631f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'),
-      drawer: getDrawer(context, _index),
+      }, image: _profileModel?.profilePic ?? '',
+        initial: _profileModel?.name ?? 'LH'
+      ),
+      drawer: getDrawer(context, _index, _profileModel),
       body: SafeArea(
         child: Stack(
           children: [

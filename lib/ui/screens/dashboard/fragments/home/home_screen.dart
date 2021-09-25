@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/video_player.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/model/dashboard_model.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 
@@ -38,8 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late BetterPlayerController _betterPlayerController;
   late BetterPlayerDataSource _betterPlayerDataSource;
 
-  final _userModelProvider =
-      ChangeNotifierProvider((ref) => UsersInfoViewModel());
   final _dashboardProvider =
       ChangeNotifierProvider((ref) => DashboardViewmodel());
 
@@ -56,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _initialize();
+    _getCatchedInfos();
     super.initState();
   }
 
@@ -68,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _packageViewmodel = context.read(_packageViewModelProvider);
     _packageViewmodel!.init(context);
     _packageViewmodel!.getPackages();
-    context.read(_userModelProvider).getUsersData();
     _contestViewModel!.getListContest();
     setState(() {});
   }
@@ -76,261 +76,262 @@ class _HomeScreenState extends State<HomeScreen> {
   final _notifier = ChangeNotifierProvider((ref) => TabViewModel());
   final _videoPlayerModel = ChangeNotifierProvider((ref) => VideoPlayer());
 
+  UsersProfileModel? _profileModel;
+  DashboardModel? _dashboardModel;
+
+  void _getCatchedInfos()async{
+    _profileModel = await profileDao!.convert();
+    _dashboardModel = await dashboardDao!.getUsersInformation();
+    setState((){});
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: dashboardDao!.getUsersInformation(),
-        builder: (_, AsyncSnapshot<DashboardModel> board) {
-          if (board.connectionState == ConnectionState.waiting) {
-            return Container();
-          }
-          final _dashboard = board.data;
-          return Consumer(builder: (_, watch, __) {
-            final _tabNotifierWatch = watch(_notifier);
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextView(
-                      text: 'Welcome,',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Pallets.grey400,
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextView(
-                      text: _dashboard?.name ?? '',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
-                      color: Pallets.grey700,
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(
-                      height: 23,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Pallets.green50,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Row(
+    return Consumer(builder: (_, watch, __) {
+      final _tabNotifierWatch = watch(_notifier);
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextView(
+                text: 'Welcome,',
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                color: Pallets.grey400,
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              TextView(
+                text: _profileModel?.name ?? '',
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+                color: Pallets.grey700,
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(
+                height: 23,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Pallets.green50,
+                    borderRadius: BorderRadius.circular(15)),
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Row(
+                        children: [
+                          FirstIcons(
+                            icon: 'assets/svgs/hash.svg',
+                            bgColor: Pallets.green200,
+                          ),
+                          SizedBox(
+                            width: 26.25,
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
                               children: [
-                                FirstIcons(
-                                  icon: 'assets/svgs/hash.svg',
-                                  bgColor: Pallets.green200,
+                                TextView(
+                                  text: 'Point Balance',
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  color: Pallets.grey500,
+                                  textAlign: TextAlign.left,
                                 ),
                                 SizedBox(
-                                  width: 26.25,
+                                  height: 5,
                                 ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      TextView(
-                                        text: 'Point Balance',
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 16,
-                                        color: Pallets.grey500,
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      TextView(
-                                        text: formatCurrency(double.parse(
-                                            _dashboard?.pointBalance ?? '0')),
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 36,
-                                        color: Pallets.grey700,
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ],
-                                  ),
-                                )
+                                TextView(
+                                  text: formatCurrency(double.parse(
+                                      _dashboardModel?.pointBalance ?? '0')),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 36,
+                                  color: Pallets.grey700,
+                                  textAlign: TextAlign.left,
+                                ),
                               ],
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            TextView(
-                              onTap: () {},
-                              text: 'View all',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                              color: Pallets.grey700,
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          SecondIcon(
-                              icon: 'assets/svgs/wallet.svg',
-                              text: 'Income received',
-                              money: formatCurrency(
-                                  _dashboard?.incomeReceived ?? 0),
-                              mainBgColor: Pallets.orange50,
-                              smallBgColor: Pallets.orange200,
-                              textColor: Pallets.orange500,
-                              onTaP: () {}),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          SecondIcon(
-                              icon: 'assets/svgs/link.svg',
-                              text: 'Referral link signup',
-                              money: formatCurrency(
-                                  _dashboard?.referralLinkSignup ?? 0),
-                              mainBgColor: Pallets.blue50,
-                              smallBgColor: Pallets.blue200,
-                              textColor: Pallets.blue500,
-                              onTaP: () {}),
+                          )
                         ],
                       ),
-                    ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      TextView(
+                        onTap: () {},
+                        text: 'View all',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        color: Pallets.grey700,
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    SecondIcon(
+                        icon: 'assets/svgs/wallet.svg',
+                        text: 'Income received',
+                        money: formatCurrency(
+                            _dashboardModel?.incomeReceived ?? 0),
+                        mainBgColor: Pallets.orange50,
+                        smallBgColor: Pallets.orange200,
+                        textColor: Pallets.orange500,
+                        onTaP: () {}),
                     SizedBox(
-                      height: 23,
+                      width: 16,
                     ),
-                    packageDao!.getListenable() == null
-                        ? Container()
-                        : ValueListenableBuilder(
-                            valueListenable: packageDao!.getListenable()!,
-                            builder: (_, Box<dynamic> box, __) {
-                              List<ViewPackagesModel> _packageList =
-                                  packageDao!.convert(box).toList();
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ViewAllButton(
-                                    title: 'Active packages',
-                                    viewAll: () {},
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: List.generate(
-                                          _packageList.length <= 5
-                                              ? _packageList.length
-                                              : 5, (index) {
-                                        final _package = _packageList[index];
-                                        return Container(
-                                          margin: EdgeInsets.only(right: 23),
-                                          child: ActivePackageWidget(
-                                            title: _package.name ?? '',
-                                            subtitle:
-                                                _package.description ?? '',
-                                            percentage: getPercentage(
-                                                directReferred:
-                                                    _package.referralPoints ??
-                                                        0,
-                                                directRequired:
-                                                    _package.directBonus ?? 0),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }),
-                    SizedBox(
-                      height: 23,
-                    ),
-                    contestDao!.getListenable() == null
-                        ? Container()
-                        : ValueListenableBuilder(
-                            valueListenable: contestDao!.getListenable()!,
-                            builder: (_, Box<dynamic> box, __) {
-                              List<ViewContestModel> _contestList =
-                                  contestDao!.convert(box).toList();
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ViewAllButton(
-                                    title: 'Contest',
-                                    viewAll: () {
-                                      _tabNotifierWatch.switchDrawerIndex(
-                                          context, 4,
-                                          drawer: false);
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: List.generate(
-                                          _contestList.length <= 5
-                                              ? _contestList.length
-                                              : 5, (index) {
-                                        final _contest = _contestList[index];
-                                        return Container(
-                                          margin: EdgeInsets.only(right: 23),
-                                          child:
-                                              ContestWidget(contest: _contest),
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }),
-                    SizedBox(
-                      height: 23,
-                    ),
-                    Consumer(builder: (_, watch, __) {
-                      final _player = watch(_videoPlayerModel);
-                      String _link = _dashboard?.featuredVideo?.content ?? '';
-                      if (_link.isNotEmpty)
-                        _player.playVideo(_link.substring(1, _link.length - 1));
-                      if (_link.isEmpty){
-                        return ImageLoader(
-                          path: _dashboard?.featuredResource?.featuredImage ?? '',
-                        );
-                      }
-                        return BetterPlayerMultipleGestureDetector(
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: BetterPlayer(
-                              controller: _player.betterPlayerController),
-                        ),
-                        onTap: () {
-                          print("Tap!");
-                        },
-                      );
-                    }),
-                    SizedBox(
-                      height: getDeviceHeight(context) / 10,
-                    ),
+                    SecondIcon(
+                        icon: 'assets/svgs/link.svg',
+                        text: 'Referral link signup',
+                        money: formatCurrency(
+                            _dashboardModel?.referralLinkSignup ?? 0),
+                        mainBgColor: Pallets.blue50,
+                        smallBgColor: Pallets.blue200,
+                        textColor: Pallets.blue500,
+                        onTaP: () {}),
                   ],
                 ),
               ),
-            );
-          });
-        });
+              SizedBox(
+                height: 23,
+              ),
+              packageDao!.getListenable() == null
+                  ? Container()
+                  : ValueListenableBuilder(
+                  valueListenable: packageDao!.getListenable()!,
+                  builder: (_, Box<dynamic> box, __) {
+                    List<ViewPackagesModel> _packageList =
+                    packageDao!.convert(box).toList();
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ViewAllButton(
+                          title: 'Active packages',
+                          viewAll: () {},
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: List.generate(
+                                _packageList.length <= 5
+                                    ? _packageList.length
+                                    : 5, (index) {
+                              final _package = _packageList[index];
+                              return Container(
+                                margin: EdgeInsets.only(right: 23),
+                                child: ActivePackageWidget(
+                                  title: _package.name ?? '',
+                                  subtitle:
+                                  _package.description ?? '',
+                                  percentage: getPercentage(
+                                      directReferred:
+                                      _package.referralPoints ??
+                                          0,
+                                      directRequired:
+                                      _package.directBonus ?? 0),
+                                ),
+                              );
+                            }),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+              SizedBox(
+                height: 23,
+              ),
+              contestDao!.getListenable() == null
+                  ? Container()
+                  : ValueListenableBuilder(
+                  valueListenable: contestDao!.getListenable()!,
+                  builder: (_, Box<dynamic> box, __) {
+                    List<ViewContestModel> _contestList =
+                    contestDao!.convert(box).toList();
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ViewAllButton(
+                          title: 'Contest',
+                          viewAll: () {
+                            _tabNotifierWatch.switchDrawerIndex(
+                                context, 4,
+                                drawer: false);
+                          },
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: List.generate(
+                                _contestList.length <= 5
+                                    ? _contestList.length
+                                    : 5, (index) {
+                              final _contest = _contestList[index];
+                              return Container(
+                                margin: EdgeInsets.only(right: 23),
+                                child:
+                                ContestWidget(contest: _contest),
+                              );
+                            }),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+              SizedBox(
+                height: 23,
+              ),
+              Consumer(builder: (_, watch, __) {
+                final _player = watch(_videoPlayerModel);
+                String _link = _dashboardModel?.featuredVideo?.content ?? '';
+                if (_link.isNotEmpty)
+                  _player.playVideo(_link.substring(1, _link.length - 1));
+                if (_link.isEmpty){
+                  return ImageLoader(
+                    path: _dashboardModel?.featuredResource?.featuredImage ?? '',
+                  );
+                }
+                return BetterPlayerMultipleGestureDetector(
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: BetterPlayer(
+                        controller: _player.betterPlayerController),
+                  ),
+                  onTap: () {
+                    print("Tap!");
+                  },
+                );
+              }),
+              SizedBox(
+                height: getDeviceHeight(context) / 10,
+              ),
+            ],
+          ),
+        ),
+      );
+    });
   }
 }

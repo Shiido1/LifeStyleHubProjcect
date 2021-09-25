@@ -47,9 +47,8 @@ Future<Map<String, String>> getHeader() async {
 /// @ get headers
 Future<Options> getDioHeader({String? token}) async {
   Map<String, String> _header = Map<String, String>();
-  var _data = await prefManager.getCachedData(key: AppConstants.usersPrefKey);
-  LoginModel _user = LoginModel.fromJson(_data);
-  String? _bearer = _user.token != null ? _user.token : AppConstants.tempToken;
+  var _token = await prefManager.getStringValues(key: AppConstants.usersPrefKey);
+  String? _bearer = _token != null ? _token : AppConstants.tempToken;
   _header[HttpHeaders.authorizationHeader] = 'Bearer $_bearer';
   _header[HttpHeaders.contentTypeHeader] = 'multipart/form-data';
   _header[HttpHeaders.acceptHeader] = 'application/json';

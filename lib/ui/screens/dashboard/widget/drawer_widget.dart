@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 
 import '../../../../helper/helper_handler.dart';
 import '../../../../helper/routes/navigation.dart';
@@ -12,7 +11,8 @@ import '../../onboarding/viewmodel/tab_viewmodel.dart';
 
 final _notifier = ChangeNotifierProvider((ref) => TabViewModel());
 
-Consumer getDrawer(BuildContext context, int index) {
+Consumer getDrawer(
+    BuildContext context, int index, UsersProfileModel? profileModel) {
   context.read(_notifier);
   return Consumer(
     builder: (context, watch, child) {
@@ -32,85 +32,69 @@ Consumer getDrawer(BuildContext context, int index) {
                     path: 'assets/svgs/x.svg',
                     onTap: () => PageRouter.goBack(context),
                   )),
-              ValueListenableBuilder(
-                  valueListenable: profileDao!.getListenable()!,
-                  builder: (_, Box<dynamic> box, __) {
-                    final _userInfo = profileDao!.convert(box);
-                    return Row(
+              Row(
+                children: [
+                  Center(
+                    child: CircularImage(
+                      onTap: () => _tap(
+                          tab: _tabNotifier, context: context, newIndex: 10),
+                      radius: 30,
+                      path: profileModel?.profilePic ?? '',
+                      initial: profileModel?.profilePic == null
+                          ? profileModel?.name!.substring(0, 2)
+                          : '',
+                      textSize: 20,
+                      showInitialTextAbovePicture: true,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    flex: 10,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Center(
-                        //   child: Container(
-                        //     margin: EdgeInsets.only(right: 10),
-                        //     child: ImageLoader(
-                        //       onTap: () => _tap(
-                        //           tab: _tabNotifier,
-                        //           context: context,
-                        //           newIndex: 10),
-                        //       isCircular: true,
-                        //       radius: 40,
-                        //       path: _userInfo.profilePic ?? '',
-                        //     ),
-                        //   ),
-                        // ),
-                        CircularImage(
-                          onTap: () => null,
-                          radius: 40,
-                          path: _userInfo.profilePic ?? '',
-                          initial: _userInfo.profilePic == null ? _userInfo.name?.substring(0, 2) : '',
-                          showInitialTextAbovePicture: true,
+                        TextView(
+                          text: profileModel?.name ?? '',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                          color: Pallets.grey700,
+                          maxLines: 1,
+                          textOverflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
                         ),
                         SizedBox(
-                          width: 10,
+                          height: 4,
                         ),
-                        Expanded(
-                          flex: 10,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextView(
-                                text: _userInfo.name ?? '',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 18,
-                                color: Pallets.grey700,
-                                maxLines: 1,
-                                textOverflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                              ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              TextView(
-                                text: 'Open notification',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: Pallets.orange500,
-                                textAlign: TextAlign.left,
-                              ),
-                            ],
-                          ),
+                        TextView(
+                          text: 'Open notification',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          color: Pallets.orange500,
+                          textAlign: TextAlign.left,
                         ),
-                        Expanded(
-                          flex: 9,
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle, color: Pallets.red500),
-                            child: Center(
-                              child: TextView(
-                                text: '2',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                                color: Pallets.white,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        )
                       ],
-                    );
-                  }),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Pallets.red500),
+                      child: Center(
+                        child: TextView(
+                          text: '2',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: Pallets.white,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
               SizedBox(
                 height: 69,
               ),

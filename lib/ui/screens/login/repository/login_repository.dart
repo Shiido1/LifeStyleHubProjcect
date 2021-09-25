@@ -1,9 +1,17 @@
 import 'dart:async';
 
+import 'package:lifestyle_hub/ui/screens/dashboard/dao/dashboardd_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/repository/profile_repository.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/repository/dashboard_repository.dart';
+
 import '../../../../helper/configs/constants.dart';
 import '../../../../helper/configs/instances.dart';
-import '../model/login_model.dart';
 import '../../../../utils/paths.dart';
+import '../model/login_model.dart';
+
+final ProfileRepository _profileRepository = ProfileRepository();
+final DashboardRepository _dashboardRepository = DashboardRepository();
 
 class LoginRepository {
   Future<LoginModel> login({required Map map}) async {
@@ -11,9 +19,25 @@ class LoginRepository {
       final _response = await apiBaseHelper.post(url: Paths.login, map: map);
       final _login = LoginModel.fromJson(_response);
 
+      /// get token temporary
+      AppConstants.tempToken = _login.token;
+
+      /// requests for users profile
+      final _usersInformationResponse =
+          await _profileRepository.getUsersProfile();
+
+      /// requests for users dashboard
+      final _dashboard = await _dashboardRepository.dashboard();
+
+      /// cache users profile
+      profileDao!.saveProfile(_usersInformationResponse);
+
+      /// cache users dashboard
+      dashboardDao!.saveDashboard(_dashboard.toJson());
+
       /// cache login data
       await prefManager.saveValue(
-          key: AppConstants.usersPrefKey, value: _login.toJson());
+          key: AppConstants.usersToken, value: _login.token);
       return _login;
     } catch (e) {
       throw e;

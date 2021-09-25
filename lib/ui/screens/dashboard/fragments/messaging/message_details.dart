@@ -2,14 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import '../../../../../database/users_data_provider.dart';
-import '../../../../../helper/configs/instances.dart';
-import '../../../../../helper/helper_handler.dart';
-import 'dao/messaging_dao.dart';
-import 'model/get_last_messages_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/open_message_model.dart'
     as open;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/widget/sender_widget.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/chat_text_box.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
@@ -18,6 +15,11 @@ import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
+import '../../../../../database/users_data_provider.dart';
+import '../../../../../helper/configs/instances.dart';
+import '../../../../../helper/helper_handler.dart';
+import 'dao/messaging_dao.dart';
+import 'model/get_last_messages_model.dart';
 import 'viewmodel/messaging_viewmodel.dart';
 import 'widget/receiver_widget.dart';
 
@@ -42,23 +44,29 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
 
   MessagingViewmodel? _messagingViewmodel;
 
-  final _userModelProvider =
-      ChangeNotifierProvider((ref) => UsersInfoViewModel());
   final TextEditingController _controller = TextEditingController();
+  UsersProfileModel? _usersProfileModel;
 
   @override
   void initState() {
     _messagingViewmodel = context.read(_messageViewModel);
-    context.read(_userModelProvider).getUsersData();
     _messagingViewmodel!.init(context);
     _messagingViewmodel!.openMessage(conversation!.id.toString());
     _currentItemSelected = _dropdownValues.first;
+    _getProfileData();
     super.initState();
   }
 
   final List<String> _dropdownValues = ["Today", "Yesterday"];
   String? _currentItemSelected;
   ScrollController _scrollController = new ScrollController();
+
+
+  void _getProfileData() async {
+    _usersProfileModel = await profileDao!.convert();
+    setState(() {});
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +79,6 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
           centerTitle: true,
           onTap: () => null),
       body: Consumer(builder: (context, watch, child) {
-        final _userData = watch(_userModelProvider);
         final _cachedMessage = watch(_messageViewModel);
         _cachedMessage.getCachedMessage(conversation!.id.toString());
 
@@ -117,7 +124,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
                       ),
                     ),
                     ..._cachedMessage.openedMessage.map((message) {
-                      if (message.sender?.id == _userData.user.id) {
+                      if (message.sender?.id == _usersProfileModel!.id) {
                         return SenderText(message);
                       }
                       return ReceiversText(message);

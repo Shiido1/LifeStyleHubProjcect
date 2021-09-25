@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import '../../utils/pallets.dart';
 
 class LoadingOverlay extends StatefulWidget {
@@ -86,9 +88,10 @@ class _LoadingOverlayState extends State<LoadingOverlay>
               opacity: widget.opacity,
             ),
             Center(
-                child: CircularProgressIndicator(
-              color: Pallets.orange600,
-            )),
+              child: SpinKitCubeGrid(
+                color: Pallets.orange600,
+              ),
+            ),
           ],
         ),
       );
