@@ -9,10 +9,12 @@ import '../../../../../../utils/paths.dart';
 
 class CommissionRepository {
   /// commission
-  Future<CommissionModel> getCommissions() async {
+  Future<CommissionModel> getCommissions({String? search}) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: Paths.getCommission, options: await getDioHeader());
+          url: Paths.getCommission,
+          queryParameters: {'search' : search},
+          options: await getDioHeader());
       return CommissionModel.fromJson(_response);
     } catch (e) {
       throw e;

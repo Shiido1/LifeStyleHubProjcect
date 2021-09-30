@@ -42,10 +42,10 @@ class CommissionViewmodel extends BaseViewModel {
   }
 
   /// get commissions
-  Future<void> getCommissions() async {
+  Future<void> getCommissions({String? search, bool refresh = false}) async {
     try {
-      if (commissionDao!.box!.isEmpty) _showLoading();
-      final _response = await _commissionRepository.getCommissions();
+      if (commissionDao!.box!.isEmpty || refresh) _showLoading();
+      final _response = await _commissionRepository.getCommissions(search: search);
       commissionDao!.saveContests(_response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());

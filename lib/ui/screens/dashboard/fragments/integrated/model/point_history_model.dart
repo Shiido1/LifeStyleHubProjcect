@@ -91,7 +91,7 @@ class PointHistory {
       this.to,
       this.total});
 
-  PointHistory.fromJson(Map<String, dynamic> json) {
+  PointHistory.fromJson(json) {
     if (json["current_page"] is int) this.currentPage = json["current_page"];
     if (json["data"] is List)
       this.data = json["data"] == null

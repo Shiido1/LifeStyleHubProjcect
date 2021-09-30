@@ -7,10 +7,12 @@ import '../model/send_message_model.dart';
 import '../../../../../../utils/paths.dart';
 
 class MessageRepository {
-  Future<GetLastMessagesModel> getLastMessages() async {
+  Future<GetLastMessagesModel> getLastMessages({String? search}) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.getLastMessages}/1', options: await getDioHeader());
+          url: '${Paths.getLastMessages}/1',
+          queryParameters: {'search' : search},
+          options: await getDioHeader());
       return GetLastMessagesModel.fromJson(_response);
     } catch (e) {
       throw e;

@@ -4,12 +4,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/dao/point_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/model/point_history_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/viewmodel/point_history_viewmodel.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'dao/commission_dao.dart';
 import 'model/commission_model.dart';
+import 'view_more_commission.dart';
 import 'viewmodel/commission_viewmodel.dart';
 import '../integrated/widgets/integrated_points_widget.dart';
 import '../integrated/widgets/point_break_down_widget.dart';
@@ -92,7 +94,7 @@ class _CommissionScreenState extends State<CommissionScreen> {
                       builder: (_, Box<dynamic> box, __) {
                         PointHistoryModel _point =
                             pointHistoryDao!.convert(box);
-                        if(_point.pointBreakdown == null){
+                        if (_point.pointBreakdown == null) {
                           return Container();
                         }
                         return SingleChildScrollView(
@@ -113,7 +115,8 @@ class _CommissionScreenState extends State<CommissionScreen> {
                   SizedBox(height: 23),
                   ViewAllButton(
                     title: 'Recent points',
-                    viewAll: () {},
+                    viewAll: () => PageRouter.gotoWidget(
+                        ViewMoreCommissionScreen(), context),
                   ),
                   SizedBox(
                     height: 23,

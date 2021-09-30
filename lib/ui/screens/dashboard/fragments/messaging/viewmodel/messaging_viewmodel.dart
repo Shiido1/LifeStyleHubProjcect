@@ -67,10 +67,10 @@ class MessagingViewmodel extends BaseViewModel {
   }
 
   /// get last messages
-  Future<void> getLastMessage() async {
+  Future<void> getLastMessage({String? search, bool refresh = false}) async {
     try {
-      if (messageDao!.box!.isEmpty) _showLoading();
-      final _response = await _messageRepository.getLastMessages();
+      if (messageDao!.box!.isEmpty || refresh) _showLoading();
+      final _response = await _messageRepository.getLastMessages(search: search);
       messageDao!.saveContents(_response.data);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());

@@ -97,7 +97,7 @@ class _ViewMoreTicketsScreenState extends State<ViewMoreTicketsScreen> {
                                   child: EditFormField(
                                     label: 'Search tickets',
                                     controller: _textEditingController,
-                                    keyboardType: TextInputType.emailAddress,
+                                    keyboardType: TextInputType.text,
                                     suffixIcon: Icons.search,
                                     suffixIconColor: Pallets.orange600,
                                     textInputAction: TextInputAction.search,

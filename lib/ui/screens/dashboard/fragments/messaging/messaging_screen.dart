@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
@@ -68,6 +69,8 @@ class _MessagingScreenState extends State<MessagingScreen>
     _getProfileData();
     super.initState();
   }
+
+  final TextEditingController _textEditingController = TextEditingController();
 
   UsersProfileModel? _usersProfileModel;
 
@@ -156,7 +159,9 @@ class _MessagingScreenState extends State<MessagingScreen>
               final _provider = watch(_messageViewModel);
               if (_provider.loading) {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: SpinKitCubeGrid(
+                    color: Pallets.orange600,
+                  ),
                 );
               }
               return Padding(
@@ -170,9 +175,21 @@ class _MessagingScreenState extends State<MessagingScreen>
                         Expanded(
                           flex: 7,
                           child: EditFormField(
-                            label: 'Search tickets',
-                            controller: null,
-                            keyboardType: TextInputType.emailAddress,
+                            label: 'Search messages',
+                            controller: _textEditingController,
+                            keyboardType: TextInputType.text,
+                            suffixIcon: Icons.search,
+                            suffixIconColor: Pallets.orange600,
+                            textInputAction: TextInputAction.search,
+                            onPasswordToggle: () {
+                              _messagingViewmodel!.getLastMessage(
+                                  search: _textEditingController.text,
+                                  refresh: true);
+                            },
+                            onSaved: (value) {
+                              _messagingViewmodel!
+                                  .getLastMessage(search: value, refresh: true);
+                            },
                           ),
                         ),
                         SizedBox(
