@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
@@ -49,7 +50,9 @@ class _TicketScreenState extends State<TicketScreen> {
             final _response = watch(_ticketNotifier);
             if (_response.loading) {
               return Center(
-                child: CircularProgressIndicator(),
+                child: SpinKitCubeGrid(
+                  color: Pallets.orange600,
+                ),
               );
             }
             return LoadingOverlay(
@@ -90,14 +93,14 @@ class _TicketScreenState extends State<TicketScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   TicketBoxsWidget(
-                                    number: snapshot.data!.open ?? 0,
+                                    number: snapshot.data?.open ?? 0,
                                     text: 'Open',
                                     color: Pallets.orange50,
                                     onTap: () {},
                                   ),
                                   SizedBox(width: 20),
                                   TicketBoxsWidget(
-                                    number: snapshot.data!.answered ?? 0,
+                                    number: snapshot.data?.answered ?? 0,
                                     text: 'Answered',
                                     color: Pallets.blue50,
                                     onTap: () {},
@@ -110,14 +113,14 @@ class _TicketScreenState extends State<TicketScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   TicketBoxsWidget(
-                                    number: snapshot.data!.replied ?? 0,
+                                    number: snapshot.data?.replied ?? 0,
                                     text: 'Your reply',
                                     color: Pallets.purple50,
                                     onTap: () {},
                                   ),
                                   SizedBox(width: 20),
                                   TicketBoxsWidget(
-                                    number: snapshot.data!.closed ?? 0,
+                                    number: snapshot.data?.closed ?? 0,
                                     text: 'Closed',
                                     color: Pallets.red50,
                                     onTap: () {},

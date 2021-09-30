@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
@@ -50,7 +51,9 @@ class _WalletScreenState extends State<WalletScreen> {
           final _wallet = watch(_walletProvider);
           if (_wallet.loading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitCubeGrid(
+                color: Pallets.orange600,
+              ),
             );
           }
           return Padding(

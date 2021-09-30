@@ -21,6 +21,7 @@ class PointBreakDownWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 23, vertical: 20),
+      margin: EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: Pallets.orange50),
       child: Row(

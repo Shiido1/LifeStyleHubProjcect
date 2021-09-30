@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'viewmodel/marketting_viewmodel.dart';
@@ -61,7 +62,9 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
         final _response = watch(_markettingViewModel);
         if (_response.loading) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: SpinKitCubeGrid(
+              color: Pallets.orange600,
+            ),
           );
         }
 

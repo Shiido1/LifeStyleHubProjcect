@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/dao/point_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/model/point_history_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/viewmodel/point_history_viewmodel.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'dao/commission_dao.dart';
 import 'model/commission_model.dart';
@@ -30,11 +35,19 @@ class _CommissionScreenState extends State<CommissionScreen> {
 
   CommissionViewmodel? _commissionViewmodel;
 
+  final _pointHistoryProvider =
+      ChangeNotifierProvider((ref) => PointHistoryViewmodel());
+
+  PointHistoryViewmodel? _pointHistoryViewmodel;
+
   @override
   void initState() {
     _commissionViewmodel = context.read(_commissionProvider);
     _commissionViewmodel!.init(context);
     _commissionViewmodel!.getCommissions();
+    _pointHistoryViewmodel = context.read(_pointHistoryProvider);
+    _pointHistoryViewmodel!.init(context);
+    _pointHistoryViewmodel!.getPointHistory();
     super.initState();
   }
 
@@ -43,12 +56,14 @@ class _CommissionScreenState extends State<CommissionScreen> {
     return ValueListenableBuilder(
       valueListenable: commissionDao!.getListenable()!,
       builder: (BuildContext context, Box<dynamic> box, Widget? child) {
-        CommissionModel _commissionModel = commissionDao!.convert(box);
+        CommissionModel? _commissionModel = commissionDao!.convert(box);
         return Consumer(builder: (context, watch, _) {
           final _commission = watch(_commissionProvider);
           if (_commission.loading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitCubeGrid(
+                color: Pallets.orange600,
+              ),
             );
           }
           return Padding(
@@ -72,18 +87,29 @@ class _CommissionScreenState extends State<CommissionScreen> {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(height: 23),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        PointBreakDownWidget(),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        PointBreakDownWidget(),
-                      ],
-                    ),
-                  ),
+                  ValueListenableBuilder(
+                      valueListenable: pointHistoryDao!.getListenable()!,
+                      builder: (_, Box<dynamic> box, __) {
+                        PointHistoryModel _point =
+                            pointHistoryDao!.convert(box);
+                        if(_point.pointBreakdown == null){
+                          return Container();
+                        }
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: _point.pointBreakdown!
+                                .map((point) => PointBreakDownWidget(
+                                      packageName: point.packageName ?? '',
+                                      packageIcon: point.packageIcon ?? '',
+                                      packageReward: point.reward ?? '',
+                                      packageCheckOutPoint:
+                                          '${point.checkoutPoints ?? 0}',
+                                    ))
+                                .toList(),
+                          ),
+                        );
+                      }),
                   SizedBox(height: 23),
                   ViewAllButton(
                     title: 'Recent points',
@@ -92,21 +118,23 @@ class _CommissionScreenState extends State<CommissionScreen> {
                   SizedBox(
                     height: 23,
                   ),
-                  // ListView.builder(
-                  //     physics: NeverScrollableScrollPhysics(),
-                  //     shrinkWrap: true,
-                  //     itemCount: commissionList.length,
-                  //     itemBuilder: (context, index) {
-                  //       final commission = commissionList[index];
-                  //       return MultiColorWidget(
-                  //           title: commission.fullname,
-                  //           bgColor: index % 2 == 0
-                  //               ? Pallets.orange100
-                  //               : Pallets.white,
-                  //           package: commission.package,
-                  //           points: formatCurrency(commission.amount ?? 0),
-                  //           date: fomartDate(commission.date!));
-                  //     }),
+                  ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount:
+                          _commissionModel.commissionHistory?.data?.length,
+                      itemBuilder: (context, index) {
+                        final commission =
+                            _commissionModel.commissionHistory?.data?[index];
+                        return MultiColorWidget(
+                            title: commission?.fullname ?? '',
+                            bgColor: index % 2 == 0
+                                ? Pallets.orange100
+                                : Pallets.white,
+                            package: commission?.packageName ?? '',
+                            points: formatCurrency(commission?.amount ?? 0),
+                            date: commission?.date ?? '');
+                      }),
                 ],
               ));
         });

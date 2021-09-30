@@ -89,7 +89,7 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
                       ? Container()
                       : Column(
                           mainAxisSize: MainAxisSize.min,
-                          children: _point.pointHistory!
+                          children: _point.pointHistory!.data!
                               .map((point) => Container(
                                     margin: EdgeInsets.only(bottom: 16),
                                     padding: EdgeInsets.all(23),

@@ -36,6 +36,8 @@ class TicketDao {
   }
 
   Future<void> saveTickets(List<Data>? data) async {
+    await truncate();
+
     final map = Map<String, Map>.fromIterable(
       data!,
       key: (g) => (g as Data).id.toString(),

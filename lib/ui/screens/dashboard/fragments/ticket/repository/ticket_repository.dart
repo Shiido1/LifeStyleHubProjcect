@@ -34,10 +34,12 @@ class TicketRepository {
   }
 
   /// [@Get]
-  Future<MyTicketModel> getMyTicket() async {
+  Future<MyTicketModel> getMyTicket({String? search}) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: Paths.tickets, options: await getDioHeader());
+          url: Paths.tickets,
+          queryParameters: {'search': search},
+          options: await getDioHeader());
       return MyTicketModel.fromJson(_response);
     } catch (e) {
       throw e;

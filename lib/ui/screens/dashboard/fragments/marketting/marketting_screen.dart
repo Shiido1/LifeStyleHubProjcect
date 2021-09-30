@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'viewmodel/marketting_viewmodel.dart';
 import 'widget/banner_content_widget.dart';
@@ -44,7 +46,9 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
             final _response = watch(_markettingViewModel);
             if (_response.loading) {
               return Center(
-                child: CircularProgressIndicator(),
+                child: SpinKitCubeGrid(
+                  color: Pallets.orange600,
+                ),
               );
             }
             return Padding(

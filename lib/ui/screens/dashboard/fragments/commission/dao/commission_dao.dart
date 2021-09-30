@@ -29,9 +29,13 @@ class CommissionDao {
   }
 
   CommissionModel convert(Box box) {
-    Map<String, dynamic> raw = new Map<String, dynamic>.from(box.toMap());
-    return CommissionModel.fromJson(
-        json.decode(json.encode(raw[HiveBoxes.commission])));
+    try{
+      Map<String, dynamic> raw = new Map<String, dynamic>.from(box.toMap());
+      return CommissionModel.fromJson(
+          json.decode(json.encode(raw[HiveBoxes.commission])));
+    }catch(_){
+      return CommissionModel();
+    }
   }
 
   ValueListenable<Box>? getListenable({List<String>? keys}) {

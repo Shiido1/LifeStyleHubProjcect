@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'dao/ticket_dao.dart';
 import 'viewmodel/ticket_viewmodel.dart';
 import 'widget/filter_modal.dart';
@@ -34,12 +38,22 @@ class _ViewMoreTicketsScreenState extends State<ViewMoreTicketsScreen> {
     'Answered ticket',
   ];
 
+  final TextEditingController _textEditingController = TextEditingController();
+
   @override
   void initState() {
+    _getCatchedInfos();
     _ticketViewmodel = context.read(_ticketNotifier);
     _ticketViewmodel!.init(context);
     _ticketViewmodel!.getAllTickets();
     super.initState();
+  }
+
+  UsersProfileModel? _profileModel;
+
+  void _getCatchedInfos() async {
+    _profileModel = await profileDao!.convert();
+    setState(() {});
   }
 
   @override
@@ -48,8 +62,7 @@ class _ViewMoreTicketsScreenState extends State<ViewMoreTicketsScreen> {
         appBar: getCustomAppBar(context,
             title: 'Ticket details',
             showLeadig: true,
-            image:
-                'https://images.unsplash.com/photo-1558185348-fe8fa4cf631f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+            image: _profileModel?.profilePic ?? '',
             showImage: true,
             showMoreMenu: false,
             centerTitle: true,
@@ -62,7 +75,9 @@ class _ViewMoreTicketsScreenState extends State<ViewMoreTicketsScreen> {
                 final _response = watch(_ticketNotifier);
                 if (_response.loading) {
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: SpinKitCubeGrid(
+                      color: Pallets.orange600,
+                    ),
                   );
                 }
                 return LoadingOverlay(
@@ -81,8 +96,20 @@ class _ViewMoreTicketsScreenState extends State<ViewMoreTicketsScreen> {
                                   flex: 7,
                                   child: EditFormField(
                                     label: 'Search tickets',
-                                    controller: null,
+                                    controller: _textEditingController,
                                     keyboardType: TextInputType.emailAddress,
+                                    suffixIcon: Icons.search,
+                                    suffixIconColor: Pallets.orange600,
+                                    textInputAction: TextInputAction.search,
+                                    onPasswordToggle: () {
+                                      _ticketViewmodel!.getAllTickets(
+                                          search: _textEditingController.text,
+                                          refresh: true);
+                                    },
+                                    onSaved: (value) {
+                                      _ticketViewmodel!.getAllTickets(
+                                          search: value, refresh: true);
+                                    },
                                   ),
                                 ),
                                 SizedBox(

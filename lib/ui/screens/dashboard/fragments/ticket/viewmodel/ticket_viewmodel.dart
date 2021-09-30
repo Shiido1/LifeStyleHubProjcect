@@ -33,7 +33,7 @@ class TicketViewmodel extends BaseViewModel {
   /// show loading indicator
   void _showLoading({bool notify = false}) {
     _loading = true;
-    if (notify) notifyListeners();
+  notifyListeners();
   }
 
   /// hide loading indicator
@@ -66,10 +66,10 @@ class TicketViewmodel extends BaseViewModel {
   }
 
   /// get list of tickets
-  Future<void> getAllTickets() async {
+  Future<void> getAllTickets({String? search, bool refresh = false}) async {
     try {
-      if (ticketDao!.box!.isEmpty) _showLoading();
-      final _response = await _ticketRepository.getMyTicket();
+      if (ticketDao!.box!.isEmpty || refresh) _showLoading();
+      final _response = await _ticketRepository.getMyTicket(search: search);
       ticketDao!.saveTickets(_response.data);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
