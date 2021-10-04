@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_account_network_response.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../utils/pallets.dart';
@@ -6,8 +10,15 @@ import '../model/generation_model.dart';
 
 class MatrixDisplayWidget extends StatelessWidget {
   final Me? me;
+  final ViewAccountNetworkResponse? network;
+  final NetworkViewModel? networkViewModel;
 
-  const MatrixDisplayWidget({Key? key, required this.me}) : super(key: key);
+  const MatrixDisplayWidget(
+      {Key? key,
+      this.me,
+      required this.network,
+      required this.networkViewModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +30,7 @@ class MatrixDisplayWidget extends StatelessWidget {
           backgroundColor: Pallets.orange300,
           child: Center(
             child: Text(
-              me!.myName![0],
+              network?.name?[0] ?? '',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.normal,
@@ -37,11 +48,11 @@ class MatrixDisplayWidget extends StatelessWidget {
                   Border(left: BorderSide(width: 1, color: Pallets.grey400))),
         ),
         ListView.builder(
-            itemCount: me!.myChildrenList!.length,
+            itemCount: network?.children?.length ?? 0,
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (_, int index) {
-              final _data = me!.myChildrenList![index];
+              final _data = network?.children?[index];
               return Container(
                 width: double.infinity,
                 child: Column(
@@ -59,16 +70,26 @@ class MatrixDisplayWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor: Pallets.orange300,
+                                    backgroundColor: _data?.id != 0
+                                        ? Pallets.orange300
+                                        : Pallets.grey300,
                                     child: Center(
-                                      child: Text(
-                                        _data.name![0],
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.black,
-                                        ),
-                                      ),
+                                      child: _data?.id != 0
+                                          ? GestureDetector(
+                                              onTap: () => networkViewModel!
+                                                  .getNetworkAccountDetails(
+                                                      _data!.id!),
+                                              child: Text(
+                                                '${_data?.name?[0]}',
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            )
+                                          : Icon(Icons.add,
+                                              color: Pallets.grey400),
                                     ),
                                   ),
                                   // Container(
@@ -111,10 +132,7 @@ class MatrixDisplayWidget extends StatelessWidget {
                               decoration: BoxDecoration(
                                   border: Border(
                                       left: BorderSide(
-                                          width: 1,
-                                          color: _data.iHaveAYoungerSibling!
-                                              ? Pallets.grey400
-                                              : Colors.transparent))),
+                                          width: 1, color: Pallets.grey400))),
                             ),
                           ),
                           Expanded(
@@ -122,7 +140,7 @@ class MatrixDisplayWidget extends StatelessWidget {
                             child: Container(
                                 height: 45,
                                 child: Row(children: [
-                                  ..._data.myGrandChildren!
+                                  ..._data!.children!
                                       .map((grandChild) => Expanded(
                                           flex: 1,
                                           child: Container(
@@ -145,28 +163,26 @@ class MatrixDisplayWidget extends StatelessWidget {
                                               CircleAvatar(
                                                 radius: 40,
                                                 backgroundColor:
-                                                    grandChild.isChildAvailable!
-                                                        ? Pallets.yellow400
-                                                        : Pallets.grey200,
+                                                    grandChild.id != 0
+                                                        ? Pallets.orange300
+                                                        : Pallets.grey300,
                                                 child: Center(
-                                                  child: grandChild
-                                                          .isChildAvailable!
-                                                      ? Text(
-                                                          grandChild.name![0],
-                                                          style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            color: Colors.black,
-                                                          ),
-                                                        )
-                                                      : Icon(
-                                                          Icons.add,
-                                                          color:
-                                                              Pallets.grey400,
-                                                        ),
-                                                ),
+                                                    child: grandChild.id != 0
+                                                        ? Text(
+                                                            grandChild.name ??
+                                                                '',
+                                                            style: TextStyle(
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          )
+                                                        : Icon(Icons.add,
+                                                            color: Pallets
+                                                                .grey400)),
                                               ),
                                             ],
                                           ))))

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../widget/second_icon.dart';
 import '../../../../widgets/buttons.dart';
@@ -7,10 +12,29 @@ import '../../../../widgets/text_views.dart';
 import '../../../../../utils/pallets.dart';
 
 import 'model/generation_model.dart';
+import 'model/view_account_model.dart';
+import 'network_package.dart';
 import 'widget/matrix_widget.dart';
 
-class NetworkScreen extends StatelessWidget {
+class NetworkScreen extends StatefulWidget {
   NetworkScreen({Key? key}) : super(key: key);
+
+  @override
+  State<NetworkScreen> createState() => _NetworkScreenState();
+}
+
+class _NetworkScreenState extends State<NetworkScreen> {
+  NetworkViewModel? _viewModel;
+  ViewAccountResponse? _response;
+
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    _viewModel = Provider.of<NetworkViewModel>(context, listen: false);
+    _viewModel!.init(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +74,7 @@ class NetworkScreen extends StatelessWidget {
             height: 32,
           ),
           TextView(
-            text: 'The Elite VVIP ',
+            text: _response?.package?.name ?? '',
             fontSize: 16,
             fontWeight: FontWeight.w700,
             textAlign: TextAlign.left,
@@ -61,7 +85,7 @@ class NetworkScreen extends StatelessWidget {
             height: 8,
           ),
           TextView(
-            text: 'Extra Luxury Packages',
+            text: _response?.package?.type ?? '',
             fontSize: 14,
             fontWeight: FontWeight.w700,
             textAlign: TextAlign.left,
@@ -73,19 +97,38 @@ class NetworkScreen extends StatelessWidget {
           ),
           EditFormField(
             floatingLabel: '',
-            label: 'The Elite VVIP',
-            controller: null,
+            label: _response?.package?.name ?? '',
+            controller: _controller,
             keyboardType: TextInputType.text,
             onChange: (value) {},
             readOnly: true,
-            onTapped: () => null,
+            onTapped: () =>
+                PageRouter.gotoWidget(PackageCallBack(onTap: (response) {
+              _response = response;
+              _controller.text = _response?.package?.name ?? '';
+              setState(() {});
+              _viewModel!.getNetworkAccountDetails(_response!.id!);
+            }), context),
             suffixIcon: Icons.keyboard_arrow_down,
             suffixIconColor: Pallets.disabledIconColor,
           ),
           SizedBox(
             height: 36,
           ),
-          MatrixDisplayWidget(me: Me.getMyDescendants()),
+          Consumer<NetworkViewModel>(builder: (_, provider, __) {
+            if (provider.loading) {
+              return Center(
+                child: SpinKitCubeGrid(
+                  color: Pallets.orange600,
+                ),
+              );
+            }
+            return MatrixDisplayWidget(
+              me: Me.getMyDescendants(),
+              network: provider.accountNetworkResponse,
+              networkViewModel: _viewModel,
+            );
+          }),
           SizedBox(
             height: 40,
           ),
