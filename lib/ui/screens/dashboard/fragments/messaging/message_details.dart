@@ -61,12 +61,10 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
   String? _currentItemSelected;
   ScrollController _scrollController = new ScrollController();
 
-
   void _getProfileData() async {
     _usersProfileModel = await profileDao!.convert();
     setState(() {});
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +94,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
                       child: Container(
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        margin: EdgeInsets.only(bottom: 8),
                         decoration: BoxDecoration(
                             color: Pallets.grey100,
                             borderRadius: BorderRadius.circular(30)),

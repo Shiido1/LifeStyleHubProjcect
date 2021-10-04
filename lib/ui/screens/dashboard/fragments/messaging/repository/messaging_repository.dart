@@ -10,8 +10,8 @@ class MessageRepository {
   Future<GetLastMessagesModel> getLastMessages({String? search}) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.getLastMessages}/1',
-          queryParameters: {'search' : search},
+          url: Paths.getLastMessages,
+          queryParameters: {'search=': search, 'page': 1, 'per_page': 25},
           options: await getDioHeader());
       return GetLastMessagesModel.fromJson(_response);
     } catch (e) {
@@ -22,7 +22,8 @@ class MessageRepository {
   Future<OpenMessageModel> openMessage(Map map) async {
     try {
       final _response = await apiBaseHelper.post(
-          url: '${Paths.openMessage}/1',
+          url: Paths.openMessage,
+          queryParameters: {'page': 1, 'per_page': 25},
           options: await getDioHeader(),
           map: map);
       return OpenMessageModel.fromJson(_response);
