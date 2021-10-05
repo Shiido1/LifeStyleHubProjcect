@@ -3,6 +3,7 @@ import 'package:lifestyle_hub/utils/paths.dart';
 
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
+import 'model/my_generation_downline_response.dart';
 import 'model/view_account_model.dart';
 import 'model/view_account_network_response.dart';
 
@@ -37,6 +38,19 @@ class NetworkRepository {
           url: '${Paths.accountDetails}user/$id/direct-downline',
           options: await getDioHeader());
       return MyDownlineResponse.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /// [@Get] return users generation dowline
+  Future<MyGenerationDownlineResponse> getUsersGenerationDownline(
+      int id) async {
+    try {
+      final _response = await apiBaseHelper.get(
+          url: '${Paths.accountDetails}user/$id/generation-downline',
+          options: await getDioHeader());
+      return MyGenerationDownlineResponse.fromJson(_response);
     } catch (e) {
       throw e;
     }

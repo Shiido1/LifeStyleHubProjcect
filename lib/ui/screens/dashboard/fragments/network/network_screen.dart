@@ -17,6 +17,7 @@ import 'model/view_account_model.dart';
 import 'network_package.dart';
 import 'widget/custom_tab.dart';
 import 'widget/matrix_widget.dart';
+import 'widget/my_generation.dart';
 
 class NetworkScreen extends StatefulWidget {
   NetworkScreen({Key? key}) : super(key: key);
@@ -93,6 +94,9 @@ class _NetworkScreenState extends State<NetworkScreen> {
 
     if (_index == 1) {
       return MyDownlineTab();
+    }
+    if (_index == 2) {
+      return MyGenerationTab();
     }
 
     return Container();

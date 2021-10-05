@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_downline_response.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_generation_downline_response.dart'
+    as generation;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_account_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_account_network_response.dart';
 import '../../../../../../helper/configs/instances.dart';
@@ -77,12 +79,26 @@ class NetworkViewModel extends BaseViewModel {
 
   List<Data>? downlineResponse = [];
 
-  /// get network details
+  /// get users direct downline
   Future<void> getUsersDownline(int id) async {
     try {
       if (downlineResponse!.length == 0) _showLoading();
       final _response = await _networkRepository.getUsersDownline(id);
       downlineResponse = _response.data;
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
+  List<generation.Data> generationData = [];
+
+  /// get users generation downline
+  Future<void> getUsersGenerationDownline(int id) async {
+    try {
+      if (generationData.length == 0) _showLoading();
+      final _response = await _networkRepository.getUsersGenerationDownline(id);
+      generationData = _response.generationDownline!.data!;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
