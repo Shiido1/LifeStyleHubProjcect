@@ -1,3 +1,4 @@
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_downline_response.dart';
 import 'package:lifestyle_hub/utils/paths.dart';
 
 import '../../../../../../helper/configs/instances.dart';
@@ -21,8 +22,21 @@ class NetworkRepository {
   Future<ViewAccountNetworkResponse> getNetworkAccountDetail(int id) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.accountDetails}user/$id/network', options: await getDioHeader());
+          url: '${Paths.accountDetails}user/$id/network',
+          options: await getDioHeader());
       return ViewAccountNetworkResponse.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /// [@Get] return users downline
+  Future<MyDownlineResponse> getUsersDownline(int id) async {
+    try {
+      final _response = await apiBaseHelper.get(
+          url: '${Paths.accountDetails}user/$id/direct-downline',
+          options: await getDioHeader());
+      return MyDownlineResponse.fromJson(_response);
     } catch (e) {
       throw e;
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_downline_response.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_account_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_account_network_response.dart';
 import '../../../../../../helper/configs/instances.dart';
@@ -50,18 +51,6 @@ class NetworkViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  /// show loading indicator
-  void _showAccountLoading() {
-    _loading = true;
-    notifyListeners();
-  }
-
-  /// hide loading indicator
-  void _hideAccountLoading() {
-    _loading = false;
-    notifyListeners();
-  }
-
   /// get list of network
   Future<void> getNetworkAccount() async {
     try {
@@ -80,6 +69,20 @@ class NetworkViewModel extends BaseViewModel {
       _showLoading();
       final _response = await _networkRepository.getNetworkAccountDetail(id);
       _accountNetworkResponse = _response;
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
+  List<Data>? downlineResponse = [];
+
+  /// get network details
+  Future<void> getUsersDownline(int id) async {
+    try {
+      if (downlineResponse!.length == 0) _showLoading();
+      final _response = await _networkRepository.getUsersDownline(id);
+      downlineResponse = _response.data;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
