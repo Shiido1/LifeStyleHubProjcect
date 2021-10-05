@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_downline_response.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_generation_downline_response.dart'
     as generation;
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_lead_wise_response.dart'
+    as lead;
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_vpp_response.dart'
+    as vpp;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_account_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_account_network_response.dart';
 import '../../../../../../helper/configs/instances.dart';
@@ -9,7 +13,7 @@ import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../network_repository.dart';
+import '../repository/network_repository.dart';
 
 NetworkRepository _networkRepository = NetworkRepository();
 
@@ -99,6 +103,34 @@ class NetworkViewModel extends BaseViewModel {
       if (generationData.length == 0) _showLoading();
       final _response = await _networkRepository.getUsersGenerationDownline(id);
       generationData = _response.generationDownline!.data!;
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
+  List<lead.Data> leadsWise = [];
+
+  /// get users lead wise downline
+  Future<void> getUsersLeadWise(int id) async {
+    try {
+      if (leadsWise.length == 0) _showLoading();
+      final _response = await _networkRepository.getUsersLeadWise(id);
+      leadsWise = _response.data!;
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
+  List<vpp.Data> vppData = [];
+
+  /// get users [VPP] downline
+  Future<void> getUsersVPP() async {
+    try {
+      if (vppData.length == 0) _showLoading();
+      final _response = await _networkRepository.getUsersVPP();
+      vppData = _response.data!;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

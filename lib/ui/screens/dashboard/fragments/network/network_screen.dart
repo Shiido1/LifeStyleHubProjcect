@@ -4,6 +4,7 @@ import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/my_downline.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/my_lead_wise.dart';
 import 'package:provider/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../widget/second_icon.dart';
@@ -18,6 +19,7 @@ import 'network_package.dart';
 import 'widget/custom_tab.dart';
 import 'widget/matrix_widget.dart';
 import 'widget/my_generation.dart';
+import 'widget/my_vpp.dart';
 
 class NetworkScreen extends StatefulWidget {
   NetworkScreen({Key? key}) : super(key: key);
@@ -57,7 +59,7 @@ class _NetworkScreenState extends State<NetworkScreen> {
                   onTap: () => setState(() => _index = 0),
                 ),
                 SizedBox(
-                  width: 30,
+                  width: 16,
                 ),
                 Tabs(
                   text: 'My downline',
@@ -65,12 +67,28 @@ class _NetworkScreenState extends State<NetworkScreen> {
                   onTap: () => setState(() => _index = 1),
                 ),
                 SizedBox(
-                  width: 30,
+                  width: 16,
                 ),
                 Tabs(
                   text: 'Generation downline',
                   isSelected: _index == 2 ? true : false,
                   onTap: () => setState(() => _index = 2),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Tabs(
+                  text: 'My Lead-wise downline',
+                  isSelected: _index == 3 ? true : false,
+                  onTap: () => setState(() => _index = 3),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Tabs(
+                  text: 'My VPP Team',
+                  isSelected: _index == 4 ? true : false,
+                  onTap: () => setState(() => _index = 4),
                 ),
               ],
             ),
@@ -99,7 +117,11 @@ class _NetworkScreenState extends State<NetworkScreen> {
       return MyGenerationTab();
     }
 
-    return Container();
+    if (_index == 3) {
+      return MyLeadWiseTab();
+    }
+
+    return MyVPPTab();
   }
 
   _buildMatrixTree() {

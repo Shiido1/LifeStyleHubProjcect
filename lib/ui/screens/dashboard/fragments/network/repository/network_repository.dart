@@ -1,11 +1,13 @@
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_downline_response.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_lead_wise_response.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_vpp_response.dart';
 import 'package:lifestyle_hub/utils/paths.dart';
 
-import '../../../../../../helper/configs/instances.dart';
-import '../../../../../../helper/helper_handler.dart';
-import 'model/my_generation_downline_response.dart';
-import 'model/view_account_model.dart';
-import 'model/view_account_network_response.dart';
+import '../../../../../../../helper/configs/instances.dart';
+import '../../../../../../../helper/helper_handler.dart';
+import '../model/my_generation_downline_response.dart';
+import '../model/view_account_model.dart';
+import '../model/view_account_network_response.dart';
 
 class NetworkRepository {
   /// [@Get] network account list
@@ -51,6 +53,29 @@ class NetworkRepository {
           url: '${Paths.accountDetails}user/$id/generation-downline',
           options: await getDioHeader());
       return MyGenerationDownlineResponse.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /// [@Get] return users lead wise dowline
+  Future<MyLeadWiseResponse> getUsersLeadWise(int id) async {
+    try {
+      final _response = await apiBaseHelper.get(
+          url: '${Paths.accountDetails}user/$id/leadwise-downline',
+          options: await getDioHeader());
+      return MyLeadWiseResponse.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /// [@Get] return users l
+  Future<MyVppResponse> getUsersVPP() async {
+    try {
+      final _response = await apiBaseHelper.get(
+          url: Paths.usersVPP, options: await getDioHeader());
+      return MyVppResponse.fromJson(_response);
     } catch (e) {
       throw e;
     }

@@ -34,4 +34,5 @@ class Paths {
   static String changePassword = 'api/change-password';
   static String accounts = 'api/user/accounts';
   static String accountDetails = 'api/';
+  static String usersVPP = 'api/user/vpp';
 }
