@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -47,7 +48,8 @@ Future<Map<String, String>> getHeader() async {
 /// @ get headers
 Future<Options> getDioHeader({String? token}) async {
   Map<String, String> _header = Map<String, String>();
-  var _token = await prefManager.getStringValues(key: AppConstants.usersPrefKey);
+  var _token =
+      await prefManager.getStringValues(key: AppConstants.usersPrefKey);
   String? _bearer = _token != null ? _token : AppConstants.tempToken;
   _header[HttpHeaders.authorizationHeader] = 'Bearer $_bearer';
   _header[HttpHeaders.contentTypeHeader] = 'multipart/form-data';
@@ -88,13 +90,9 @@ String fomartCompleteDate(String date) {
 /// get expiry date
 Future<CountDownTimer> getTrialDuration() async {
   DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
-  final _usersData =
-      await prefManager.getCachedData(key: AppConstants.usersPrefKey);
-  LoginModel _user = LoginModel.fromJson(_usersData);
-  DateTime duration = _dateFormat.parse(_user.user!.trialEnds!);
-
-  final _answer = DateTime.now().difference(duration);
-
+  final _user = await profileDao!.convert();
+  final duration = _dateFormat.parse(_user.trialEnds!);
+  final _answer = duration.difference(DateTime.now());
   return CountDownTimer(
       day: _answer.inDays,
       hour: DateTime.now().hour,
@@ -106,7 +104,7 @@ CountDownTimer getDateTime(String date) {
   DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
   DateTime _duration = _dateFormat.parse(date);
   DateTime presentDate = _dateFormat.parse(DateTime.now().toIso8601String());
-  final _answer = _duration.difference(presentDate);
+  final _answer = presentDate.difference(_duration);
   return CountDownTimer(
       day: _answer.inDays,
       hour: DateTime.now().hour,
@@ -145,7 +143,7 @@ String getFileName(File file) {
 double getPercentage({num? directReferred, num? directRequired}) {
   double _answer = directReferred! / directRequired!;
   double _percentage = _answer * 100;
-  return _percentage / 100;
+  return 0 / 100;
 }
 
 void copyToClipBoard(BuildContext? context, String text) {

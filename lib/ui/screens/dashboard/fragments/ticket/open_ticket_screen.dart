@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/ui/widgets/general_bottom_sheet.dart';
 import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
@@ -50,7 +52,15 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
     _ticketViewmodel = context.read(_ticketNotifier);
     _ticketViewmodel!.init(context);
     _ticketViewmodel!.getTicketDepartments();
+    _getCatchedInfos();
     super.initState();
+  }
+
+  UsersProfileModel? _profileModel;
+
+  void _getCatchedInfos() async {
+    _profileModel = await profileDao!.convert();
+    setState(() {});
   }
 
   @override
@@ -69,8 +79,8 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
                 title: 'Open a ticket',
                 showLeadig: true,
                 centerTitle: true,
-                image:
-                    'https://images.unsplash.com/photo-1558185348-fe8fa4cf631f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'),
+                image: _profileModel?.profilePic ?? '',
+                initial: _profileModel?.name ?? 'LH'),
             body: Form(
               key: _globalFormKey,
               child: ValueListenableBuilder(
@@ -162,18 +172,21 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
                             onPressed: () => _loadAssets(),
                             padding: EdgeInsets.zero,
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Icon(
                                   Icons.add,
                                   color: Pallets.orange500,
                                 ),
                                 SizedBox(width: 10),
-                                TextView(
-                                  text: _fileName ?? 'Attach a file',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  color: Pallets.orange500,
-                                  textAlign: TextAlign.left,
+                                Expanded(
+                                  child: TextView(
+                                    text: _fileName ?? 'Attach a file',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    color: Pallets.orange500,
+                                    textAlign: TextAlign.left,
+                                  ),
                                 ),
                               ],
                             ),

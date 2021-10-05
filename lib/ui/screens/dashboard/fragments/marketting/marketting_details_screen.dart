@@ -2,6 +2,8 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/video_player.dart';
@@ -40,6 +42,19 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
   _MarkettingDetailScreenState({required this.getResourcesModel, this.type});
 
   @override
+  void initState() {
+    _getCatchedInfos();
+    super.initState();
+  }
+
+  UsersProfileModel? _profileModel;
+
+  void _getCatchedInfos() async {
+    _profileModel = await profileDao!.convert();
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
       final _player = watch(_videoPlayerModel);
@@ -50,9 +65,9 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
         appBar: getCustomAppBar(context,
             title: '',
             showLeadig: true,
-            changeLeadingIcon: true,
-            image:
-                'https://images.unsplash.com/photo-1558185348-fe8fa4cf631f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'),
+            centerTitle: true,
+            image: _profileModel?.profilePic ?? '',
+            initial: _profileModel?.name ?? 'LH'),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ListView(children: [

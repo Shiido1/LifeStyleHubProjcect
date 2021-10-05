@@ -1,5 +1,3 @@
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-
 class DashboardModel {
   String? name;
   int? walletBalance;
@@ -7,11 +5,9 @@ class DashboardModel {
   int? referralLinkSignup;
   int? upgradedMembers;
   String? pointBalance;
-  FeaturedResource? featuredResource;
   FeaturedVideo? featuredVideo;
   FeaturedContest? featuredContest;
   List<dynamic>? recentDownlines;
-  List<ActivePackages>? activePackages;
   String? referralLink;
   List<Resources>? resources;
 
@@ -22,50 +18,37 @@ class DashboardModel {
       this.referralLinkSignup,
       this.upgradedMembers,
       this.pointBalance,
-      this.featuredResource,
-      this.featuredContest,
       this.featuredVideo,
+      this.featuredContest,
       this.recentDownlines,
-      this.activePackages,
       this.referralLink,
       this.resources});
 
-  DashboardModel.fromJson(json) {
-    if (json != null && json["name"] is String) this.name = json["name"];
-    if (json != null && json["wallet_balance"] is int)
+  DashboardModel.fromJson(Map<String, dynamic> json) {
+    if (json["name"] is String) this.name = json["name"];
+    if (json["wallet_balance"] is int)
       this.walletBalance = json["wallet_balance"];
-    if (json != null && json["income_received"] is int)
+    if (json["income_received"] is int)
       this.incomeReceived = json["income_received"];
-    if (json != null && json["referral_link_signup"] is int)
+    if (json["referral_link_signup"] is int)
       this.referralLinkSignup = json["referral_link_signup"];
-    if (json != null && json["upgraded_members"] is int)
+    if (json["upgraded_members"] is int)
       this.upgradedMembers = json["upgraded_members"];
-    if (json != null && json["point_balance"] is String)
+    if (json["point_balance"] is String)
       this.pointBalance = json["point_balance"];
-    if (json != null && json["featured_resource"] is Map)
-      this.featuredResource = json["featured_resource"] == null
-          ? null
-          : FeaturedResource.fromJson(json["featured_resource"]);
-    if (json != null && json["featured_contest"] is Map)
-      this.featuredContest = json["featured_contest"] == null
-          ? null
-          : FeaturedContest.fromJson(json["featured_contest"]);
-
-    if (json != null && json["featured_video"] is Map)
+    if (json["featured_video"] is Map)
       this.featuredVideo = json["featured_video"] == null
           ? null
           : FeaturedVideo.fromJson(json["featured_video"]);
-    if (json != null && json["recent_downlines"] is List)
-      this.recentDownlines = json["recent_downlines"] ?? [];
-    if (json != null && json["active_packages"] is List)
-      this.activePackages = json["active_packages"] == null
+    if (json["featured_contest"] is Map)
+      this.featuredContest = json["featured_contest"] == null
           ? null
-          : (json["active_packages"] as List)
-              .map((e) => ActivePackages.fromJson(e))
-              .toList();
-    if (json != null && json["referral_link"] is String)
+          : FeaturedContest.fromJson(json["featured_contest"]);
+    if (json["recent_downlines"] is List)
+      this.recentDownlines = json["recent_downlines"] ?? [];
+    if (json["referral_link"] is String)
       this.referralLink = json["referral_link"];
-    if (json != null && json["resources"] is List)
+    if (json["resources"] is List)
       this.resources = json["resources"] == null
           ? null
           : (json["resources"] as List)
@@ -81,17 +64,12 @@ class DashboardModel {
     data["referral_link_signup"] = this.referralLinkSignup;
     data["upgraded_members"] = this.upgradedMembers;
     data["point_balance"] = this.pointBalance;
-    if (this.featuredResource != null)
-      data["featured_resource"] = this.featuredResource?.toJson();
-    if (this.featuredContest != null)
-      data["featured_contest"] = this.featuredContest?.toJson();
     if (this.featuredVideo != null)
       data["featured_video"] = this.featuredVideo?.toJson();
+    if (this.featuredContest != null)
+      data["featured_contest"] = this.featuredContest?.toJson();
     if (this.recentDownlines != null)
       data["recent_downlines"] = this.recentDownlines;
-    if (this.activePackages != null)
-      data["active_packages"] =
-          this.activePackages?.map((e) => e.toJson()).toList();
     data["referral_link"] = this.referralLink;
     if (this.resources != null)
       data["resources"] = this.resources?.map((e) => e.toJson()).toList();
@@ -103,9 +81,10 @@ class Resources {
   int? id;
   String? title;
   String? slug;
+  String? description;
   String? featuredImage;
   String? type;
-  dynamic? content;
+  Content1? content;
   int? featured;
   String? createdAt;
   String? updatedAt;
@@ -114,6 +93,7 @@ class Resources {
       {this.id,
       this.title,
       this.slug,
+      this.description,
       this.featuredImage,
       this.type,
       this.content,
@@ -121,20 +101,20 @@ class Resources {
       this.createdAt,
       this.updatedAt});
 
-  Resources.fromJson(json) {
-    if (json != null && json["id"] is int) this.id = json["id"];
-    if (json != null && json["title"] is String) this.title = json["title"];
-    if (json != null && json["slug"] is String) this.slug = json["slug"];
-    if (json != null && json["featured_image"] is String)
+  Resources.fromJson(Map<String, dynamic> json) {
+    if (json["id"] is int) this.id = json["id"];
+    if (json["title"] is String) this.title = json["title"];
+    if (json["slug"] is String) this.slug = json["slug"];
+    if (json["description"] is String) this.description = json["description"];
+    if (json["featured_image"] is String)
       this.featuredImage = json["featured_image"];
-    if (json != null && json["type"] is String) this.type = json["type"];
-    this.content = json["content"];
-    if (json != null && json["featured"] is int)
-      this.featured = json["featured"];
-    if (json != null && json["created_at"] is String)
-      this.createdAt = json["created_at"];
-    if (json != null && json["updated_at"] is String)
-      this.updatedAt = json["updated_at"];
+    if (json["type"] is String) this.type = json["type"];
+    if (json["content"] is Map)
+      this.content =
+          json["content"] == null ? null : Content1.fromJson(json["content"]);
+    if (json["featured"] is int) this.featured = json["featured"];
+    if (json["created_at"] is String) this.createdAt = json["created_at"];
+    if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
   }
 
   Map<String, dynamic> toJson() {
@@ -142,9 +122,10 @@ class Resources {
     data["id"] = this.id;
     data["title"] = this.title;
     data["slug"] = this.slug;
+    data["description"] = this.description;
     data["featured_image"] = this.featuredImage;
     data["type"] = this.type;
-    data["content"] = this.content;
+    if (this.content != null) data["content"] = this.content?.toJson();
     data["featured"] = this.featured;
     data["created_at"] = this.createdAt;
     data["updated_at"] = this.updatedAt;
@@ -152,21 +133,18 @@ class Resources {
   }
 }
 
-class ActivePackages {
-  String? name;
-  String? type;
+class Content1 {
+  String? path;
 
-  ActivePackages({this.name, this.type});
+  Content1({this.path});
 
-  ActivePackages.fromJson(json) {
-    if (json != null && json["name"] is String) this.name = json["name"];
-    if (json != null && json["type"] is String) this.type = json["type"];
+  Content1.fromJson(Map<String, dynamic> json) {
+    if (json["path"] is String) this.path = json["path"];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["name"] = this.name;
-    data["type"] = this.type;
+    data["path"] = this.path;
     return data;
   }
 }
@@ -183,6 +161,7 @@ class FeaturedContest {
   int? featured;
   String? createdAt;
   String? updatedAt;
+  int? directsReferred;
 
   FeaturedContest(
       {this.id,
@@ -195,27 +174,24 @@ class FeaturedContest {
       this.reward,
       this.featured,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.directsReferred});
 
-  FeaturedContest.fromJson(json) {
-    if (json != null && json["id"] is int) this.id = json["id"];
-    if (json != null && json["name"] is String) this.name = json["name"];
-    if (json != null && json["description"] is String)
-      this.description = json["description"];
-    if (json != null && json["startdate"] is String)
-      this.startdate = json["startdate"];
-    if (json != null && json["enddate"] is String)
-      this.enddate = json["enddate"];
-    if (json != null && json["directs_required"] is int)
+  FeaturedContest.fromJson(Map<String, dynamic> json) {
+    if (json["id"] is int) this.id = json["id"];
+    if (json["name"] is String) this.name = json["name"];
+    if (json["description"] is String) this.description = json["description"];
+    if (json["startdate"] is String) this.startdate = json["startdate"];
+    if (json["enddate"] is String) this.enddate = json["enddate"];
+    if (json["directs_required"] is int)
       this.directsRequired = json["directs_required"];
-    if (json != null && json["image"] is String) this.image = json["image"];
-    if (json != null && json["reward"] is String) this.reward = json["reward"];
-    if (json != null && json["featured"] is int)
-      this.featured = json["featured"];
-    if (json != null && json["created_at"] is String)
-      this.createdAt = json["created_at"];
-    if (json != null && json["updated_at"] is String)
-      this.updatedAt = json["updated_at"];
+    if (json["image"] is String) this.image = json["image"];
+    if (json["reward"] is String) this.reward = json["reward"];
+    if (json["featured"] is int) this.featured = json["featured"];
+    if (json["created_at"] is String) this.createdAt = json["created_at"];
+    if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
+    if (json["directs_referred"] is int)
+      this.directsReferred = json["directs_referred"];
   }
 
   Map<String, dynamic> toJson() {
@@ -231,59 +207,7 @@ class FeaturedContest {
     data["featured"] = this.featured;
     data["created_at"] = this.createdAt;
     data["updated_at"] = this.updatedAt;
-    return data;
-  }
-}
-
-class FeaturedResource {
-  int? id;
-  String? title;
-  String? slug;
-  String? featuredImage;
-  String? type;
-  dynamic? content;
-  int? featured;
-  String? createdAt;
-  String? updatedAt;
-
-  FeaturedResource(
-      {this.id,
-      this.title,
-      this.slug,
-      this.featuredImage,
-      this.type,
-      this.content,
-      this.featured,
-      this.createdAt,
-      this.updatedAt});
-
-  FeaturedResource.fromJson(json) {
-    if (json != null && json["id"] is int) this.id = json["id"];
-    if (json != null && json["title"] is String) this.title = json["title"];
-    if (json != null && json["slug"] is String) this.slug = json["slug"];
-    if (json != null && json["featured_image"] is String)
-      this.featuredImage = json["featured_image"];
-    if (json != null && json["type"] is String) this.type = json["type"];
-    this.content = json["content"];
-    if (json != null && json["featured"] is int)
-      this.featured = json["featured"];
-    if (json != null && json["created_at"] is String)
-      this.createdAt = json["created_at"];
-    if (json != null && json["updated_at"] is String)
-      this.updatedAt = json["updated_at"];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["id"] = this.id;
-    data["title"] = this.title;
-    data["slug"] = this.slug;
-    data["featured_image"] = this.featuredImage;
-    data["type"] = this.type;
-    data["content"] = this.content;
-    data["featured"] = this.featured;
-    data["created_at"] = this.createdAt;
-    data["updated_at"] = this.updatedAt;
+    data["directs_referred"] = this.directsReferred;
     return data;
   }
 }
@@ -292,10 +216,10 @@ class FeaturedVideo {
   int? id;
   String? title;
   String? slug;
-  dynamic? description;
+  String? description;
   String? featuredImage;
   String? type;
-  String? content;
+  Content? content;
   int? featured;
   String? createdAt;
   String? updatedAt;
@@ -312,16 +236,17 @@ class FeaturedVideo {
       this.createdAt,
       this.updatedAt});
 
-  FeaturedVideo.fromJson(json) {
+  FeaturedVideo.fromJson(Map<String, dynamic> json) {
     if (json["id"] is int) this.id = json["id"];
     if (json["title"] is String) this.title = json["title"];
     if (json["slug"] is String) this.slug = json["slug"];
-    this.description = json["description"];
+    if (json["description"] is String) this.description = json["description"];
     if (json["featured_image"] is String)
       this.featuredImage = json["featured_image"];
     if (json["type"] is String) this.type = json["type"];
-    if (json["content"] is String)
-      this.content = format(json["content"]);
+    if (json["content"] is Map)
+      this.content =
+          json["content"] == null ? null : Content.fromJson(json["content"]);
     if (json["featured"] is int) this.featured = json["featured"];
     if (json["created_at"] is String) this.createdAt = json["created_at"];
     if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
@@ -335,7 +260,7 @@ class FeaturedVideo {
     data["description"] = this.description;
     data["featured_image"] = this.featuredImage;
     data["type"] = this.type;
-    data["content"] = this.content;
+    if (this.content != null) data["content"] = this.content?.toJson();
     data["featured"] = this.featured;
     data["created_at"] = this.createdAt;
     data["updated_at"] = this.updatedAt;
@@ -344,19 +269,16 @@ class FeaturedVideo {
 }
 
 class Content {
-  List<dynamic>? body;
   String? path;
 
-  Content({this.body, this.path});
+  Content({this.path});
 
   Content.fromJson(Map<String, dynamic> json) {
-    if (json["body"] is List) this.body = json["body"] ?? [];
     if (json["path"] is String) this.path = json["path"];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.body != null) data["body"] = this.body;
     data["path"] = this.path;
     return data;
   }

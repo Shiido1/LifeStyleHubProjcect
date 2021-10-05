@@ -42,7 +42,7 @@ class ActivePackageWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextView(
-                text: '0%',
+                text: '$percentage%',
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
                 color: Pallets.white,
@@ -60,7 +60,7 @@ class ActivePackageWidget extends StatelessWidget {
           LinearProgressIndicator(
             backgroundColor: Pallets.grey600,
             valueColor: new AlwaysStoppedAnimation<Color>(Pallets.orange500),
-            value: 0 / 100,
+            value: percentage,
           ),
           SizedBox(
             height: spaceHeight,

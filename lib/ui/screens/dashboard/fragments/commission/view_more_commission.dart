@@ -63,13 +63,11 @@ class _ViewMoreCommissionScreenState extends State<ViewMoreCommissionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: getCustomAppBar(context,
-            title: 'Ticket details',
+            title: 'My Commissions',
             showLeadig: true,
-            image: _profileModel?.profilePic ?? '',
-            showImage: true,
-            showMoreMenu: false,
             centerTitle: true,
-            onTap: () {}),
+            image: _profileModel?.profilePic ?? '',
+            initial: _profileModel?.name ?? 'LH'),
         body: ValueListenableBuilder(
             valueListenable: commissionDao!.getListenable()!,
             builder: (_, Box<dynamic> box, __) {

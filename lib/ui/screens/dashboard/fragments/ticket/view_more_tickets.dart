@@ -60,13 +60,11 @@ class _ViewMoreTicketsScreenState extends State<ViewMoreTicketsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: getCustomAppBar(context,
-            title: 'Ticket details',
+            title: 'Ticket Details',
             showLeadig: true,
-            image: _profileModel?.profilePic ?? '',
-            showImage: true,
-            showMoreMenu: false,
             centerTitle: true,
-            onTap: () {}),
+            image: _profileModel?.profilePic ?? '',
+            initial: _profileModel?.name ?? 'LH'),
         body: ValueListenableBuilder(
             valueListenable: ticketDao!.getListenable()!,
             builder: (_, Box<dynamic> box, __) {

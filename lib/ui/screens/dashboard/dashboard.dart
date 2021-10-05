@@ -99,11 +99,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: getCustomAppBar(context,
           title: _titleList[_index],
           showLeadig: true,
-          centerTitle: true, onTap: () {
-        getTrialDuration();
-      }, image: _profileModel?.profilePic ?? '',
-        initial: _profileModel?.name ?? 'LH'
-      ),
+          centerTitle: true,
+          image: _profileModel?.profilePic ?? '',
+          initial: _profileModel?.name ?? 'LH'),
       drawer: getDrawer(context, _index, _profileModel),
       body: SafeArea(
         child: Stack(

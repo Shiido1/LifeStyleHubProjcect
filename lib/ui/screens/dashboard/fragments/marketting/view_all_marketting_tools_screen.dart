@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'viewmodel/marketting_viewmodel.dart';
@@ -37,6 +39,7 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
     _marketting = context.read(_markettingViewModel);
     _marketting!.init(context);
     _marketting!.getMarketingViewAll(_getType());
+    _getCatchedInfos();
     super.initState();
   }
 
@@ -47,17 +50,22 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
     return '';
   }
 
+  UsersProfileModel? _profileModel;
+
+  void _getCatchedInfos() async {
+    _profileModel = await profileDao!.convert();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getCustomAppBar(context,
-          showImage: true,
-          image:
-              'https://images.unsplash.com/photo-1532074205216-d0e1f4b87368?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBwcm9maWxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80',
-          showLeadingWidget: true,
-          showLeadig: true,
           title: 'More Views',
-          centerTitle: true),
+          showLeadig: true,
+          centerTitle: true,
+          image: _profileModel?.profilePic ?? '',
+          initial: _profileModel?.name ?? 'LH'),
       body: Consumer(builder: (context, watch, child) {
         final _response = watch(_markettingViewModel);
         if (_response.loading) {

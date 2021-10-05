@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../ticket/widget/filter_modal.dart';
 import 'dao/wallet_dao.dart';
@@ -30,7 +32,15 @@ class _AllWalletScreenState extends State<AllWalletScreen> {
     _walletViewmodel = context.read(_walletProvider);
     _walletViewmodel!.init(context);
     _refresh();
+    _getCatchedInfos();
     super.initState();
+  }
+
+  UsersProfileModel? _profileModel;
+
+  void _getCatchedInfos() async {
+    _profileModel = await profileDao!.convert();
+    setState(() {});
   }
 
   void _refresh() {
@@ -41,14 +51,11 @@ class _AllWalletScreenState extends State<AllWalletScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getCustomAppBar(context,
-          title: 'Wallet History',
+          title: 'Ticket Details',
           showLeadig: true,
-          image:
-              'https://images.unsplash.com/photo-1558185348-fe8fa4cf631f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-          showImage: true,
-          showMoreMenu: false,
           centerTitle: true,
-          onTap: () {}),
+          image: _profileModel?.profilePic ?? '',
+          initial: _profileModel?.name ?? 'LH'),
       body: ValueListenableBuilder(
         valueListenable: walletDao!.getListenable()!,
         builder: (BuildContext context, Box<dynamic> box, Widget? child) {

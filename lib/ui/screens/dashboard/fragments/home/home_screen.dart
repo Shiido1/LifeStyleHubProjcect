@@ -79,10 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
   UsersProfileModel? _profileModel;
   DashboardModel? _dashboardModel;
 
-  void _getCatchedInfos()async{
+  void _getCatchedInfos() async {
     _profileModel = await profileDao!.convert();
     _dashboardModel = await dashboardDao!.getUsersInformation();
-    setState((){});
+    setState(() {});
   }
 
   @override
@@ -136,8 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Expanded(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextView(
                                   text: 'Point Balance',
@@ -214,104 +213,104 @@ class _HomeScreenState extends State<HomeScreen> {
               packageDao!.getListenable() == null
                   ? Container()
                   : ValueListenableBuilder(
-                  valueListenable: packageDao!.getListenable()!,
-                  builder: (_, Box<dynamic> box, __) {
-                    List<ViewPackagesModel> _packageList =
-                    packageDao!.convert(box).toList();
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ViewAllButton(
-                          title: 'Active packages',
-                          viewAll: () {},
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: List.generate(
-                                _packageList.length <= 5
-                                    ? _packageList.length
-                                    : 5, (index) {
-                              final _package = _packageList[index];
-                              return Container(
-                                margin: EdgeInsets.only(right: 23),
-                                child: ActivePackageWidget(
-                                  title: _package.name ?? '',
-                                  subtitle:
-                                  _package.description ?? '',
-                                  percentage: getPercentage(
-                                      directReferred:
-                                      _package.referralPoints ??
-                                          0,
-                                      directRequired:
-                                      _package.directBonus ?? 0),
-                                ),
-                              );
-                            }),
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
+                      valueListenable: packageDao!.getListenable()!,
+                      builder: (_, Box<dynamic> box, __) {
+                        List<ViewPackagesModel> _packageList =
+                            packageDao!.convert(box).toList();
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ViewAllButton(
+                              title: 'Active packages',
+                              viewAll: () {},
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: List.generate(
+                                    _packageList.length <= 5
+                                        ? _packageList.length
+                                        : 5, (index) {
+                                  final _package = _packageList[index];
+                                  return Container(
+                                    margin: EdgeInsets.only(right: 23),
+                                    child: ActivePackageWidget(
+                                      title: _package.name ?? '',
+                                      subtitle: _package.description ?? '',
+                                      percentage: getPercentage(
+                                          directReferred:
+                                              _package.referralPoints ?? 0,
+                                          directRequired:
+                                              _package.checkoutPoints ?? 0),
+                                    ),
+                                  );
+                                }),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
               SizedBox(
                 height: 23,
               ),
               contestDao!.getListenable() == null
                   ? Container()
                   : ValueListenableBuilder(
-                  valueListenable: contestDao!.getListenable()!,
-                  builder: (_, Box<dynamic> box, __) {
-                    List<ViewContestModel> _contestList =
-                    contestDao!.convert(box).toList();
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ViewAllButton(
-                          title: 'Contest',
-                          viewAll: () {
-                            _tabNotifierWatch.switchDrawerIndex(
-                                context, 4,
-                                drawer: false);
-                          },
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: List.generate(
-                                _contestList.length <= 5
-                                    ? _contestList.length
-                                    : 5, (index) {
-                              final _contest = _contestList[index];
-                              return Container(
-                                margin: EdgeInsets.only(right: 23),
-                                child:
-                                ContestWidget(contest: _contest),
-                              );
-                            }),
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
+                      valueListenable: contestDao!.getListenable()!,
+                      builder: (_, Box<dynamic> box, __) {
+                        List<ViewContestModel> _contestList =
+                            contestDao!.convert(box).toList();
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ViewAllButton(
+                              title: 'Contest',
+                              viewAll: () {
+                                _tabNotifierWatch.switchDrawerIndex(context, 4,
+                                    drawer: false);
+                              },
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: List.generate(
+                                    _contestList.length <= 5
+                                        ? _contestList.length
+                                        : 5, (index) {
+                                  final _contest = _contestList[index];
+                                  return Container(
+                                    margin: EdgeInsets.only(right: 23),
+                                    child: ContestWidget(contest: _contest),
+                                  );
+                                }),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
               SizedBox(
                 height: 23,
               ),
               Consumer(builder: (_, watch, __) {
                 final _player = watch(_videoPlayerModel);
-                String _link = _dashboardModel?.featuredVideo?.content ?? '';
-                if (_link.isNotEmpty)
-                  _player.playVideo(_link.substring(1, _link.length - 1));
-                if (_link.isEmpty){
+                String _link =
+                    _dashboardModel?.featuredVideo?.content?.path ?? '';
+                if (_link.isNotEmpty) _player.playVideo(_link);
+                if (_link.isEmpty) {
                   return ImageLoader(
-                    path: _dashboardModel?.featuredResource?.featuredImage ?? '',
+                    isCurvedEdge: true,
+                    curve: 10,
+                    height: 200,
+                    fit: BoxFit.cover,
+                    path: _dashboardModel?.featuredVideo?.featuredImage ?? '',
                   );
                 }
                 return BetterPlayerMultipleGestureDetector(
@@ -324,6 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     print("Tap!");
                   },
                 );
+                // logger.d(_dashboardModel?.featuredVideo?.content?.path);
               }),
               SizedBox(
                 height: getDeviceHeight(context) / 10,
