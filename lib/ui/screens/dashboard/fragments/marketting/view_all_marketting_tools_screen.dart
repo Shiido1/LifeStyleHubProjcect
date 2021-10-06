@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
@@ -68,7 +69,7 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
           initial: _profileModel?.name ?? 'LH'),
       body: Consumer(builder: (context, watch, child) {
         final _response = watch(_markettingViewModel);
-        if (_response.loading) {
+        if (_response.loading && !_response.isPagination) {
           return Center(
             child: SpinKitCubeGrid(
               color: Pallets.orange600,
@@ -80,7 +81,10 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
           padding: const EdgeInsets.all(16.0),
           child: SmartRefresher(
             controller: _marketting!.refreshController,
-            onRefresh: () => _marketting!.getMarketingViewAll(_getType()),
+            enablePullUp: true,
+            onRefresh: () => _marketting!
+                .getMarketingViewAll(_getType(), isRefreshing: true),
+            onLoading: () => _marketting!.loadPagination(_getType()),
             child: ListView(
               children: [
                 Row(

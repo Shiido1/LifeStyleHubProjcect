@@ -30,10 +30,12 @@ class MarkettingRepository {
   }
 
   /// [@Get] Resource marketting list
-  Future<GetResourcesModelList> getMarkettingAll(String type) async {
+  Future<GetResourcesModelList> getMarkettingAll(String type,
+      {int? page}) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.getMarketting}?type=$type',
+          url: Paths.getMarketting,
+          queryParameters: {'type': type, 'page': page, 'per_page': 20},
           options: await getDioHeader());
       return GetResourcesModelList.fromJson(_response);
     } catch (e) {

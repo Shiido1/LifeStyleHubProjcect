@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
 import '../dao/marketting_dao.dart';
@@ -17,7 +18,7 @@ class MarkettingViewmodel extends BaseViewModel {
 
   bool get loading => _loading;
 
-  List<Data>? _getResourcesModelList;
+  List<Data>? _getResourcesModelList = [];
 
   List<Data>? get getResourceModelList => _getResourcesModelList;
 
@@ -72,17 +73,51 @@ class MarkettingViewmodel extends BaseViewModel {
   }
 
   /// get list of marketing
-  Future<void> getMarketingViewAll(String path) async {
+  Future<void> getMarketingViewAll(String path,
+      {int page = 1,
+      bool isRefreshing = false,
+      bool isLoadMore = false}) async {
     try {
-      _showLoading();
-      final _response = await _markettingRepository.getMarkettingAll(path);
-      _getResourcesModelList = _response.data;
-      _refreshController.refreshCompleted();
+      if (_getResourcesModelList!.length == 0) _showLoading();
+      final _response =
+          await _markettingRepository.getMarkettingAll(path, page: page);
+      if (_response.data!.isNotEmpty) {
+        _getResourcesModelList!.addAll(_response.data!);
+      }
+      if (isRefreshing) _isRefreshing();
+
+      if (isLoadMore) _isLoadMore(_response.data!);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
       _refreshController.refreshFailed();
+      _refreshController.loadFailed();
     }
     _hideLoading();
+  }
+
+  void _isRefreshing() {
+    _page = 1;
+    notifyListeners();
+    _refreshController.refreshCompleted();
+  }
+
+  void _isLoadMore(List list) {
+    isPagination = false;
+    if (list.isEmpty) {
+      _refreshController.loadNoData();
+    } else {
+      _refreshController.loadComplete();
+    }
+  }
+
+  int _page = 1;
+  bool isPagination = false;
+
+  void loadPagination(String path) {
+    _page++;
+    isPagination = true;
+    notifyListeners();
+    getMarketingViewAll(path, page: _page, isLoadMore: true);
   }
 
   List<Data> videoContents = [];
