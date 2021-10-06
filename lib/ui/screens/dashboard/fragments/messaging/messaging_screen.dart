@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../../helper/routes/navigation.dart';
 import '../../../../../utils/pallets.dart';
@@ -133,7 +134,7 @@ class _MessagingScreenState extends State<MessagingScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: Container(
-          margin: EdgeInsets.only(bottom: 50),
+          margin: EdgeInsets.only(bottom: 70),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -166,93 +167,102 @@ class _MessagingScreenState extends State<MessagingScreen>
               }
               return Padding(
                 padding: EdgeInsets.all(16),
-                child: ListView(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 7,
-                          child: EditFormField(
-                            label: 'Search messages',
-                            controller: _textEditingController,
-                            keyboardType: TextInputType.text,
-                            suffixIcon: Icons.search,
-                            suffixIconColor: Pallets.orange600,
-                            textInputAction: TextInputAction.search,
-                            onPasswordToggle: () {
-                              _messagingViewmodel!.getLastMessage(
-                                  search: _textEditingController.text,
-                                  refresh: true);
-                            },
-                            onSaved: (value) {
-                              _messagingViewmodel!
-                                  .getLastMessage(search: value, refresh: true);
-                            },
+                child: SmartRefresher(
+                  controller: _provider.lastMessageController,
+                  enablePullDown: true,
+                  enablePullUp: true,
+                  onRefresh: () =>
+                      _messagingViewmodel!.getLastMessage(isRefreshing: true),
+                  onLoading: () => _messagingViewmodel!
+                      .loadPagination(_textEditingController.text),
+                  child: ListView(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 7,
+                            child: EditFormField(
+                              label: 'Search messages',
+                              controller: _textEditingController,
+                              keyboardType: TextInputType.text,
+                              suffixIcon: Icons.search,
+                              suffixIconColor: Pallets.orange600,
+                              textInputAction: TextInputAction.search,
+                              onPasswordToggle: () {
+                                _messagingViewmodel!.getLastMessage(
+                                    search: _textEditingController.text,
+                                    isRefreshing: true);
+                              },
+                              onSaved: (value) {
+                                _messagingViewmodel!.getLastMessage(
+                                    search: value, isRefreshing: true);
+                              },
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          height: 48,
-                          width: 50,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Pallets.orange500),
-                          child: Center(
-                              child: ImageLoader(
-                                  onTap: () => showTicketFiltering(context,
-                                      callBack: (filter) {}),
-                                  path: 'assets/svgs/filter.svg')),
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 32),
-                    Column(
-                      children: _messageList
-                          .map((elements) => ListTile(
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 0),
-                                onTap: () => PageRouter.gotoWidget(
-                                    MessageDetailsSms(
-                                        conversation: elements.conversation),
-                                    context),
-                                leading: CircleAvatar(
-                                  backgroundColor: Pallets.amber500,
-                                  child: TextView(
-                                      text: '',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                title: TextView(
-                                  text: _formatReceiver(elements.conversation,
-                                          _usersProfileModel!) ??
-                                      '',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Pallets.grey700,
-                                  textAlign: TextAlign.left,
-                                  maxLines: 1,
-                                  textOverflow: TextOverflow.ellipsis,
-                                ),
-                                subtitle: TextView(
-                                  text: elements
-                                          .conversation?.lastMessage?.body ??
-                                      '',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Pallets.grey400,
-                                  textAlign: TextAlign.left,
-                                  maxLines: 1,
-                                  textOverflow: TextOverflow.ellipsis,
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                    SizedBox(height: 36),
-                  ],
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            height: 48,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Pallets.orange500),
+                            child: Center(
+                                child: ImageLoader(
+                                    onTap: () => showTicketFiltering(context,
+                                        callBack: (filter) {}),
+                                    path: 'assets/svgs/filter.svg')),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 32),
+                      Column(
+                        children: _messageList
+                            .map((elements) => ListTile(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 0),
+                                  onTap: () => PageRouter.gotoWidget(
+                                      MessageDetailsSms(
+                                          conversation: elements.conversation),
+                                      context),
+                                  leading: CircleAvatar(
+                                    backgroundColor: Pallets.amber500,
+                                    child: TextView(
+                                        text: '',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  title: TextView(
+                                    text: _formatReceiver(elements.conversation,
+                                            _usersProfileModel!) ??
+                                        '',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: Pallets.grey700,
+                                    textAlign: TextAlign.left,
+                                    maxLines: 1,
+                                    textOverflow: TextOverflow.ellipsis,
+                                  ),
+                                  subtitle: TextView(
+                                    text: elements
+                                            .conversation?.lastMessage?.body ??
+                                        '',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: Pallets.grey400,
+                                    textAlign: TextAlign.left,
+                                    maxLines: 1,
+                                    textOverflow: TextOverflow.ellipsis,
+                                  ),
+                                ))
+                            .toList(),
+                      ),
+                      SizedBox(height: 36),
+                    ],
+                  ),
                 ),
               );
             });

@@ -4,6 +4,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/ope
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/repository/messaging_repository.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../../../database/users_data_provider.dart';
 import '../../../../../../helper/helper_handler.dart';
@@ -24,6 +25,8 @@ class MessagingViewmodel extends BaseViewModel {
   List<Data>? _getLastMessages;
 
   List<Data>? get getLastMessages => _getLastMessages;
+
+  final RefreshController lastMessageController = RefreshController();
 
   /// initialize auth viewmodel
   void init(BuildContext context) {
@@ -66,16 +69,58 @@ class MessagingViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
+  List<Data> _messageData = [];
+
   /// get last messages
-  Future<void> getLastMessage({String? search, bool refresh = false}) async {
+  Future<void> getLastMessage(
+      {String? search,
+      int page = 1,
+      bool isRefreshing = false,
+      bool isLoadMore = false}) async {
     try {
-      if (messageDao!.box!.isEmpty || refresh) _showLoading();
-      final _response = await _messageRepository.getLastMessages(search: search);
-      messageDao!.saveContents(_response.data);
+      if (messageDao!.box!.isEmpty) _showLoading();
+      final _response =
+          await _messageRepository.getLastMessages(search: search, page: page);
+
+      if (_response.data!.isNotEmpty) {
+        _messageData.addAll(_response.data!);
+        messageDao!.saveContents(_messageData);
+      }
+
+      if (isRefreshing) _isRefreshing();
+
+      if (isLoadMore) _isLoadMore(_response.data!);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
+      lastMessageController.refreshFailed();
+      lastMessageController.loadFailed();
     }
     _hideLoading();
+  }
+
+  void _isRefreshing() {
+    _page = 1;
+    notifyListeners();
+    lastMessageController.refreshCompleted();
+  }
+
+  void _isLoadMore(List list) {
+    isPagination = false;
+    if (list.isEmpty) {
+      lastMessageController.loadNoData();
+    } else {
+      lastMessageController.loadComplete();
+    }
+  }
+
+  int _page = 1;
+  bool isPagination = false;
+
+  void loadPagination(String path) {
+    _page++;
+    isPagination = true;
+    notifyListeners();
+    getLastMessage(search: path, page: _page, isLoadMore: true);
   }
 
   /// open last messages

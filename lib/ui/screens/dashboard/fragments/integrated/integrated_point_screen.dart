@@ -82,6 +82,7 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
                   SizedBox(height: 23),
                   ViewAllButton(
                     title: 'Recent points',
+                    showViewAll: false,
                     viewAll: () {},
                   ),
                   SizedBox(height: 23),

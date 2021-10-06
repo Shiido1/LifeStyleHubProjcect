@@ -4,8 +4,13 @@ import '../../../../utils/pallets.dart';
 
 class ViewAllButton extends StatelessWidget {
   final String? title;
+  bool showViewAll;
   final Function()? viewAll;
-  const ViewAllButton({Key? key, required this.title, required this.viewAll})
+  ViewAllButton(
+      {Key? key,
+      required this.title,
+      required this.viewAll,
+      this.showViewAll = true})
       : super(key: key);
 
   @override
@@ -20,13 +25,16 @@ class ViewAllButton extends StatelessWidget {
           color: Pallets.grey500,
           textAlign: TextAlign.left,
         ),
-        TextView(
-          onTap: viewAll,
-          text: 'View all',
-          fontWeight: FontWeight.w500,
-          fontSize: 14,
-          color: Pallets.grey500,
-          textAlign: TextAlign.left,
+        Visibility(
+          visible: showViewAll,
+          child: TextView(
+            onTap: viewAll,
+            text: 'View all',
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            color: Pallets.grey500,
+            textAlign: TextAlign.left,
+          ),
         ),
       ],
     );
