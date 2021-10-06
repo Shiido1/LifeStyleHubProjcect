@@ -41,15 +41,56 @@ class CommissionViewmodel extends BaseViewModel {
     notifyListeners();
   }
 
+  List data = [];
+
   /// get commissions
-  Future<void> getCommissions({String? search, bool refresh = false}) async {
+  Future<void> getCommissions(
+      {String? search,
+      int page = 1,
+      bool isRefreshing = false,
+      bool isLoadMore = false}) async {
     try {
-      if (commissionDao!.box!.isEmpty || refresh) _showLoading();
-      final _response = await _commissionRepository.getCommissions(search: search);
+      if (commissionDao!.box!.isEmpty) _showLoading();
+      if (data.length == 0) _showLoading();
+      final _response =
+          await _commissionRepository.getCommissions(search: search);
       commissionDao!.saveContests(_response.toJson());
+
+      if (_response.commissionHistory!.data!.isNotEmpty) {
+        data.addAll(_response.commissionHistory!.data!);
+      }
+      if (isRefreshing) _isRefreshing();
+
+      if (isLoadMore) _isLoadMore(_response.commissionHistory!.data!);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
+      _refreshController.loadFailed();
     }
     _hideLoading();
+  }
+
+  void _isRefreshing() {
+    _page = 1;
+    notifyListeners();
+    _refreshController.refreshCompleted();
+  }
+
+  void _isLoadMore(List list) {
+    isPagination = false;
+    if (list.isEmpty) {
+      _refreshController.loadNoData();
+    } else {
+      _refreshController.loadComplete();
+    }
+  }
+
+  int _page = 1;
+  bool isPagination = false;
+
+  void loadPagination(String path) {
+    _page++;
+    isPagination = true;
+    notifyListeners();
+    getCommissions(search: path, isLoadMore: true);
   }
 }

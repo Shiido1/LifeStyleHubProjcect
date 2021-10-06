@@ -1,3 +1,4 @@
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/viewmodel/commission_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -13,7 +14,10 @@ class Providers {
     ChangeNotifierProvider<RegisterViewModel>(
         create: (_) => RegisterViewModel()),
     ChangeNotifierProvider<LoginViewModel>(create: (_) => LoginViewModel()),
-    ChangeNotifierProvider<InformationViewModel>(create: (_) => InformationViewModel()),
+    ChangeNotifierProvider<InformationViewModel>(
+        create: (_) => InformationViewModel()),
     ChangeNotifierProvider<NetworkViewModel>(create: (_) => NetworkViewModel()),
+    ChangeNotifierProvider<CommissionViewmodel>(
+        create: (_) => CommissionViewmodel()),
   ];
 }

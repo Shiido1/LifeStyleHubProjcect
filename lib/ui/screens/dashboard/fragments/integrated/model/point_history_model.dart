@@ -43,7 +43,7 @@ class PointBreakdown {
   PointBreakdown(
       {this.packageIcon, this.packageName, this.reward, this.checkoutPoints});
 
-  PointBreakdown.fromJson(Map<String, dynamic> json) {
+  PointBreakdown.fromJson(json) {
     if (json["package_icon"] is String) this.packageIcon = json["package_icon"];
     if (json["package_name"] is String) this.packageName = json["package_name"];
     if (json["reward"] is String) this.reward = json["reward"];
@@ -143,7 +143,7 @@ class Links {
 
   Links({this.url, this.label, this.active});
 
-  Links.fromJson(Map<String, dynamic> json) {
+  Links.fromJson(json) {
     this.url = json["url"];
     if (json["label"] is String) this.label = json["label"];
     if (json["active"] is bool) this.active = json["active"];
@@ -167,7 +167,7 @@ class Data {
 
   Data({this.date, this.name, this.email, this.package, this.points});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(json) {
     if (json["date"] is String) this.date = json["date"];
     if (json["name"] is String) this.name = json["name"];
     if (json["email"] is String) this.email = json["email"];
