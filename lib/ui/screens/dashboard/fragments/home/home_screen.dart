@@ -242,10 +242,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       title: _package.name ?? '',
                                       subtitle: _package.description ?? '',
                                       percentage: getPercentage(
-                                          directReferred:
-                                              _package.referralPoints ?? 0,
-                                          directRequired:
-                                              _package.checkoutPoints ?? 0),
+                                          directReferred: int.parse(_package
+                                              .referralPoints
+                                              .toString()),
+                                          directRequired: int.parse(_package
+                                              .checkoutPoints
+                                              .toString())),
                                     ),
                                   );
                                 }),
