@@ -1,24 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/open_message_model.dart'
-    as open;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/widget/sender_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/chat_text_box.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/overlay.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
-import '../../../../../database/users_data_provider.dart';
-import '../../../../../helper/configs/instances.dart';
-import '../../../../../helper/helper_handler.dart';
-import 'dao/messaging_dao.dart';
 import 'model/get_last_messages_model.dart';
 import 'viewmodel/messaging_viewmodel.dart';
 import 'widget/receiver_widget.dart';

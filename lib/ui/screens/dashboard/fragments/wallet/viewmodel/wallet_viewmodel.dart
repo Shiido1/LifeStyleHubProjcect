@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
@@ -99,5 +100,20 @@ class WalletViewmodel extends BaseViewModel {
       _walletTransactions(_currentPage);
     }
     notifyListeners();
+  }
+
+  /// perform withdrawal
+  Future<void> withdrawal(Map map) async {
+    try {
+      _showLoading(notify: true);
+      await _walletRepository.withdraw(map);
+      showsnackBarInfo(_context,
+          message: 'Pending admin\'s approval', bgColor: Pallets.green600);
+      PageRouter.goBack(_context);
+    } catch (e) {
+      showsnackBarInfo(_context,
+          message: e.toString(), bgColor: Pallets.red600);
+    }
+    _hideLoading();
   }
 }

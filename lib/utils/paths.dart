@@ -35,4 +35,5 @@ class Paths {
   static String accounts = 'api/user/accounts';
   static String accountDetails = 'api/';
   static String usersVPP = 'api/user/vpp';
+  static String withdraw = 'api/wallet/withdraw';
 }

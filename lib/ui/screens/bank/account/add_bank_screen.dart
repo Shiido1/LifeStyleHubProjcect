@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/ui/screens/bank/account/viewmodel/account_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
@@ -106,17 +107,15 @@ class _AddOrEditBankAccountScreenState
                         EditFormField(
                           floatingLabel: 'Sort Code',
                           label: 'Enter sort code',
-                          autoValidate: _autoValidate,
+                          autoValidate: false,
                           controller: _sortCodeController,
-                          validator: Validators.validateString(),
                         ),
                         SizedBox(height: 40),
                         EditFormField(
                           floatingLabel: 'Swift Code (if any)',
                           label: 'Enter swift code',
-                          autoValidate: _autoValidate,
+                          autoValidate: false,
                           controller: _swiftCodeController,
-                          validator: Validators.validateString(),
                         ),
                         SizedBox(height: 32),
                         ButtonWidget(
@@ -145,8 +144,14 @@ class _AddOrEditBankAccountScreenState
 
   void _updateUsersInformation() async {
     FocusScope.of(context).unfocus();
+    final _response = await profileDao!.convert();
     if (_globalFormKey.currentState!.validate()) {
-      _accountViewmodel!.addBankAccount({});
+      _accountViewmodel!.addBankAccount({
+        'name': _response.name,
+        'account_name': _accountNameController!.text,
+        'account_no': _accountNoController!.text,
+        'currency': 'Naira',
+      });
     } else
       setState(() => _autoValidate = true);
   }

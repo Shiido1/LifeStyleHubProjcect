@@ -116,7 +116,7 @@ class MessagingViewmodel extends BaseViewModel {
   int _page = 1;
   bool isPagination = false;
 
-  void loadPagination(String path) {
+  void loadLastPagination(String path) {
     _page++;
     isPagination = true;
     notifyListeners();

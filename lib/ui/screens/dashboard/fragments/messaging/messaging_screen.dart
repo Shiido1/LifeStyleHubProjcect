@@ -174,7 +174,7 @@ class _MessagingScreenState extends State<MessagingScreen>
                   onRefresh: () =>
                       _messagingViewmodel!.getLastMessage(isRefreshing: true),
                   onLoading: () => _messagingViewmodel!
-                      .loadPagination(_textEditingController.text),
+                      .loadLastPagination(_textEditingController.text),
                   child: ListView(
                     children: [
                       Row(

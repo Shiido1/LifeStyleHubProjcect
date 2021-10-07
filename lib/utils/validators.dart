@@ -157,7 +157,7 @@ class Validators {
   }
 
   /// validates users input to a valid amount type
-  static String Function(String?)? validateAmount(
+  static String? Function(String?)? validateAmount(
       {String? error, double? minAmount, double? maxAmount}) {
     return (String? value) {
       value = value!.replaceAll(",", "");
@@ -180,7 +180,7 @@ class Validators {
       if (maxAmount != null && double.tryParse(value)! > maxAmount) {
         return 'Maximum amount allow is $maxAmount';
       }
-      return '';
+      return null;
     };
   }
 

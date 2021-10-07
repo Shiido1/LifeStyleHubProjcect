@@ -40,8 +40,8 @@ class BankAccountViewmodel extends BaseViewModel {
   Future<void> addBankAccount(Map map) async {
     try {
       _showLoading();
-      final _response = await _accountRepository.addBankAccount(map);
-      logger.d(_response.toJson());
+      await _accountRepository.addBankAccount(map);
+      getBankAccounts();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     } finally {
@@ -54,8 +54,8 @@ class BankAccountViewmodel extends BaseViewModel {
   Future<void> updateBankAccount(String id, FormData map) async {
     try {
       _showLoading();
-      final _response = await _accountRepository.updateBankAccount(map, id: id);
-      logger.d(_response.toJson());
+      await _accountRepository.updateBankAccount(map, id: id);
+      getBankAccounts();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
