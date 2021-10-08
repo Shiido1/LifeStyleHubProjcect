@@ -77,9 +77,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     eventBus.on().listen((event) async {
       if (event is UserLoggedInEvent && event.logUserOut!) {
-        await HiveBoxes.logOut();
-        PageRouter.gotoWidget(LoginScreen(), context,
-            clearStack: true, animationType: PageTransitionType.fade);
+        // await HiveBoxes.logOut();
+        // PageRouter.gotoWidget(LoginScreen(), context,
+        //     clearStack: true, animationType: PageTransitionType.fade);
       }
     });
     _getCatchedInfos();

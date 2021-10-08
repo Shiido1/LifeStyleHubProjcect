@@ -22,7 +22,7 @@ class ViewAllButton extends StatelessWidget {
           text: title!,
           fontWeight: FontWeight.w700,
           fontSize: 16,
-          color: Pallets.grey500,
+          color: Pallets.grey800,
           textAlign: TextAlign.left,
         ),
         Visibility(

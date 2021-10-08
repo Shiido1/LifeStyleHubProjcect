@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/dao/account_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/history_cards.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/multi_color_widget.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 
-class MyDownlineTab extends StatefulWidget {
-  MyDownlineTab({Key? key}) : super(key: key);
+class ViewMyDownlinesScreen extends StatefulWidget {
+  ViewMyDownlinesScreen({Key? key}) : super(key: key);
 
   @override
-  _MyDownlineTabState createState() => _MyDownlineTabState();
+  _ViewMyDownlinesScreenState createState() => _ViewMyDownlinesScreenState();
 }
 
-class _MyDownlineTabState extends State<MyDownlineTab> {
+class _ViewMyDownlinesScreenState extends State<ViewMyDownlinesScreen> {
   NetworkViewModel? _viewModel;
 
   @override
@@ -32,7 +30,6 @@ class _MyDownlineTabState extends State<MyDownlineTab> {
 
   void _getCatchedInfos() async {
     _profileModel = await profileDao!.convert();
-    logger.d(_profileModel!.id!);
     _viewModel!.getUsersDownline(_profileModel!.id!);
     setState(() {});
   }
@@ -47,19 +44,19 @@ class _MyDownlineTabState extends State<MyDownlineTab> {
           ),
         );
       }
-      return ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: provider.downlineResponse?.length ?? 0,
-          itemBuilder: (context, index) {
-            final _downline = provider.downlineResponse?[index];
-            return MultiColorWidget(
-                title: _downline?.user?.name ?? 'N/A',
-                bgColor: index % 2 == 0 ? Pallets.orange100 : Pallets.white,
-                package: _downline?.package?.name ?? 'N/A',
-                points: _downline?.points ?? 'N/A',
-                date: fomartDate(_downline!.createdAt!));
-          });
+
+      return Column(
+        children: provider.downlineResponse!
+            .map((element) => HistroyCard(
+                  historyValues: HistoryValues(
+                      name: element.user?.name ?? '',
+                      email: element.user?.email ?? '',
+                      date: fomartDate(element.createdAt!),
+                      packageName: element.package?.name ?? 'M/A',
+                      referral: 'Referal Name here'),
+                ))
+            .toList(),
+      );
     });
   }
 }
