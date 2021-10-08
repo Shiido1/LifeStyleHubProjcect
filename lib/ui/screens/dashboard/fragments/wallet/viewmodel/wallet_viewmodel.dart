@@ -48,10 +48,11 @@ class WalletViewmodel extends BaseViewModel {
   /// transfer to wallet
   Future<void> transferToWallet(Map map) async {
     try {
-      _showLoading();
+      _showLoading(notify: true);
       final _reponse = await _walletRepository.transferToWallet(map);
       showsnackBarInfo(_context,
-          message: _reponse.message, bgColor: Pallets.grey800);
+          message: _reponse.message, bgColor: Pallets.green600);
+      PageRouter.goBack(_context);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
@@ -109,6 +110,22 @@ class WalletViewmodel extends BaseViewModel {
       await _walletRepository.withdraw(map);
       showsnackBarInfo(_context,
           message: 'Pending admin\'s approval', bgColor: Pallets.green600);
+      PageRouter.goBack(_context);
+    } catch (e) {
+      showsnackBarInfo(_context,
+          message: e.toString(), bgColor: Pallets.red600);
+    }
+    _hideLoading();
+  }
+
+  /// perform transfer
+  Future<void> transfer(Map map) async {
+    try {
+      _showLoading(notify: true);
+      final _response = await _walletRepository.transfer(map);
+      showsnackBarInfo(_context,
+          message: _response.fromWalletTransaction?.status ?? 'Successful',
+          bgColor: Pallets.green600);
       PageRouter.goBack(_context);
     } catch (e) {
       showsnackBarInfo(_context,

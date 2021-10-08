@@ -54,4 +54,15 @@ class WalletRepository {
       throw e;
     }
   }
+
+  /// [@View] Transfer
+  Future<TransferToWalletModel> transfer(Map map) async {
+    try {
+      final _response = await apiBaseHelper.post(
+          url: '${Paths.transfer}', map: map, options: await getDioHeader());
+      return TransferToWalletModel.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
 }
