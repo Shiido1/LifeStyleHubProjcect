@@ -4,7 +4,7 @@ import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/my_downline/my_downline.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/my_lead_wise.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/my_lead/my_lead_wise.dart';
 import 'package:provider/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../widget/second_icon.dart';

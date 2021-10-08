@@ -34,7 +34,7 @@ class _ViewMyGenerationScreenState extends State<ViewMyGenerationScreen> {
 
   void _getCatchedInfos() async {
     _profileModel = await profileDao!.convert();
-    _viewModel!.getUsersDownline(_profileModel!.id!);
+    _viewModel!.getUsersGenerationDownline(_profileModel!.id!);
     setState(() {});
   }
 
@@ -97,7 +97,7 @@ class _ViewMyGenerationScreenState extends State<ViewMyGenerationScreen> {
                             name: element.user?.name ?? '',
                             email: element.user?.email ?? '',
                             date: fomartDate(element.createdAt!),
-                            packageName: element.package?.name ?? 'M/A',
+                            packageName: element.package?.name ?? 'N/A',
                             referral: 'Referal Name here'),
                       ))
                   .toList()

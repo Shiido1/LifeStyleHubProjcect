@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 
 import 'dio_exceptions.dart';
 
@@ -12,7 +13,6 @@ const _defaultReceiveTimeout = 30000;
 void printDioLogs(Object object) {
   printWrapped(object.toString());
 }
-
 
 void printWrapped(String text) {
   final pattern = new RegExp('.{1,800}'); // 800 is the size of each chunk
@@ -61,6 +61,7 @@ class DioClient {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
+    logger.d(options!.headers);
     try {
       var response = await _dio!.get(
         url!,

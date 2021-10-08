@@ -12,14 +12,14 @@ import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 
-class ViewMyDownlinesScreen extends StatefulWidget {
-  ViewMyDownlinesScreen({Key? key}) : super(key: key);
+class ViewMyLeadsScreen extends StatefulWidget {
+  ViewMyLeadsScreen({Key? key}) : super(key: key);
 
   @override
-  _ViewMyDownlinesScreenState createState() => _ViewMyDownlinesScreenState();
+  _ViewMyLeadsScreenState createState() => _ViewMyLeadsScreenState();
 }
 
-class _ViewMyDownlinesScreenState extends State<ViewMyDownlinesScreen> {
+class _ViewMyLeadsScreenState extends State<ViewMyLeadsScreen> {
   NetworkViewModel? _viewModel;
 
   @override
@@ -34,7 +34,7 @@ class _ViewMyDownlinesScreenState extends State<ViewMyDownlinesScreen> {
 
   void _getCatchedInfos() async {
     _profileModel = await profileDao!.convert();
-    _viewModel!.getUsersDownline(_profileModel!.id!);
+    _viewModel!.getUsersLeadWise(_profileModel!.id!);
     setState(() {});
   }
 
@@ -42,7 +42,7 @@ class _ViewMyDownlinesScreenState extends State<ViewMyDownlinesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getCustomAppBar(context,
-          title: 'My Downlines',
+          title: 'My Lead Wise',
           showLeadig: true,
           centerTitle: true,
           image: _profileModel?.profilePic ?? '',
@@ -91,14 +91,14 @@ class _ViewMyDownlinesScreenState extends State<ViewMyDownlinesScreen> {
                 ],
               ),
               SizedBox(height: 16),
-              ...provider.downlineResponse!
+              ...provider.leadsWise
                   .map((element) => HistroyCard(
                         historyValues: HistoryValues(
-                            name: element.user?.name ?? '',
-                            email: element.user?.email ?? '',
+                            name: element.name ?? '',
+                            email: element.email ?? '',
                             date: fomartDate(element.createdAt!),
-                            packageName: element.package?.name ?? 'N/A',
-                            referral: 'Referal Name here'),
+                            packageName: 'Package name here',
+                            referral: element.referredBy ?? 'N/A'),
                       ))
                   .toList()
             ],

@@ -115,7 +115,7 @@ class _MyDownlineTabState extends State<MyDownlineTab> {
                         name: element.user?.name ?? '',
                         email: element.user?.email ?? '',
                         date: fomartDate(element.createdAt!),
-                        packageName: element.package?.name ?? 'M/A',
+                        packageName: element.package?.name ?? 'N/A',
                         referral: 'Referal Name here'));
               }),
         ],

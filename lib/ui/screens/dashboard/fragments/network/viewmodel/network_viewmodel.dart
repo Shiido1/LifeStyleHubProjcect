@@ -96,12 +96,14 @@ class NetworkViewModel extends BaseViewModel {
   }
 
   List<generation.Data> generationData = [];
+  generation.MyGenerationDownlineResponse? myGenerationDownlineResponse;
 
   /// get users generation downline
   Future<void> getUsersGenerationDownline(int id) async {
     try {
       if (generationData.length == 0) _showLoading();
       final _response = await _networkRepository.getUsersGenerationDownline(id);
+      myGenerationDownlineResponse = _response;
       generationData = _response.generationDownline!.data!;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());

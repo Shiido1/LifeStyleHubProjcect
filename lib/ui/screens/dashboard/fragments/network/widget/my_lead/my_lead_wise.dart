@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/widget/multi_color_widget.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 import '../history_cards.dart';
-import 'view_all_my_generation.dart';
 
-class MyGenerationTab extends StatefulWidget {
-  MyGenerationTab({Key? key}) : super(key: key);
+class MyLeadWiseTab extends StatefulWidget {
+  MyLeadWiseTab({Key? key}) : super(key: key);
 
   @override
-  _MyGenerationTabState createState() => _MyGenerationTabState();
+  _MyLeadWiseTabState createState() => _MyLeadWiseTabState();
 }
 
-class _MyGenerationTabState extends State<MyGenerationTab> {
+class _MyLeadWiseTabState extends State<MyLeadWiseTab> {
   NetworkViewModel? _viewModel;
 
   @override
@@ -35,7 +34,7 @@ class _MyGenerationTabState extends State<MyGenerationTab> {
 
   void _getCatchedInfos() async {
     _profileModel = await profileDao!.convert();
-    _viewModel!.getUsersGenerationDownline(_profileModel!.id!);
+    _viewModel!.getUsersLeadWise(_profileModel!.id!);
     setState(() {});
   }
 
@@ -71,8 +70,7 @@ class _MyGenerationTabState extends State<MyGenerationTab> {
                 ),
                 SizedBox(height: 8),
                 TextView(
-                  text:
-                      '${provider.myGenerationDownlineResponse?.generationDownlineCount ?? 0}',
+                  text: '\$10,000',
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
                   color: Pallets.black,
@@ -94,29 +92,27 @@ class _MyGenerationTabState extends State<MyGenerationTab> {
             ),
           ),
           SizedBox(height: 32),
-          ViewAllButton(
-              title: 'Generation downline history',
-              viewAll: () =>
-                  PageRouter.gotoWidget(ViewMyGenerationScreen(), context)),
+          ViewAllButton(title: 'My lead', viewAll: () => null),
           SizedBox(height: 16),
           ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: provider.generationData.length <= 5
-                  ? provider.generationData.length
+              itemCount: provider.leadsWise.length <= 5
+                  ? provider.leadsWise.length
                   : 5,
               itemBuilder: (context, index) {
-                final element = provider.generationData[index];
+                final element = provider.leadsWise[index];
                 return HistroyCard(
                     historyValues: HistoryValues(
-                        name: element.user?.name ?? '',
-                        email: element.user?.email ?? '',
+                        name: element.name ?? '',
+                        email: element.email ?? '',
                         date: fomartDate(element.createdAt!),
-                        packageName: element.package?.name ?? 'N/A',
-                        referral: 'Referal Name here'));
+                        packageName: 'Package Name',
+                        referral: element.referredBy ?? 'N/A'));
               }),
         ],
       );
+      ;
     });
   }
 }
