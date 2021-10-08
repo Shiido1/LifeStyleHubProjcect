@@ -12,14 +12,14 @@ import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 
-class ViewMyDownlinesScreen extends StatefulWidget {
-  ViewMyDownlinesScreen({Key? key}) : super(key: key);
+class ViewMyGenerationScreen extends StatefulWidget {
+  ViewMyGenerationScreen({Key? key}) : super(key: key);
 
   @override
-  _ViewMyDownlinesScreenState createState() => _ViewMyDownlinesScreenState();
+  _ViewMyGenerationScreenState createState() => _ViewMyGenerationScreenState();
 }
 
-class _ViewMyDownlinesScreenState extends State<ViewMyDownlinesScreen> {
+class _ViewMyGenerationScreenState extends State<ViewMyGenerationScreen> {
   NetworkViewModel? _viewModel;
 
   @override
@@ -42,7 +42,7 @@ class _ViewMyDownlinesScreenState extends State<ViewMyDownlinesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getCustomAppBar(context,
-          title: 'My Downlines',
+          title: 'My Generation',
           showLeadig: true,
           centerTitle: true,
           image: _profileModel?.profilePic ?? '',
@@ -91,7 +91,7 @@ class _ViewMyDownlinesScreenState extends State<ViewMyDownlinesScreen> {
                 ],
               ),
               SizedBox(height: 16),
-              ...provider.downlineResponse!
+              ...provider.generationData
                   .map((element) => HistroyCard(
                         historyValues: HistoryValues(
                             name: element.user?.name ?? '',

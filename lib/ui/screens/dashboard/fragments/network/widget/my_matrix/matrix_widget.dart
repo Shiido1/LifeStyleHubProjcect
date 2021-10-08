@@ -4,9 +4,9 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
-import '../../../../../../helper/helper_handler.dart';
-import '../../../../../../utils/pallets.dart';
-import '../model/generation_model.dart';
+import '../../../../../../../helper/helper_handler.dart';
+import '../../../../../../../utils/pallets.dart';
+import '../../model/generation_model.dart';
 
 class MatrixDisplayWidget extends StatelessWidget {
   final Me? me;
