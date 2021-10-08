@@ -67,17 +67,19 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
                   SizedBox(height: 23),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: _point.pointBreakdown!
-                          .map((point) => PointBreakDownWidget(
-                                packageName: point.packageName ?? '',
-                                packageIcon: point.packageIcon ?? '',
-                                packageReward: point.reward ?? '',
-                                packageCheckOutPoint:
-                                    '${point.checkoutPoints ?? 0}',
-                              ))
-                          .toList(),
-                    ),
+                    child: _point.pointBreakdown == null
+                        ? Container()
+                        : Row(
+                            children: _point.pointBreakdown!
+                                .map((point) => PointBreakDownWidget(
+                                      packageName: point.packageName ?? '',
+                                      packageIcon: point.packageIcon ?? '',
+                                      packageReward: point.reward ?? '',
+                                      packageCheckOutPoint:
+                                          '${point.checkoutPoints ?? 0}',
+                                    ))
+                                .toList(),
+                          ),
                   ),
                   SizedBox(height: 23),
                   ViewAllButton(

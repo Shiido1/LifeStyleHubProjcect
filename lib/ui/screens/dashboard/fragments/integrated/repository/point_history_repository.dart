@@ -8,7 +8,9 @@ class PointHistoryRepository {
   Future<PointHistoryModel> pointHistory() async {
     try {
       final _response = await apiBaseHelper.get(
-          url: Paths.point, options: await getDioHeader());
+          url: Paths.point,
+          queryParameters: {'search': ''},
+          options: await getDioHeader());
       return PointHistoryModel.fromJson(_response);
     } catch (e) {
       throw e;
