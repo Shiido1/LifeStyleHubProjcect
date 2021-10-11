@@ -1,5 +1,6 @@
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/viewmodel/commission_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/viewmodel/package_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -21,5 +22,6 @@ class Providers {
     ChangeNotifierProvider<CommissionViewmodel>(
         create: (_) => CommissionViewmodel()),
     ChangeNotifierProvider<WalletViewmodel>(create: (_) => WalletViewmodel()),
+    ChangeNotifierProvider<PackageViewmodel>(create: (_) => PackageViewmodel()),
   ];
 }
