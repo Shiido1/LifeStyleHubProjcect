@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
@@ -36,7 +37,7 @@ class _BankListScreenState extends State<BankListScreen> {
   void initState() {
     _accountViewmodel = context.read(_accountProvider);
     _accountViewmodel!.init(context);
-    _accountViewmodel!.getBankAccounts();
+    _accountViewmodel!.getMyBankAccounts();
     super.initState();
   }
 
@@ -58,7 +59,11 @@ class _BankListScreenState extends State<BankListScreen> {
             body: Consumer(builder: (_, watch, __) {
               final _accountWatcher = watch(_accountProvider);
               if (_accountWatcher.loading) {
-                return Center(child: CircularProgressIndicator());
+                return Center(
+                    child: SpinKitCubeGrid(
+                  color: Pallets.orange600,
+                  size: 50,
+                ));
               }
               return SafeArea(
                 child: Stack(
@@ -112,13 +117,15 @@ class _BankListScreenState extends State<BankListScreen> {
                                                 if (value == _optionsList.first)
                                                   PageRouter.gotoWidget(
                                                       AddOrEditBankAccountScreen(
-                                                          bank: bank),
+                                                          bank: bank,
+                                                          isEdit: true),
                                                       context,
                                                       animationType:
                                                           PageTransitionType
                                                               .fade);
                                                 else
-                                                  logger.d(value);
+                                                  _accountViewmodel!.deleteBank(
+                                                      bank.id!.toString());
                                               }),
                                           icon: Icon(Icons.more_vert))
                                     ],

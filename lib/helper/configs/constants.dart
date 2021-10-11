@@ -2,11 +2,9 @@ class AppConstants {
   AppConstants._();
 
   static int timeOutDuration = 30;
-  static String? tempToken;
   static String? tempEmail;
   static String? tempPassword;
   static String? usersPrefKey = 'user';
-  static String? usersToken = 'usersToken';
   static String? bearer = 'Bearer ';
 
   static List<String> getStates() {

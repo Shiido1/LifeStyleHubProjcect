@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/ui/screens/bank/account/viewmodel/account_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
@@ -14,8 +15,10 @@ import 'model/get_bank_account_model.dart';
 
 class AddOrEditBankAccountScreen extends StatefulWidget {
   final GetBankAccountModel? bank;
+  final bool isEdit;
 
-  const AddOrEditBankAccountScreen({this.bank, Key? key}) : super(key: key);
+  const AddOrEditBankAccountScreen({this.bank, this.isEdit = false, Key? key})
+      : super(key: key);
 
   @override
   _AddOrEditBankAccountScreenState createState() =>
@@ -44,10 +47,18 @@ class _AddOrEditBankAccountScreenState
 
   @override
   void initState() {
+    _getCatchedInfos();
     _initializeControllers();
     _accountViewmodel = context.read(_accountProvider);
     _accountViewmodel!.init(context);
     super.initState();
+  }
+
+  UsersProfileModel? _profileModel;
+
+  void _getCatchedInfos() async {
+    _profileModel = await profileDao!.convert();
+    setState(() {});
   }
 
   void _initializeControllers() {
@@ -145,13 +156,18 @@ class _AddOrEditBankAccountScreenState
   void _updateUsersInformation() async {
     FocusScope.of(context).unfocus();
     final _response = await profileDao!.convert();
+
+    Map _map = Map<String, dynamic>();
+    _map['name'] = _response.name;
+    _map['account_name'] = _accountNameController!.text;
+    _map['account_no'] = _accountNoController!.text;
+    _map['currency'] = 'Naira';
+
     if (_globalFormKey.currentState!.validate()) {
-      _accountViewmodel!.addBankAccount({
-        'name': _response.name,
-        'account_name': _accountNameController!.text,
-        'account_no': _accountNoController!.text,
-        'currency': 'Naira',
-      });
+      !widget.isEdit
+          ? _accountViewmodel!.addBankAccount(_map)
+          : _accountViewmodel!
+              .updateBankAccount(bank!.id.toString(), _map);
     } else
       setState(() => _autoValidate = true);
   }

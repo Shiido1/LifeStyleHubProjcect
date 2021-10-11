@@ -20,7 +20,7 @@ class BankAccountRepository {
   }
 
   /// [@UPDATE] bank account
-  Future<AddBankAccountModel> updateBankAccount(FormData map,
+  Future<AddBankAccountModel> updateBankAccount(Map map,
       {String id = ''}) async {
     try {
       final _response = await apiBaseHelper.put(
@@ -34,10 +34,10 @@ class BankAccountRepository {
   }
 
   /// [@Get] accounts
-  Future<GetBankAccountModelList> getBankAccounts() async {
+  Future<GetBankAccountModelList> getMyBankAccounts() async {
     try {
       final _response = await apiBaseHelper.get(
-          url: Paths.getBankAccount, options: await getDioHeader());
+          url: Paths.addBankAccount, options: await getDioHeader());
       return GetBankAccountModelList.fromJson(_response);
     } catch (e) {
       throw e;
@@ -48,7 +48,7 @@ class BankAccountRepository {
   Future<GetBankAccountModel> getBankAccountsDetails(String id) async {
     try {
       final _response = await apiBaseHelper.get(
-          url: '${Paths.getBankAccount}/$id', options: await getDioHeader());
+          url: '${Paths.addBankAccount}/$id', options: await getDioHeader());
       return GetBankAccountModel.fromJson(_response);
     } catch (e) {
       throw e;
@@ -59,7 +59,7 @@ class BankAccountRepository {
   Future<DeleteBankAccountModel> deleteBankAccountDetails(String id) async {
     try {
       final _response = await apiBaseHelper.delete(
-          url: '${Paths.getBankAccount}/$id', options: await getDioHeader());
+          url: '${Paths.addBankAccount}/$id', options: await getDioHeader());
       return DeleteBankAccountModel.fromJson(_response);
     } catch (e) {
       throw e;

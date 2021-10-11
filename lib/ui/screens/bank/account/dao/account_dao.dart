@@ -26,6 +26,8 @@ class AccountDao {
 
   Future<void> saveBankAccounts(
       List<GetBankAccountModel>? getBankAccountModel) async {
+    await truncate();
+
     final map = Map<String, Map>.fromIterable(
       getBankAccountModel!,
       key: (g) => (g as GetBankAccountModel).id.toString(),

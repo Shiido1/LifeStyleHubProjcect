@@ -1,10 +1,14 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:path_provider/path_provider.dart';
 
 enum ProfileOptionAction {
   VIEW_IMAGE,
@@ -110,7 +114,7 @@ class ImagePickerHandler {
     return null;
   }
 
-  Future<File> _cropImage(BuildContext context, PickedFile imageFile) async {
+  Future<File?> _cropImage(BuildContext context, PickedFile imageFile) async {
     File? croppedFile = await ImageCropper.cropImage(
         sourcePath: imageFile.path,
         aspectRatioPresets: Platform.isAndroid
@@ -125,6 +129,33 @@ class ImagePickerHandler {
         iosUiSettings: IOSUiSettings(
           title: 'LifeStyleHub',
         ));
-    return croppedFile!;
+    final _response = await _compressImageFiles(croppedFile!);
+
+    return _response;
   }
+
+  Future<File?> _compressImageFiles(File mFile) async {
+    final _dir = await _findLocalPath();
+    final _targetPath = _dir.absolute.path + "/${_generateKey(15)}.jpg";
+    File? _result = await FlutterImageCompress.compressAndGetFile(
+        mFile.path, _targetPath,
+        quality: 10);
+    return _result;
+  }
+
+//* getting local path
+  Future<Directory> _findLocalPath() async {
+    final directory = Platform.isAndroid
+        ? await getExternalStorageDirectory()
+        : await getApplicationDocumentsDirectory();
+    return directory!;
+  }
+
+//* generate key
+  static const _chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  final Random _rnd = Random();
+
+  String _generateKey(int length) => String.fromCharCodes(Iterable.generate(
+      length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 }

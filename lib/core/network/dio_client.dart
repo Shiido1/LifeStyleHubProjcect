@@ -61,7 +61,6 @@ class DioClient {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    logger.d(options!.headers);
     try {
       var response = await _dio!.get(
         url!,

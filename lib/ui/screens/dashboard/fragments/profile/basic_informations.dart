@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import '../../../../../helper/configs/constants.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
+import 'dao/profile_dao.dart';
 import 'model/users_profile_model.dart';
 import '../../../../widgets/bottom_count_down.dart';
 import '../../../../widgets/buttons.dart';
@@ -19,23 +21,18 @@ import 'viewmodel/profile_viewmodel.dart';
 import 'widget/custom_radio_button.dart';
 
 class BasicInformationsScreen extends StatefulWidget {
-  final UsersProfileModel? userInfo;
 
-  const BasicInformationsScreen(this.userInfo, {Key? key}) : super(key: key);
+  const BasicInformationsScreen({Key? key}) : super(key: key);
 
   @override
   _BasicInformationsScreenState createState() =>
-      _BasicInformationsScreenState(userInfo);
+      _BasicInformationsScreenState();
 }
 
 class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
   bool _dateSelected = false;
   bool _stateSelected = false;
   int? _radioID = 0;
-
-  final UsersProfileModel? userInfo;
-
-  _BasicInformationsScreenState(this.userInfo);
 
   final _profileProvider = ChangeNotifierProvider((_) => ProfileViewmodel());
   ProfileViewmodel? _profileViewmodel;
@@ -50,10 +47,18 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
 
   @override
   void initState() {
-    _initializeControllers();
+    _getCatchedInfos();
     _profileViewmodel = context.read(_profileProvider);
     _profileViewmodel!.init(context);
     super.initState();
+  }
+
+  UsersProfileModel? userInfo;
+
+  void _getCatchedInfos() async {
+    userInfo = await profileDao!.convert();
+    _initializeControllers();
+    setState(() {});
   }
 
   void _initializeControllers() {
@@ -63,7 +68,7 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
     _stateController = TextEditingController(text: userInfo?.state ?? '');
     _addressController = TextEditingController(text: userInfo?.address ?? '');
     _dobController = TextEditingController(text: userInfo?.dob ?? '');
-    if (userInfo!.sex!.toLowerCase() == 'male') {
+    if (userInfo?.sex!.toLowerCase() == 'male') {
       _radioID = 0;
     } else {
       _radioID = 1;
@@ -200,31 +205,19 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
     });
   }
 
-  Future<FormData> _getMappedData() async {
-    return FormData.fromMap({
-      '_method': 'PATCH',
-      'name': _fullNameController!.text,
-      'phone_no': _phoneNumberController!.text,
-      'sex': _radioID == 0 ? 'Male' : 'Female',
-      'state': _stateController!.text,
-      'address': _addressController!.text,
-      'dob': _dobController!.text,
-    });
-  }
-
   void _updateUsersInformation() async {
     FocusScope.of(context).unfocus();
     if (_globalFormKey.currentState!.validate()) {
-      final _mappedData = await _getMappedData();
-      _profileViewmodel!.updateUsersProfile({
+    await  _profileViewmodel!.updateUsersProfile({
         '_method': 'PATCH',
         'name': _fullNameController!.text,
-        // 'phone_no': _phoneNumberController!.text,
+        'phone_no': _phoneNumberController!.text,
         'sex': _radioID == 0 ? 'Male' : 'Female',
         'state': _stateController!.text,
         'address': _addressController!.text,
         'dob': _dobController!.text,
       });
+    _getCatchedInfos();
     } else
       setState(() => _autoValidate = true);
   }

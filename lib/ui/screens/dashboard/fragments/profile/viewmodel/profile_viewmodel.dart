@@ -55,8 +55,8 @@ class ProfileViewmodel extends BaseViewModel {
   Future<void> updateUsersProfile(formData) async {
     try {
       _showLoading(notify: true);
-      await _profileRepository.updateAUsersProfile(formData);
-      await getUsersProfile();
+      final _response = await _profileRepository.updateAUsersProfile(formData);
+      profileDao!.saveProfile(_response);
       showsnackBarInfo(_context, message: 'Update successful');
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');

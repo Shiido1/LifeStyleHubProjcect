@@ -64,15 +64,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CircularImage(
-                onTap: () => _pickImages(),
-                radius: 70,
-                path: _profileModel?.profilePic ?? '',
-                initial: _profileModel?.profilePic == null
-                    ? _profileModel?.name?.substring(0, 2)
-                    : '',
-                showInitialTextAbovePicture: true,
-              ),
+              _file != null
+                  ? CircleAvatar(
+                      radius: 70,
+                      backgroundImage: FileImage(_file!),
+                    )
+                  : CircularImage(
+                      onTap: () => _pickImages(),
+                      radius: 70,
+                      path: _profileModel?.profilePic ?? '',
+                      initial: _profileModel?.profilePic == null
+                          ? _profileModel?.name?.substring(0, 2)
+                          : '',
+                      showInitialTextAbovePicture: true,
+                    ),
               SizedBox(height: 23),
               TextView(
                 text: _profileModel?.name ?? '',
@@ -150,13 +155,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10)),
             onTap: () => PageRouter.gotoWidget(
-                BasicInformationsScreen(_profileModel), context,
+                BasicInformationsScreen(), context,
                 animationType: PageTransitionType.fade),
           ),
           CustomTileWidget(
             title: 'Next of Kin information',
             onTap: () => PageRouter.gotoWidget(
-                NextOfKinInformationScreen(_profileModel?.nok), context,
+                NextOfKinInformationScreen(), context,
                 animationType: PageTransitionType.fade),
           ),
           CustomTileWidget(
@@ -253,12 +258,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       _image.pickImage(
           context: context,
-          file: (file) {
+          file: (file) async{
             _file = file;
+           await _profileViewmodel!.updateUsersProfile(await _getMappedData());
+           _getCatchedInfos();
             setState(() {});
           });
-
-      _profileViewmodel!.updateUsersProfile(await _getMappedData());
     } catch (e) {
       logger.e(e);
     }

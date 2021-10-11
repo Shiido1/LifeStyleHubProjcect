@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../helper/configs/constants.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
+import 'dao/profile_dao.dart';
 import 'model/users_profile_model.dart';
 import '../../../../widgets/bottom_count_down.dart';
 import '../../../../widgets/buttons.dart';
@@ -19,21 +20,15 @@ import 'viewmodel/profile_viewmodel.dart';
 import 'widget/custom_radio_button.dart';
 
 class NextOfKinInformationScreen extends StatefulWidget {
-  final Nok? nok;
-
-  const NextOfKinInformationScreen(this.nok, {Key? key}) : super(key: key);
+  const NextOfKinInformationScreen({Key? key}) : super(key: key);
 
   @override
   _NextOfKinInformationScreenState createState() =>
-      _NextOfKinInformationScreenState(nok);
+      _NextOfKinInformationScreenState();
 }
 
 class _NextOfKinInformationScreenState
     extends State<NextOfKinInformationScreen> {
-  final Nok? nok;
-
-  _NextOfKinInformationScreenState(this.nok);
-
   final _profileProvider = ChangeNotifierProvider((_) => ProfileViewmodel());
   ProfileViewmodel? _profileViewmodel;
 
@@ -44,13 +39,23 @@ class _NextOfKinInformationScreenState
   var _globalFormKey = GlobalKey<FormState>();
   bool _autoValidate = false;
   bool _relationshipSelected = false;
+  Nok? nok;
 
   @override
   void initState() {
-    _initializeControllers();
     _profileViewmodel = context.read(_profileProvider);
     _profileViewmodel!.init(context);
+    _getCatchedInfos();
     super.initState();
+  }
+
+  UsersProfileModel? _profileModel;
+
+  void _getCatchedInfos() async {
+    _profileModel = await profileDao!.convert();
+    nok = _profileModel?.nok;
+    _initializeControllers();
+    setState(() {});
   }
 
   void _initializeControllers() {

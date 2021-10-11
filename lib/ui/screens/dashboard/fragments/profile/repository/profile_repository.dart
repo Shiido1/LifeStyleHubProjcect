@@ -21,8 +21,8 @@ class ProfileRepository {
   /// updates a users profile
   Future<UsersProfileModel> updateAUsersProfile(body) async {
     try {
-      final _response = await apiBaseHelper.patch(Paths.user, body,
-          options: await getDioHeader());
+      final _response = await apiBaseHelper.post(
+          url: Paths.user, map: body, options: await getDioHeader());
       return UsersProfileModel.fromJson(_response);
     } catch (e) {
       throw e;

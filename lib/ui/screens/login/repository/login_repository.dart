@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:lifestyle_hub/core/data/session_manager.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/dao/dashboardd_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/repository/profile_repository.dart';
@@ -19,8 +20,8 @@ class LoginRepository {
       final _response = await apiBaseHelper.post(url: Paths.login, map: map);
       final _login = LoginModel.fromJson(_response);
 
-      /// get token temporary
-      AppConstants.tempToken = _login.token;
+      /// cache login data
+      SessionManager.instance.authToken = _login.token!;
 
       /// requests for users profile
       final _usersInformationResponse =
@@ -35,9 +36,6 @@ class LoginRepository {
       /// cache users dashboard
       dashboardDao!.saveDashboard(_dashboard.toJson());
 
-      /// cache login data
-      await prefManager.saveValue(
-          key: AppConstants.usersToken, value: _login.token);
       return _login;
     } catch (e) {
       throw e;

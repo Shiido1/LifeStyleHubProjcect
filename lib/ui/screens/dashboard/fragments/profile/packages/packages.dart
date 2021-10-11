@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'dao/my_account_package_dao.dart';
 import '../../../widget/active_packages.dart';
@@ -46,7 +47,10 @@ class _PackageScreenState extends State<PackageScreen> {
         body: Consumer(builder: (_, watch, __) {
           final _packageWatch = watch(_profilePackageProvider);
           if (_packageWatch.loading) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: SpinKitCubeGrid(
+              color: Pallets.orange600,
+              size: 50,
+            ));
           }
           return ValueListenableBuilder(
               valueListenable: accountPackageDao!.getListenable()!,

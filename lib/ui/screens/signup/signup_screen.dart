@@ -113,7 +113,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             : Pallets.disabledIconColor,
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 23,
                       ),
                       EditFormField(
                         floatingLabel: 'Email address',
@@ -130,7 +130,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         validator: Validators.validateEmail(),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 23,
                       ),
                       EditFormField(
                         floatingLabel: 'Enter password',
@@ -157,7 +157,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         validator: Validators.validatePlainPassword()!,
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 23,
                       ),
                       EditFormField(
                         floatingLabel: 'Re-enter password',

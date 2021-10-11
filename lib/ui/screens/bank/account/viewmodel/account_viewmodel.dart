@@ -41,21 +41,21 @@ class BankAccountViewmodel extends BaseViewModel {
     try {
       _showLoading();
       await _accountRepository.addBankAccount(map);
-      getBankAccounts();
+      getMyBankAccounts();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
-    } finally {
-      logger.d('finally called');
     }
     _hideLoading();
   }
 
   /// updates bank account
-  Future<void> updateBankAccount(String id, FormData map) async {
+  Future<void> updateBankAccount(String id, Map map) async {
     try {
       _showLoading();
       await _accountRepository.updateBankAccount(map, id: id);
-      getBankAccounts();
+      showsnackBarInfo(_context,
+          message: 'Update successful', bgColor: Pallets.green600);
+      getMyBankAccounts();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
@@ -63,10 +63,10 @@ class BankAccountViewmodel extends BaseViewModel {
   }
 
   /// get list of bank accounts
-  Future<void> getBankAccounts() async {
+  Future<void> getMyBankAccounts() async {
     try {
       if (accountDao!.box!.isEmpty) _showLoading();
-      final _response = await _accountRepository.getBankAccounts();
+      final _response = await _accountRepository.getMyBankAccounts();
       accountDao!.saveBankAccounts(_response.getBankAccountModel);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
@@ -88,12 +88,13 @@ class BankAccountViewmodel extends BaseViewModel {
   }
 
   /// deletes a single bank account details
-  Future<void> deleteMarketting(String id) async {
+  Future<void> deleteBank(String id) async {
     try {
-      _showLoading();
+      _showLoading(notify: true);
       final _response = await _accountRepository.deleteBankAccountDetails(id);
       showsnackBarInfo(_context,
-          message: _response.message, bgColor: Pallets.grey800);
+          message: _response.message, bgColor: Pallets.green600);
+      getMyBankAccounts();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

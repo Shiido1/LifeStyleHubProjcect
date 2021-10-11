@@ -101,7 +101,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
           showLeadig: true,
           centerTitle: true,
           image: _profileModel?.profilePic ?? '',
-          initial: _profileModel?.name ?? 'LH'),
+          initial: _profileModel?.name ?? 'LH',
+          onTap: () =>
+              PageRouter.gotoWidget(DashboardScreen(index: 10), context,
+                  animationType: PageTransitionType.fade, clearStack: true)
+      ),
       drawer: getDrawer(context, _index, _profileModel),
       body: SafeArea(
         child: Stack(

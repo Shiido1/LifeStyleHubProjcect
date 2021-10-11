@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:lifestyle_hub/core/data/session_manager.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:path/path.dart';
@@ -34,24 +35,11 @@ void showsnackBarInfo(BuildContext? context,
   ));
 }
 
-/// get header
-Future<Map<String, String>> getHeader() async {
-  Map<String, String> _header = Map<String, String>();
-
-  var _data = await prefManager.getCachedData(key: AppConstants.usersPrefKey);
-  LoginModel _user = LoginModel.fromJson(_data);
-  String? _bearer = _user != null ? _user.token : AppConstants.tempToken;
-  _header[HttpHeaders.authorizationHeader] = 'Bearer $_bearer';
-  return _header;
-}
-
 /// @ get headers
-Future<Options> getDioHeader({String? token}) async {
+Future<Options> getDioHeader() async {
   Map<String, String> _header = Map<String, String>();
-  var _token =
-      await prefManager.getStringValues(key: AppConstants.usersPrefKey);
-  String? _bearer = _token != null ? _token : AppConstants.tempToken;
-  _header[HttpHeaders.authorizationHeader] = 'Bearer $_bearer';
+  _header[HttpHeaders.authorizationHeader] =
+      'Bearer ${SessionManager.instance.authToken}';
   _header[HttpHeaders.contentTypeHeader] = 'multipart/form-data';
   _header[HttpHeaders.acceptHeader] = 'application/json';
   _header[HttpHeaders.contentEncodingHeader] = 'gzip, deflate, br';

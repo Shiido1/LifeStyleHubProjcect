@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:lifestyle_hub/helper/helper_handler.dart';
 import '../../../../helper/configs/constants.dart';
 import '../../../../helper/configs/instances.dart';
 import '../model/basic_information_model.dart';
@@ -13,12 +14,7 @@ class InformationRepository {
   Future<BasicInformationModel> registerBasicInformation(
       {required Map map}) async {
     final _response = await apiBaseHelper.post(
-        url: Paths.basicInformation,
-        map: map,
-        options: Options(headers: {
-          HttpHeaders.authorizationHeader:
-              '${AppConstants.bearer!}${AppConstants.tempToken!}'
-        }));
+        url: Paths.basicInformation, map: map, options: await getDioHeader());
     return BasicInformationModel.fromJson(_response);
   }
 
@@ -27,12 +23,7 @@ class InformationRepository {
       {required Map map}) async {
     try {
       final _response = await apiBaseHelper.post(
-          url: Paths.workAndBanking,
-          map: map,
-          options: Options(headers: {
-            HttpHeaders.authorizationHeader:
-                '${AppConstants.bearer!}${AppConstants.tempToken!}'
-          }));
+          url: Paths.workAndBanking, map: map, options: await getDioHeader());
 
       return WorkInformationModel.fromJson(_response);
     } catch (e) {

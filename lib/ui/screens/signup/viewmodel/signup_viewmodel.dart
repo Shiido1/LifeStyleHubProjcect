@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/core/data/session_manager.dart';
 
 import '../../../../helper/configs/constants.dart';
 import '../../../../helper/helper_handler.dart';
@@ -41,7 +42,9 @@ class RegisterViewModel extends BaseViewModel {
     try {
       _showLoading();
       final _response = await _registerRepository.register(map: map);
-      AppConstants.tempToken = _response.token;
+
+      /// cache users token
+      SessionManager.instance.authToken = _response.token!;
       AppConstants.tempEmail = map['email'];
       AppConstants.tempPassword = map['password'];
       _hideLoading();
