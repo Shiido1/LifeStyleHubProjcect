@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../../../helper/configs/instances.dart';
@@ -106,11 +107,11 @@ class ProfileViewmodel extends BaseViewModel {
   /// change users password
   Future<void> changeUsersPassword(Map map) async {
     try {
-      _showLoading();
+      _showLoading(notify: true);
       final _response = await _profileRepository.changeUsersPassword(map);
-      showsnackBarInfo(_context, message: _response.message ?? '');
+      showsnackBarInfo(_context,
+          message: _response.message ?? '', bgColor: Pallets.green600);
     } catch (e) {
-      logger.wtf('An unexpected error occurred! => $e');
       showsnackBarInfo(_context, message: e.toString());
     }
     _hideLoading();
