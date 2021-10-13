@@ -39,8 +39,11 @@ class BankAccountViewmodel extends BaseViewModel {
   /// creates bank account
   Future<void> addBankAccount(Map map) async {
     try {
-      _showLoading();
-      await _accountRepository.addBankAccount(map);
+      _showLoading(notify: true);
+      final _response = await _accountRepository.addBankAccount(map);
+      showsnackBarInfo(this._context,
+          message: _response.message ?? 'Success', bgColor: Pallets.green600);
+
       getMyBankAccounts();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());

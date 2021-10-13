@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/ui/screens/bank/account/viewmodel/account_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
@@ -10,6 +9,7 @@ import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
 import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:lifestyle_hub/utils/validators.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'model/get_bank_account_model.dart';
 
@@ -40,16 +40,14 @@ class _AddOrEditBankAccountScreenState
   var _globalFormKey = GlobalKey<FormState>();
   bool _autoValidate = false;
 
-  final _accountProvider =
-      ChangeNotifierProvider((ref) => BankAccountViewmodel());
-
   BankAccountViewmodel? _accountViewmodel;
 
   @override
   void initState() {
     _getCatchedInfos();
     _initializeControllers();
-    _accountViewmodel = context.read(_accountProvider);
+    _accountViewmodel =
+        Provider.of<BankAccountViewmodel>(context, listen: false);
     _accountViewmodel!.init(context);
     super.initState();
   }
@@ -72,8 +70,7 @@ class _AddOrEditBankAccountScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (_, watch, __) {
-      final _bankWatcher = watch(_accountProvider);
+    return Consumer<BankAccountViewmodel>(builder: (_, _bankWatcher, __) {
       return LoadingOverlay(
         isLoading: _bankWatcher.loading,
         child: Scaffold(
@@ -166,8 +163,7 @@ class _AddOrEditBankAccountScreenState
     if (_globalFormKey.currentState!.validate()) {
       !widget.isEdit
           ? _accountViewmodel!.addBankAccount(_map)
-          : _accountViewmodel!
-              .updateBankAccount(bank!.id.toString(), _map);
+          : _accountViewmodel!.updateBankAccount(bank!.id.toString(), _map);
     } else
       setState(() => _autoValidate = true);
   }
