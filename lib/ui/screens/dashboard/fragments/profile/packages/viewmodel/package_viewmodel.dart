@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/package_subcription_response.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/view_packages_model.dart';
 import '../../../../../../../helper/configs/instances.dart';
 import '../../../../../../../helper/helper_handler.dart';
 import '../../../../../../../provider/_base_viewmodels.dart';
@@ -34,9 +36,9 @@ class PackageViewmodel extends BaseViewModel {
   }
 
   /// subscribe to package
-  Future<void> subscribe(String id, Map map) async {
+  Future<void> subscribe(int id, Map map) async {
     try {
-      _showLoading();
+      _showLoading(notify: true);
       final _reponse = await _packageRepository.payment(id, map);
       logger.d(_reponse.toJson());
     } catch (e) {
@@ -45,41 +47,35 @@ class PackageViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
+  List<ActivePackages>? activePackages = [];
+  List<ActivePackages>? completedPackages = [];
+  List<ActivePackages>? inactivePackages = [];
+
   /// get list of packages
   Future<void> getPackages() async {
     try {
       if (packageDao!.box!.isEmpty) _showLoading();
       final _response = await _packageRepository.getListOfPackages();
-      packageDao!.savePackages(_response.viewPackagesModel);
+      activePackages = _response.activePackages;
+      completedPackages = _response.completedPackages;
+      inactivePackages = _response.inactivePackages;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
     _hideLoading();
   }
 
-  /// get single of package details
-  Future<void> getPackagesDetails(String id) async {
+  List<PackageSubcriptionResponse>? packageListResponse = [];
+
+  /// get list of packages for subscribing
+  Future<void> getAvailablePackages() async {
     try {
-      _showLoading();
-      final _reponse = await _packageRepository.getPackageDetail(id);
-      logger.d(_reponse.toJson());
-      _hideLoading();
+      if (packageListResponse!.length == 0) _showLoading();
+      final _response = await _packageRepository.getAvailablePackages();
+      packageListResponse = _response.packageList;
     } catch (e) {
-      _hideLoading();
       showsnackBarInfo(this._context, message: e.toString());
     }
-  }
-
-  /// get my account packages
-  Future<void> getMyAccountPackages() async {
-    try {
-      if (accountPackageDao!.box!.isEmpty) _showLoading();
-      final _reponse = await _packageRepository.getMyAccountPackages();
-      accountPackageDao!.saveAccountPackages(_reponse.myAccountModelList);
-      _hideLoading();
-    } catch (e) {
-      logger.e(e.toString());
-      _hideLoading();
-    }
+    _hideLoading();
   }
 }

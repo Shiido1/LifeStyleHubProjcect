@@ -101,7 +101,7 @@ CountDownTimer getDateTime(String date) {
 
 /// format currency
 String formatCurrency(dynamic i) {
-  return NumberFormat.simpleCurrency().format(i);
+  return NumberFormat.simpleCurrency().format(i).replaceAll('.00', '');
 }
 
 //* getting local path
@@ -131,7 +131,7 @@ String getFileName(File file) {
 double getPercentage({num? directReferred, num? directRequired}) {
   double _answer = directReferred! / directRequired!;
   double _percentage = _answer * 100;
-  return 0 / 100;
+  return double.parse(_percentage.toStringAsPrecision(2)) /100;
 }
 
 void copyToClipBoard(BuildContext? context, String text) {

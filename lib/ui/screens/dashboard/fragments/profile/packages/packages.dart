@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:provider/provider.dart';
 import 'dao/my_account_package_dao.dart';
 import '../../../widget/active_packages.dart';
 import '../../../../../widgets/bottom_count_down.dart';
@@ -22,15 +23,13 @@ class PackageScreen extends StatefulWidget {
 class _PackageScreenState extends State<PackageScreen> {
   int? _tabIndex = 0;
 
-  final _profilePackageProvider =
-      ChangeNotifierProvider((_) => PackageViewmodel());
   PackageViewmodel? _packageViewmodel;
 
   @override
   void initState() {
-    _packageViewmodel = context.read(_profilePackageProvider);
+    _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);
     _packageViewmodel!.init(context);
-    _packageViewmodel!.getMyAccountPackages();
+    _packageViewmodel!.getPackages();
     super.initState();
   }
 
@@ -44,119 +43,109 @@ class _PackageScreenState extends State<PackageScreen> {
             showMoreMenu: true,
             centerTitle: true,
             onTap: () => null),
-        body: Consumer(builder: (_, watch, __) {
-          final _packageWatch = watch(_profilePackageProvider);
+        body: Consumer<PackageViewmodel>(builder: (_, _packageWatch, __) {
           if (_packageWatch.loading) {
-            return Center(child: SpinKitCubeGrid(
+            return Center(
+                child: SpinKitCubeGrid(
               color: Pallets.orange600,
               size: 50,
             ));
           }
-          return ValueListenableBuilder(
-              valueListenable: accountPackageDao!.getListenable()!,
-              builder: (_, Box<dynamic> box, __) {
-                List<MyAccountsModel> _packageList =
-                    accountPackageDao!.convert(box).toList();
-                return SafeArea(
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
+          return SafeArea(
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Pallets.orange50),
+                        child: Row(
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Pallets.orange50),
-                              child: Row(
-                                children: [
-                                  Tabs(
-                                    defaultID: 0,
-                                    dynamicID: _tabIndex,
-                                    title: 'Active',
-                                    onTap: () => setState(() => _tabIndex = 0),
-                                  ),
-                                  Tabs(
-                                    defaultID: 1,
-                                    dynamicID: _tabIndex,
-                                    title: 'Completed',
-                                    onTap: () => setState(() => _tabIndex = 1),
-                                  ),
-                                  Tabs(
-                                    defaultID: 2,
-                                    dynamicID: _tabIndex,
-                                    title: 'Inactive',
-                                    onTap: () => setState(() => _tabIndex = 2),
-                                  ),
-                                ],
-                              ),
+                            Tabs(
+                              defaultID: 0,
+                              dynamicID: _tabIndex,
+                              title: 'Active',
+                              onTap: () => setState(() => _tabIndex = 0),
                             ),
-                            SizedBox(
-                              height: 23,
+                            Tabs(
+                              defaultID: 1,
+                              dynamicID: _tabIndex,
+                              title: 'Completed',
+                              onTap: () => setState(() => _tabIndex = 1),
                             ),
-                            Expanded(
-                              child: ListView(
-                                children: [
-                                  if (_tabIndex! == 0)
-                                    ..._packageList
-                                        .map((package) => Visibility(
-                                            visible:
-                                                package.status!.toLowerCase() ==
-                                                    'active',
-                                            child: Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 23),
-                                                child: ActivePackageWidget(
-                                                  title: 'Active',
-                                                  subtitle: 'Subtitle',
-                                                  spaceHeight: 31,
-                                                ))))
-                                        .toList(),
-                                  if (_tabIndex! == 1)
-                                    ..._packageList
-                                        .map((package) => Visibility(
-                                            visible:
-                                                package.status!.toLowerCase() ==
-                                                    'completed',
-                                            child: Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 23),
-                                                child: ActivePackageWidget(
-                                                  title: 'Active',
-                                                  subtitle: 'Subtitle',
-                                                  spaceHeight: 31,
-                                                ))))
-                                        .toList(),
-                                  if (_tabIndex! == 2)
-                                    ..._packageList
-                                        .map((package) => Visibility(
-                                            visible:
-                                                package.status!.toLowerCase() ==
-                                                    'inactive',
-                                            child: Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 23),
-                                                child: ActivePackageWidget(
-                                                  title: 'Active',
-                                                  subtitle: 'Subtitle',
-                                                  spaceHeight: 31,
-                                                ))))
-                                        .toList(),
-                                  SizedBox(
-                                    height: 40,
-                                  )
-                                ],
-                              ),
+                            Tabs(
+                              defaultID: 2,
+                              dynamicID: _tabIndex,
+                              title: 'Inactive',
+                              onTap: () => setState(() => _tabIndex = 2),
                             ),
                           ],
                         ),
                       ),
-                      ButtomCountDownWidget()
+                      SizedBox(
+                        height: 23,
+                      ),
+                      Expanded(
+                        child: ListView(
+                          children: [
+                            /// RETURNS ACTIVE PACKAGES
+                            if (_tabIndex! == 0)
+                              ..._packageWatch.activePackages!
+                                  .map((package) => ActivePackageWidget(
+                                        title: package.name ?? '',
+                                        subtitle: package.type ?? '',
+                                        percentage: getPercentage(
+                                            directReferred:
+                                                package.downlinesAcquired ?? 0,
+                                            directRequired:
+                                                package.downlinesRequired ?? 0),
+                                      ))
+                                  .toList(),
+
+                            /// RETURNS COMPLETED PACKAGES
+                            if (_tabIndex! == 1)
+                              ..._packageWatch.completedPackages!
+                                  .map((package) => ActivePackageWidget(
+                                        title: package.name ?? '',
+                                        subtitle: package.type ?? '',
+                                        percentage: getPercentage(
+                                            directReferred:
+                                                package.downlinesAcquired ?? 0,
+                                            directRequired:
+                                                package.downlinesRequired ?? 0),
+                                      ))
+                                  .toList(),
+
+                            /// RETURNS IN-ACTIVE PACKAGES
+                            if (_tabIndex! == 2)
+                              ..._packageWatch.inactivePackages!
+                                  .map((package) => ActivePackageWidget(
+                                        title: package.name ?? '',
+                                        subtitle: package.type ?? '',
+                                        percentage: getPercentage(
+                                            directReferred:
+                                                package.downlinesAcquired ?? 0,
+                                            directRequired:
+                                                package.downlinesRequired ?? 0),
+                                      ))
+                                  .toList(),
+                            SizedBox(
+                              height: 40,
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                );
-              });
+                ),
+                ButtomCountDownWidget()
+              ],
+            ),
+          );
         }));
   }
 }

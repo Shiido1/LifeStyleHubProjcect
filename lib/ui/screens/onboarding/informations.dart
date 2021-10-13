@@ -17,81 +17,79 @@ class GetStartedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Consumer2<TabViewModel, InformationViewModel>(
-        builder: (context, provider, info, child) {
-          return LoadingOverlay(
-            isLoading: info.loading,
-            child: Scaffold(
-              appBar: AppBar(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                automaticallyImplyLeading: false,
-              ),
-              body: SingleChildScrollView(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 32),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ImageLoader(
-                        path: AppImages.logo,
-                        height: 80,
-                        width: 80,
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              thickness: 4,
-                              color: Pallets.orange500,
-                            ),
+    return Consumer2<TabViewModel, InformationViewModel>(
+      builder: (context, provider, info, child) {
+        return LoadingOverlay(
+          isLoading: info.loading,
+          child: Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              automaticallyImplyLeading: false,
+            ),
+            body: SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 32),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ImageLoader(
+                      path: AppImages.logo,
+                      height: 80,
+                      width: 80,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            thickness: 4,
+                            color: Pallets.orange500,
                           ),
-                          SizedBox(width: 17),
-                          Expanded(
-                            child: Divider(
-                              thickness: 4,
-                              color: provider.index! >= 1
-                                  ? Pallets.orange500
-                                  : Pallets.grey200,
-                            ),
+                        ),
+                        SizedBox(width: 17),
+                        Expanded(
+                          child: Divider(
+                            thickness: 4,
+                            color: provider.index! >= 1
+                                ? Pallets.orange500
+                                : Pallets.grey200,
                           ),
-                          SizedBox(width: 17),
-                          Expanded(
-                            child: Divider(
-                              thickness: 4,
-                              color: provider.index! >= 2
-                                  ? Pallets.orange500
-                                  : Pallets.grey200,
-                            ),
+                        ),
+                        SizedBox(width: 17),
+                        Expanded(
+                          child: Divider(
+                            thickness: 4,
+                            color: provider.index! >= 2
+                                ? Pallets.orange500
+                                : Pallets.grey200,
                           ),
-                          SizedBox(width: 17),
-                          Expanded(
-                            child: Divider(
-                              thickness: 4,
-                              color: provider.index! >= 3
-                                  ? Pallets.orange500
-                                  : Pallets.grey200,
-                            ),
+                        ),
+                        SizedBox(width: 17),
+                        Expanded(
+                          child: Divider(
+                            thickness: 4,
+                            color: provider.index! >= 3
+                                ? Pallets.orange500
+                                : Pallets.grey200,
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 32,
-                      ),
-                      _switchTabs(provider)
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 32,
+                    ),
+                    _switchTabs(provider)
+                  ],
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

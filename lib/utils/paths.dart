@@ -21,7 +21,7 @@ class Paths {
   static String basicInformation = 'api/basic';
   static String workAndBanking = 'api/work-banking';
   static String addBankAccount = 'api/user/bank-accounts';
-  static String packages = 'api/packages';
+  static String packages = 'api/accounts/package-status';
   static String tickets = 'api/tickets';
   static String departments = 'api/departments';
   static String point = 'api/points';
@@ -32,6 +32,7 @@ class Paths {
   static String updateUsersBank = 'api/bank';
   static String changePassword = 'api/change-password';
   static String accounts = 'api/user/accounts';
+  static String subscribeToPackage = 'api/packages';
   static String accountDetails = 'api/';
   static String usersVPP = 'api/user/vpp';
   static String withdraw = 'api/wallet/withdraw';

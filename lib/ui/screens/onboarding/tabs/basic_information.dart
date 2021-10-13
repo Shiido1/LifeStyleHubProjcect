@@ -63,7 +63,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           textAlign: TextAlign.left,
         ),
         SizedBox(
-          height: 8,
+          height: 23,
         ),
         TextView(
           text:
@@ -74,7 +74,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           textAlign: TextAlign.left,
         ),
         SizedBox(
-          height: 8,
+          height: 23,
         ),
         EditFormField(
           floatingLabel: 'Full name',
@@ -82,7 +82,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           controller: _fullNameController,
         ),
         SizedBox(
-          height: 8,
+          height: 23,
         ),
         EditFormField(
           floatingLabel: 'Phone number',
@@ -90,7 +90,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           controller: _phoneNumberController,
         ),
         SizedBox(
-          height: 8,
+          height: 23,
         ),
         EditFormField(
           floatingLabel: 'State/province',
@@ -109,7 +109,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           }),
         ),
         SizedBox(
-          height: 8,
+          height: 23,
         ),
         EditFormField(
           floatingLabel: 'Address',
@@ -117,7 +117,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           controller: _addressController,
         ),
         SizedBox(
-          height: 8,
+          height: 23,
         ),
         EditFormField(
           floatingLabel: 'Sex',
@@ -135,7 +135,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           }),
         ),
         SizedBox(
-          height: 8,
+          height: 23,
         ),
         EditFormField(
           floatingLabel: 'Date of Birth',

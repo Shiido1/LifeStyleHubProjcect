@@ -24,20 +24,21 @@ class PackageDao {
     return HiveBoxes.openBox<Map>(HiveBoxes.package);
   }
 
-  Future<void> savePackages(List<ViewPackagesModel>? viewPackagesList) async {
-    final map = Map<String, Map>.fromIterable(
-      viewPackagesList!,
-      key: (g) => (g as ViewPackagesModel).id.toString(),
-      value: (g) => (g as ViewPackagesModel).toJson(),
-    );
-    await _box!.putAll(map);
+  Future<void> savePackages(List<ViewPackagesModelList>? viewPackagesList) async {
+    // final map = Map<String, Map>.fromIterable(
+    //   viewPackagesList!,
+    //   key: (g) => (g as ViewPackagesModelList).id.toString(),
+    //   value: (g) => (g as ViewPackagesModel).toJson(),
+    // );
+    await _box!.putAll({});
   }
 
-  List<ViewPackagesModel> convert(Box box) {
-    Map<String, dynamic> raw = new Map<String, dynamic>.from(box.toMap());
-    return raw.values
-        .map((e) => ViewPackagesModel.fromJson(json.decode(json.encode(e))))
-        .toList();
+  List<ViewPackagesModelList> convert(Box box) {
+    // Map<String, dynamic> raw = new Map<String, dynamic>.from(box.toMap());
+    // return raw.values
+    //     .map((e) => ViewPackagesModel.fromJson(json.decode(json.encode(e))))
+    //     .toList();
+    return [];
   }
 
   ValueListenable<Box>? getListenable({List<String>? keys}) {

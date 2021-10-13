@@ -76,11 +76,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     eventBus.on().listen((event) async {
-      if (event is UserLoggedInEvent && event.logUserOut!) {
-        await HiveBoxes.logOut();
-        PageRouter.gotoWidget(LoginScreen(), context,
-            clearStack: true, animationType: PageTransitionType.fade);
-      }
+      // if (event is UserLoggedInEvent && event.logUserOut!) {
+      //   await HiveBoxes.logOut();
+      //   PageRouter.gotoWidget(LoginScreen(), context,
+      //       clearStack: true, animationType: PageTransitionType.fade);
+      // }
     });
     _getCatchedInfos();
     super.initState();
@@ -102,10 +102,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           centerTitle: true,
           image: _profileModel?.profilePic ?? '',
           initial: _profileModel?.name ?? 'LH',
-          onTap: () =>
-              PageRouter.gotoWidget(DashboardScreen(index: 10), context,
-                  animationType: PageTransitionType.fade, clearStack: true)
-      ),
+          onTap: () => PageRouter.gotoWidget(
+              DashboardScreen(index: 10), context,
+              animationType: PageTransitionType.fade, clearStack: true)),
       drawer: getDrawer(context, _index, _profileModel),
       body: SafeArea(
         child: Stack(
