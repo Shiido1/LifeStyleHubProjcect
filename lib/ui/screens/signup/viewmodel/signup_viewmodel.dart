@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/core/data/session_manager.dart';
+import '../../../../core/data/session_manager.dart';
 
 import '../../../../helper/configs/constants.dart';
 import '../../../../helper/helper_handler.dart';

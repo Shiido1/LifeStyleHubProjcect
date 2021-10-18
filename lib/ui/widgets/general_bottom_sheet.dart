@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../helper/helper_handler.dart';
+import '../../helper/routes/navigation.dart';
+import '../../utils/pallets.dart';
 
 import 'text_views.dart';
 

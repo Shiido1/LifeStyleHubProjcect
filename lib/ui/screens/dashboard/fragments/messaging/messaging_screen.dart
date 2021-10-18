@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
+import '../profile/dao/profile_dao.dart';
+import '../profile/model/users_profile_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../../helper/routes/navigation.dart';
@@ -201,21 +201,21 @@ class _MessagingScreenState extends State<MessagingScreen>
                               },
                             ),
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            height: 48,
-                            width: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Pallets.orange500),
-                            child: Center(
-                                child: ImageLoader(
-                                    onTap: () => showTicketFiltering(context,
-                                        callBack: (filter) {}),
-                                    path: 'assets/svgs/filter.svg')),
-                          )
+                          // SizedBox(
+                          //   width: 10,
+                          // ),
+                          // Container(
+                          //   height: 48,
+                          //   width: 50,
+                          //   decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(8),
+                          //       color: Pallets.orange500),
+                          //   child: Center(
+                          //       child: ImageLoader(
+                          //           onTap: () => showTicketFiltering(context,
+                          //               callBack: (filter) {}),
+                          //           path: 'assets/svgs/filter.svg')),
+                          // )
                         ],
                       ),
                       SizedBox(height: 32),

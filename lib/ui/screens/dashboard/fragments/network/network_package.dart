@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../helper/routes/navigation.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../../../widgets/text_views.dart';
+import '../../../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 import 'model/view_account_model.dart';

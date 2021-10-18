@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/viewmodel/package_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../../../helper/helper_handler.dart';
+import '../../viewmodel/package_viewmodel.dart';
+import '../../../../../../../widgets/buttons.dart';
+import '../../../../../../../widgets/text_views.dart';
+import '../../../../../../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 void showPayment(BuildContext context, int packageID) {

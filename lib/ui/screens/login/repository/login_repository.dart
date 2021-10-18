@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:lifestyle_hub/core/data/session_manager.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/dao/dashboardd_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/repository/profile_repository.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/repository/dashboard_repository.dart';
+import '../../../../core/data/session_manager.dart';
+import '../../dashboard/dao/dashboardd_dao.dart';
+import '../../dashboard/fragments/profile/dao/profile_dao.dart';
+import '../../dashboard/fragments/profile/repository/profile_repository.dart';
+import '../../dashboard/repository/dashboard_repository.dart';
 
 import '../../../../helper/configs/constants.dart';
 import '../../../../helper/configs/instances.dart';

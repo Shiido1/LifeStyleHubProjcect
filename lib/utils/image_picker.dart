@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
+import '../helper/configs/instances.dart';
 import 'package:path_provider/path_provider.dart';
 
 enum ProfileOptionAction {

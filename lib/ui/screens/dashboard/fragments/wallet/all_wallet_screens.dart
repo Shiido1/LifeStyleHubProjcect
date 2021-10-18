@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
+import '../profile/dao/profile_dao.dart';
+import '../profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../ticket/widget/filter_modal.dart';
 import 'dao/wallet_dao.dart';
@@ -51,7 +51,7 @@ class _AllWalletScreenState extends State<AllWalletScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getCustomAppBar(context,
-          title: 'Ticket Details',
+          title: 'Wallet Transactions',
           showLeadig: true,
           centerTitle: true,
           image: _profileModel?.profilePic ?? '',
@@ -80,30 +80,30 @@ class _AllWalletScreenState extends State<AllWalletScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Expanded(
-                            flex: 7,
-                            child: EditFormField(
-                              label: 'Search tickets',
-                              controller: null,
-                              keyboardType: TextInputType.emailAddress,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Expanded(
-                            child: Container(
-                              height: 48,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: Pallets.orange500),
-                              child: Center(
-                                  child: ImageLoader(
-                                      onTap: () => showTicketFiltering(context,
-                                          callBack: (filter) {}),
-                                      path: 'assets/svgs/filter.svg')),
-                            ),
-                          )
+                          // Expanded(
+                          //   flex: 7,
+                          //   child: EditFormField(
+                          //     label: 'Search tickets',
+                          //     controller: null,
+                          //     keyboardType: TextInputType.emailAddress,
+                          //   ),
+                          // ),
+                          // SizedBox(
+                          //   width: 16,
+                          // ),
+                          // Expanded(
+                          //   child: Container(
+                          //     height: 48,
+                          //     decoration: BoxDecoration(
+                          //         borderRadius: BorderRadius.circular(8),
+                          //         color: Pallets.orange500),
+                          //     child: Center(
+                          //         child: ImageLoader(
+                          //             onTap: () => showTicketFiltering(context,
+                          //                 callBack: (filter) {}),
+                          //             path: 'assets/svgs/filter.svg')),
+                          //   ),
+                          // )
                         ],
                       ),
                       SizedBox(height: 23),

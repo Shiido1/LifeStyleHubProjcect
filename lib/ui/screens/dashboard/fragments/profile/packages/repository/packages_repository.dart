@@ -1,4 +1,4 @@
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/package_subcription_response.dart';
+import '../model/package_subcription_response.dart';
 
 import '../../../../../../../helper/configs/instances.dart';
 import '../../../../../../../helper/helper_handler.dart';

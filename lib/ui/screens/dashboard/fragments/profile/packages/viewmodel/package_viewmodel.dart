@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/package_subcription_response.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/view_packages_model.dart';
+import '../model/package_subcription_response.dart';
+import '../model/view_packages_model.dart';
 import '../../../../../../../helper/configs/instances.dart';
 import '../../../../../../../helper/helper_handler.dart';
 import '../../../../../../../provider/_base_viewmodels.dart';

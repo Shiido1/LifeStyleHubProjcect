@@ -2,12 +2,12 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/video_player.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/model/dashboard_model.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
+import '../../../../../helper/configs/instances.dart';
+import '../../../../../helper/video_player.dart';
+import '../profile/dao/profile_dao.dart';
+import '../profile/model/users_profile_model.dart';
+import '../../model/dashboard_model.dart';
+import '../../../../widgets/image_loader.dart';
 
 import '../../../../../database/users_data_provider.dart';
 import '../../../../../helper/helper_handler.dart';

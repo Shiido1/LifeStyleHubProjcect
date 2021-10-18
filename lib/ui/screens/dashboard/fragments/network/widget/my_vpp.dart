@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/multi_color_widget.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../viewmodel/network_viewmodel.dart';
+import '../../profile/dao/profile_dao.dart';
+import '../../profile/model/users_profile_model.dart';
+import '../../../widget/multi_color_widget.dart';
+import '../../../../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 class MyVPPTab extends StatefulWidget {

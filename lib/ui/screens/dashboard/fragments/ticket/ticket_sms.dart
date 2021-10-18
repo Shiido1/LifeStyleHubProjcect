@@ -37,6 +37,7 @@ class _TicketDetailsSmsState extends State<TicketDetailsSms> {
   }
 
   final List<String> _dropdownValues = ["Today", "Yesterday"];
+  String? _currentItemSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -89,26 +90,33 @@ class _TicketDetailsSmsState extends State<TicketDetailsSms> {
                     SizedBox(height: 40),
                     Center(
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        margin: EdgeInsets.only(bottom: 8),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0),
-                          color: Pallets.grey200,
-                          border: Border.all(
-                              color: Pallets.grey200,
-                              style: BorderStyle.solid,
-                              width: 0.80),
-                        ),
-                        child: DropdownButton(
-                          underline: Container(),
-                          items: _dropdownValues
-                              .map((value) => DropdownMenuItem(
-                                    child: Text(value),
-                                    value: value,
-                                  ))
-                              .toList(),
-                          onChanged: (String? value) {},
-                          isExpanded: false,
-                          value: _dropdownValues.first,
+                            color: Pallets.grey100,
+                            borderRadius: BorderRadius.circular(30)),
+                        child: PopupMenuButton<String>(
+                          itemBuilder: (context) {
+                            return _dropdownValues.map((str) {
+                              return PopupMenuItem(
+                                value: str,
+                                child: Text(str),
+                              );
+                            }).toList();
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Text(_currentItemSelected!),
+                              Icon(Icons.arrow_drop_down),
+                            ],
+                          ),
+                          onSelected: (v) {
+                            setState(() {
+                              _currentItemSelected = v;
+                            });
+                          },
                         ),
                       ),
                     ),

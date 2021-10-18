@@ -50,7 +50,7 @@ void _buildCupertinoDatePicker(
             child: Container(
               height: getDeviceHeight(context) / 3,
               child: CupertinoDatePicker(
-                mode: CupertinoDatePickerMode.date,
+                mode: CupertinoDatePickerMode.dateAndTime,
                 backgroundColor: Theme.of(context).cardColor,
                 onDateTimeChanged: (picked) {
                   if (picked != date)

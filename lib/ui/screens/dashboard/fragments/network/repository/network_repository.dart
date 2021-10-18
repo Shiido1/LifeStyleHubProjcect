@@ -1,7 +1,7 @@
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_downline_response.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_lead_wise_response.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_vpp_response.dart';
-import 'package:lifestyle_hub/utils/paths.dart';
+import '../model/my_downline_response.dart';
+import '../model/my_lead_wise_response.dart';
+import '../model/my_vpp_response.dart';
+import '../../../../../../utils/paths.dart';
 
 import '../../../../../../../helper/configs/instances.dart';
 import '../../../../../../../helper/helper_handler.dart';

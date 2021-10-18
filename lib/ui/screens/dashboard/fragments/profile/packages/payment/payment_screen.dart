@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/viewmodel/package_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../../helper/helper_handler.dart';
+import '../../dao/profile_dao.dart';
+import '../../model/users_profile_model.dart';
+import '../viewmodel/package_viewmodel.dart';
+import '../../../../../../widgets/buttons.dart';
+import '../../../../../../widgets/custom_appbar.dart';
+import '../../../../../../widgets/text_views.dart';
+import '../../../../../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 import 'modal/payment_modal.dart';

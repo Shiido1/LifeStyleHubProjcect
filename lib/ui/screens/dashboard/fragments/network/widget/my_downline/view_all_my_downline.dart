@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/history_cards.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/filter_modal.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../../helper/helper_handler.dart';
+import '../../viewmodel/network_viewmodel.dart';
+import '../history_cards.dart';
+import '../../../profile/dao/profile_dao.dart';
+import '../../../profile/model/users_profile_model.dart';
+import '../../../ticket/widget/filter_modal.dart';
+import '../../../../../../widgets/custom_appbar.dart';
+import '../../../../../../widgets/edit_form_widget.dart';
+import '../../../../../../widgets/image_loader.dart';
+import '../../../../../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 class ViewMyDownlinesScreen extends StatefulWidget {

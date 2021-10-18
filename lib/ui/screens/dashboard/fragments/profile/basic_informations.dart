@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
+import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/configs/constants.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
@@ -21,7 +21,6 @@ import 'viewmodel/profile_viewmodel.dart';
 import 'widget/custom_radio_button.dart';
 
 class BasicInformationsScreen extends StatefulWidget {
-
   const BasicInformationsScreen({Key? key}) : super(key: key);
 
   @override
@@ -208,7 +207,7 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
   void _updateUsersInformation() async {
     FocusScope.of(context).unfocus();
     if (_globalFormKey.currentState!.validate()) {
-    await  _profileViewmodel!.updateUsersProfile({
+      await _profileViewmodel!.updateUsersProfile({
         '_method': 'PATCH',
         'name': _fullNameController!.text,
         'phone_no': _phoneNumberController!.text,
@@ -217,7 +216,7 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
         'address': _addressController!.text,
         'dob': _dobController!.text,
       });
-    _getCatchedInfos();
+      _getCatchedInfos();
     } else
       setState(() => _autoValidate = true);
   }

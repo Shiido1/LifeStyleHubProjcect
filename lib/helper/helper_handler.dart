@@ -5,9 +5,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:lifestyle_hub/core/data/session_manager.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
+import '../core/data/session_manager.dart';
+import '../ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import '../ui/widgets/bottom_count_down.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 

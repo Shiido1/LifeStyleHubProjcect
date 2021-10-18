@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/widget/sender_widget.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/chat_text_box.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/overlay.dart';
+import 'widget/sender_widget.dart';
+import '../profile/dao/profile_dao.dart';
+import '../profile/model/users_profile_model.dart';
+import '../ticket/widget/chat_text_box.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../../../widgets/overlay.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
 import 'model/get_last_messages_model.dart';

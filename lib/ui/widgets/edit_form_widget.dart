@@ -28,6 +28,7 @@ class EditFormField extends StatelessWidget {
       this.readOnly = false,
       this.onTapped,
       this.keyboardType,
+      this.suffixWidget,
       this.maxLines = 1,
       this.minLines = 1,
       this.maxLength,
@@ -60,6 +61,7 @@ class EditFormField extends StatelessWidget {
   final String? hint;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
+  final Widget? suffixWidget;
 
   final FormFieldSetter<String>? onSaved;
   final Function(String)? onChange;
@@ -207,14 +209,16 @@ class EditFormField extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
                           fontStyle: FontStyle.normal),
-                  prefixIcon: prefixIcon != null
-                      ? IconButton(
-                          onPressed: onPasswordToggle,
-                          icon: Icon(
-                            prefixIcon,
-                            color: prefixIconColor,
-                          ))
-                      : null,
+                  prefixIcon: suffixWidget != null
+                      ? suffixWidget
+                      : prefixIcon != null
+                          ? IconButton(
+                              onPressed: onPasswordToggle,
+                              icon: Icon(
+                                prefixIcon,
+                                color: prefixIconColor,
+                              ))
+                          : null,
                   suffixIcon: suffixIcon != null
                       ? IconButton(
                           onPressed: onPasswordToggle,

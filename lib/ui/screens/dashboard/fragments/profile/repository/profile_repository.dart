@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/change_password.dart';
+import '../model/change_password.dart';
 
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';

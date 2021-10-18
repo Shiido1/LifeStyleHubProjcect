@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
+import '../../helper/configs/instances.dart';
 
 import 'dio_exceptions.dart';
 

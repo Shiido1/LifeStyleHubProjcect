@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_downline_response.dart';
+import '../model/my_downline_response.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_generation_downline_response.dart'
     as generation;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_lead_wise_response.dart'

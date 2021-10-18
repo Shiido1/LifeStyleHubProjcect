@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:event_bus/event_bus.dart';
-import 'package:lifestyle_hub/core/network/app_interceptor.dart';
-import 'package:lifestyle_hub/core/network/dio_client.dart';
-import 'package:lifestyle_hub/core/network/url_config.dart';
+import '../../core/network/app_interceptor.dart';
+import '../../core/network/dio_client.dart';
+import '../../core/network/url_config.dart';
 import 'package:logger/logger.dart';
 
 import 'pref_manager.dart';

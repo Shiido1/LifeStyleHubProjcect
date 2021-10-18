@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
+import '../../helper/configs/instances.dart';
+import '../../ui/screens/dashboard/dashboard.dart';
 
 /// [Interceptor] extension for setting token header
 /// and other required properties for all requests
@@ -21,7 +21,6 @@ class AppInterceptor extends Interceptor {
   }
 
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
-
     if (response.statusCode! >= 200 && response.statusCode! < 400) {
       response.statusCode = 200;
     } else if (response.statusCode == 401) {

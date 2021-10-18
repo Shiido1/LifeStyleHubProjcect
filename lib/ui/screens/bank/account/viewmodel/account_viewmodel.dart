@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/dao/account_dao.dart';
+import '../dao/account_dao.dart';
 import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../provider/_base_viewmodels.dart';

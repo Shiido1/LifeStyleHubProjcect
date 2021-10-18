@@ -1,5 +1,6 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import '../../../../../../helper/routes/navigation.dart';
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
@@ -132,5 +133,12 @@ class WalletViewmodel extends BaseViewModel {
           message: e.toString(), bgColor: Pallets.red600);
     }
     _hideLoading();
+  }
+
+  Country? country;
+
+  void setCountry(Country? country) {
+    this.country = country;
+    notifyListeners();
   }
 }

@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/database/hive_database.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/add_bank_screen.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/change_transaction_pin.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';
+import '../../../../../database/hive_database.dart';
+import '../../../bank/account/add_bank_screen.dart';
+import 'change_transaction_pin.dart';
+import 'model/users_profile_model.dart';
+import '../../../login/login_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../../../helper/configs/instances.dart';
@@ -258,10 +258,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       _image.pickImage(
           context: context,
-          file: (file) async{
+          file: (file) async {
             _file = file;
-           await _profileViewmodel!.updateUsersProfile(await _getMappedData());
-           _getCatchedInfos();
+            await _profileViewmodel!.updateUsersProfile(await _getMappedData());
+            _getCatchedInfos();
             setState(() {});
           });
     } catch (e) {

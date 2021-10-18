@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/commission/viewmodel/commission_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/viewmodel/point_history_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/widget/filter_modal.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/multi_color_widget.dart';
+import '../../../../../helper/configs/instances.dart';
+import '../../../../../helper/helper_handler.dart';
+import 'viewmodel/commission_viewmodel.dart';
+import '../integrated/viewmodel/point_history_viewmodel.dart';
+import '../profile/dao/profile_dao.dart';
+import '../profile/model/users_profile_model.dart';
+import '../ticket/widget/filter_modal.dart';
+import '../../widget/multi_color_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../widgets/bottom_count_down.dart';
@@ -117,23 +117,23 @@ class _ViewMoreCommissionScreenState extends State<ViewMoreCommissionScreen> {
                                     },
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 16,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    height: 48,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: Pallets.orange500),
-                                    child: Center(
-                                        child: ImageLoader(
-                                            onTap: () => showTicketFiltering(
-                                                context,
-                                                callBack: (filter) {}),
-                                            path: 'assets/svgs/filter.svg')),
-                                  ),
-                                )
+                                // SizedBox(
+                                //   width: 16,
+                                // ),
+                                // Expanded(
+                                //   child: Container(
+                                //     height: 48,
+                                //     decoration: BoxDecoration(
+                                //         borderRadius: BorderRadius.circular(8),
+                                //         color: Pallets.orange500),
+                                //     child: Center(
+                                //         child: ImageLoader(
+                                //             onTap: () => showTicketFiltering(
+                                //                 context,
+                                //                 callBack: (filter) {}),
+                                //             path: 'assets/svgs/filter.svg')),
+                                //   ),
+                                // )
                               ],
                             ),
                             SizedBox(height: 16),

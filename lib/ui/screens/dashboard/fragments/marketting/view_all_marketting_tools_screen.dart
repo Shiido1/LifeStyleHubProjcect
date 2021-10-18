@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
+import '../../../../../helper/configs/instances.dart';
+import '../profile/dao/profile_dao.dart';
+import '../profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'viewmodel/marketting_viewmodel.dart';
@@ -87,36 +87,11 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
             onLoading: () => _marketting!.loadPagination(_getType()),
             child: ListView(
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 7,
-                      child: EditFormField(
-                        label: 'Search tickets',
-                        controller: null,
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 48,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Pallets.orange500),
-                        child: Center(
-                            child: ImageLoader(
-                                onTap: () => showTicketFiltering(context,
-                                    callBack: (filter) {}),
-                                path: 'assets/svgs/filter.svg')),
-                      ),
-                    )
-                  ],
-                ),
+                // EditFormField(
+                //   label: 'Search tickets',
+                //   controller: null,
+                //   keyboardType: TextInputType.emailAddress,
+                // ),
                 ..._response.getResourceModelList!.map((element) {
                   return Container(
                     margin: EdgeInsets.only(bottom: 16),

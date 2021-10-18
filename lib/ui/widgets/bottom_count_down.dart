@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/purchase_package_screen.dart';
+import '../../helper/routes/navigation.dart';
+import '../screens/dashboard/fragments/profile/packages/purchase_package_screen.dart';
 
 import '../../helper/configs/instances.dart';
 import '../../helper/helper_handler.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_account_network_response.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../../helper/configs/instances.dart';
+import '../../model/view_account_network_response.dart';
+import '../../viewmodel/network_viewmodel.dart';
+import '../../../../../../../utils/pallets.dart';
 
 import '../../../../../../../helper/helper_handler.dart';
 import '../../../../../../../utils/pallets.dart';

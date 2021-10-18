@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/model/get_bank_account_model.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
+import '../../../../../../helper/helper_handler.dart';
+import '../../../../bank/account/model/get_bank_account_model.dart';
+import '../../../../../../utils/pallets.dart';
 
 void showBankPopUpList(BuildContext context,
     {String? title,

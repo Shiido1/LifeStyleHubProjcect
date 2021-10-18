@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/dao/account_dao.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/model/get_bank_account_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/modal/bank_pop_modal.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
-import 'package:lifestyle_hub/ui/widgets/overlay.dart';
-import 'package:lifestyle_hub/utils/validators.dart';
+import '../../../../../../helper/configs/instances.dart';
+import '../../../../bank/account/dao/account_dao.dart';
+import '../../../../bank/account/model/get_bank_account_model.dart';
+import 'bank_pop_modal.dart';
+import '../viewmodel/wallet_viewmodel.dart';
+import '../../../../../widgets/overlay.dart';
+import '../../../../../../utils/validators.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../helper/routes/navigation.dart';
@@ -76,35 +76,27 @@ void showWithdrawModal(BuildContext context) {
                             ),
                             SizedBox(height: 32),
                             EditFormField(
-                              floatingLabel: 'Beneficiary account information',
-                              label: '',
-                              onTapped: () => showBankPopUpList(context,
-                                  title: 'Select bank',
-                                  items: _bankList, onTap: (value) {
-                                _accountDetailsController.text = value.name!;
-                                _accountModel = value;
-                                PageRouter.goBack(context);
-                              }),
-                              readOnly: true,
-                              controller: _accountDetailsController,
-                              autoValidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: Validators.validateString(),
-                            ),
-                            SizedBox(height: 32),
-                            EditFormField(
-                              floatingLabel: 'Purpose of withdrawal',
-                              label: '',
-                              controller: _purposeOfWithdrawalController,
-                              keyboardType: TextInputType.text,
-                              autoValidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: Validators.validateString(),
-                            ),
+                                floatingLabel:
+                                    'Beneficiary account information',
+                                label: '',
+                                onTapped: () => showBankPopUpList(context,
+                                        title: 'Select bank',
+                                        items: _bankList, onTap: (value) {
+                                      _accountDetailsController.text =
+                                          value.name!;
+                                      _accountModel = value;
+                                      PageRouter.goBack(context);
+                                    }),
+                                readOnly: true,
+                                controller: _accountDetailsController,
+                                autoValidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: Validators.validateString(),
+                                suffixIcon: Icons.keyboard_arrow_down_outlined),
                             SizedBox(height: 32),
                             EditFormField(
                               floatingLabel: 'Amount in local currency ',
-                              label: ' ',
+                              label: 'Amount',
                               controller: _amountController,
                               keyboardType: TextInputType.number,
                               autoValidateMode:
@@ -145,7 +137,7 @@ _proceed(BuildContext context) {
     _walletProvider.withdrawal({
       'amount': _amountController.text,
       'bank_id': _accountModel!.id,
-      'purpose': _purposeOfWithdrawalController.text,
+      // 'purpose': _purposeOfWithdrawalController.text,
     });
   }
 }

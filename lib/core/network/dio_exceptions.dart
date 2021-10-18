@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
+import '../../helper/configs/instances.dart';
+import '../../ui/screens/dashboard/dashboard.dart';
 
 class NetworkExceptions implements Exception {
   NetworkExceptions.fromDioError(DioError dioError) {

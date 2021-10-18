@@ -1,4 +1,4 @@
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/withdraw_model.dart';
+import '../model/withdraw_model.dart';
 
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';

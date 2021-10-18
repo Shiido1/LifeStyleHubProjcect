@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/view_all_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../../helper/helper_handler.dart';
+import '../../../../../../../helper/routes/navigation.dart';
+import '../../../../../../../utils/pallets.dart';
+import '../../../../../../widgets/text_views.dart';
+import '../../../../widget/view_all_widget.dart';
+import '../../../profile/dao/profile_dao.dart';
+import '../../../profile/model/users_profile_model.dart';
+import '../../viewmodel/network_viewmodel.dart';
 import '../history_cards.dart';
 import 'view_all_my_generation.dart';
 

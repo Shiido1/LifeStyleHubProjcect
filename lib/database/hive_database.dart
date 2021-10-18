@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/ui/screens/bank/account/dao/account_dao.dart';
+import '../ui/screens/bank/account/dao/account_dao.dart';
 
 import '../helper/configs/instances.dart';
 import '../ui/screens/dashboard/dao/dashboardd_dao.dart';
@@ -105,7 +105,7 @@ class HiveBoxes {
     }
   }
 
-  static logOut()async{
+  static logOut() async {
     await prefManager.remove();
     await HiveBoxes.clearAllBox();
   }

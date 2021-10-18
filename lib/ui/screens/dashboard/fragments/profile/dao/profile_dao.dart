@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
+import '../../../../../../helper/configs/instances.dart';
 
 import '../../../../../../database/hive_database.dart';
 import '../model/users_profile_model.dart';
@@ -30,10 +30,11 @@ class ProfileDao {
         key: HiveBoxes.profile, value: usersProfileModel.toJson());
   }
 
-  Future<UsersProfileModel> convert() async{
+  Future<UsersProfileModel> convert() async {
     final _raw = await prefManager.getCachedData(key: HiveBoxes.profile);
     return UsersProfileModel.fromJson(_raw);
   }
+
   ValueListenable<Box>? getListenable({List<String>? keys}) {
     return keys == null ? _box?.listenable() : _box?.listenable(keys: keys);
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
+import '../fragments/profile/model/users_profile_model.dart';
 
 import '../../../../helper/helper_handler.dart';
 import '../../../../helper/routes/navigation.dart';

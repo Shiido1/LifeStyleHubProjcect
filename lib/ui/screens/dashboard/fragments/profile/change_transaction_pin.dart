@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
-import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/otp_screen.dart';
-import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
-import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
-import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
-import 'package:lifestyle_hub/ui/widgets/text_views.dart';
-import 'package:lifestyle_hub/utils/images.dart';
-import 'package:lifestyle_hub/utils/pallets.dart';
-import 'package:lifestyle_hub/utils/validators.dart';
+import '../../../../../helper/helper_handler.dart';
+import '../../../../../helper/routes/navigation.dart';
+import 'otp_screen.dart';
+import '../../../../widgets/bottom_count_down.dart';
+import '../../../../widgets/buttons.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../../../widgets/edit_form_widget.dart';
+import '../../../../widgets/image_loader.dart';
+import '../../../../widgets/text_views.dart';
+import '../../../../../utils/images.dart';
+import '../../../../../utils/pallets.dart';
+import '../../../../../utils/validators.dart';
 import 'package:page_transition/page_transition.dart';
 
 class ChangePINScreen extends StatefulWidget {

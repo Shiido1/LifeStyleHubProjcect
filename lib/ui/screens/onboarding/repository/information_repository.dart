@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
+import '../../../../helper/helper_handler.dart';
 import '../../../../helper/configs/constants.dart';
 import '../../../../helper/configs/instances.dart';
 import '../model/basic_information_model.dart';
