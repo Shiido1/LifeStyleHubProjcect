@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle_hub/ui/screens/notifications/notifications_screen.dart';
 import '../fragments/profile/model/users_profile_model.dart';
 
 import '../../../../helper/helper_handler.dart';
@@ -72,6 +73,11 @@ Consumer getDrawer(
                           text: 'Open notification',
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
+                          onTap: () {
+                            PageRouter.goBack(context);
+                            PageRouter.gotoWidget(
+                                NotificationScreen(), context);
+                          },
                           color: Pallets.orange500,
                           textAlign: TextAlign.left,
                         ),

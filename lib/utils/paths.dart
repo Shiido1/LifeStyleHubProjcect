@@ -38,4 +38,5 @@ class Paths {
   static String withdraw = 'api/wallet/withdraw';
   static String transfer = 'api/wallet-to-wallet';
   static String availablePackages = 'api/packages';
+  static String notifications = 'api/notifications';
 }
