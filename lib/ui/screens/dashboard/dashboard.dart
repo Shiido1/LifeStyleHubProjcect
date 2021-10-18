@@ -20,6 +20,7 @@ import 'fragments/network/network_screen.dart';
 import 'fragments/profile/dao/profile_dao.dart';
 import 'fragments/profile/model/users_profile_model.dart';
 import 'fragments/profile/profile_screen.dart';
+import 'fragments/report/report_screen.dart';
 import 'fragments/ticket/ticket_screen.dart';
 import 'fragments/wallet/wallet_screen.dart';
 import 'widget/drawer_widget.dart';
@@ -47,7 +48,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     NetworkScreen(),
     CommissionScreen(),
     ContestScreen(),
-    Container(), // Report
+    ReportScreen(), 
     WalletScreen(),
     IntegratedPointScreen(),
     MessagingScreen(),

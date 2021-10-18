@@ -37,21 +37,44 @@ class _NotificationScreenState extends State<NotificationScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ListView(
-                children: [
-                  SizedBox(height: 36),
-                  TextView(
-                    text: 'Clear all',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: Pallets.orange500,
-                    textAlign: TextAlign.right,
+            Consumer<NotificationViewmodel>(
+              builder: (context, notification, child) {
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ListView(
+                    children: [
+                      SizedBox(height: 36),
+                      TextView(
+                        text: 'Clear all',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Pallets.orange500,
+                        textAlign: TextAlign.right,
+                        onTap: () =>
+                            _notificationViewmodel!.clearNotificationList(),
+                      ),
+                      SizedBox(height: 32),
+                      ...notification.notificationList
+                          .map((notification) => ListTile(
+                                title: TextView(
+                                  text: notification,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: Pallets.grey600,
+                                  textAlign: TextAlign.right,
+                                ),
+                                subtitle: TextView(
+                                  text: notification,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12,
+                                  color: Pallets.grey400,
+                                  textAlign: TextAlign.right,
+                                ),
+                              ))
+                    ],
                   ),
-                  SizedBox(height: 32),
-                ],
-              ),
+                );
+              },
             ),
             ButtomCountDownWidget()
           ],

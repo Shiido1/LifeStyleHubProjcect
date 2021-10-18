@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/notifications_screen.dart';
+import 'package:lifestyle_hub/ui/screens/notifications/viewmodel/notification_viewmodel.dart';
+import 'package:provider/provider.dart';
 import '../fragments/profile/model/users_profile_model.dart';
 
 import '../../../../helper/helper_handler.dart';
@@ -10,14 +11,9 @@ import '../../../widgets/image_loader.dart';
 import '../../../widgets/text_views.dart';
 import '../../onboarding/viewmodel/tab_viewmodel.dart';
 
-final _notifier = ChangeNotifierProvider((ref) => TabViewModel());
-
-Consumer getDrawer(
-    BuildContext context, int index, UsersProfileModel? profileModel) {
-  context.read(_notifier);
-  return Consumer(
-    builder: (context, watch, child) {
-      final _tabNotifier = watch(_notifier);
+getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
+  return Consumer2<TabViewModel, NotificationViewmodel>(
+    builder: (context, _tabNotifier, notification, child) {
       return Container(
         width: getDeviceWidth(context) / 1.1,
         child: Drawer(
@@ -90,7 +86,7 @@ Consumer getDrawer(
                           shape: BoxShape.circle, color: Pallets.red500),
                       child: Center(
                         child: TextView(
-                          text: '2',
+                          text: '${notification.unreadNotifications}',
                           fontWeight: FontWeight.w400,
                           fontSize: 14,
                           color: Pallets.white,

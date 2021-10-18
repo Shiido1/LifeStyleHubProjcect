@@ -13,6 +13,9 @@ class NotificationViewmodel extends BaseViewModel {
 
   bool get loading => _loading;
 
+  int unreadNotifications = 0;
+  List<String> notificationList = [];
+
   /// initialize auth viewmodel
   void init(BuildContext context, {bool initialize = true}) {
     this._context = context;
@@ -34,10 +37,18 @@ class NotificationViewmodel extends BaseViewModel {
   Future<void> notification() async {
     try {
       _showLoading();
-      await _notificationRepository.notification();
+      final _response = await _notificationRepository.notification();
+      unreadNotifications = _response.unreadNotifications ?? 0;
+      notificationList = _response.notifications?.data ?? [];
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
     _hideLoading();
+  }
+
+  /// clear notifications list
+  void clearNotificationList() {
+    notificationList.clear();
+    notifyListeners();
   }
 }
