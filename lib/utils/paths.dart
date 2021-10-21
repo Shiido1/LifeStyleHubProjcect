@@ -21,6 +21,7 @@ class Paths {
   static String basicInformation = 'api/basic';
   static String workAndBanking = 'api/work-banking';
   static String addBankAccount = 'api/user/bank-accounts';
+  static String getLSHBankAccounts = 'api/bank-accounts';
   static String packages = 'api/accounts/package-status';
   static String tickets = 'api/tickets';
   static String departments = 'api/departments';
@@ -39,4 +40,10 @@ class Paths {
   static String transfer = 'api/wallet-to-wallet';
   static String availablePackages = 'api/packages';
   static String notifications = 'api/notifications';
+  static String reportPromotionSummary = 'api/reports/promotion/summary';
+  static String reportPromotionIncome = 'api/reports/promotion/income';
+  static String reportPromotionFreeMember =
+      'api/reports/promotion/free-trial-members';
+  static String reportPromotionUpgradedMember =
+      'api/reports/promotion/upgraded-members';
 }

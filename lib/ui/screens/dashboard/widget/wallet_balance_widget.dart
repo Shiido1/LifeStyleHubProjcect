@@ -54,6 +54,30 @@ class WalletBalanceWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         InkWell(
+                          onTap: () => null,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: Pallets.orange200,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Icon(Icons.call_received_outlined,
+                                    color: Pallets.grey600),
+                              ),
+                              SizedBox(height: 8),
+                              TextView(
+                                text: 'Fund wallet',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                                color: Pallets.grey600,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                        InkWell(
                           onTap: () => showWithdrawModal(context),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,

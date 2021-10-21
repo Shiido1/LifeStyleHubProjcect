@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'core/data/session_manager.dart';
 import 'core/network/url_config.dart';
 import 'database/hive_database.dart';
+import 'graph.dart';
 import 'helper/configs/instances.dart';
 import 'helper/configs/providers.dart';
 import 'helper/routes/routes.dart';

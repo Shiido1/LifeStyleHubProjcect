@@ -1,3 +1,4 @@
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/viewmodel/notification_viewmodel.dart';
 
 import '../../ui/screens/bank/account/viewmodel/account_viewmodel.dart';
@@ -33,7 +34,10 @@ class Providers {
         create: (_) => DashboardViewmodel()),
     ChangeNotifierProvider<ContestViewModel>(create: (_) => ContestViewModel()),
     ChangeNotifierProvider<VideoPlayer>(create: (_) => VideoPlayer()),
-    ChangeNotifierProvider<BankAccountViewmodel>(create: (_) => BankAccountViewmodel()),
-    ChangeNotifierProvider<NotificationViewmodel>(create: (_) => NotificationViewmodel()),
+    ChangeNotifierProvider<BankAccountViewmodel>(
+        create: (_) => BankAccountViewmodel()),
+    ChangeNotifierProvider<NotificationViewmodel>(
+        create: (_) => NotificationViewmodel()),
+    ChangeNotifierProvider<ReportViewmodel>(create: (_) => ReportViewmodel()),
   ];
 }
