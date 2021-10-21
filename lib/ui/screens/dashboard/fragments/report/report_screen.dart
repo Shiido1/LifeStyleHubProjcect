@@ -19,39 +19,33 @@ class _ReportScreenState extends State<ReportScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
-          child: DefaultTabController(
-              length: 2,
-              initialIndex: 0,
-              child: SingleChildScrollView(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      TabBar(
-                        labelColor: Pallets.grey800,
-                        labelStyle: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w700),
-                        unselectedLabelColor: Pallets.grey400,
-                        unselectedLabelStyle: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w700),
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        tabs: [
-                          Tab(text: 'My promotion'),
-                          Tab(text: 'My VPP Report'),
-                        ],
-                      ),
-                      Container(
-                          height: getDeviceHeight(context) / 1,
-                          child: TabBarView(children: <Widget>[
-                            PromotionTab(),
-                            Text('asas'),
-                          ]))
-                    ]),
-              )),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50.0),
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            bottom: TabBar(
+              labelColor: Pallets.grey800,
+              labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+              unselectedLabelColor: Pallets.grey400,
+              unselectedLabelStyle:
+                  TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+              indicatorSize: TabBarIndicatorSize.tab,
+              tabs: [
+                Tab(text: 'My promotion'),
+                Tab(text: 'My VPP Report'),
+              ],
+            ),
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            PromotionTab(),
+            Text('asas'),
+          ],
         ),
       ),
     );
