@@ -35,6 +35,7 @@ dependencies:
   observable_ish: ^3.0.0
   page_transition: ^2.0.2
   path_provider: ^2.0.2
+  pie_chart: ^5.0.1
   pin_code_fields: ^7.3.0
   provider: ^5.0.0
   pull_to_refresh: ^2.0.0

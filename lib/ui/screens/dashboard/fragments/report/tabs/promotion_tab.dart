@@ -1,7 +1,11 @@
+import 'dart:math';
+
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/card.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/left_tile.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
@@ -23,8 +27,17 @@ class _PromotionTabState extends State<PromotionTab> {
     _reportViewmodel!.reportPromotionSummary();
     _reportViewmodel!.reportPromotionTrialMembers();
     _reportViewmodel!.reportPromotionUpgradedMembers();
+    _reportViewmodel!.promotionIncome();
     super.initState();
   }
+
+  final List<FlSpot> dummyData1 = List.generate(3, (index) {
+    return FlSpot(index.toDouble(), index * Random().nextDouble());
+  });
+
+  final List<FlSpot> dummyData2 = List.generate(10, (index) {
+    return FlSpot(index.toDouble(), index * Random().nextDouble());
+  });
 
   _container(
       {required int? point,
@@ -33,6 +46,7 @@ class _PromotionTabState extends State<PromotionTab> {
       required Color? containerColor}) {
     return Expanded(
       child: Container(
+        width: getDeviceWidth(context),
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -113,8 +127,25 @@ class _PromotionTabState extends State<PromotionTab> {
               ],
             ),
             SizedBox(height: 44),
-
-            /// Todo 1: Graph comes here
+            Container(
+              height: 300,
+              child: LineChart(
+                LineChartData(
+                  borderData: FlBorderData(show: false),
+                  titlesData: flTitle(context),
+                  gridData: flGrid(context),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: provider.analysisData,
+                      isCurved: true,
+                      barWidth: 3,
+                      colors: [Pallets.blue500],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 24),
             TextView(
               text: 'Free trial members',
               fontWeight: FontWeight.w700,
@@ -122,48 +153,49 @@ class _PromotionTabState extends State<PromotionTab> {
               fontSize: 16,
             ),
             SizedBox(height: 16),
-            Consumer<ReportViewmodel>(
-              builder: (context, report, child) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: report.freeTrialMembers!
-                      .map((element) => MemberCard(
-                          element: MemberCardModel(
-                              name: element.name,
-                              phoneNo: element.phoneNo,
-                              date: element.date)))
-                      .toList(),
-                );
-              },
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: provider.freeTrialMembers!
+                  .map((element) => MemberCard(
+                      element: MemberCardModel(
+                          name: element.name,
+                          phoneNo: element.phoneNo,
+                          date: element.date)))
+                  .toList(),
             ),
             SizedBox(height: 24),
-
-            /// Todo 2: Pie comes here
             TextView(
               text: 'Analytics ',
               fontWeight: FontWeight.w700,
               textAlign: TextAlign.left,
               fontSize: 16,
             ),
-            SizedBox(
-              height: 16,
+            SizedBox(height: 16),
+            Container(
+              child: AspectRatio(
+                aspectRatio: 2.5,
+                child: PieChart(
+                  PieChartData(
+                    borderData: FlBorderData(show: false),
+                    centerSpaceRadius: 50,
+                    sections: provider.pieAnalysisData,
+                  ),
+                ),
+              ),
             ),
-            Consumer<ReportViewmodel>(
-              builder: (context, report, child) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: report.upgradedMembers!
-                      .map((element) => MemberCard(
-                          element: MemberCardModel(
-                              name: element.name,
-                              phoneNo: element.phoneNo,
-                              date: element.date,
-                              money: element.commission)))
-                      .toList(),
-                );
-              },
+            SizedBox(height: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: provider.upgradedMembers!
+                  .map((element) => MemberCard(
+                      element: MemberCardModel(
+                          name: element.name,
+                          phoneNo: element.phoneNo,
+                          date: element.date,
+                          money: element.commission)))
+                  .toList(),
             ),
           ],
         ),

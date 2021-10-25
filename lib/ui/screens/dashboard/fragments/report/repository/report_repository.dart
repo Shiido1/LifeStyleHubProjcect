@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_promotion_income_analysis_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_summary_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/upgraded_member_model.dart';
 
@@ -34,6 +35,17 @@ class ReportRepository {
           url: Paths.reportPromotionUpgradedMember,
           options: await getDioHeader());
       return UpgradedMemberModel.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<ReportPromotionIncomeAnalysisModelList>
+      promotionIncomeAnalysis() async {
+    try {
+      final _response = await apiBaseHelper.get(
+          url: Paths.reportPromotionIncome, options: await getDioHeader());
+      return ReportPromotionIncomeAnalysisModelList.fromJson(_response);
     } catch (e) {
       throw e;
     }
