@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/widget/multi_color_widget.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/vpp_team_card_widget.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +39,12 @@ class _MyVPPTabState extends State<MyVPPTab> {
           itemCount: provider.vppData.length,
           itemBuilder: (context, index) {
             final _lead = provider.vppData[index];
-            return Text(_lead.name ?? '');
+            return VppTeamCardWidget(
+              email: _lead.email??'',
+              bgColor: Pallets.orange100,
+              signUpCount: _lead.signupCount??0,
+              date: _lead.updatedAt??'',
+              name: _lead.name??'',);
           });
     });
   }
