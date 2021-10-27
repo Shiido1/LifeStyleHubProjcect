@@ -72,7 +72,7 @@ class VppTeamCardWidget extends StatelessWidget {
               ),
               Spacer(),
               IconButton(
-                  icon:Icon(Icons.more_horiz_outlined,color: Pallets.grey200,),
+                  icon:Icon(Icons.more_horiz_outlined,color: Pallets.grey600,),
                   onPressed:(){}
               )
             ],
