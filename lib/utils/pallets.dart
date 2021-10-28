@@ -41,4 +41,6 @@ class Pallets {
 
   static Color lightBlue50 = Color(0xffF0F9FF);
   static Color lightBlue500 = Color(0xff0EA5E9);
+  static Color lime50 = Color(0xffF7FEE7);
+  static Color lime700 = Color(0xff4D7C0F);
 }

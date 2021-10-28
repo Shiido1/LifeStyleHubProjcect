@@ -19,7 +19,7 @@ import 'network_package.dart';
 import 'widget/custom_tab.dart';
 import 'widget/my_matrix/matrix_widget.dart';
 import 'widget/my_generation/my_generation.dart';
-import 'widget/my_vpp.dart';
+import 'widget/vpp/my_vpp.dart';
 
 class NetworkScreen extends StatefulWidget {
   NetworkScreen({Key? key}) : super(key: key);
