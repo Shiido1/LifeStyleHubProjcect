@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/utils/pallets.dart';
 import '../model/my_downline_response.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_generation_downline_response.dart'
     as generation;
@@ -133,6 +135,20 @@ class NetworkViewModel extends BaseViewModel {
       if (vppData.length == 0) _showLoading();
       final _response = await _networkRepository.getUsersVPP();
       vppData = _response.data!;
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
+  /// update VPP
+  Future<void> updateVPP(int id, FormData body) async {
+    try {
+      _showLoading();
+      final _response = await _networkRepository.updateVPP(id, body);
+      showsnackBarInfo(this._context,
+          message: _response.message ?? '', bgColor: Pallets.green500);
+      getUsersVPP();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

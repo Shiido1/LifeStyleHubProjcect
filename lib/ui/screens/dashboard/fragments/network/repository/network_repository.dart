@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/vpp_response.dart';
+
 import '../model/my_downline_response.dart';
 import '../model/my_lead_wise_response.dart';
 import '../model/my_vpp_response.dart';
@@ -76,6 +79,19 @@ class NetworkRepository {
       final _response = await apiBaseHelper.get(
           url: Paths.usersVPP, options: await getDioHeader());
       return MyVppResponse.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /// Update VPP
+  Future<VppResponse> updateVPP(int id, FormData body) async {
+    try {
+      final _response = await apiBaseHelper.post(
+          url: '${Paths.usersVPP}/$id',
+          options: await getDioHeader(),
+          map: body);
+      return VppResponse.fromJson(_response);
     } catch (e) {
       throw e;
     }

@@ -5,23 +5,26 @@ import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
 class VppTeamCardWidget extends StatelessWidget {
-
   final String? name;
   final String? email;
   final Color? bgColor;
   final int? signUpCount;
   final String? date;
+  final Widget? menu;
+
   const VppTeamCardWidget(
       {Key? key,
-        required this.name,
-        required this.email,
-        required this.bgColor,
-        required this.signUpCount,
-        required this.date}) : super(key: key);
+      required this.name,
+      required this.email,
+      required this.bgColor,
+      required this.signUpCount,
+      required this.date,
+      required this.menu
+      })
+      : super(key: key);
 
-  String? splitName(String? name){
-    if(name==null || name.isEmpty)
-      return '';
+  String? splitName(String? name) {
+    if (name == null || name.isEmpty) return '';
     List<String> list = name.split(' ');
     return '${list[0][0].toUpperCase()}${list[1][0].toUpperCase()}';
   }
@@ -32,25 +35,25 @@ class VppTeamCardWidget extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 16),
       padding: EdgeInsets.all(18),
       decoration:
-      BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(5)),
+          BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(5)),
       child: Column(
         children: [
           Row(
             children: [
               Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle, color: Pallets.orange300),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: Pallets.orange300),
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextView(
-                    text:splitName(name) ?? '',
+                    text: splitName(name) ?? '',
                     fontSize: 24,
                     color: Pallets.black,
                   ),
                 ),
               ),
-                SizedBox(width:12),
-                Column(
+              SizedBox(width: 12),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -61,23 +64,23 @@ class VppTeamCardWidget extends StatelessWidget {
                     color: Pallets.grey800,
                     textAlign: TextAlign.left,
                   ),
+                  SizedBox(height: 4),
                   TextView(
                     text: email ?? '',
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
-                    color: Pallets.disabledIconColor,
+                    color: Pallets.grey500,
                     textAlign: TextAlign.right,
                   ),
                 ],
               ),
               Spacer(),
-              IconButton(
-                  icon:Icon(Icons.more_horiz_outlined,color: Pallets.grey600,),
-                  onPressed:(){}
-              )
+              menu!
             ],
           ),
-              Divider(thickness:1,color:Pallets.grey100),
+          SizedBox(height: 17),
+          Divider(thickness: 1, color: Color(0xffFFEDD5)),
+          SizedBox(height: 17),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -85,32 +88,33 @@ class VppTeamCardWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextView(
-                      text: 'Sign Up count: ',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Pallets.orange00,
-                      textAlign: TextAlign.left,
-                    ),TextView(
-                      text: signUpCount.toString(),
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: Pallets.grey500,
-                      textAlign: TextAlign.left,
+                    text: 'Sign Up count: ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: Pallets.orange500,
+                    textAlign: TextAlign.left,
+                  ),
+                  TextView(
+                    text: '${signUpCount ?? 0}',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: Pallets.grey500,
+                    textAlign: TextAlign.left,
                   ),
                 ],
               ),
               Expanded(
                 child: TextView(
                   text: fomartDate(date!),
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w500,
                   fontSize: 14,
-                  color: Pallets.disabledIconColor,
+                  color: Pallets.grey500,
                   textAlign: TextAlign.right,
                 ),
               ),
             ],
-          )
-            ],
+          ),
+        ],
       ),
     );
   }
