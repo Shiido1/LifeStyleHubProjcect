@@ -84,6 +84,17 @@ class NetworkRepository {
     }
   }
 
+  /// Register VPP
+  Future<VppResponse> registerVpp(FormData body) async {
+    try {
+      final _response = await apiBaseHelper.post(
+          url: Paths.usersVPP, options: await getDioHeader(), map: body);
+      return VppResponse.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
   /// Update VPP
   Future<VppResponse> updateVPP(int id, FormData body) async {
     try {

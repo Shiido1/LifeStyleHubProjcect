@@ -45,9 +45,10 @@ class PopMenuWidget extends StatelessWidget {
                       onTap: () => menuCallback!(item.options!),
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 10),
+                            horizontal: 16, vertical: 16),
                         child: TextView(
                           text: item.title ?? '',
+                          color: item.error! ? Pallets.red500 : Pallets.black,
                           textAlign: TextAlign.left,
                         ),
                       ),

@@ -70,7 +70,8 @@ class _MyVPPTabState extends State<MyVPPTab> {
   void _options(PopMenuOptions option, Data lead) {
     switch (option) {
       case PopMenuOptions.viewProfile:
-        PageRouter.gotoWidget(VPPInformationsScreen(lead), context);
+        PageRouter.gotoWidget(
+            VPPInformationsScreen(lead, isUpdate: true), context);
         break;
       case PopMenuOptions.setCommission:
         // TODO: Handle this case.

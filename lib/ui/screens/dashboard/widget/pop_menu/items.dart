@@ -2,10 +2,11 @@ enum PopMenuOptions { viewProfile, setCommission, deactivateVPP }
 
 class PostsMenuModel {
   String? title;
+  bool? error;
   PopMenuOptions? options;
   bool? showdivider;
 
-  PostsMenuModel({this.title, this.options, this.showdivider});
+  PostsMenuModel({this.title, this.options, this.error = false, this.showdivider});
 
   static List<PostsMenuModel> postMenu() {
     List<PostsMenuModel> _itemModels = [];
@@ -22,6 +23,7 @@ class PostsMenuModel {
     _item = PostsMenuModel(
         title: 'Deactivate VPP',
         options: PopMenuOptions.deactivateVPP,
+        error: true,
         showdivider: true);
     _itemModels.add(_item);
     return _itemModels;

@@ -40,6 +40,7 @@ class VppTeamCardWidget extends StatelessWidget {
         children: [
           Row(
             children: [
+
               Container(
                 decoration: BoxDecoration(
                     shape: BoxShape.circle, color: Pallets.orange300),

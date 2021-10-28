@@ -142,6 +142,20 @@ class NetworkViewModel extends BaseViewModel {
   }
 
   /// update VPP
+  Future<void> registerVpp(FormData body) async {
+    try {
+      _showLoading();
+      final _response = await _networkRepository.registerVpp(body);
+      showsnackBarInfo(this._context,
+          message: _response.message ?? '', bgColor: Pallets.green500);
+      getUsersVPP();
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
+  /// update VPP
   Future<void> updateVPP(int id, FormData body) async {
     try {
       _showLoading();
