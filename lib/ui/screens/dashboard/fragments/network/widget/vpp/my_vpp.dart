@@ -72,14 +72,11 @@ class _MyVPPTabState extends State<MyVPPTab> {
       case PopMenuOptions.viewProfile:
         PageRouter.gotoWidget(VPPInformationsScreen(lead), context);
         break;
-      case PopMenuOptions.testResult:
+      case PopMenuOptions.setCommission:
         // TODO: Handle this case.
         break;
-      case PopMenuOptions.testStatistics:
-        // TODO: Handle this case.
-        break;
-      case PopMenuOptions.removeProfile:
-        // TODO: Handle this case.
+      case PopMenuOptions.deactivateVPP:
+        _viewModel!.deactivateVPP(lead.id!);
         break;
     }
   }

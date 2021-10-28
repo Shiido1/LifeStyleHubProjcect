@@ -154,4 +154,17 @@ class NetworkViewModel extends BaseViewModel {
     }
     _hideLoading();
   }
+
+  /// update VPP
+  Future<void> deactivateVPP(int id) async {
+    try {
+      final _response = await _networkRepository.deactivateVPP(id);
+      showsnackBarInfo(this._context,
+          message: _response.message ?? '', bgColor: Pallets.green500);
+      getUsersVPP();
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
 }

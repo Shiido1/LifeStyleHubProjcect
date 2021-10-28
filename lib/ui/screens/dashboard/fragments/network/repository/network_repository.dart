@@ -96,4 +96,17 @@ class NetworkRepository {
       throw e;
     }
   }
+
+  /// Deactivate VPP
+  Future<VppResponse> deactivateVPP(int id) async {
+    try {
+      final _response = await apiBaseHelper.post(
+          url: '${Paths.usersVPP}/$id/deactivate',
+          options: await getDioHeader());
+      logger.d(_response);
+      return VppResponse.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
 }

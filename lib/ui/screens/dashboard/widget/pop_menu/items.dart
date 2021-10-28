@@ -1,4 +1,4 @@
-enum PopMenuOptions { viewProfile, testResult, testStatistics, removeProfile }
+enum PopMenuOptions { viewProfile, setCommission, deactivateVPP }
 
 class PostsMenuModel {
   String? title;
@@ -16,12 +16,12 @@ class PostsMenuModel {
     _itemModels.add(_item);
     _item = PostsMenuModel(
         title: 'Set Commission',
-        options: PopMenuOptions.testResult,
+        options: PopMenuOptions.setCommission,
         showdivider: true);
     _itemModels.add(_item);
     _item = PostsMenuModel(
         title: 'Deactivate VPP',
-        options: PopMenuOptions.testStatistics,
+        options: PopMenuOptions.deactivateVPP,
         showdivider: true);
     _itemModels.add(_item);
     return _itemModels;
