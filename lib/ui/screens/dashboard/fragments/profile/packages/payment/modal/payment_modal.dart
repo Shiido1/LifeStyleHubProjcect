@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import '../../../../../../../../helper/helper_handler.dart';
 import '../../viewmodel/package_viewmodel.dart';
 import '../../../../../../../widgets/buttons.dart';
 import '../../../../../../../widgets/text_views.dart';
 import '../../../../../../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
+
+import '../lsh_banj_list.dart';
 
 void showPayment(BuildContext context, int packageID) {
   final _payment = Provider.of<PackageViewmodel>(context, listen: false);
@@ -17,7 +20,7 @@ void showPayment(BuildContext context, int packageID) {
         return Consumer<PackageViewmodel>(
           builder: (context, provider, child) {
             return Container(
-              padding: EdgeInsets.all(23),
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 23),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
@@ -67,6 +70,7 @@ void showPayment(BuildContext context, int packageID) {
                       onPressed: () {
                         _payment
                             .subscribe(packageID, {'payment_method': 'wallet'});
+                        PageRouter.goBack(context);
                       },
                     ),
                     SizedBox(height: 32),
@@ -96,7 +100,21 @@ void showPayment(BuildContext context, int packageID) {
                       fontStyle: FontStyle.normal,
                       primary: Pallets.orange600,
                       onPressed: () => null,
-                    )
+                    ),
+                    SizedBox(height: 16),
+                    Center(
+                      child: TextView(
+                          text: 'insufficient fund?',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: Pallets.grey400,
+                          textAlign: TextAlign.center,
+                          onTap: () {
+                            PageRouter.goBack(context);
+                            PageRouter.gotoWidget(LSHBankScreen(), context);
+                          }),
+                    ),
+                    SizedBox(height: 16),
                   ],
                 ),
               ),

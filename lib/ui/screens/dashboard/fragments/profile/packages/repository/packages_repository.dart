@@ -1,3 +1,5 @@
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/payment/list_of_banks.dart';
+
 import '../model/package_subcription_response.dart';
 
 import '../../../../../../../helper/configs/instances.dart';
@@ -38,6 +40,17 @@ class PackageRepository {
       final _response = await apiBaseHelper.get(
           url: '${Paths.availablePackages}', options: await getDioHeader());
       return PackageSubcriptionResponseList.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /// [@Get]
+  Future<LSHBankResponseList> getLSHBankz() async {
+    try {
+      final _response = await apiBaseHelper.get(
+          url: '${Paths.getLSHBankAccounts}', options: await getDioHeader());
+      return LSHBankResponseList.fromJson(_response);
     } catch (e) {
       throw e;
     }

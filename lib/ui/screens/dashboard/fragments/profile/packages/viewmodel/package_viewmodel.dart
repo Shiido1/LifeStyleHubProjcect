@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/payment/list_of_banks.dart'
+    as lsh;
+import 'package:lifestyle_hub/utils/pallets.dart';
 import '../model/package_subcription_response.dart';
 import '../model/view_packages_model.dart';
 import '../../../../../../../helper/configs/instances.dart';
@@ -39,8 +42,9 @@ class PackageViewmodel extends BaseViewModel {
   Future<void> subscribe(int id, Map map) async {
     try {
       _showLoading(notify: true);
-      final _reponse = await _packageRepository.payment(id, map);
-      logger.d(_reponse.toJson());
+      final _response = await _packageRepository.payment(id, map);
+      showsnackBarInfo(this._context,
+          message: _response.message ?? '', bgColor: Pallets.green600);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
@@ -73,6 +77,20 @@ class PackageViewmodel extends BaseViewModel {
       if (packageListResponse!.length == 0) _showLoading();
       final _response = await _packageRepository.getAvailablePackages();
       packageListResponse = _response.packageList;
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
+
+  /// get list of bankz
+  List<lsh.LshBankResponse>? list = [];
+
+  Future<void> getLSHBankz() async {
+    try {
+      if (list!.length == 0) _showLoading(notify: true);
+      final _response = await _packageRepository.getLSHBankz();
+      list = _response.list ?? [];
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

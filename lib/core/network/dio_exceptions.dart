@@ -57,6 +57,7 @@ class NetworkExceptions implements Exception {
         eventBus
             .fire(UserLoggedInEvent(logUserOut: true, message: errorMessage));
         return errorMessage;
+      case 400:
       case 404:
         return errorMessage;
       case 500:
