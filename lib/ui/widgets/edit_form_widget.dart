@@ -53,7 +53,7 @@ class EditFormField extends StatelessWidget {
       this.isTyping = false,
       this.autoValidate = false,
       this.showMaxLengthCounter = false,
-      this.radius = 5});
+      this.radius = 5, this.prefixWidget});
 
   final TextCapitalization? textCapitalization;
   final String? label;
@@ -62,6 +62,7 @@ class EditFormField extends StatelessWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final Widget? suffixWidget;
+  final Widget? prefixWidget;
 
   final FormFieldSetter<String>? onSaved;
   final Function(String)? onChange;
@@ -209,8 +210,8 @@ class EditFormField extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
                           fontStyle: FontStyle.normal),
-                  prefixIcon: suffixWidget != null
-                      ? suffixWidget
+                  prefixIcon: prefixWidget != null
+                      ? prefixWidget
                       : prefixIcon != null
                           ? IconButton(
                               onPressed: onPasswordToggle,
@@ -219,8 +220,9 @@ class EditFormField extends StatelessWidget {
                                 color: prefixIconColor,
                               ))
                           : null,
-                  suffixIcon: suffixIcon != null
-                      ? IconButton(
+                  suffixIcon: suffixWidget != null
+                      ? suffixWidget: suffixIcon != null ?
+                  IconButton(
                           onPressed: onPasswordToggle,
                           icon: Icon(
                             suffixIcon,
