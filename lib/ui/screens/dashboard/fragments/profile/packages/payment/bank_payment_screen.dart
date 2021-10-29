@@ -7,12 +7,15 @@ import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/viewmodel/package_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
 import 'package:lifestyle_hub/ui/widgets/edit_form_widget.dart';
+import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/image_picker.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:provider/provider.dart';
 
 class BankPaymentScreen extends StatefulWidget {
   final String? bankName;
@@ -21,17 +24,18 @@ class BankPaymentScreen extends StatefulWidget {
 
   BankPaymentScreen(
       {Key? key,
-        required this.bankName,
-        required this.accountName,
-        required this.accountNumber}) : super(key: key);
+      required this.bankName,
+      required this.accountName,
+      required this.accountNumber})
+      : super(key: key);
 
   @override
   State<BankPaymentScreen> createState() => _BankPaymentScreenState();
 }
 
 class _BankPaymentScreenState extends State<BankPaymentScreen> {
-
   UsersProfileModel? _profileModel;
+  PackageViewmodel? _packageViewmodel;
 
   void _getCachedInfos() async {
     _profileModel = await profileDao!.convert();
@@ -40,6 +44,8 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
 
   @override
   void initState() {
+    _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);
+    _packageViewmodel!.init(context);
     _getCachedInfos();
     super.initState();
   }
@@ -54,92 +60,116 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
           image: _profileModel?.profilePic ?? '',
           initial: _profileModel?.name ?? 'LH'),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(22.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextView(
-                text: widget.bankName??'',
-                fontWeight: FontWeight.w700,
-                fontSize: 24,
-                color: Pallets.grey800,
-                textAlign: TextAlign.left,
-              ),
-              SizedBox(height: 8,),
-              TextView(
-                text: 'Account Name: ${widget.accountName??''}',
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: Pallets.grey700,
-                textAlign: TextAlign.left,
-              ),
-              SizedBox(height: 8,),
-              TextView(
-                text: 'Account Number: ${widget.accountNumber??''}',
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: Pallets.grey700,
-                textAlign: TextAlign.left,
-              ),
-              SizedBox(height: 24,),
-              TextView(
-                text: 'Amount',
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
-                color: Pallets.grey700,
-                textAlign: TextAlign.left,
-              ),
-              EditFormField(
-                label: 'NGN',
-              ),
-              SizedBox(height: 24,),
-              TextView(
-                text: 'Description (Optional)',
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
-                color: Pallets.grey700,
-                textAlign: TextAlign.left,
-              ),
-              EditFormField(
-                label: 'What’s this for?',
-              ),
-              SizedBox(height: 24,),
-              TextView(
-                text: 'Upload  Payment  Receipt',
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
-                color: Pallets.grey700,
-                textAlign: TextAlign.left,
-              ),
-              EditFormField(
-                label: _imgFile==null || _imgFile!.isEmpty?'PDF, Jpeg, or PNG':_imgFile,
-                readOnly: true,
-                suffixWidget: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ButtonWidget(
-                    onPressed: ()=>_pickImages(),
-                    buttonText: 'Select the file',
-                    fontSize: 14,
-                    width: 120,
-                    fontWeight: FontWeight.w500,
-                    color: Pallets.white,
-                    primary: Pallets.orange00,
-                  ),
+        child: Consumer<PackageViewmodel>(
+          builder: (_, provider, __) {
+            return LoadingOverlay(
+              isLoading: provider.loading,
+              child: Padding(
+                padding: const EdgeInsets.all(22.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextView(
+                      text: widget.bankName ?? '',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 24,
+                      color: Pallets.grey800,
+                      textAlign: TextAlign.left,
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    TextView(
+                      text: 'Account Name: ${widget.accountName ?? ''}',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Pallets.grey700,
+                      textAlign: TextAlign.left,
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    TextView(
+                      text: 'Account Number: ${widget.accountNumber ?? ''}',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Pallets.grey700,
+                      textAlign: TextAlign.left,
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    TextView(
+                      text: 'Amount',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Pallets.grey700,
+                      textAlign: TextAlign.left,
+                    ),
+                    EditFormField(
+                      label: 'NGN',
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    TextView(
+                      text: 'Description (Optional)',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Pallets.grey700,
+                      textAlign: TextAlign.left,
+                    ),
+                    EditFormField(
+                      label: 'What’s this for?',
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    TextView(
+                      text: 'Upload  Payment  Receipt',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Pallets.grey700,
+                      textAlign: TextAlign.left,
+                    ),
+                    EditFormField(
+                      label: _file == null
+                          ? 'PDF, Jpeg, or PNG'
+                          : _file?.toString(),
+                      readOnly: true,
+                      suffixWidget: InkWell(
+                        onTap: () => _pickImages(),
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 8, right: 8, top: 16, bottom: 4),
+                          decoration: BoxDecoration(
+                              color: Pallets.orange600,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: TextView(
+                            text: 'Select the file',
+                            color: Pallets.white,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 56,
+                    ),
+                    ButtonWidget(
+                      onPressed: () {},
+                      buttonText: 'Make Payment',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Pallets.white,
+                      primary: Pallets.orange00,
+                      width: getDeviceWidth(context),
+                    )
+                  ],
                 ),
               ),
-              SizedBox(height: 56,),
-              ButtonWidget(
-                onPressed: () {},
-                buttonText: 'Make Payment',
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: Pallets.white,
-                primary:Pallets.orange00,
-                width: getDeviceWidth(context),
-              )
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
@@ -148,13 +178,12 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
   final _image = ImagePickerHandler();
 
   File? _file;
-  String? _imgFile='';
 
   Future<FormData> _getMappedData() async {
     String fileName = _file!.path.split('/').last;
     return FormData.fromMap({
       'profile_pic':
-      await MultipartFile.fromFile(_file!.path, filename: fileName),
+          await MultipartFile.fromFile(_file!.path, filename: fileName),
       '_method': 'PATCH',
     });
   }
@@ -165,8 +194,8 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
           context: context,
           file: (file) async {
             _file = file;
-            _imgFile = _file.toString();
             setState(() {});
+            logger.d(_file);
           });
     } catch (e) {
       logger.e(e);

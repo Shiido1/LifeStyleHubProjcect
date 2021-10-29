@@ -96,4 +96,7 @@ class PackageViewmodel extends BaseViewModel {
     }
     _hideLoading();
   }
+
+
+  ///
 }
