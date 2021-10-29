@@ -22,6 +22,7 @@ class Paths {
   static String workAndBanking = 'api/work-banking';
   static String addBankAccount = 'api/user/bank-accounts';
   static String getLSHBankAccounts = 'api/bank-accounts';
+  static String makePayment = 'api/packages/3/subscribe';
   static String packages = 'api/accounts/package-status';
   static String tickets = 'api/tickets';
   static String departments = 'api/departments';

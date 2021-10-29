@@ -4,10 +4,9 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/pa
 import 'package:lifestyle_hub/utils/pallets.dart';
 import '../model/package_subcription_response.dart';
 import '../model/view_packages_model.dart';
-import '../../../../../../../helper/configs/instances.dart';
+import 'package:dio/dio.dart';
 import '../../../../../../../helper/helper_handler.dart';
 import '../../../../../../../provider/_base_viewmodels.dart';
-import '../dao/my_account_package_dao.dart';
 import '../dao/package_dao.dart';
 import '../repository/packages_repository.dart';
 
@@ -98,5 +97,15 @@ class PackageViewmodel extends BaseViewModel {
   }
 
 
-  ///
+  /// make bank payment
+  Future<void> makePayment(FormData formData) async {
+    try {
+       _showLoading(notify: true);
+      final _response = await _packageRepository.makePayment(formData:formData);
+      return _response;
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
 }
