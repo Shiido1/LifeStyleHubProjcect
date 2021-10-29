@@ -7,6 +7,7 @@ import '../../../../../../../helper/helper_handler.dart';
 import '../../../../../../../helper/routes/navigation.dart';
 import '../../dao/profile_dao.dart';
 import '../../model/users_profile_model.dart';
+import 'bank_payment_screen.dart';
 import 'payment_screen.dart';
 import '../../../../../../widgets/custom_appbar.dart';
 import '../../../../../../widgets/text_views.dart';
@@ -53,7 +54,9 @@ class _LSHBankScreenState extends State<LSHBankScreen> {
           initial: _profileModel?.name ?? 'LH'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             TextView(
         text: 'List of Banks',
         fontWeight: FontWeight.w700,
@@ -81,56 +84,63 @@ class _LSHBankScreenState extends State<LSHBankScreen> {
         return Expanded(
           child: ListView(
             children: [
-              ...provider.list!.map((e) => Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: 20
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Pallets.grey200
-                  )
-                ),
-                margin: EdgeInsets.only(bottom: 23),
-                child: Row(
-                  children: [
-                    ImageLoader(
-                      path: AppImages.bank
-                    ),
-                    SizedBox(width: 23),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextView(
-                            text: e.name ?? '',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            color: Pallets.grey900,
-                            textAlign: TextAlign.left,
-                            maxLines: 1,
-                          ),
-                          TextView(
-                            text: 'Account name: ${e.accountName ?? 'N/A'}',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: Pallets.grey700,
-                            textAlign: TextAlign.left,
-                            maxLines: 1,
-                          ),
-                          TextView(
-                            text: 'Account Number: ${e.accountNo ?? 'N/A'}',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: Pallets.grey700,
-                            textAlign: TextAlign.left,
-                            maxLines: 1,
-                          ),
-                        ],
+              ...provider.list!.map((e) => InkWell(
+            onTap:()=>PageRouter.gotoWidget(BankPaymentScreen(
+              bankName: e.name,
+              accountName: e.accountName,
+              accountNumber: e.accountNo,
+            ), context),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 20
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Pallets.grey200
+                    )
+                  ),
+                  margin: EdgeInsets.only(bottom: 23),
+                  child: Row(
+                    children: [
+                      ImageLoader(
+                        path: AppImages.bank
                       ),
-                    ),
+                      SizedBox(width: 23),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextView(
+                              text: e.name ?? '',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: Pallets.grey900,
+                              textAlign: TextAlign.left,
+                              maxLines: 1,
+                            ),
+                            TextView(
+                              text: 'Account name: ${e.accountName ?? 'N/A'}',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: Pallets.grey700,
+                              textAlign: TextAlign.left,
+                              maxLines: 1,
+                            ),
+                            TextView(
+                              text: 'Account Number: ${e.accountNo ?? 'N/A'}',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: Pallets.grey700,
+                              textAlign: TextAlign.left,
+                              maxLines: 1,
+                            ),
+                          ],
+                        ),
+                      ),
 
-                  ],
+                    ],
+                  ),
                 ),
               )).toList()
             ],
