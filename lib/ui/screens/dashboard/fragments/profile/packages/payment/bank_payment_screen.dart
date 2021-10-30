@@ -139,6 +139,9 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
                       textAlign: TextAlign.left,
                     ),
                     EditFormField(
+                      hint: _file == null
+                          ? 'PDF, Jpeg, or PNG'
+                          : _file?.toString(),
                       label: _file == null
                           ? 'PDF, Jpeg, or PNG'
                           : _file?.toString(),
