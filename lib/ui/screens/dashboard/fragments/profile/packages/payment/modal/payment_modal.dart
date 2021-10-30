@@ -99,7 +99,10 @@ void showPayment(BuildContext context, int packageID) {
                       textAlign: TextAlign.center,
                       fontStyle: FontStyle.normal,
                       primary: Pallets.orange600,
-                      onPressed: () => null,
+                      onPressed: () => {
+                      PageRouter.goBack(context),
+                        PageRouter.gotoWidget(LSHBankScreen(), context)
+                      },
                     ),
                     SizedBox(height: 16),
                     Center(
@@ -109,10 +112,7 @@ void showPayment(BuildContext context, int packageID) {
                           fontSize: 14,
                           color: Pallets.grey400,
                           textAlign: TextAlign.center,
-                          onTap: () {
-                            PageRouter.goBack(context);
-                            PageRouter.gotoWidget(LSHBankScreen(), context);
-                          }),
+                          onTap: () {}),
                     ),
                     SizedBox(height: 16),
                   ],

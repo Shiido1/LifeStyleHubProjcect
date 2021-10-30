@@ -19,15 +19,8 @@ class VppTeamCardWidget extends StatelessWidget {
       required this.bgColor,
       required this.signUpCount,
       required this.date,
-      required this.menu
-      })
+      required this.menu})
       : super(key: key);
-
-  String? splitName(String? name) {
-    if (name == null || name.isEmpty) return '';
-    List<String> list = name.split(' ');
-    return '${list[0][0].toUpperCase()}${list[1][0].toUpperCase()}';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +33,13 @@ class VppTeamCardWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-
               Container(
                 decoration: BoxDecoration(
                     shape: BoxShape.circle, color: Pallets.orange300),
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextView(
-                    text: splitName(name) ?? '',
+                    text: name?[0].toUpperCase() ?? '',
                     fontSize: 24,
                     color: Pallets.black,
                   ),

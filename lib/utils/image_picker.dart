@@ -10,6 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import '../helper/configs/instances.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'pallets.dart';
+
 enum ProfileOptionAction {
   VIEW_IMAGE,
   PROFILE_CAMERA,
@@ -122,7 +124,7 @@ class ImagePickerHandler {
             : [CropAspectRatioPreset.square],
         androidUiSettings: AndroidUiSettings(
             toolbarTitle: 'LifeStyleHub',
-            toolbarColor: Theme.of(context).appBarTheme.color,
+            toolbarColor: Pallets.orange600
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false),

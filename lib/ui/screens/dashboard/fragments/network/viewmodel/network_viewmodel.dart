@@ -135,6 +135,7 @@ class NetworkViewModel extends BaseViewModel {
       if (vppData.length == 0) _showLoading();
       final _response = await _networkRepository.getUsersVPP();
       vppData = _response.data!;
+      // logger.d(_response.data);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

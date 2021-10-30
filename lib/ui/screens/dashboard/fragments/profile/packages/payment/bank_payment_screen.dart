@@ -21,12 +21,14 @@ class BankPaymentScreen extends StatefulWidget {
   final String? bankName;
   final String? accountName;
   final String? accountNumber;
+  final int? id;
 
   BankPaymentScreen(
       {Key? key,
       required this.bankName,
       required this.accountName,
-      required this.accountNumber})
+      required this.accountNumber,
+      required this.id})
       : super(key: key);
 
   @override
@@ -36,6 +38,8 @@ class BankPaymentScreen extends StatefulWidget {
 class _BankPaymentScreenState extends State<BankPaymentScreen> {
   UsersProfileModel? _profileModel;
   PackageViewmodel? _packageViewmodel;
+  TextEditingController? amountController = TextEditingController();
+  TextEditingController? descriptionController = TextEditingController();
 
   void _getCachedInfos() async {
     _profileModel = await profileDao!.convert();
@@ -108,6 +112,7 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
                     ),
                     EditFormField(
                       label: 'NGN',
+                      controller: amountController,
                     ),
                     SizedBox(
                       height: 24,
@@ -121,6 +126,7 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
                     ),
                     EditFormField(
                       label: 'What’s this for?',
+                      controller: descriptionController,
                     ),
                     SizedBox(
                       height: 24,
@@ -133,6 +139,9 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
                       textAlign: TextAlign.left,
                     ),
                     EditFormField(
+                      hint: _file == null
+                          ? 'PDF, Jpeg, or PNG'
+                          : _file?.toString(),
                       label: _file == null
                           ? 'PDF, Jpeg, or PNG'
                           : _file?.toString(),
@@ -157,7 +166,7 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
                       height: 56,
                     ),
                     ButtonWidget(
-                      onPressed: () {},
+                      onPressed: () => fundWallet(),
                       buttonText: 'Make Payment',
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
@@ -175,6 +184,10 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
     );
   }
 
+  fundWallet() async {
+    await _packageViewmodel!.fundWallet(formData: await _getMappedData());
+  }
+
   final _image = ImagePickerHandler();
 
   File? _file;
@@ -182,9 +195,10 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
   Future<FormData> _getMappedData() async {
     String fileName = _file!.path.split('/').last;
     return FormData.fromMap({
-      'profile_pic':
-          await MultipartFile.fromFile(_file!.path, filename: fileName),
-      '_method': 'PATCH',
+      'document': await MultipartFile.fromFile(_file!.path, filename: fileName),
+      'accounting_bank_id': widget.id,
+      'amount': amountController!.text,
+      'description': descriptionController!.text,
     });
   }
 

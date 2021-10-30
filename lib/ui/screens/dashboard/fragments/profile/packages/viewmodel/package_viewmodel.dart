@@ -4,10 +4,9 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/pa
 import 'package:lifestyle_hub/utils/pallets.dart';
 import '../model/package_subcription_response.dart';
 import '../model/view_packages_model.dart';
-import '../../../../../../../helper/configs/instances.dart';
+import 'package:dio/dio.dart';
 import '../../../../../../../helper/helper_handler.dart';
 import '../../../../../../../provider/_base_viewmodels.dart';
-import '../dao/my_account_package_dao.dart';
 import '../dao/package_dao.dart';
 import '../repository/packages_repository.dart';
 
@@ -97,6 +96,28 @@ class PackageViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
+  /// fund account
+  Future<void> fundWallet({required FormData formData}) async {
+    try {
+      _showLoading(notify: true);
+      final _response = await _packageRepository.fundWallet(formData: formData);
+      showsnackBarInfo(this._context,
+          message: _response.message ?? '', bgColor: Pallets.green600);
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
 
-  ///
+  /// make bank payment
+  Future<void> makePayment(int id) async {
+    try {
+      _showLoading(notify: true);
+      final _response = await _packageRepository.makePayment(id: id);
+      return _response;
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
 }
