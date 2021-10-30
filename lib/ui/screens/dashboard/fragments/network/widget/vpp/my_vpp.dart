@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_vpp_response.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/vpp/vpp_profile.dart';
@@ -44,26 +45,25 @@ class _MyVPPTabState extends State<MyVPPTab> {
           ),
         );
       }
-      return ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: provider.vppData.length,
-          itemBuilder: (context, index) {
-            final _lead = provider.vppData[index];
-            return VppTeamCardWidget(
-                email: _lead.email ?? '',
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: provider.vppData
+            .map((lead) => VppTeamCardWidget(
+                email: lead.email ?? '',
                 bgColor: Pallets.orange50,
-                signUpCount: _lead.signupCount ?? 0,
-                date: _lead.updatedAt ?? '',
-                name: _lead.name ?? '',
+                signUpCount: lead.signupCount ?? 0,
+                date: lead.updatedAt ?? '',
+                name: lead.name ?? '',
                 menu: PopMenuWidget(
                   menuItems: PostsMenuModel.postMenu(),
                   menuCallback: (PopMenuOptions option) {
-                    _options(option, _lead);
+                    _options(option, lead);
                     controller.hideMenu();
                   },
-                ));
-          });
+                )))
+            .toList(),
+      );
     });
   }
 

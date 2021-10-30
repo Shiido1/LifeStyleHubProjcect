@@ -3,6 +3,9 @@ import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/vpp/vpp_profile.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/vpp/my_vpp.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/card.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/left_tile.dart';
@@ -43,7 +46,9 @@ class _VPPTabState extends State<VPPTab> {
       {required int? point,
       required String? text,
       required Color? textColor,
-      required Color? containerColor}) {
+      required Color? containerColor,
+      VoidCallback? voidCallback,
+      bool? isAdded = false}) {
     return Expanded(
       child: Container(
         width: getDeviceWidth(context),
@@ -69,6 +74,34 @@ class _VPPTabState extends State<VPPTab> {
               color: textColor,
               textAlign: TextAlign.center,
             ),
+            SizedBox(height: 16),
+            Visibility(
+                visible: isAdded!,
+                child: InkWell(
+                  onTap: voidCallback,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Pallets.red500),
+                          child: Icon(
+                            Icons.add_rounded,
+                            color: Pallets.white,
+                            size: 15,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      TextView(
+                        text: 'Add new',
+                        fontWeight: FontWeight.w500,
+                        color: Pallets.orange500,
+                        fontSize: 13,
+                      )
+                    ],
+                  ),
+                ))
           ],
         ),
       ),
@@ -118,7 +151,10 @@ class _VPPTabState extends State<VPPTab> {
                         0,
                     text: 'All my VPP',
                     textColor: Pallets.grey500,
-                    containerColor: Pallets.orange50),
+                    containerColor: Pallets.orange50,
+                    voidCallback: () => PageRouter.gotoWidget(
+                        VPPInformationsScreen(null, isUpdate: false), context),
+                    isAdded: true),
                 SizedBox(width: 16),
                 _container(
                     point: provider.reportPromotionSummaryModel
