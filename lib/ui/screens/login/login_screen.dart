@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../helper/helper_handler.dart';
 import '../../../helper/routes/navigation.dart';
 import '../../../helper/routes/routes.dart';
-import '../../../provider/provider_architecture.dart';
 import 'model/login_model.dart';
 import '../../widgets/buttons.dart';
 import '../../widgets/edit_form_widget.dart';

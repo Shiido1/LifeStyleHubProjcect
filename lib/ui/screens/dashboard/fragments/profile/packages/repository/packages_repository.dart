@@ -1,3 +1,4 @@
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/model/message_response.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/payment/list_of_banks.dart';
 
 import '../model/package_subcription_response.dart';
@@ -55,18 +56,28 @@ class PackageRepository {
     }
   }
 
+  /// fund wallet
+  Future<dynamic> fundWallet({required FormData formData}) async {
+    try {
+      final _response = await apiBaseHelper.post(
+          url: '${Paths.fundWallet}',
+          options: await getDioHeader(),
+          map: formData);
+      return MessageResponse.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
 
   /// making payment on  the endpoint
-  Future<dynamic> makePayment({required FormData formData})async{
-    try{
+  Future<dynamic> makePayment({required int id}) async {
+    try {
       final _response = await apiBaseHelper.post(
-        url: '${Paths.makePayment}',
-          options: await getDioHeader(),
-          map: formData
+        url: '${Paths.makePayment}$id/subscribe',
+        options: await getDioHeader(),
       );
       return _response;
-    }
-    catch(e){
+    } catch (e) {
       throw e;
     }
   }

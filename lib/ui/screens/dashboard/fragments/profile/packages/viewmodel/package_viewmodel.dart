@@ -96,12 +96,24 @@ class PackageViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
+  /// fund account
+  Future<void> fundWallet({required FormData formData}) async {
+    try {
+      _showLoading(notify: true);
+      final _response = await _packageRepository.fundWallet(formData: formData);
+      showsnackBarInfo(this._context,
+          message: _response.message ?? '', bgColor: Pallets.green600);
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
 
   /// make bank payment
-  Future<void> makePayment(FormData formData) async {
+  Future<void> makePayment(int id) async {
     try {
-       _showLoading(notify: true);
-      final _response = await _packageRepository.makePayment(formData:formData);
+      _showLoading(notify: true);
+      final _response = await _packageRepository.makePayment(id: id);
       return _response;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
