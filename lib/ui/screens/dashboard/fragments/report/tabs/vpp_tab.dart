@@ -172,40 +172,49 @@ class _VPPTabState extends State<VPPTab> {
                     containerColor: Pallets.lime50),
               ],
             ),
-            SizedBox(height: 35),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextView(
-                  text: 'Income chart',
-                  fontWeight: FontWeight.w700,
-                  textAlign: TextAlign.left,
-                  fontSize: 16,
-                ),
-                SizedBox(width: 11),
-                Icon(
-                  Icons.info_outline,
-                  color: Pallets.grey300,
-                )
-              ],
-            ),
-            SizedBox(height: 44),
-            Container(
-              height: 300,
-              child: LineChart(
-                LineChartData(
-                  borderData: FlBorderData(show: false),
-                  titlesData: flTitle(context),
-                  gridData: flGrid(context),
-                  lineBarsData: [
-                    LineChartBarData(
-                      spots: provider.analysisData,
-                      isCurved: true,
-                      barWidth: 3,
-                      colors: [Pallets.blue500],
+            Visibility(
+              visible: provider.analysisData.isEmpty ? false : true,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 35),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextView(
+                        text: 'Income chart',
+                        fontWeight: FontWeight.w700,
+                        textAlign: TextAlign.left,
+                        fontSize: 16,
+                      ),
+                      SizedBox(width: 11),
+                      Icon(
+                        Icons.info_outline,
+                        color: Pallets.grey300,
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 44),
+                  Container(
+                    height: 300,
+                    child: LineChart(
+                      LineChartData(
+                        borderData: FlBorderData(show: false),
+                        titlesData: flTitle(context),
+                        gridData: flGrid(context),
+                        lineBarsData: [
+                          LineChartBarData(
+                            spots: provider.analysisData,
+                            isCurved: true,
+                            barWidth: 3,
+                            colors: [Pallets.blue500],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             SizedBox(height: 24),
@@ -227,24 +236,33 @@ class _VPPTabState extends State<VPPTab> {
                           date: element.date)))
                   .toList(),
             ),
-            SizedBox(height: 24),
-            TextView(
-              text: 'Analytics ',
-              fontWeight: FontWeight.w700,
-              textAlign: TextAlign.left,
-              fontSize: 16,
-            ),
-            SizedBox(height: 16),
-            Container(
-              child: AspectRatio(
-                aspectRatio: 2.5,
-                child: PieChart(
-                  PieChartData(
-                    borderData: FlBorderData(show: false),
-                    centerSpaceRadius: 50,
-                    sections: provider.pieAnalysisData,
+            Visibility(
+              visible: provider.pieAnalysisData.isEmpty ? false : true,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 24),
+                  TextView(
+                    text: 'Analytics ',
+                    fontWeight: FontWeight.w700,
+                    textAlign: TextAlign.left,
+                    fontSize: 16,
                   ),
-                ),
+                  SizedBox(height: 16),
+                  Container(
+                    child: AspectRatio(
+                      aspectRatio: 2.5,
+                      child: PieChart(
+                        PieChartData(
+                          borderData: FlBorderData(show: false),
+                          centerSpaceRadius: 50,
+                          sections: provider.pieAnalysisData,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(height: 16),
