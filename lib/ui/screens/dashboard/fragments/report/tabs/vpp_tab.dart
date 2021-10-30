@@ -48,7 +48,8 @@ class _VPPTabState extends State<VPPTab> {
       required Color? textColor,
       required Color? containerColor,
       VoidCallback? voidCallback,
-      bool? isAdded = false}) {
+      bool? isAdded = false,
+      Widget? widget}) {
     return Expanded(
       child: Container(
         width: getDeviceWidth(context),
@@ -77,31 +78,7 @@ class _VPPTabState extends State<VPPTab> {
             SizedBox(height: 16),
             Visibility(
                 visible: isAdded!,
-                child: InkWell(
-                  onTap: voidCallback,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: Pallets.red500),
-                          child: Icon(
-                            Icons.add_rounded,
-                            color: Pallets.white,
-                            size: 15,
-                          )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      TextView(
-                        text: 'Add new',
-                        fontWeight: FontWeight.w500,
-                        color: Pallets.orange500,
-                        fontSize: 13,
-                      )
-                    ],
-                  ),
-                ))
+                child: InkWell(onTap: voidCallback, child: widget))
           ],
         ),
       ),
@@ -146,20 +123,50 @@ class _VPPTabState extends State<VPPTab> {
             Row(
               children: [
                 _container(
-                    point: provider.reportPromotionSummaryModel
-                            ?.totalFreeTrialMembers ??
-                        0,
-                    text: 'All my VPP',
-                    textColor: Pallets.grey500,
-                    containerColor: Pallets.orange50,
-                    voidCallback: () => PageRouter.gotoWidget(
-                        VPPInformationsScreen(null, isUpdate: false), context),
-                    isAdded: true),
+                  point: provider
+                          .reportPromotionSummaryModel?.totalFreeTrialMembers ??
+                      0,
+                  text: 'All my VPP',
+                  textColor: Pallets.grey500,
+                  containerColor: Pallets.orange50,
+                  voidCallback: () => PageRouter.gotoWidget(
+                      VPPInformationsScreen(null, isUpdate: false), context),
+                  isAdded: true,
+                  widget: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Pallets.orange500),
+                          child: Icon(
+                            Icons.add_rounded,
+                            color: Pallets.white,
+                            size: 15,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      TextView(
+                        text: 'Add new',
+                        fontWeight: FontWeight.w500,
+                        color: Pallets.orange500,
+                        fontSize: 12,
+                      )
+                    ],
+                  ),
+                ),
                 SizedBox(width: 16),
                 _container(
                     point: provider.reportPromotionSummaryModel
                             ?.totalUpgradedMembers ??
                         0,
+                    isAdded: true,
+                    widget: TextView(
+                      text: 'View members',
+                      fontWeight: FontWeight.w500,
+                      color: Pallets.lime700,
+                      fontSize: 12,
+                    ),
                     text: 'Active Members',
                     textColor: Pallets.grey500,
                     containerColor: Pallets.lime50),
