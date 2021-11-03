@@ -48,7 +48,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     NetworkScreen(),
     CommissionScreen(),
     ContestScreen(),
-    ReportScreen(), 
+    ReportScreen(),
     WalletScreen(),
     IntegratedPointScreen(),
     MessagingScreen(),

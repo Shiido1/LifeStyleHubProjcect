@@ -169,8 +169,7 @@ class MatrixDisplayWidget extends StatelessWidget {
                                                 child: Center(
                                                     child: grandChild.id != 0
                                                         ? Text(
-                                                            grandChild.name ??
-                                                                '',
+                                                            grandChild.name![0],
                                                             style: TextStyle(
                                                               fontSize: 20,
                                                               fontWeight:

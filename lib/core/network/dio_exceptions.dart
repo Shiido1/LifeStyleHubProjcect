@@ -53,6 +53,8 @@ class NetworkExceptions implements Exception {
     final String errorMessage =
         NotFoundException(message: error["message"]).message!;
     switch (statusCode) {
+      case 302:
+        return 'An unknown error occurred';
       case 401:
         eventBus
             .fire(UserLoggedInEvent(logUserOut: true, message: errorMessage));

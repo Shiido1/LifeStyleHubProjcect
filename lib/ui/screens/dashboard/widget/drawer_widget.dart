@@ -112,7 +112,7 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 newIndex: index,
               ),
               CustomDrawerTabs(
-                title: 'Marketting tools',
+                title: 'Marketing tools',
                 image: 'assets/svgs/marketing.svg',
                 onTap: () => _tap(
                     tab: _tabNotifier,
@@ -200,8 +200,8 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 newIndex: index,
               ),
               CustomDrawerTabs(
-                title: 'Ticketting',
-                image: 'assets/svgs/square_box.svg',
+                title: 'Ticketing',
+                image: 'assets/svgs/ticketing.svg',
                 onTap: () => _tap(
                     tab: _tabNotifier,
                     context: context,

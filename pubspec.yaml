@@ -40,6 +40,7 @@ dependencies:
   provider: ^5.0.0
   pull_to_refresh: ^2.0.0
   shared_preferences: ^2.0.6
+  share: ^2.0.4
 
 jsonToDart:
   outputFolder: lib/models #default: lib/
