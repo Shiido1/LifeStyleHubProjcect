@@ -8,14 +8,12 @@ import '../../../../../../../helper/routes/navigation.dart';
 import '../../dao/profile_dao.dart';
 import '../../model/users_profile_model.dart';
 import 'bank_payment_screen.dart';
-import 'payment_screen.dart';
 import '../../../../../../widgets/custom_appbar.dart';
 import '../../../../../../widgets/text_views.dart';
 import '../../../../../../../utils/pallets.dart';
 import 'package:provider/provider.dart';
 
 import '../viewmodel/package_viewmodel.dart';
-import '../widget/content_card.dart';
 
 class LSHBankScreen extends StatefulWidget {
   const LSHBankScreen({Key? key}) : super(key: key);

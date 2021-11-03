@@ -19,12 +19,18 @@ class SessionManager {
   }
 
   static const String KEY_AUTH_TOKEN = 'authToken';
+  static const String KEY_USER_WALLET = 'wallet';
 
   String get authToken => sharedPreferences!.getString(KEY_AUTH_TOKEN) ?? '';
 
   set authToken(String authToken) =>
       sharedPreferences!.setString(KEY_AUTH_TOKEN, authToken);
-  //
+
+  Map get userWallet =>
+      json.decode(sharedPreferences!.getString(KEY_USER_WALLET) ?? '');
+
+  set userWallet(Map map) =>
+      sharedPreferences!.setString(KEY_USER_WALLET, json.encode(map));
 
   Future<bool> logOut() async {
     await sharedPreferences!.clear();

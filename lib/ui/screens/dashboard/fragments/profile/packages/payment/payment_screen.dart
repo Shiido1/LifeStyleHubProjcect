@@ -168,7 +168,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     textAlign: TextAlign.center,
                     fontStyle: FontStyle.normal,
                     primary: Pallets.orange600,
-                    onPressed: () => showPayment(context, widget.element.id),
+                    onPressed: () {
+                      final _payment =
+                          Provider.of<PackageViewmodel>(context, listen: false);
+                      _payment.init(context);
+                      showPayment(context, widget.element.id, _payment);
+                    },
                   ),
                 ],
               ),

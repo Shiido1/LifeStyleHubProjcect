@@ -66,7 +66,7 @@ class _WalletScreenState extends State<WalletScreen> {
                 child: ListView(
                   children: [
                     WalletBalanceWidget(),
-                    SizedBox(height: 23),
+                    SizedBox(height: 46),
                     ViewAllButton(
                       title: 'My wallet history',
                       viewAll: () =>

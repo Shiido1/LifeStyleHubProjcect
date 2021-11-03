@@ -63,123 +63,118 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
           centerTitle: true,
           image: _profileModel?.profilePic ?? '',
           initial: _profileModel?.name ?? 'LH'),
-      body: SingleChildScrollView(
-        child: Consumer<PackageViewmodel>(
-          builder: (_, provider, __) {
-            return LoadingOverlay(
-              isLoading: provider.loading,
-              child: Padding(
-                padding: const EdgeInsets.all(22.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextView(
-                      text: widget.bankName ?? '',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                      color: Pallets.grey800,
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    TextView(
-                      text: 'Account Name: ${widget.accountName ?? ''}',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Pallets.grey700,
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    TextView(
-                      text: 'Account Number: ${widget.accountNumber ?? ''}',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Pallets.grey700,
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    TextView(
-                      text: 'Amount',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: Pallets.grey700,
-                      textAlign: TextAlign.left,
-                    ),
-                    EditFormField(
-                      label: 'NGN',
-                      controller: amountController,
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    TextView(
-                      text: 'Description (Optional)',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: Pallets.grey700,
-                      textAlign: TextAlign.left,
-                    ),
-                    EditFormField(
-                      label: 'What’s this for?',
-                      controller: descriptionController,
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    TextView(
-                      text: 'Upload  Payment  Receipt',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: Pallets.grey700,
-                      textAlign: TextAlign.left,
-                    ),
-                    EditFormField(
-                      hint: _file == null
-                          ? 'PDF, Jpeg, or PNG'
-                          : _file?.toString(),
-                      label: _file == null
-                          ? 'PDF, Jpeg, or PNG'
-                          : _file?.toString(),
-                      readOnly: true,
-                      suffixWidget: InkWell(
-                        onTap: () => _pickImages(),
-                        child: Container(
-                          padding: EdgeInsets.only(
-                              left: 8, right: 8, top: 16, bottom: 4),
-                          decoration: BoxDecoration(
-                              color: Pallets.orange600,
-                              borderRadius: BorderRadius.circular(8)),
-                          child: TextView(
-                            text: 'Select the file',
-                            color: Pallets.white,
-                            textAlign: TextAlign.center,
-                          ),
+      body: Consumer<PackageViewmodel>(
+        builder: (_, provider, __) {
+          return LoadingOverlay(
+            isLoading: provider.loading,
+            child: Padding(
+              padding: const EdgeInsets.all(22.0),
+              child: ListView(
+                children: [
+                  TextView(
+                    text: widget.bankName ?? '',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 24,
+                    color: Pallets.grey800,
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  TextView(
+                    text: 'Account Name: ${widget.accountName ?? ''}',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: Pallets.grey700,
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  TextView(
+                    text: 'Account Number: ${widget.accountNumber ?? ''}',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: Pallets.grey700,
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  TextView(
+                    text: 'Amount',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: Pallets.grey700,
+                    textAlign: TextAlign.left,
+                  ),
+                  EditFormField(
+                    label: 'NGN',
+                    controller: amountController,
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  TextView(
+                    text: 'Description (Optional)',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: Pallets.grey700,
+                    textAlign: TextAlign.left,
+                  ),
+                  EditFormField(
+                    label: 'What’s this for?',
+                    controller: descriptionController,
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  TextView(
+                    text: 'Upload  Payment  Receipt',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: Pallets.grey700,
+                    textAlign: TextAlign.left,
+                  ),
+                  EditFormField(
+                    hint:
+                        _file == null ? 'PDF, Jpeg, or PNG' : _file?.toString(),
+                    label:
+                        _file == null ? 'PDF, Jpeg, or PNG' : _file?.toString(),
+                    readOnly: true,
+                    suffixWidget: InkWell(
+                      onTap: () => _pickImages(),
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            left: 8, right: 8, top: 16, bottom: 4),
+                        decoration: BoxDecoration(
+                            color: Pallets.orange600,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: TextView(
+                          text: 'Select the file',
+                          color: Pallets.white,
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 56,
-                    ),
-                    ButtonWidget(
-                      onPressed: () => fundWallet(),
-                      buttonText: 'Make Payment',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Pallets.white,
-                      primary: Pallets.orange00,
-                      width: getDeviceWidth(context),
-                    )
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 56,
+                  ),
+                  ButtonWidget(
+                    onPressed: () => fundWallet(),
+                    buttonText: 'Make Payment',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: Pallets.white,
+                    primary: Pallets.orange00,
+                    width: getDeviceWidth(context),
+                  )
+                ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -209,7 +204,6 @@ class _BankPaymentScreenState extends State<BankPaymentScreen> {
           file: (file) async {
             _file = file;
             setState(() {});
-            logger.d(_file);
           });
     } catch (e) {
       logger.e(e);

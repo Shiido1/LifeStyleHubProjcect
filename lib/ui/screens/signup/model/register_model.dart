@@ -56,7 +56,7 @@ class Wallet {
       this.createdAt,
       this.updatedAt});
 
-  Wallet.fromJson(Map<String, dynamic> json) {
+  Wallet.fromJson(json) {
     if (json["id"] is int) this.id = json["id"];
     if (json["user_id"] is int) this.userId = json["user_id"];
     if (json["total_income"] is int) this.totalIncome = json["total_income"];

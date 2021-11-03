@@ -145,7 +145,6 @@ class _AddOrEditBankAccountScreenState
               ),
             ),
           ),
-       
         ),
       );
     });
@@ -159,6 +158,7 @@ class _AddOrEditBankAccountScreenState
     _map['name'] = _response.name;
     _map['account_name'] = _accountNameController!.text;
     _map['account_no'] = _accountNoController!.text;
+    _map['bank_name'] = _bankNameController!.text;
     _map['currency'] = 'Naira';
 
     if (_globalFormKey.currentState!.validate()) {

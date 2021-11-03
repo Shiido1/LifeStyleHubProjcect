@@ -2,18 +2,15 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/video_player.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import '../../model/dashboard_model.dart';
 import '../../../../widgets/image_loader.dart';
 
-import '../../../../../database/users_data_provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../utils/pallets.dart';
 import '../../../../widgets/text_views.dart';
-import '../../../onboarding/viewmodel/tab_viewmodel.dart';
 import '../../dao/dashboardd_dao.dart';
 import '../../viewmodel/dashboard_viewmodel.dart';
 import '../../widget/active_packages.dart';
@@ -24,8 +21,6 @@ import '../../widget/view_all_widget.dart';
 import '../contest/dao/contest_dao.dart';
 import '../contest/model/view_contest_model.dart';
 import '../contest/viewmodel/contest_viewmodel.dart';
-import '../profile/packages/dao/package_dao.dart';
-import '../profile/packages/model/view_packages_model.dart';
 import '../profile/packages/viewmodel/package_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -37,9 +32,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late BetterPlayerController _betterPlayerController;
-  late BetterPlayerDataSource _betterPlayerDataSource;
-
   DashboardViewmodel? _dashboardViewmodel;
   ContestViewModel? _contestViewModel;
   PackageViewmodel? _packageViewmodel;
@@ -64,9 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _contestViewModel!.getListContest();
     setState(() {});
   }
-
-  // final _notifier = ChangeNotifierProvider((ref) => TabViewModel());
-  // final _videoPlayerModel = ChangeNotifierProvider((ref) => VideoPlayer());
 
   UsersProfileModel? _profileModel;
   DashboardModel? _dashboardModel;
@@ -203,41 +192,44 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Consumer<PackageViewmodel>(
               builder: (_, provider, __) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ViewAllButton(
-                      title: 'Active packages',
-                      viewAll: () {},
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: List.generate(
-                            provider.activePackages!.length <= 5
-                                ? provider.activePackages!.length
-                                : 5, (index) {
-                          final _package = provider.activePackages![index];
-                          return Container(
-                            margin: EdgeInsets.only(right: 23),
-                            child: ActivePackageWidget(
-                              title: _package.name ?? '',
-                              subtitle: _package.type ?? '',
-                              percentage: getPercentage(
-                                  directReferred:
-                                      _package.downlinesAcquired ?? 0,
-                                  directRequired:
-                                      _package.downlinesRequired ?? 0),
-                            ),
-                          );
-                        }),
+                return Visibility(
+                  visible: provider.activePackages!.isEmpty ? false : true,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ViewAllButton(
+                        title: 'Active packages',
+                        viewAll: () {},
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 16,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: List.generate(
+                              provider.activePackages!.length <= 5
+                                  ? provider.activePackages!.length
+                                  : 5, (index) {
+                            final _package = provider.activePackages![index];
+                            return Container(
+                              margin: EdgeInsets.only(right: 23),
+                              child: ActivePackageWidget(
+                                title: _package.name ?? '',
+                                subtitle: _package.type ?? '',
+                                percentage: getPercentage(
+                                    directReferred:
+                                        _package.downlinesAcquired ?? 0,
+                                    directRequired:
+                                        _package.downlinesRequired ?? 0),
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               },
             ),

@@ -6,7 +6,6 @@ import '../../dashboard/fragments/profile/dao/profile_dao.dart';
 import '../../dashboard/fragments/profile/repository/profile_repository.dart';
 import '../../dashboard/repository/dashboard_repository.dart';
 
-import '../../../../helper/configs/constants.dart';
 import '../../../../helper/configs/instances.dart';
 import '../../../../utils/paths.dart';
 import '../model/login_model.dart';
@@ -22,6 +21,9 @@ class LoginRepository {
 
       /// cache login data
       SessionManager.instance.authToken = _login.token!;
+
+      /// cache users wallet
+      SessionManager.instance.userWallet = _login.user!.wallet!.toJson();
 
       /// requests for users profile
       final _usersInformationResponse =

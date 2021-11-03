@@ -94,27 +94,34 @@ class _MyGenerationTabState extends State<MyGenerationTab> {
             ),
           ),
           SizedBox(height: 32),
-          ViewAllButton(
-              title: 'Generation downline history',
-              viewAll: () =>
-                  PageRouter.gotoWidget(ViewMyGenerationScreen(), context)),
-          SizedBox(height: 16),
-          ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: provider.generationData.length <= 5
-                  ? provider.generationData.length
-                  : 5,
-              itemBuilder: (context, index) {
-                final element = provider.generationData[index];
-                return HistroyCard(
-                    historyValues: HistoryValues(
-                        name: element.user?.name ?? '',
-                        email: element.user?.email ?? '',
-                        date: fomartDate(element.createdAt!),
-                        packageName: element.package?.name ?? 'N/A',
-                        referral: 'Referal Name here'));
-              }),
+          Visibility(
+              visible: provider.generationData.isEmpty ? false : true,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ViewAllButton(
+                      title: 'Generation downline history',
+                      viewAll: () => PageRouter.gotoWidget(
+                          ViewMyGenerationScreen(), context)),
+                  SizedBox(height: 16),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: provider.generationData.length <= 5
+                          ? provider.generationData.length
+                          : 5,
+                      itemBuilder: (context, index) {
+                        final element = provider.generationData[index];
+                        return HistroyCard(
+                            historyValues: HistoryValues(
+                                name: element.user?.name ?? '',
+                                email: element.user?.email ?? '',
+                                date: fomartDate(element.createdAt!),
+                                packageName: element.package?.name ?? 'N/A',
+                                referral: 'Referal Name here'));
+                      }),
+                ],
+              ))
         ],
       );
     });

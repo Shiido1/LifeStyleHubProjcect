@@ -97,27 +97,35 @@ class _MyDownlineTabState extends State<MyDownlineTab> {
             ),
           ),
           SizedBox(height: 32),
-          ViewAllButton(
-              title: 'Downline history',
-              viewAll: () =>
-                  PageRouter.gotoWidget(ViewMyDownlinesScreen(), context)),
-          SizedBox(height: 16),
-          ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: provider.downlineResponse!.length <= 5
-                  ? provider.downlineResponse!.length
-                  : 5,
-              itemBuilder: (context, index) {
-                final element = provider.downlineResponse![index];
-                return HistroyCard(
-                    historyValues: HistoryValues(
-                        name: element.user?.name ?? '',
-                        email: element.user?.email ?? '',
-                        date: fomartDate(element.createdAt!),
-                        packageName: element.package?.name ?? 'N/A',
-                        referral: 'Referal Name here'));
-              }),
+          Visibility(
+            visible: provider.downlineResponse!.isEmpty ? false : true,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ViewAllButton(
+                    title: 'Downline history',
+                    viewAll: () => PageRouter.gotoWidget(
+                        ViewMyDownlinesScreen(), context)),
+                SizedBox(height: 16),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: provider.downlineResponse!.length <= 5
+                        ? provider.downlineResponse!.length
+                        : 5,
+                    itemBuilder: (context, index) {
+                      final element = provider.downlineResponse![index];
+                      return HistroyCard(
+                          historyValues: HistoryValues(
+                              name: element.user?.name ?? '',
+                              email: element.user?.email ?? '',
+                              date: fomartDate(element.createdAt!),
+                              packageName: element.package?.name ?? 'N/A',
+                              referral: 'Referal Name here'));
+                    }),
+              ],
+            ),
+          )
         ],
       );
     });

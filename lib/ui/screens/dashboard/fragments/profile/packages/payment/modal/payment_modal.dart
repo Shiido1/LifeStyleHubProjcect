@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/core/data/session_manager.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/signup/model/register_model.dart';
 import '../../../../../../../../helper/helper_handler.dart';
 import '../../viewmodel/package_viewmodel.dart';
 import '../../../../../../../widgets/buttons.dart';
@@ -10,9 +12,8 @@ import 'package:provider/provider.dart';
 
 import '../lsh_banj_list.dart';
 
-void showPayment(BuildContext context, int packageID) {
-  final _payment = Provider.of<PackageViewmodel>(context, listen: false);
-  _payment.init(context);
+void showPayment(
+    BuildContext context, int packageID, PackageViewmodel _payment) {
   showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -68,9 +69,8 @@ void showPayment(BuildContext context, int packageID) {
                       fontStyle: FontStyle.normal,
                       primary: Pallets.orange600,
                       onPressed: () {
-                        _payment
-                            .subscribe(packageID, {'payment_method': 'wallet'});
                         PageRouter.goBack(context);
+                        walletBalanceModal(context, packageID, _payment);
                       },
                     ),
                     SizedBox(height: 32),
@@ -100,19 +100,92 @@ void showPayment(BuildContext context, int packageID) {
                       fontStyle: FontStyle.normal,
                       primary: Pallets.orange600,
                       onPressed: () => {
-                      PageRouter.goBack(context),
+                        PageRouter.goBack(context),
                         PageRouter.gotoWidget(LSHBankScreen(), context)
                       },
                     ),
                     SizedBox(height: 16),
-                    Center(
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      });
+}
+
+void walletBalanceModal(
+    BuildContext context, int packageID, PackageViewmodel _payment) {
+  final _wallet = Wallet.fromJson(SessionManager.instance.userWallet);
+  showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Consumer<PackageViewmodel>(
+          builder: (context, provider, child) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 23),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30)),
+                  color: Pallets.white),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Visibility(
+                        visible: provider.loading,
+                        child: LinearProgressIndicator()),
+                    Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Pallets.orange300),
                       child: TextView(
-                          text: 'insufficient fund?',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          color: Pallets.grey400,
-                          textAlign: TextAlign.center,
-                          onTap: () {}),
+                        text: 'Wallet ID (${_wallet.id})',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12,
+                        color: Pallets.white,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(height: 33),
+                    TextView(
+                      text: 'Wallet balance',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Pallets.grey500,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 16),
+                    TextView(
+                        text: '${formatCurrency(_wallet.balance ?? 0)}',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24,
+                        color: Pallets.grey700,
+                        textAlign: TextAlign.center),
+                    SizedBox(height: 23),
+                    ButtonWidget(
+                      width: getDeviceWidth(context),
+                      buttonText: 'Make payment',
+                      color: Pallets.white,
+                      fontWeight: FontWeight.w500,
+                      textAlign: TextAlign.center,
+                      fontStyle: FontStyle.normal,
+                      primary: Pallets.orange600,
+                      onPressed: () {
+                        _payment
+                            .subscribe(packageID, {'payment_method': 'wallet'});
+                        PageRouter.goBack(context);
+                      },
+                    ),
+                    SizedBox(height: 23),
+                    TextView(
+                      text: 'insufficient fund?',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                      color: Pallets.grey400,
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 16),
                   ],

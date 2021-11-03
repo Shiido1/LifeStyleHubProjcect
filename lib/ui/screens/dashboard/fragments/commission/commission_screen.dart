@@ -113,31 +113,41 @@ class _CommissionScreenState extends State<CommissionScreen> {
                         );
                       }),
                   SizedBox(height: 23),
-                  ViewAllButton(
-                    title: 'Recent points',
-                    viewAll: () => PageRouter.gotoWidget(
-                        ViewMoreCommissionScreen(), context),
-                  ),
-                  SizedBox(
-                    height: 23,
-                  ),
-                  ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount:
-                          _commissionModel.commissionHistory?.data?.length,
-                      itemBuilder: (context, index) {
-                        final commission =
-                            _commissionModel.commissionHistory?.data?[index];
-                        return MultiColorWidget(
-                            title: commission?.fullname ?? '',
-                            bgColor: index % 2 == 0
-                                ? Pallets.orange100
-                                : Pallets.white,
-                            package: commission?.packageName ?? '',
-                            points: formatCurrency(commission?.amount ?? 0),
-                            date: commission?.date ?? '');
-                      }),
+                  Visibility(
+                      visible: _commissionModel.commissionHistory!.data!.isEmpty
+                          ? false
+                          : true,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ViewAllButton(
+                            title: 'Recent points',
+                            viewAll: () => PageRouter.gotoWidget(
+                                ViewMoreCommissionScreen(), context),
+                          ),
+                          SizedBox(
+                            height: 23,
+                          ),
+                          ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: _commissionModel
+                                  .commissionHistory?.data?.length,
+                              itemBuilder: (context, index) {
+                                final commission = _commissionModel
+                                    .commissionHistory?.data?[index];
+                                return MultiColorWidget(
+                                    title: commission?.fullname ?? '',
+                                    bgColor: index % 2 == 0
+                                        ? Pallets.orange100
+                                        : Pallets.white,
+                                    package: commission?.packageName ?? '',
+                                    points:
+                                        formatCurrency(commission?.amount ?? 0),
+                                    date: commission?.date ?? '');
+                              }),
+                        ],
+                      ))
                 ],
               ));
         });

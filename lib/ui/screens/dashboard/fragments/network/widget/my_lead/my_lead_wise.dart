@@ -92,24 +92,31 @@ class _MyLeadWiseTabState extends State<MyLeadWiseTab> {
             ),
           ),
           SizedBox(height: 32),
-          ViewAllButton(title: 'My lead', viewAll: () => null),
-          SizedBox(height: 16),
-          ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: provider.leadsWise.length <= 5
-                  ? provider.leadsWise.length
-                  : 5,
-              itemBuilder: (context, index) {
-                final element = provider.leadsWise[index];
-                return HistroyCard(
-                    historyValues: HistoryValues(
-                        name: element.name ?? '',
-                        email: element.email ?? '',
-                        date: fomartDate(element.createdAt!),
-                        packageName: 'Package Name',
-                        referral: element.referredBy ?? 'N/A'));
-              }),
+          Visibility(
+              visible: provider.leadsWise.isEmpty ? false : true,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ViewAllButton(title: 'My lead', viewAll: () => null),
+                  SizedBox(height: 16),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: provider.leadsWise.length <= 5
+                          ? provider.leadsWise.length
+                          : 5,
+                      itemBuilder: (context, index) {
+                        final element = provider.leadsWise[index];
+                        return HistroyCard(
+                            historyValues: HistoryValues(
+                                name: element.name ?? '',
+                                email: element.email ?? '',
+                                date: fomartDate(element.createdAt!),
+                                packageName: 'Package Name',
+                                referral: element.referredBy ?? 'N/A'));
+                      }),
+                ],
+              ))
         ],
       );
       ;

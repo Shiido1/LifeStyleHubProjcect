@@ -38,7 +38,7 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                       radius: 30,
                       path: profileModel?.profilePic ?? '',
                       initial: profileModel?.profilePic == null
-                          ? profileModel?.name!.substring(0, 2)
+                          ? profileModel?.name?.substring(0, 2)
                           : '',
                       textSize: 20,
                       showInitialTextAbovePicture: true,
@@ -61,6 +61,10 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                           maxLines: 1,
                           textOverflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
+                          onTap: () => _tap(
+                              tab: _tabNotifier,
+                              context: context,
+                              newIndex: 10),
                         ),
                         SizedBox(
                           height: 4,

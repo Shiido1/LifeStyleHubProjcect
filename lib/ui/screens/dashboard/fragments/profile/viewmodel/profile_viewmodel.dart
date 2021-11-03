@@ -58,7 +58,8 @@ class ProfileViewmodel extends BaseViewModel {
       _showLoading(notify: true);
       final _response = await _profileRepository.updateAUsersProfile(formData);
       profileDao!.saveProfile(_response);
-      showsnackBarInfo(_context, message: 'Update successful');
+      showsnackBarInfo(_context,
+          message: 'Update successful', bgColor: Pallets.green600);
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
@@ -84,7 +85,8 @@ class ProfileViewmodel extends BaseViewModel {
       _showLoading();
       await _profileRepository.updateUsersWork(map);
       await getUsersProfile();
-      showsnackBarInfo(_context, message: 'Update successful');
+      showsnackBarInfo(_context,
+          message: 'Update successful', bgColor: Pallets.green600);
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }

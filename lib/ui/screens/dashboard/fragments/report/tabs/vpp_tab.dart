@@ -162,7 +162,7 @@ class _VPPTabState extends State<VPPTab> {
                         0,
                     isAdded: true,
                     widget: TextView(
-                      text: 'View members',
+                      text: '',
                       fontWeight: FontWeight.w500,
                       color: Pallets.lime700,
                       fontSize: 12,

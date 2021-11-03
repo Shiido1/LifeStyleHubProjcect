@@ -100,6 +100,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         color: Pallets.grey700,
                         textAlign: TextAlign.left,
                       ),
+                      SizedBox(
+                        height: 16,
+                      ),
                       EditFormField(
                         floatingLabel: 'Enter referral code (If any)',
                         label: 'Referral code (if any)',
