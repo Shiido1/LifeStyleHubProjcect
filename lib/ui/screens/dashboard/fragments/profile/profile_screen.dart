@@ -214,14 +214,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: () => PageRouter.gotoWidget(ChangePasswordScreen(), context,
                 animationType: PageTransitionType.fade),
           ),
-          CustomTileWidget(
-            title: 'Change transaction pin',
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10)),
-            onTap: () => PageRouter.gotoWidget(ChangePINScreen(), context,
-                animationType: PageTransitionType.fade),
-          ),
+          // CustomTileWidget(
+          //   title: 'Change transaction pin',
+          //   borderRadius: BorderRadius.only(
+          //       bottomLeft: Radius.circular(10),
+          //       bottomRight: Radius.circular(10)),
+          //   onTap: () => PageRouter.gotoWidget(ChangePINScreen(), context,
+          //       animationType: PageTransitionType.fade),
+          // ),
           CustomTileWidget(
             title: 'Log out',
             borderRadius: BorderRadius.only(

@@ -110,7 +110,7 @@ class ButtomCountDownWidget extends StatelessWidget {
                                 children: [
                                   TextView(
                                     text: _timer.day!.isNegative
-                                        ? '00:'
+                                        ? '00'
                                         : '${_timer.miniute}',
                                     fontWeight: FontWeight.w500,
                                     fontSize: 28,

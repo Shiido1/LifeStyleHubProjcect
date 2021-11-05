@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
-import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/routes/navigation.dart';
 import '../integrated/dao/point_dao.dart';
 import '../integrated/model/point_history_model.dart';
@@ -15,12 +13,8 @@ import 'view_more_commission.dart';
 import 'viewmodel/commission_viewmodel.dart';
 import '../integrated/widgets/integrated_points_widget.dart';
 import '../integrated/widgets/point_break_down_widget.dart';
-import '../wallet/dao/wallet_dao.dart';
-import '../wallet/model/view_wallet_transaction_model.dart';
 import '../../widget/multi_color_widget.dart';
-import '../../widget/second_icon.dart';
 import '../../widget/view_all_widget.dart';
-import '../../widget/wallet_balance_widget.dart';
 import '../../../../widgets/text_views.dart';
 import '../../../../../utils/pallets.dart';
 
