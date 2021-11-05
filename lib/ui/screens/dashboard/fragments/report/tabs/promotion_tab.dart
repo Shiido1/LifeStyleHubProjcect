@@ -188,7 +188,7 @@ class _PromotionTabState extends State<PromotionTab> {
                       aspectRatio: 2.5,
                       child: PieChart(
                         PieChartData(
-                          borderData: FlBorderData(show: false),
+                          borderData: FlBorderData(show: true),
                           centerSpaceRadius: 50,
                           sections: provider.pieAnalysisData,
                         ),

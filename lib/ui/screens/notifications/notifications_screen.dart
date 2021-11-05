@@ -43,8 +43,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   padding: const EdgeInsets.all(16.0),
                   child: ListView(
                     children: [
-                      SizedBox(height: 36),
-                      TextView(
+                      SizedBox(height: 30),
+                     notification.notificationList.isEmpty?TextView(
+                       text: 'No Notification',
+                       fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Pallets.orange500,
+                        textAlign: TextAlign.center,):TextView(
                         text: 'Clear all',
                         fontWeight: FontWeight.w500,
                         fontSize: 16,

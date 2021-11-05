@@ -63,7 +63,9 @@ class ButtomCountDownWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   TextView(
-                                    text: '${_timer.day}:',
+                                    text: _timer.day!.isNegative
+                                        ? '00:'
+                                        : '${_timer.day}:',
                                     fontWeight: FontWeight.w500,
                                     fontSize: 28,
                                     color: Pallets.red500,
@@ -84,7 +86,9 @@ class ButtomCountDownWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   TextView(
-                                    text: '${_timer.hour}:',
+                                    text: _timer.day!.isNegative
+                                        ? '00:'
+                                        : '${_timer.hour}:',
                                     fontWeight: FontWeight.w500,
                                     fontSize: 28,
                                     color: Pallets.red500,
@@ -105,7 +109,9 @@ class ButtomCountDownWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   TextView(
-                                    text: '${_timer.miniute}',
+                                    text: _timer.day!.isNegative
+                                        ? '00'
+                                        : '${_timer.miniute}',
                                     fontWeight: FontWeight.w500,
                                     fontSize: 28,
                                     color: Pallets.red500,

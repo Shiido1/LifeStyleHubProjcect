@@ -35,7 +35,7 @@ class ContestTimeLeftWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15)),
             child: Center(
               child: TextView(
-                text: '${directs ?? 0}',
+                text: directs!.isNegative?'00:':'${directs ?? 0}',
                 color: textColor != null ? textColor : Pallets.black,
                 fontSize: 24,
                 textAlign: TextAlign.center,
