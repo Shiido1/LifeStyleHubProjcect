@@ -92,14 +92,15 @@ class ReportViewmodel extends BaseViewModel {
     try {
       if (promotionIncomeAnalysis!.isEmpty) _showLoading();
       final _response = await _reportRepository.promotionIncomeAnalysis();
-      promotionIncomeAnalysis =
-          _response.reportPromotionIncomeAnalysisModel ?? [];
+      promotionIncomeAnalysis =  _response.reportPromotionIncomeAnalysisModel ?? [];
       if (pieAnalysisData.isNotEmpty) {
         pieAnalysisData.clear();
       }
       for (var item in promotionIncomeAnalysis!) {
         analysisData
             .add(FlSpot(item.month!.toDouble(), item.amount!.toDouble()));
+
+            
         pieAnalysisData.add(PieChartSectionData(
             color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
             value: item.amount!.toDouble(),

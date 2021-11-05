@@ -31,13 +31,7 @@ class _PromotionTabState extends State<PromotionTab> {
     super.initState();
   }
 
-  final List<FlSpot> dummyData1 = List.generate(3, (index) {
-    return FlSpot(index.toDouble(), index * Random().nextDouble());
-  });
 
-  final List<FlSpot> dummyData2 = List.generate(10, (index) {
-    return FlSpot(index.toDouble(), index * Random().nextDouble());
-  });
 
   _container(
       {required int? point,
