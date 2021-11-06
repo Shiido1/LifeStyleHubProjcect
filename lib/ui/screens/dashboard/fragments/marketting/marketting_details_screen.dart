@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
-import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/video_player.dart';
 import 'data/enum.dart';
 import 'data/social_media.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
-import '../../../../widgets/glass_container.dart';
 import '../../../../widgets/image_loader.dart';
 import '../../../../widgets/text_views.dart';
 import '../../../../../utils/pallets.dart';
@@ -139,101 +137,102 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
               color: Pallets.grey600,
               textAlign: TextAlign.left,
             ),
-            SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        CupertinoIcons.eye,
-                        color: Pallets.grey400,
-                      ),
-                      SizedBox(width: 8),
-                      TextView(
-                        text: '1.2K views',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                        color: Pallets.grey400,
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        CupertinoIcons.share,
-                        color: Pallets.grey400,
-                      ),
-                      SizedBox(width: 8),
-                      TextView(
-                        text: '400 shares',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                        color: Pallets.grey400,
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            SizedBox(height: 24),
-            TextView(
-              text: 'Share this',
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: Pallets.grey800,
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(height: 10),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: SocialMediaModel.getSocialMedia()
-                    .map((social) => Container(
-                        height: 60,
-                        width: 60,
-                        margin: EdgeInsets.only(right: 16.5),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: social.color),
-                        child: ImageLoader(
-                          path: social.media!,
-                        )))
-                    .toList(),
-              ),
-            ),
-            SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextView(
-                  text: 'Similar videos',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16,
-                  color: Pallets.grey800,
-                  textAlign: TextAlign.left,
-                ),
-                TextView(
-                  onTap: () {},
-                  text: 'View all',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                  color: Pallets.grey500,
-                  textAlign: TextAlign.left,
-                ),
-              ],
-            ),
+            // SizedBox(height: 8),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   mainAxisSize: MainAxisSize.max,
+            //   children: [
+            //     Expanded(
+            //       flex: 2,
+            //       child: Row(
+            //         mainAxisSize: MainAxisSize.min,
+            //         crossAxisAlignment: CrossAxisAlignment.center,
+            //         children: [
+            //           Icon(
+            //             CupertinoIcons.eye,
+            //             color: Pallets.grey400,
+            //           ),
+            //           SizedBox(width: 8),
+            //           TextView(
+            //             text: '1.2K views',
+            //             fontWeight: FontWeight.w500,
+            //             fontSize: 12,
+            //             color: Pallets.grey400,
+            //             textAlign: TextAlign.left,
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     Expanded(
+            //       flex: 3,
+            //       child: Row(
+            //         mainAxisSize: MainAxisSize.min,
+            //         crossAxisAlignment: CrossAxisAlignment.center,
+            //         children: [
+            //           Icon(
+            //             CupertinoIcons.share,
+            //             color: Pallets.grey400,
+            //           ),
+            //           SizedBox(width: 8),
+            //           TextView(
+            //             text: '400 shares',
+            //             fontWeight: FontWeight.w500,
+            //             fontSize: 12,
+            //             color: Pallets.grey400,
+            //             textAlign: TextAlign.left,
+            //           ),
+            //         ],
+            //       ),
+            //     )
+            //   ],
+            // ),
+            // SizedBox(height: 24),
+            // TextView(
+            //   text: 'Share this',
+            //   fontWeight: FontWeight.w700,
+            //   fontSize: 16,
+            //   color: Pallets.grey800,
+            //   textAlign: TextAlign.left,
+            // ),
+            // SizedBox(height: 10),
+            // SingleChildScrollView(
+            //   scrollDirection: Axis.horizontal,
+            //   child: Row(
+            //     children: SocialMediaModel.getSocialMedia()
+            //         .map((social) => Container(
+            //             height: 60,
+            //             width: 60,
+            //             margin: EdgeInsets.only(right: 16.5),
+            //             decoration: BoxDecoration(
+            //                 shape: BoxShape.circle, color: social.color),
+            //             child: ImageLoader(
+            //               path: social.media!,
+            //             )))
+            //         .toList(),
+            //   ),
+            // ),
+            // SizedBox(height: 30),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     TextView(
+            //       text: 'Similar videos',
+            //       fontWeight: FontWeight.w700,
+            //       fontSize: 16,
+            //       color: Pallets.grey800,
+            //       textAlign: TextAlign.left,
+            //     ),
+            //     TextView(
+            //       onTap: () {},
+            //       text: 'View all',
+            //       fontWeight: FontWeight.w500,
+            //       fontSize: 14,
+            //       color: Pallets.grey500,
+            //       textAlign: TextAlign.left,
+            //     ),
+            //   ],
+            // ),
+
             SizedBox(height: 16),
           ]),
         ),
