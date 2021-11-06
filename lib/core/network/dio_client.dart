@@ -36,7 +36,8 @@ class DioClient {
       ..options.receiveTimeout = _defaultReceiveTimeout
       ..httpClientAdapter
       ..options.method
-      ..options.headers = {'Content-Type': 'application/json; charset=UTF-8'};
+      ..options.headers = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+      ..options.headers = {  'Accepts' : 'application/json'};
 
     if (interceptors?.isNotEmpty ?? false) {
       _dio!.interceptors.addAll(interceptors!);

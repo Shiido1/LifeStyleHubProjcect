@@ -21,6 +21,7 @@ class NetworkExceptions implements Exception {
         message = "Receive timeout in connection with API server";
         break;
       case DioErrorType.response:
+
         message = _handleError(
             dioError.response!.statusCode!, dioError.response!.data);
         break;
@@ -50,6 +51,7 @@ class NetworkExceptions implements Exception {
   String message = '';
 
   String _handleError(int statusCode, dynamic error) {
+    logger.d(statusCode);
     final String errorMessage =
         NotFoundException(message: error["message"]).message!;
     switch (statusCode) {
