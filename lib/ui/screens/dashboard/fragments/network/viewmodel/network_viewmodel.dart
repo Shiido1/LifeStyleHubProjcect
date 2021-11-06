@@ -48,9 +48,9 @@ class NetworkViewModel extends BaseViewModel {
   }
 
   /// show loading indicator
-  void _showLoading() {
+  void _showLoading({bool notify = true}) {
     _loading = true;
-    notifyListeners();
+    if (notify) notifyListeners();
   }
 
   /// hide loading indicator
@@ -60,15 +60,17 @@ class NetworkViewModel extends BaseViewModel {
   }
 
   /// get list of network
-  Future<void> getNetworkAccount() async {
+  Future<List<ViewAccountResponse>> getNetworkAccount(
+      {bool notify = true}) async {
     try {
-      if (_viewAccountResponseList!.length == 0) _showLoading();
+      if (_viewAccountResponseList!.length == 0) _showLoading(notify: notify);
       final _response = await _networkRepository.getNetworkAccount();
       _viewAccountResponseList = _response.viewAccountResponseList;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
     _hideLoading();
+    return _viewAccountResponseList!;
   }
 
   /// get network details
