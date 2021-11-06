@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverPod;
+import 'package:lifestyle_hub/core/network/app_config.dart';
 import 'package:provider/provider.dart';
 
 import 'core/data/session_manager.dart';
-import 'core/network/url_config.dart';
 import 'database/hive_database.dart';
 import 'helper/configs/instances.dart';
 import 'helper/configs/providers.dart';
@@ -17,7 +17,7 @@ import 'ui/screens/onboarding/splashscreen.dart';
 void main() async {
   await initializeDatabase();
   await SessionManager().init();
-  UrlConfig.environment = Environment.staging;
+  AppConfig.environment = Environment.staging;
   runApp(DevicePreview(
       enabled: kReleaseMode,
       builder: (context) => riverPod.ProviderScope(child: MyApp())));
