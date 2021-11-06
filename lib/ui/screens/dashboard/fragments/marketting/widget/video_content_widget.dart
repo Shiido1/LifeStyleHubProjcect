@@ -47,9 +47,8 @@ class VideoContents extends StatelessWidget {
                               height: 127,
                               onTap: () => PageRouter.gotoWidget(
                                     MarkettingDetailScreen(
-                                      getResourcesModel: element,
-                                      type: MarketingType.Video,
-                                    ),
+                                        getResourcesModel: element,
+                                        type: MarketingType.Video),
                                     context,
                                     animationType: PageTransitionType.fade,
                                   ),

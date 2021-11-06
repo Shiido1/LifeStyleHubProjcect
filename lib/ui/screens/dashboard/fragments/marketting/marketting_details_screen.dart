@@ -2,10 +2,13 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/video_player.dart';
+import 'dao/marketting_dao.dart';
 import 'data/enum.dart';
 import 'data/social_media.dart';
 import '../../../../widgets/buttons.dart';
@@ -15,11 +18,16 @@ import '../../../../widgets/text_views.dart';
 import '../../../../../utils/pallets.dart';
 
 import 'model/get_resources_model.dart';
+import 'viewmodel/marketting_viewmodel.dart';
 
 // ignore: must_be_immutable
 class MarkettingDetailScreen extends StatefulWidget {
   Data? getResourcesModel;
   MarketingType type;
+  final _markettingViewModel =
+      ChangeNotifierProvider((ref) => MarkettingViewmodel());
+
+  MarkettingViewmodel? _marketting;
 
   MarkettingDetailScreen(
       {Key? key,
@@ -36,16 +44,22 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
   final _videoPlayerModel = ChangeNotifierProvider((ref) => VideoPlayer());
   Data? getResourcesModel;
   MarketingType? type;
+  final _markettingViewModel =
+      ChangeNotifierProvider((ref) => MarkettingViewmodel());
+
+  MarkettingViewmodel? _marketting;
+
+  UsersProfileModel? _profileModel;
 
   _MarkettingDetailScreenState({required this.getResourcesModel, this.type});
 
   @override
   void initState() {
+    _marketting = context.read(_markettingViewModel);
+    _marketting!.init(context);
     _getCatchedInfos();
     super.initState();
   }
-
-  UsersProfileModel? _profileModel;
 
   void _getCatchedInfos() async {
     _profileModel = await profileDao!.convert();
@@ -137,7 +151,7 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
               color: Pallets.grey600,
               textAlign: TextAlign.left,
             ),
-            // SizedBox(height: 8),
+            SizedBox(height: 23),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.start,
             //   mainAxisSize: MainAxisSize.max,
@@ -212,28 +226,55 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
             //   ),
             // ),
             // SizedBox(height: 30),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     TextView(
-            //       text: 'Similar videos',
-            //       fontWeight: FontWeight.w700,
-            //       fontSize: 16,
-            //       color: Pallets.grey800,
-            //       textAlign: TextAlign.left,
-            //     ),
-            //     TextView(
-            //       onTap: () {},
-            //       text: 'View all',
-            //       fontWeight: FontWeight.w500,
-            //       fontSize: 14,
-            //       color: Pallets.grey500,
-            //       textAlign: TextAlign.left,
-            //     ),
-            //   ],
-            // ),
 
-            SizedBox(height: 16),
+            ValueListenableBuilder(
+                valueListenable: markettingDao!.getListenable()!,
+                builder: (_, Box<dynamic> box, __) {
+                  List<Data> _marketing = markettingDao!.convert(box);
+                  _marketting!.sortContentByType(_marketing);
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextView(
+                        text: 'Similar videos',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                        color: Pallets.grey800,
+                        textAlign: TextAlign.left,
+                      ),
+                      SizedBox(height: 16),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: _marketting!.videoContents
+                              .map(
+                                (element) => Container(
+                                  margin: EdgeInsets.only(right: 16),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      ImageLoader(
+                                          width: 218,
+                                          height: 127,
+                                          onTap: () => null,
+                                          path: element.featuredImage!),
+                                      SizedBox(height: 8),
+                                      Text(element.title!)
+                                    ],
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    ],
+                  );
+                })
           ]),
         ),
       );

@@ -1,3 +1,4 @@
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/viewmodel/notification_viewmodel.dart';
 
@@ -39,5 +40,7 @@ class Providers {
     ChangeNotifierProvider<NotificationViewmodel>(
         create: (_) => NotificationViewmodel()),
     ChangeNotifierProvider<ReportViewmodel>(create: (_) => ReportViewmodel()),
+    ChangeNotifierProvider<MarkettingViewmodel>(
+        create: (_) => MarkettingViewmodel()),
   ];
 }
