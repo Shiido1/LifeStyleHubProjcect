@@ -89,6 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(height: 16),
               Container(
+                width: getDeviceWidth(context) / 2,
                 padding: EdgeInsets.all(9),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -96,17 +97,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    TextView(
-                      text: _profileModel?.referredBy ?? '',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: Pallets.grey600,
-                      textAlign: TextAlign.left,
+                    Expanded(
+                      child: TextView(
+                        text: _profileModel?.affiliateId?.link ?? '',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Pallets.grey600,
+                        textAlign: TextAlign.left,
+                        maxLines: 1,
+                        textOverflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     SizedBox(width: 10),
                     GestureDetector(
-                      onTap: () =>
-                          copyToClipBoard(context, _profileModel!.referredBy!),
+                      onTap: () => copyToClipBoard(
+                          context, _profileModel?.affiliateId?.link ?? ''),
                       child: Container(
                         padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(

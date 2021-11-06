@@ -68,8 +68,6 @@ class _BankInformationWidgetState extends State<BankInformationWidget> {
         EditFormField(
           floatingLabel: 'Account number',
           label: 'Account number',
-          suffixIcon: Icons.keyboard_arrow_down_sharp,
-          suffixIconColor: Pallets.disabledIconColor,
           controller: _acctNumberController,
         ),
         SizedBox(

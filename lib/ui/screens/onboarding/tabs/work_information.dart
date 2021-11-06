@@ -70,8 +70,6 @@ class _WorkInformationWidgetState extends State<WorkInformationWidget> {
         EditFormField(
           floatingLabel: 'Official address',
           label: 'Official address',
-          suffixIcon: Icons.keyboard_arrow_down_sharp,
-          suffixIconColor: Pallets.disabledIconColor,
           controller: _officialAddressController,
         ),
         SizedBox(
