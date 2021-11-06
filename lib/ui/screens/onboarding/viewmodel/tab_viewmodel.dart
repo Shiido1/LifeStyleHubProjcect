@@ -12,9 +12,9 @@ class TabViewModel extends BaseViewModel {
 
   bool? get isFromDrawer => _isFromDrawer;
 
-  void switchIndex(int i) {
+  void switchIndex(int i, {bool notify = true}) {
     _index = i;
-    notifyListeners();
+    if (notify) notifyListeners();
   }
 
   void switchDrawerIndex(BuildContext context, int i, {bool? drawer = true}) {

@@ -12,8 +12,20 @@ import 'package:provider/provider.dart';
 import 'tabs/basic_information.dart';
 import 'tabs/work_information.dart';
 
-class GetStartedScreen extends StatelessWidget {
+class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({Key? key}) : super(key: key);
+
+  @override
+  State<GetStartedScreen> createState() => _GetStartedScreenState();
+}
+
+class _GetStartedScreenState extends State<GetStartedScreen> {
+  @override
+  void initState() {
+    final _provider = Provider.of<TabViewModel>(context, listen: false);
+    _provider.switchIndex(0, notify: false);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
