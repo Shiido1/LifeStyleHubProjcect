@@ -75,17 +75,23 @@ class ContestWidget extends StatelessWidget {
               children: [
                 ContestTimeLeftWidget(
                   timeLeft: 'Days left',
-                  directs: getDateTime(contest!.enddate!).day,
+                  directs: getDateTime(contest!.enddate!).day!.isNegative
+                      ? 0
+                      : getDateTime(contest!.enddate!).day,
                 ),
                 Spacer(),
                 ContestTimeLeftWidget(
                   timeLeft: 'Hrs left',
-                  directs: getDateTime(contest!.enddate!).hour,
+                  directs: getDateTime(contest!.enddate!).day!.isNegative
+                      ? 0
+                      : getDateTime(contest!.enddate!).hour,
                 ),
                 Spacer(),
                 ContestTimeLeftWidget(
                   timeLeft: 'Mins left',
-                  directs: getDateTime(contest!.enddate!).miniute,
+                  directs: getDateTime(contest!.enddate!).day!.isNegative
+                      ? 0
+                      : getDateTime(contest!.enddate!).miniute,
                 ),
               ],
             ),

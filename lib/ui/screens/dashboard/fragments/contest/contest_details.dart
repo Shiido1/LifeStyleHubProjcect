@@ -109,7 +109,7 @@ class _ContestDetailsState extends State<ContestDetails> {
                       child: Column(
                         children: [
                           TextView(
-                            text: '0',
+                            text: '${contestModel?.directsReferred ?? 0}',
                             fontWeight: FontWeight.w700,
                             fontSize: 36,
                             color: Pallets.black,
@@ -151,7 +151,9 @@ class _ContestDetailsState extends State<ContestDetails> {
                   textColor: Pallets.black,
                   timeColor: Pallets.black,
                   bgColor: Pallets.grey200,
-                  directs: getDateTime(contestModel!.enddate!).day,
+                  directs: getDateTime(contestModel!.enddate!).day!.isNegative
+                      ? 0
+                      : getDateTime(contestModel!.enddate!).day,
                 ),
                 SizedBox(
                   width: 30,
@@ -162,7 +164,9 @@ class _ContestDetailsState extends State<ContestDetails> {
                   timeColor: Pallets.black,
                   bgColor: Pallets.grey200,
                   timeLeft: 'Hrs left',
-                  directs: getDateTime(contestModel!.enddate!).hour,
+                  directs: getDateTime(contestModel!.enddate!).day!.isNegative
+                      ? 0
+                      : getDateTime(contestModel!.enddate!).hour,
                 ),
                 SizedBox(
                   width: 30,
@@ -173,7 +177,9 @@ class _ContestDetailsState extends State<ContestDetails> {
                   timeColor: Pallets.red600,
                   bgColor: Pallets.grey200,
                   timeLeft: 'Mins left',
-                  directs: getDateTime(contestModel!.enddate!).miniute,
+                  directs: getDateTime(contestModel!.enddate!).day!.isNegative
+                      ? 0
+                      : getDateTime(contestModel!.enddate!).miniute,
                 ),
               ],
             ),
@@ -290,7 +296,7 @@ class _ContestDetailsState extends State<ContestDetails> {
                     height: 6,
                   ),
                   TextView(
-                    text: '0',
+                    text: '${contestModel?.directsReferred ?? 0}',
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                     color: Pallets.grey500,
