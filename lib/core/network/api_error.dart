@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
 import 'laravel_error_model.dart';
 
 import 'api_error_model.dart';
@@ -63,7 +64,7 @@ class ApiError {
         break;
       case 401:
         message = ApiErrorModel.fromJson(response.data).message!;
-        // eventBus.fire(UserLoggedInEvent(logUserOut: true, message: message));
+        eventBus.fire(UserLoggedInEvent(logUserOut: true, message: message));
         break;
       case 422:
         final _response = LaravelError.fromJson(response.data);
