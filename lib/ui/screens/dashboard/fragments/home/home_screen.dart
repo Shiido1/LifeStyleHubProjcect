@@ -2,6 +2,10 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
+import 'package:page_transition/page_transition.dart';
 import '../../../../../helper/video_player.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -35,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DashboardViewmodel? _dashboardViewmodel;
   ContestViewModel? _contestViewModel;
   PackageViewmodel? _packageViewmodel;
+  TabViewModel? _tabViewModel;
 
   @override
   void initState() {
@@ -44,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _initialize() {
+    _tabViewModel = Provider.of<TabViewModel>(context, listen: false);
     _dashboardViewmodel =
         Provider.of<DashboardViewmodel>(context, listen: false);
     _dashboardViewmodel!.init(context);
@@ -145,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 5,
                     ),
                     TextView(
-                      onTap: () {},
+                      onTap: () => _tabViewModel!.switchDrawerIndex(context, 7),
                       text: 'View all',
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
@@ -164,26 +170,27 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: [
                   SecondIcon(
-                      icon: 'assets/svgs/wallet.svg',
-                      text: 'Income received',
-                      money:
-                          formatCurrency(_dashboardModel?.incomeReceived ?? 0),
-                      mainBgColor: Pallets.orange50,
-                      smallBgColor: Pallets.orange200,
-                      textColor: Pallets.orange500,
-                      onTaP: () {}),
+                    icon: 'assets/svgs/wallet.svg',
+                    text: 'Income received',
+                    money: formatCurrency(_dashboardModel?.incomeReceived ?? 0),
+                    mainBgColor: Pallets.orange50,
+                    smallBgColor: Pallets.orange200,
+                    textColor: Pallets.orange500,
+                    onTap: () => _tabViewModel!.switchDrawerIndex(context, 7),
+                  ),
                   SizedBox(
                     width: 16,
                   ),
                   SecondIcon(
-                      icon: 'assets/svgs/link.svg',
-                      text: 'Referral link signup',
-                      money:
-                          '${_dashboardModel?.referralLinkSignup?.toInt() ?? '0'}',
-                      mainBgColor: Pallets.blue50,
-                      smallBgColor: Pallets.blue200,
-                      textColor: Pallets.blue500,
-                      onTaP: () {}),
+                    icon: 'assets/svgs/link.svg',
+                    text: 'Referral link signup',
+                    money:
+                        '${_dashboardModel?.referralLinkSignup?.toInt() ?? '0'}',
+                    mainBgColor: Pallets.blue50,
+                    smallBgColor: Pallets.blue200,
+                    textColor: Pallets.blue500,
+                    onTap: () => _tabViewModel!.switchDrawerIndex(context, 7),
+                  ),
                 ],
               ),
             ),
@@ -200,7 +207,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       ViewAllButton(
                         title: 'Active packages',
-                        viewAll: () {},
+                        viewAll: () =>
+                            _tabViewModel!.switchDrawerIndex(context, 7),
                       ),
                       SizedBox(
                         height: 16,
@@ -249,7 +257,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           ViewAllButton(
                             title: 'Contest',
-                            viewAll: () {},
+                            viewAll: () =>
+                                _tabViewModel!.switchDrawerIndex(context, 7),
                           ),
                           SizedBox(
                             height: 16,
@@ -294,9 +303,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   child:
                       BetterPlayer(controller: provider.betterPlayerController),
                 ),
-                onTap: () {
-                  print("Tap!");
-                },
               );
             }),
             SizedBox(

@@ -11,7 +11,7 @@ class SecondIcon extends StatelessWidget {
   final Color? mainBgColor;
   final Color? smallBgColor;
   final Color? textColor;
-  final VoidCallback? onTaP;
+  final VoidCallback? onTap;
 
   const SecondIcon(
       {Key? key,
@@ -21,7 +21,7 @@ class SecondIcon extends StatelessWidget {
       required this.mainBgColor,
       required this.textColor,
       required this.smallBgColor,
-      required this.onTaP})
+      required this.onTap})
       : super(key: key);
 
   @override
@@ -61,7 +61,7 @@ class SecondIcon extends StatelessWidget {
             height: 16,
           ),
           TextView(
-            onTap: onTaP,
+            onTap: onTap,
             text: 'View all',
             fontWeight: FontWeight.w500,
             fontSize: 14,
