@@ -152,13 +152,11 @@ class _AddOrEditBankAccountScreenState
 
   void _updateUsersInformation() async {
     FocusScope.of(context).unfocus();
-    final _response = await profileDao!.convert();
 
     Map _map = Map<String, dynamic>();
-    _map['name'] = _response.name;
     _map['account_name'] = _accountNameController!.text;
     _map['account_no'] = _accountNoController!.text;
-    _map['bank_name'] = _bankNameController!.text;
+    _map['name'] = _bankNameController!.text;
     _map['currency'] = 'Naira';
 
     if (_globalFormKey.currentState!.validate()) {
