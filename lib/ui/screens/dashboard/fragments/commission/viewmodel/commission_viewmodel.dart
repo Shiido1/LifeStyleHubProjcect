@@ -56,12 +56,17 @@ class CommissionViewmodel extends BaseViewModel {
           await _commissionRepository.getCommissions(search: search);
       commissionDao!.saveContests(_response.toJson());
 
-      if (_response.commissionHistory!.data!.isNotEmpty) {
+      if (isLoadMore && _response.commissionHistory!.data!.isNotEmpty) {
         data.addAll(_response.commissionHistory!.data!);
+      } else {
+        data = _response.commissionHistory!.data!;
       }
+
       if (isRefreshing) _isRefreshing();
 
       if (isLoadMore) _isLoadMore(_response.commissionHistory!.data!);
+
+      _refreshController.loadComplete();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
       _refreshController.loadFailed();

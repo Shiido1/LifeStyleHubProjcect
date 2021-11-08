@@ -24,16 +24,16 @@ class NotificationResponse {
 
 class Notifications {
   int? currentPage;
-  List<String>? data;
+  List<Data>? data;
   String? firstPageUrl;
   int? from;
   int? lastPage;
   String? lastPageUrl;
   List<Links>? links;
-  String? nextPageUrl;
+  dynamic? nextPageUrl;
   String? path;
   int? perPage;
-  String? prevPageUrl;
+  dynamic? prevPageUrl;
   int? to;
   int? total;
 
@@ -55,7 +55,9 @@ class Notifications {
   Notifications.fromJson(Map<String, dynamic> json) {
     if (json["current_page"] is int) this.currentPage = json["current_page"];
     if (json["data"] is List)
-      this.data = json["data"] == null ? [] : List<String>.from(json["data"]);
+      this.data = json["data"] == null
+          ? null
+          : (json["data"] as List).map((e) => Data.fromJson(e)).toList();
     if (json["first_page_url"] is String)
       this.firstPageUrl = json["first_page_url"];
     if (json["from"] is int) this.from = json["from"];
@@ -66,12 +68,10 @@ class Notifications {
       this.links = json["links"] == null
           ? null
           : (json["links"] as List).map((e) => Links.fromJson(e)).toList();
-    if (json["next_page_url"] is String)
-      this.nextPageUrl = json["next_page_url"];
+    this.nextPageUrl = json["next_page_url"];
     if (json["path"] is String) this.path = json["path"];
     if (json["per_page"] is int) this.perPage = json["per_page"];
-    if (json["prev_page_url"] is String)
-      this.prevPageUrl = json["prev_page_url"];
+    this.prevPageUrl = json["prev_page_url"];
     if (json["to"] is int) this.to = json["to"];
     if (json["total"] is int) this.total = json["total"];
   }
@@ -79,7 +79,8 @@ class Notifications {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data["current_page"] = this.currentPage;
-    if (this.data != null) data["data"] = this.data;
+    if (this.data != null)
+      data["data"] = this.data?.map((e) => e.toJson()).toList();
     data["first_page_url"] = this.firstPageUrl;
     data["from"] = this.from;
     data["last_page"] = this.lastPage;
@@ -97,14 +98,14 @@ class Notifications {
 }
 
 class Links {
-  String? url;
+  dynamic? url;
   String? label;
   bool? active;
 
   Links({this.url, this.label, this.active});
 
   Links.fromJson(Map<String, dynamic> json) {
-    if (json["url"] is String) this.url = json["url"];
+    this.url = json["url"];
     if (json["label"] is String) this.label = json["label"];
     if (json["active"] is bool) this.active = json["active"];
   }
@@ -114,6 +115,25 @@ class Links {
     data["url"] = this.url;
     data["label"] = this.label;
     data["active"] = this.active;
+    return data;
+  }
+}
+
+class Data {
+  String? text;
+  String? date;
+
+  Data({this.text, this.date});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    if (json["text"] is String) this.text = json["text"];
+    if (json["date"] is String) this.date = json["date"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data["text"] = this.text;
+    data["date"] = this.date;
     return data;
   }
 }

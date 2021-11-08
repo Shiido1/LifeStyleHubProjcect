@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
@@ -39,42 +40,43 @@ class _NotificationScreenState extends State<NotificationScreen> {
           children: [
             Consumer<NotificationViewmodel>(
               builder: (context, notification, child) {
+                if (notification.notificationList.isEmpty) {
+                  return Center(
+                    child: TextView(
+                      text: 'No Notification',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Pallets.orange500,
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                }
+
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ListView(
                     children: [
-                      SizedBox(height: 30),
-                     notification.notificationList.isEmpty?TextView(
-                       text: 'No Notification',
-                       fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: Pallets.orange500,
-                        textAlign: TextAlign.center,):TextView(
-                        text: 'Clear all',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: Pallets.orange500,
-                        textAlign: TextAlign.right,
-                        onTap: () =>
-                            _notificationViewmodel!.clearNotificationList(),
-                      ),
-                      SizedBox(height: 32),
                       ...notification.notificationList
-                          .map((notification) => ListTile(
-                                title: TextView(
-                                  text: notification,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                  color: Pallets.grey600,
-                                  textAlign: TextAlign.right,
-                                ),
-                                subtitle: TextView(
-                                  text: notification,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                  color: Pallets.grey400,
-                                  textAlign: TextAlign.right,
-                                ),
+                          .map((notification) => Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextView(
+                                    text: notification.text ?? '',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Pallets.grey600,
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  SizedBox(height: 4),
+                                  TextView(
+                                    text: fomartDate(notification.date ?? ''),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    color: Pallets.grey400,
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
                               ))
                     ],
                   ),
