@@ -69,12 +69,25 @@ class CustomDialogBox extends StatelessWidget {
                   child: CupertinoButton(
                       alignment: Alignment.centerLeft,
                       padding: EdgeInsets.zero,
-                      child: Text(
-                        item.name ?? '',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Pallets.grey700,
-                            fontWeight: FontWeight.w400),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '${item.accountNo ?? ''}',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Pallets.grey700,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          Text(
+                            ' ${item.name ?? ''}',
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Pallets.grey700,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
                       ),
                       onPressed: () {
                         onTap!(item);
