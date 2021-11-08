@@ -75,7 +75,7 @@ class _MyDownlineTabState extends State<MyDownlineTab> {
                 ),
                 SizedBox(height: 8),
                 TextView(
-                  text: '\$10,000',
+                  text: '\$${provider.downlineTotal}',
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
                   color: Pallets.black,

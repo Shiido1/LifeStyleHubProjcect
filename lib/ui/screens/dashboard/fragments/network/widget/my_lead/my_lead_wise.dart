@@ -70,7 +70,7 @@ class _MyLeadWiseTabState extends State<MyLeadWiseTab> {
                 ),
                 SizedBox(height: 8),
                 TextView(
-                  text: '\$10,000',
+                  text: '\$${provider.leadWiseTotal}',
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
                   color: Pallets.black,

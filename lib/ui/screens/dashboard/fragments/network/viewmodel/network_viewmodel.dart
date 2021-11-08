@@ -86,6 +86,7 @@ class NetworkViewModel extends BaseViewModel {
   }
 
   List<Data>? downlineResponse = [];
+  int? downlineTotal = 0;
 
   /// get users direct downline
   Future<void> getUsersDownline(int id) async {
@@ -93,6 +94,7 @@ class NetworkViewModel extends BaseViewModel {
       if (downlineResponse!.length == 0) _showLoading();
       final _response = await _networkRepository.getUsersDownline(id);
       downlineResponse = _response.data;
+      downlineTotal = _response.total ?? 0;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
@@ -116,6 +118,7 @@ class NetworkViewModel extends BaseViewModel {
   }
 
   List<lead.Data> leadsWise = [];
+  int? leadWiseTotal = 0;
 
   /// get users lead wise downline
   Future<void> getUsersLeadWise(int id) async {
@@ -123,6 +126,7 @@ class NetworkViewModel extends BaseViewModel {
       if (leadsWise.length == 0) _showLoading();
       final _response = await _networkRepository.getUsersLeadWise(id);
       leadsWise = _response.data!;
+      leadWiseTotal = _response.total ?? 0;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
