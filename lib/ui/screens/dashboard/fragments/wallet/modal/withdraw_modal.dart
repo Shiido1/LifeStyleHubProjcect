@@ -139,5 +139,6 @@ _proceed(BuildContext context) {
       'bank_id': _accountModel!.id,
       // 'purpose': _purposeOfWithdrawalController.text,
     });
+    PageRouter.goBack(context);
   }
 }

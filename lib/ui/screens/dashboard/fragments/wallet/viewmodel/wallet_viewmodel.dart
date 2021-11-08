@@ -115,6 +115,7 @@ class WalletViewmodel extends BaseViewModel {
     } catch (e) {
       showsnackBarInfo(_context,
           message: e.toString(), bgColor: Pallets.red600);
+          logger.d(e);
     }
     _hideLoading();
   }

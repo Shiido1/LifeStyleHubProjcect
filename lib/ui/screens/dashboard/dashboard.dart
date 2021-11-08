@@ -1,11 +1,13 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:lifestyle_hub/database/hive_database.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../widgets/bottom_count_down.dart';
@@ -78,9 +80,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     eventBus.on().listen((event) async {
       if (event is UserLoggedInEvent && event.logUserOut!) {
-        await HiveBoxes.logOut();
-        PageRouter.gotoWidget(LoginScreen(), context,
-            clearStack: true, animationType: PageTransitionType.fade);
+        HiveBoxes.logOut(context);
       }
     });
     _getCatchedInfos();

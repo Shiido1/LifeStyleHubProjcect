@@ -67,7 +67,7 @@ void showTransferModal(BuildContext context) {
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           controller: _phoneNumberController,
                           keyboardType: TextInputType.number,
-                          suffixWidget: Padding(
+                          prefixWidget: Padding(
                             padding: const EdgeInsets.only(left: 16.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,

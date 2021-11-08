@@ -1,5 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
+import 'package:page_transition/page_transition.dart';
 import '../ui/screens/bank/account/dao/account_dao.dart';
 
 import '../helper/configs/instances.dart';
@@ -105,8 +111,15 @@ class HiveBoxes {
     }
   }
 
-  static logOut() async {
+
+  static logOut(BuildContext context) async {
+    final _tabViewProvider = ChangeNotifierProvider((_) => TabViewModel());
+    final _tabViewModel = context.read(_tabViewProvider);
+
     await prefManager.remove();
     await HiveBoxes.clearAllBox();
+    _tabViewModel.switchDrawerIndex(context, 0, notify: false);
+    PageRouter.gotoWidget(LoginScreen(), context,
+        clearStack: true, animationType: PageTransitionType.fade);
   }
 }

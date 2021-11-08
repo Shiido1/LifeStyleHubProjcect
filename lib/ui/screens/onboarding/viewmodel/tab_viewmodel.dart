@@ -17,10 +17,11 @@ class TabViewModel extends BaseViewModel {
     if (notify) notifyListeners();
   }
 
-  void switchDrawerIndex(BuildContext context, int i, {bool? drawer = true}) {
+  void switchDrawerIndex(BuildContext context, int i,
+      {bool? drawer = true, bool? notify = true}) {
     this._isFromDrawer = drawer;
     _index = i;
-    notifyListeners();
+    if (notify!) notifyListeners();
 
     PageRouter.gotoWidget(DashboardScreen(index: i), context,
         animationType: PageTransitionType.fade);

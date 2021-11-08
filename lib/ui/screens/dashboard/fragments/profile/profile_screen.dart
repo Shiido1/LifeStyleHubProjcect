@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
+
 import '../../../../../database/hive_database.dart';
 import '../../../bank/account/add_bank_screen.dart';
 import 'change_transaction_pin.dart';
@@ -36,11 +38,14 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final _profileProvider = ChangeNotifierProvider((_) => ProfileViewmodel());
+  final _tabViewProvider = ChangeNotifierProvider((_) => TabViewModel());
+  TabViewModel? _tabViewModel;
   ProfileViewmodel? _profileViewmodel;
 
   @override
   void initState() {
     _getCatchedInfos();
+    _tabViewModel = context.read(_tabViewProvider);
     _profileViewmodel = context.read(_profileProvider);
     _profileViewmodel!.init(context);
     _profileViewmodel!.getUsersProfile();
@@ -232,11 +237,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10)),
-            onTap: () async {
-              await HiveBoxes.logOut();
-              PageRouter.gotoWidget(LoginScreen(), context,
-                  clearStack: true, animationType: PageTransitionType.fade);
-            },
+            onTap: () => HiveBoxes.logOut(context),
           ),
           SizedBox(
             height: 90,
@@ -273,4 +274,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       logger.e(e);
     }
   }
+
+
 }
