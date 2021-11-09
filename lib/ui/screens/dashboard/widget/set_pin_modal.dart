@@ -22,13 +22,10 @@ class PinModel {
   final String? amount;
   final String? purpose;
   final String? otp;
+  final String? phoneNumber;
 
-  PinModel({
-    this.bankID,
-    this.amount,
-    this.purpose,
-    this.otp,
-  });
+  PinModel(
+      {this.bankID, this.amount, this.purpose, this.otp, this.phoneNumber});
 
   Map<String, dynamic> toMap() {
     return {
@@ -36,6 +33,7 @@ class PinModel {
       'amount': amount,
       'purpose': purpose,
       'otp': otp,
+      'receiver_phone_no': phoneNumber,
     };
   }
 }
@@ -44,7 +42,7 @@ TextEditingController _otpController = TextEditingController();
 final _formKey = GlobalKey<FormState>();
 
 void showPinModal(BuildContext mContext, PinEnum pinEnum,
-    {String? bankID, String? amount, String? purpose}) {
+    {String? bankID, String? amount, String? purpose, String? phoneNumber}) {
   showModalBottomSheet(
       context: mContext,
       backgroundColor: Colors.transparent,
@@ -110,11 +108,16 @@ void showPinModal(BuildContext mContext, PinEnum pinEnum,
                                   bankID: bankID,
                                   amount: amount,
                                   purpose: purpose,
-                                  otp: _otpController.text);
+                                  otp: _otpController.text,
+                                  phoneNumber: phoneNumber);
 
                               if (_formKey.currentState!.validate()) {
                                 if (pinEnum == PinEnum.withdraw) {
                                   _wallet.withdrawal(_model.toMap());
+                                }
+
+                                if (pinEnum == PinEnum.transfer) {
+                                  _wallet.transfer(_model.toMap());
                                 }
                               }
                             },

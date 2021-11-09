@@ -77,6 +77,9 @@ class ApiError {
         if (_response.errors!.picture!.isNotEmpty) {
           message = _response.errors!.picture!.first;
         }
+        if (_response.errors!.receiverPhoneNo!.isNotEmpty) {
+          message = _response.errors!.receiverPhoneNo!.first;
+        }
         break;
       default:
         message = 'An unknown error occured!';

@@ -37,8 +37,9 @@ class Errors {
   List<String>? email = [];
   List<String>? username = [];
   List<String>? picture = [];
+  List<String>? receiverPhoneNo = [];
 
-  Errors({this.email, this.username, this.picture});
+  Errors({this.email, this.username, this.picture, this.receiverPhoneNo});
 
   Errors.fromJson(Map<String, dynamic> json) {
     if (json["email"] is List) {
@@ -51,6 +52,11 @@ class Errors {
     if (json["picture"] is List) {
       picture =
           json["picture"] == null ? [] : List<String>.from(json["picture"]);
+    }
+    if (json["receiver_phone_no"] is List) {
+      receiverPhoneNo = json["receiver_phone_no"] == null
+          ? []
+          : List<String>.from(json["receiver_phone_no"]);
     }
   }
 

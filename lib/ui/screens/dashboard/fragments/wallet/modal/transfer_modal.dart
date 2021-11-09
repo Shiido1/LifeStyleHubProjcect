@@ -2,6 +2,9 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/widget/set_pin_modal.dart';
+import 'package:lifestyle_hub/ui/screens/otp/provider/pin_viewmodel.dart';
 import '../../../../../widgets/overlay.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../helper/helper_handler.dart';
@@ -137,16 +140,20 @@ void showTransferModal(BuildContext context) {
       });
 }
 
-_proceed(BuildContext context) {
-  if (_key.currentState!.validate()) {
-    // showPinModal(context);
-    String? _phone = _walletProvider!.country?.phoneCode == null
-        ? '$_countryCode${_phoneNumberController.text}'
-        : '+${_walletProvider!.country?.phoneCode}${_phoneNumberController.text}';
+_proceed(BuildContext context) async {
+  String? _phone = _walletProvider!.country?.phoneCode == null
+      ? '$_countryCode${_phoneNumberController.text}'
+      : '+${_walletProvider!.country?.phoneCode}${_phoneNumberController.text}';
 
-    _walletProvider!.transferToWallet({
-      'receiver_phone_no': _phone,
-      'amount': _amountController.text,
-    });
+  if (_key.currentState!.validate()) {
+    final _otp = Provider.of<OTPViewmodel>(context, listen: false);
+    _otp.init(context);
+    final _value = await _otp.generateOTP();
+    if (_value) {
+      PageRouter.goBack(context);
+
+      showPinModal(context, PinEnum.transfer,
+          phoneNumber: _phone, amount: _amountController.text);
+    }
   }
 }

@@ -127,12 +127,12 @@ class WalletViewmodel extends BaseViewModel {
       showsnackBarInfo(_context,
           message: _response.fromWalletTransaction?.status ?? 'Successful',
           bgColor: Pallets.green600);
-      PageRouter.goBack(_context);
     } catch (e) {
       showsnackBarInfo(_context,
           message: e.toString(), bgColor: Pallets.red600);
     }
     _hideLoading();
+    PageRouter.goBack(_context);
   }
 
   Country? country;
