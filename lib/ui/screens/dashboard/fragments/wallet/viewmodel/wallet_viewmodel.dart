@@ -111,13 +111,12 @@ class WalletViewmodel extends BaseViewModel {
       await _walletRepository.withdraw(map);
       showsnackBarInfo(_context,
           message: 'Pending admin\'s approval', bgColor: Pallets.green600);
-      PageRouter.goBack(_context);
     } catch (e) {
       showsnackBarInfo(_context,
           message: e.toString(), bgColor: Pallets.red600);
-          logger.d(e);
     }
     _hideLoading();
+    PageRouter.goBack(_context);
   }
 
   /// perform transfer

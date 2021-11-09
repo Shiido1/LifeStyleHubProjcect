@@ -10,7 +10,7 @@ class Paths {
   static String forgotPassword = 'api/forgot-password';
   static String getMarketting = 'api/resources';
   static String getCommission = 'api/commissions';
-  static String dashboard = 'api/dashboard';
+  static String dashboard = 'api/dashboard/vp';
   static String updateMarketting = 'admin/resources/';
   static String viewWallet = 'api/wallet';
   static String viewWalletTransactions = 'api/wallet-transactions?page=';
@@ -48,4 +48,5 @@ class Paths {
       'api/reports/promotion/free-trial-members';
   static String reportPromotionUpgradedMember =
       'api/reports/promotion/upgraded-members';
+  static String generateOTP = 'api/otp';
 }
