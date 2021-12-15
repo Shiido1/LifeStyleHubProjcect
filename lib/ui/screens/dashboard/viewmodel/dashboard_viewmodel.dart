@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../helper/configs/instances.dart';
 import '../../../../helper/helper_handler.dart';
 import '../../../../provider/_base_viewmodels.dart';
 import '../dao/dashboardd_dao.dart';
-import '../fragments/marketting/dao/marketting_dao.dart';
-import '../fragments/marketting/model/get_resources_model.dart';
-import '../fragments/marketting/repository/marketting_repository.dart';
 import '../repository/dashboard_repository.dart';
-import '../../../../utils/pallets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 DashboardRepository _dashboardRepository = DashboardRepository();
@@ -42,10 +37,10 @@ class DashboardViewmodel extends BaseViewModel {
   }
 
   /// get Dashboards
-  Future<void> getDashboards() async {
+  Future<void> getDashboards(bool isUser) async {
     try {
       if (dashboardDao!.box!.isEmpty) _showLoading();
-      final _response = await _dashboardRepository.dashboard();
+      final _response = await _dashboardRepository.dashboard(isUser);
       dashboardDao!.saveDashboard(_response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());

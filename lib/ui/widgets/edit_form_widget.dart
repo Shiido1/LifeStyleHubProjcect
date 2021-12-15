@@ -139,7 +139,7 @@ class EditFormField extends StatelessWidget {
           onChanged: onChange,
           maxLines: maxLines,
           // ignore: deprecated_member_use
-          autovalidate: autoValidate,
+          // autovalidate: autoValidate,
           style: GoogleFonts.montserrat(
               color: Pallets.grey800,
               fontWeight: FontWeight.w500,

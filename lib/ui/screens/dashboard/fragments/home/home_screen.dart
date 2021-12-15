@@ -2,6 +2,7 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/core/data/session_manager.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
@@ -48,12 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  void _initialize() {
+  void _initialize() async {
+    final _user = await profileDao?.convert();
     _tabViewModel = Provider.of<TabViewModel>(context, listen: false);
     _dashboardViewmodel =
         Provider.of<DashboardViewmodel>(context, listen: false);
     _dashboardViewmodel!.init(context);
-    _dashboardViewmodel!.getDashboards();
+
+    _dashboardViewmodel!.getDashboards(_user?.role == "user");
     _contestViewModel = Provider.of<ContestViewModel>(context, listen: false);
     _contestViewModel!.init(context);
     _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);

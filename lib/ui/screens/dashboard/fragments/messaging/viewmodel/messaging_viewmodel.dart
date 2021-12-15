@@ -58,7 +58,7 @@ class MessagingViewmodel extends BaseViewModel {
     try {
       _showLoading();
       await _messageRepository.createMessage({
-        'participants_email': [emailOrPhone].toString()
+        'participants_email': [emailOrPhone]
       });
       getLastMessage();
       showsnackBarInfo(_context,

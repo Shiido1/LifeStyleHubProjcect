@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
@@ -42,7 +44,15 @@ class _CreateMessageScreenState extends State<CreateMessageScreen> {
   void initState() {
     _messagingViewmodel = context.read(_messageViewModel);
     _messagingViewmodel!.init(context);
+    _getCatchedInfos();
     super.initState();
+  }
+
+  UsersProfileModel? _profileModel;
+
+  void _getCatchedInfos() async {
+    _profileModel = await profileDao!.convert();
+    setState(() {});
   }
 
   @override
@@ -52,8 +62,8 @@ class _CreateMessageScreenState extends State<CreateMessageScreen> {
             title: 'Messages',
             showLeadig: true,
             centerTitle: true,
-            image:
-                'https://images.unsplash.com/photo-1558185348-fe8fa4cf631f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'),
+            image: _profileModel?.profilePic ?? '',
+            initial: _profileModel?.name ?? 'LH'),
         body: Consumer(
           builder: (context, watch, child) {
             final _provider = watch(_messageViewModel);

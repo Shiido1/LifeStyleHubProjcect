@@ -157,7 +157,7 @@ class Wallet {
     if (json["total_income"] is int) this.totalIncome = json["total_income"];
     if (json["total_credit"] is int) this.totalCredit = json["total_credit"];
     if (json["total_debit"] is int) this.totalDebit = json["total_debit"];
-    if (json["balance"] is int) this.balance = json["balance"];
+    // this.balance = json["balance"] ?? 0;
     if (json["created_at"] is String) this.createdAt = json["created_at"];
     if (json["updated_at"] is String) this.updatedAt = json["updated_at"];
   }
@@ -169,7 +169,7 @@ class Wallet {
     data["total_income"] = this.totalIncome;
     data["total_credit"] = this.totalCredit;
     data["total_debit"] = this.totalDebit;
-    data["balance"] = this.balance;
+    // data["balance"] = this.balance;
     data["created_at"] = this.createdAt;
     data["updated_at"] = this.updatedAt;
     return data;

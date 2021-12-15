@@ -29,8 +29,10 @@ class LoginRepository {
       final _usersInformationResponse =
           await _profileRepository.getUsersProfile();
 
+      bool _user = _login.user?.role == "user";
+
       /// requests for users dashboard
-      final _dashboard = await _dashboardRepository.dashboard();
+      final _dashboard = await _dashboardRepository.dashboard(_user);
 
       /// cache users profile
       profileDao!.saveProfile(_usersInformationResponse);

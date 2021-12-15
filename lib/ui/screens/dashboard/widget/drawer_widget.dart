@@ -127,6 +127,7 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 newIndex: index,
               ),
               CustomDrawerTabs(
+                visibility: profileModel?.role == "user",
                 title: 'My network',
                 image: 'assets/svgs/network.svg',
                 onTap: () => _tap(
@@ -149,6 +150,7 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 newIndex: index,
               ),
               CustomDrawerTabs(
+                visibility: profileModel?.role == "user",
                 title: 'Contest & Reward',
                 image: 'assets/svgs/trophy.svg',
                 onTap: () => _tap(
@@ -182,6 +184,7 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 newIndex: _tabNotifier.index!,
               ),
               CustomDrawerTabs(
+                visibility: profileModel?.role == "user",
                 title: 'Integrated point',
                 image: 'assets/svgs/point.svg',
                 onTap: () => _tap(
@@ -242,6 +245,7 @@ class CustomDrawerTabs extends StatelessWidget {
   final VoidCallback? onTap;
   final int defaultIndex;
   final int newIndex;
+  final bool? visibility;
 
   const CustomDrawerTabs(
       {Key? key,
@@ -249,33 +253,38 @@ class CustomDrawerTabs extends StatelessWidget {
       required this.image,
       required this.onTap,
       required this.defaultIndex,
+      this.visibility = true,
       this.newIndex = 0})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: defaultIndex == newIndex
-              ? Pallets.orange100
-              : Colors.transparent),
-      child: ListTile(
-        contentPadding: EdgeInsets.zero,
-        leading: ImageLoader(
-          path: image,
-          height: 20,
-          dColor:
-              defaultIndex == newIndex ? Pallets.orange500 : Pallets.grey400,
+    return Visibility(
+      visible: visibility!,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: defaultIndex == newIndex
+                ? Pallets.orange100
+                : Colors.transparent),
+        child: ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: ImageLoader(
+            path: image,
+            height: 20,
+            dColor:
+                defaultIndex == newIndex ? Pallets.orange500 : Pallets.grey400,
+          ),
+          title: TextView(
+            text: title!,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+            color:
+                defaultIndex == newIndex ? Pallets.orange500 : Pallets.grey400,
+            textAlign: TextAlign.left,
+          ),
+          onTap: onTap,
         ),
-        title: TextView(
-          text: title!,
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-          color: defaultIndex == newIndex ? Pallets.orange500 : Pallets.grey400,
-          textAlign: TextAlign.left,
-        ),
-        onTap: onTap,
       ),
     );
   }
