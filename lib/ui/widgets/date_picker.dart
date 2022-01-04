@@ -26,7 +26,7 @@ void _buildMaterialDatePicker(
   final DateTime? picked = await showDatePicker(
     context: context!,
     initialDate: DateTime.now(),
-    firstDate: DateTime.now().subtract(Duration(days: 0)),
+    firstDate: DateTime(1960),
     lastDate: DateTime(2025),
     builder: (context, child) {
       return Theme(
@@ -57,7 +57,7 @@ void _buildCupertinoDatePicker(
                     date(DateFormat('yyyy-MM-dd').format(picked));
                 },
                 initialDateTime: DateTime.now(),
-                minimumYear: 2000,
+                minimumYear: 1960,
                 maximumYear: 2025,
               ),
             ));

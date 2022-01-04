@@ -2,6 +2,7 @@ import '../../../../../helper/configs/instances.dart';
 
 class TempBasicInformationHolder {
   static String? fullName;
+  static String? userName;
   static String? phoneNumber;
   static String? state;
   static String? address;
@@ -15,6 +16,7 @@ class TempBasicInformationHolder {
 
   static Map<String, dynamic> sendData({
     required String name,
+    required String username,
     required String phoneNumber,
     required String state,
     required String address,
@@ -27,6 +29,7 @@ class TempBasicInformationHolder {
   }) {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data["name"] = name;
+    data["username"] = username;
     data["phone_no"] = phoneNumber;
     data["state"] = state;
     data["address"] = address;

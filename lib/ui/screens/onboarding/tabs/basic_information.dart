@@ -24,6 +24,8 @@ class BasicInformationWidget extends StatefulWidget {
 class _BasicInformationWidgetState extends State<BasicInformationWidget> {
   TextEditingController _fullNameController =
       TextEditingController(text: TempBasicInformationHolder.fullName ?? '');
+  TextEditingController _userNameController =
+      TextEditingController(text: TempBasicInformationHolder.userName ?? '');
   TextEditingController _phoneNumberController =
       TextEditingController(text: TempBasicInformationHolder.phoneNumber ?? '');
   TextEditingController _stateController =
@@ -80,6 +82,14 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           floatingLabel: 'Full name',
           label: 'Full name',
           controller: _fullNameController,
+        ),
+        SizedBox(
+          height: 23,
+        ),
+        EditFormField(
+          floatingLabel: 'User name',
+          label: 'User name',
+          controller: _userNameController,
         ),
         SizedBox(
           height: 23,
@@ -176,6 +186,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
 
   void _cacheTemporer(TabViewModel _tabViewModel) {
     TempBasicInformationHolder.fullName = _fullNameController.text;
+    TempBasicInformationHolder.userName = _userNameController.text;
     TempBasicInformationHolder.phoneNumber = _phoneNumberController.text;
     TempBasicInformationHolder.state = _stateController.text;
     TempBasicInformationHolder.address = _addressController.text;

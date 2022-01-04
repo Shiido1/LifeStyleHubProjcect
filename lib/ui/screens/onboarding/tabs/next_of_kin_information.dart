@@ -149,6 +149,7 @@ class _NextOfKinInformationWidgetState
     bool _value = await _informationModel!.registerBasicInformation(
         map: TempBasicInformationHolder.sendData(
             name: TempBasicInformationHolder.fullName!,
+            username: TempBasicInformationHolder.userName!,
             phoneNumber: TempBasicInformationHolder.phoneNumber!,
             state: TempBasicInformationHolder.state!,
             address: TempBasicInformationHolder.address!,

@@ -69,6 +69,7 @@ class _BankInformationWidgetState extends State<BankInformationWidget> {
           floatingLabel: 'Account number',
           label: 'Account number',
           controller: _acctNumberController,
+          keyboardType: TextInputType.number,
         ),
         SizedBox(
           height: 8,
