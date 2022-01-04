@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../helper/helper_handler.dart';
-import '../../helper/routes/navigation.dart';
 import '../../utils/pallets.dart';
 
 import 'text_views.dart';

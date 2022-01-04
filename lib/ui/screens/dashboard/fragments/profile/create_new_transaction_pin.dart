@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../widgets/bottom_count_down.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../../../../widgets/edit_form_widget.dart';
-import '../../../../widgets/image_loader.dart';
-import '../../../../widgets/text_views.dart';
-import '../../../../../utils/images.dart';
 import '../../../../../utils/pallets.dart';
 import '../../../../../utils/validators.dart';
 

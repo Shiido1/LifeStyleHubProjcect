@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../dao/account_dao.dart';
 import '../../../../../helper/configs/instances.dart';

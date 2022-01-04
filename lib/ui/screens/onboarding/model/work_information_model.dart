@@ -27,8 +27,8 @@ class Bank {
   String? name;
   String? accountName;
   String? accountNo;
-  dynamic? sortCode;
-  dynamic? swiftCode;
+  dynamic sortCode;
+  dynamic swiftCode;
   String? updatedAt;
   String? createdAt;
   int? id;

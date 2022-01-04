@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_vpp_response.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/vpp/vpp_profile.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/pop_menu/items.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/pop_menu/pop_up_menu.dart';
-import '../../../../../../../helper/helper_handler.dart';
 import '../../viewmodel/network_viewmodel.dart';
-import '../../../profile/dao/profile_dao.dart';
-import '../../../profile/model/users_profile_model.dart';
-import '../../../../widget/multi_color_widget.dart';
 import '../../../../../../../utils/pallets.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/viewmodel/network_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/vpp_team_card_widget.dart';
@@ -74,7 +69,7 @@ class _MyVPPTabState extends State<MyVPPTab> {
             VPPInformationsScreen(lead, isUpdate: true), context);
         break;
       case PopMenuOptions.setCommission:
-        // TODO: Handle this case.
+        
         break;
       case PopMenuOptions.deactivateVPP:
         _viewModel!.deactivateVPP(lead.id!);

@@ -52,6 +52,7 @@ class _AddOrEditBankAccountScreenState
     super.initState();
   }
 
+  // ignore: unused_field
   UsersProfileModel? _profileModel;
 
   void _getCatchedInfos() async {

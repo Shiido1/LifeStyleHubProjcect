@@ -26,10 +26,10 @@ class WalletTransactions {
   int? lastPage;
   String? lastPageUrl;
   List<Links>? links;
-  dynamic? nextPageUrl;
+  dynamic nextPageUrl;
   String? path;
   int? perPage;
-  dynamic? prevPageUrl;
+  dynamic prevPageUrl;
   int? to;
   int? total;
 
@@ -94,7 +94,7 @@ class WalletTransactions {
 }
 
 class Links {
-  dynamic? url;
+  dynamic url;
   String? label;
   bool? active;
 
@@ -120,7 +120,7 @@ class Data {
   int? walletId;
   String? referenceId;
   String? type;
-  dynamic? description;
+  dynamic description;
   String? category;
   String? status;
   String? meta;

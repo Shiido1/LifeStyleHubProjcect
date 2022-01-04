@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/model/notification_response.dart';
 import '../../../../helper/helper_handler.dart';
 import '../../../../provider/provider_architecture.dart';

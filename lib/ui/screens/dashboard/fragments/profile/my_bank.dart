@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import '../../../bank/account/add_bank_screen.dart';
@@ -15,9 +14,6 @@ import '../../../../widgets/general_bottom_sheet.dart';
 import '../../../../widgets/text_views.dart';
 import '../../../../../utils/pallets.dart';
 import 'package:page_transition/page_transition.dart';
-import 'model/users_profile_model.dart';
-
-import 'viewmodel/profile_viewmodel.dart';
 
 class BankListScreen extends StatefulWidget {
   const BankListScreen({Key? key}) : super(key: key);

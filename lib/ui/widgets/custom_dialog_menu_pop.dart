@@ -20,6 +20,7 @@ void showCustomDialog(BuildContext context,
       });
 }
 
+// ignore: must_be_immutable
 class CustomDialogBox extends StatelessWidget {
   final String? title;
   final List<String> items;

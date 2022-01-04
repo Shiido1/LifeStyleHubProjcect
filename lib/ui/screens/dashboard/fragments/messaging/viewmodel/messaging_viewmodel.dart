@@ -6,7 +6,6 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../../../../../database/users_data_provider.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
 import '../dao/messaging_dao.dart';

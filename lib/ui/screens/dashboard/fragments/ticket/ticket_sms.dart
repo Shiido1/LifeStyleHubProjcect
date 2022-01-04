@@ -50,6 +50,7 @@ class _TicketDetailsSmsState extends State<TicketDetailsSms> {
           centerTitle: true,
           onTap: () => showOpenedTicketMenuModal(context, element)),
       body: Consumer(builder: (context, watch, child) {
+        // ignore: unused_local_variable
         final _response = watch(_ticketNotifier);
 
         return Stack(

@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-
 import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../model/add_bank_account_model.dart';

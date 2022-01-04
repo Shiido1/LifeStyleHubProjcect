@@ -197,9 +197,9 @@ class Bank {
   String? name;
   String? accountName;
   String? accountNo;
-  dynamic? currency;
-  dynamic? sortCode;
-  dynamic? swiftCode;
+  dynamic currency;
+  dynamic sortCode;
+  dynamic swiftCode;
   String? createdAt;
   String? updatedAt;
 

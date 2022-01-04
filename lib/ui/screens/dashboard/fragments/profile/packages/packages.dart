@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hive/hive.dart';
 import '../../../../../../helper/helper_handler.dart';
 import 'package:provider/provider.dart';
-import 'dao/my_account_package_dao.dart';
 import '../../../widget/active_packages.dart';
 import '../../../../../widgets/bottom_count_down.dart';
 import '../../../../../widgets/custom_appbar.dart';
 import '../../../../../../utils/pallets.dart';
-
-import 'model/my_accounts_model.dart';
 import 'viewmodel/package_viewmodel.dart';
 import 'widget/tabs.dart';
 

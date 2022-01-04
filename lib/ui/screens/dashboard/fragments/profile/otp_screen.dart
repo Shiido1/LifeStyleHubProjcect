@@ -1,19 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'create_new_transaction_pin.dart';
 import '../../../../widgets/bottom_count_down.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
-import '../../../../widgets/edit_form_widget.dart';
-import '../../../../widgets/image_loader.dart';
 import '../../../../widgets/text_views.dart';
-import '../../../../../utils/images.dart';
 import '../../../../../utils/pallets.dart';
-import '../../../../../utils/validators.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -26,6 +21,7 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   var _globalFormKey = GlobalKey<FormState>();
+  // ignore: unused_field
   bool _autoValidate = false;
 
   TextEditingController textEditingController = TextEditingController();

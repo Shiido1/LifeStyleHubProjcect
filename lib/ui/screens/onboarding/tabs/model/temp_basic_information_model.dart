@@ -1,4 +1,3 @@
-import '../../../../../helper/configs/instances.dart';
 
 class TempBasicInformationHolder {
   static String? fullName;

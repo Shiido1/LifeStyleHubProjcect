@@ -1,15 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/otp/provider/pin_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/utils/validators.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../helper/helper_handler.dart';
-import '../../../../helper/routes/navigation.dart';
 import '../../../../utils/pallets.dart';
 import '../../../widgets/buttons.dart';
 import '../../../widgets/edit_form_widget.dart';

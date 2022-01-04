@@ -5,6 +5,7 @@ import '../../../../../../utils/pallets.dart';
 import '../../../../../widgets/image_loader.dart';
 import '../../../../../widgets/text_views.dart';
 
+// ignore: must_be_immutable
 class PointBreakDownWidget extends StatelessWidget {
   String? packageIcon;
   String? packageName;

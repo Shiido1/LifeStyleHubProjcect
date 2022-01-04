@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../../../../../../../helper/configs/instances.dart';
 import '../../../../../../../helper/helper_handler.dart';
 import '../../../../../../../helper/routes/navigation.dart';
-import '../../../../../bank/account/dao/account_dao.dart';
 import '../../viewmodel/network_viewmodel.dart';
 import '../history_cards.dart';
 import '../../../profile/dao/profile_dao.dart';
 import '../../../profile/model/users_profile_model.dart';
-import '../../../../widget/multi_color_widget.dart';
 import '../../../../widget/view_all_widget.dart';
 import '../../../../../../widgets/text_views.dart';
 import '../../../../../../../utils/pallets.dart';

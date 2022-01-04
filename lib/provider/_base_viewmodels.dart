@@ -1,7 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import '../helper/configs/instances.dart';
-import '../helper/routes/navigation.dart';
-import '../helper/routes/routes.dart';
 
 import '_reactive_service_mixin.dart';
 

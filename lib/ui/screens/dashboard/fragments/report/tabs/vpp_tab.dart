@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/vpp/vpp_profile.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/widget/vpp/my_vpp.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/card.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/left_tile.dart';

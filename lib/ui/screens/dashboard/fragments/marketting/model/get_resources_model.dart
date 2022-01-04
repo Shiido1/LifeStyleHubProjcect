@@ -76,7 +76,7 @@ class GetResourcesModelList {
 }
 
 class Links {
-  dynamic? url;
+  dynamic url;
   String? label;
   bool? active;
 

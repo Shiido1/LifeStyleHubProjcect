@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import '../helper/configs/instances.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'pallets.dart';
@@ -106,6 +105,7 @@ class ImagePickerHandler {
 
   Future<File?> _getImage(BuildContext context, ImageSource source) async {
     try {
+      // ignore: invalid_use_of_visible_for_testing_member
       final pickedFile = await ImagePicker.platform.pickImage(source: source);
       if (pickedFile != null) {
         return await _cropImage(context, pickedFile);

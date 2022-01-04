@@ -184,6 +184,7 @@ class ImageLoader extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CircularImage extends StatelessWidget {
   CircularImage(
       {this.width,

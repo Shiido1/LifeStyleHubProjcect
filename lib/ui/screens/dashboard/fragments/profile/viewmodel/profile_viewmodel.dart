@@ -97,6 +97,7 @@ class ProfileViewmodel extends BaseViewModel {
   Future<void> updateUsersBank(Map map) async {
     try {
       _showLoading();
+      // ignore: unused_local_variable
       final _response =
           await _profileRepository.updateUsersBankInformation(map);
       await getUsersProfile();

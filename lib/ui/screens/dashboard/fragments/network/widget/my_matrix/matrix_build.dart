@@ -93,6 +93,5 @@ class MatrixBuild extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

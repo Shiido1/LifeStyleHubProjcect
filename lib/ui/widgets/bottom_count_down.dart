@@ -1,15 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../helper/routes/navigation.dart';
 import '../screens/dashboard/fragments/profile/packages/purchase_package_screen.dart';
-
-import '../../helper/configs/instances.dart';
 import '../../helper/helper_handler.dart';
 import '../../utils/pallets.dart';
-import '../../utils/timer/countdown.dart';
-import '../../utils/timer/countdown_controller.dart';
 import 'buttons.dart';
 import 'glass_container.dart';
 import 'text_views.dart';

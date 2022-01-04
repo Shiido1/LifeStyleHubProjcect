@@ -11,7 +11,6 @@ import '../../../../../utils/pallets.dart';
 import '../../../../widgets/edit_form_widget.dart';
 import '../../../../widgets/image_loader.dart';
 import '../../../../widgets/text_views.dart';
-import '../ticket/widget/filter_modal.dart';
 import 'create_message.dart';
 import 'dao/messaging_dao.dart';
 import 'enum/message_enum.dart';

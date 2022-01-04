@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_promotion_income_analysis_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_summary_model.dart';

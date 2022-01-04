@@ -1,8 +1,5 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/repository/wallet_repository.dart';
 import 'package:lifestyle_hub/ui/screens/otp/service/pin_service.dart';
-import '../../../../../../helper/routes/navigation.dart';
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
@@ -26,6 +23,7 @@ class OTPViewmodel extends BaseViewModel {
   RefreshController get refreshController => _refreshController;
 
   int _currentPage = 1;
+  // ignore: unused_field
   int? _totalPages = 0;
 
   int get currentPage => _currentPage;

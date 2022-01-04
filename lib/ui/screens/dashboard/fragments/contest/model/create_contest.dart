@@ -26,7 +26,7 @@ class Contest {
   String? startdate;
   String? enddate;
   int? directsRequired;
-  dynamic? image;
+  dynamic image;
   String? reward;
   String? createdAt;
   String? updatedAt;

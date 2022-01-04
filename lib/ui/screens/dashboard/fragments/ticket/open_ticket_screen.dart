@@ -9,7 +9,6 @@ import '../../../../../helper/routes/navigation.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import '../../../../widgets/general_bottom_sheet.dart';
-import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'dao/dept_dao.dart';
 import 'viewmodel/ticket_viewmodel.dart';
@@ -43,6 +42,7 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
   final TextEditingController _messageController = TextEditingController();
 
   var _globalFormKey = GlobalKey<FormState>();
+  // ignore: unused_field
   bool _autoValidate = false;
   DepartmentModel? _value;
 

@@ -1,13 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+// ignore: deprecated_member_use, unused_import
 import 'package:flutter_riverpod/all.dart';
 import 'package:lifestyle_hub/database/hive_database.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
-import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../widgets/bottom_count_down.dart';

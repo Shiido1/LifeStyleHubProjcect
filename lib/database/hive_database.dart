@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: deprecated_member_use
 import 'package:flutter_riverpod/all.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';

@@ -1,22 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../../helper/configs/constants.dart';
 import '../../../../../helper/helper_handler.dart';
-import '../../../../../helper/routes/navigation.dart';
 import 'model/users_profile_model.dart';
 import '../../../../widgets/bottom_count_down.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
-import '../../../../widgets/custom_dialog_menu_pop.dart';
-import '../../../../widgets/date_picker.dart';
 import '../../../../widgets/edit_form_widget.dart';
 import '../../../../widgets/overlay.dart';
 import '../../../../../utils/pallets.dart';
 import '../../../../../utils/validators.dart';
 
 import 'viewmodel/profile_viewmodel.dart';
-import 'widget/custom_radio_button.dart';
 
 class WorkInformationScreen extends StatefulWidget {
   final Work? work;
@@ -41,6 +36,7 @@ class _WorkInformationScreenState extends State<WorkInformationScreen> {
   TextEditingController? _addressController;
   var _globalFormKey = GlobalKey<FormState>();
   bool _autoValidate = false;
+  // ignore: unused_field
   bool _relationshipSelected = false;
 
   @override

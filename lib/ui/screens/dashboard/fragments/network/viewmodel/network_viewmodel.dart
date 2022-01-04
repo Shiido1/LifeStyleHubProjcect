@@ -10,7 +10,6 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/my_vp
     as vpp;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_account_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/view_account_network_response.dart';
-import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

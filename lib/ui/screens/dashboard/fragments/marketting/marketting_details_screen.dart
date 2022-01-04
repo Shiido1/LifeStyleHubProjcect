@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:share/share.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -11,7 +10,6 @@ import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/video_player.dart';
 import 'dao/marketting_dao.dart';
 import 'data/enum.dart';
-import 'data/social_media.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../../../../widgets/image_loader.dart';
@@ -25,9 +23,11 @@ import 'viewmodel/marketting_viewmodel.dart';
 class MarkettingDetailScreen extends StatefulWidget {
   Data? getResourcesModel;
   MarketingType type;
+  // ignore: unused_field
   final _markettingViewModel =
       ChangeNotifierProvider((ref) => MarkettingViewmodel());
 
+  // ignore: unused_field
   MarkettingViewmodel? _marketting;
 
   MarkettingDetailScreen(

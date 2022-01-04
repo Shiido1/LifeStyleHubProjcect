@@ -35,6 +35,7 @@ class Validators {
   /// validates users input to double
   static String Function(String) validateDouble({String? error}) {
     return (String value) {
+      // ignore: unnecessary_null_comparison
       if (value == null || value.isEmpty) {
         return error ?? 'Field is required.';
       }
@@ -149,6 +150,7 @@ class Validators {
   /// validates users input to a file
   static String Function(File) validateFile({String? error}) {
     return (File file) {
+      // ignore: unnecessary_null_comparison
       if (file == null || file.path.isEmpty) {
         return error ?? 'Invalid File.';
       }
@@ -201,6 +203,7 @@ class Validators {
   static String? Function(String?)? validatePassword(
       FormFieldState<String> passwordField) {
     return (String? value) {
+      // ignore: unnecessary_null_comparison
       if (passwordField == null) {
         return 'Please enter a password.';
       }

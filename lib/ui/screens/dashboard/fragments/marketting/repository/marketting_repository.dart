@@ -1,4 +1,3 @@
-import '../../../../../../helper/configs/constants.dart';
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../model/delete_marketting_model.dart';
@@ -10,6 +9,7 @@ class MarkettingRepository {
   /// [@CREATE] Resource marketting list
   Future<dynamic> createMarketting(Map map) async {
     try {
+      // ignore: unused_local_variable
       final _response = await apiBaseHelper.post(
           map: map, url: Paths.getMarketting, options: await getDioHeader());
       return null;

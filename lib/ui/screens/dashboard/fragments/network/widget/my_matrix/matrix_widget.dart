@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../../../../helper/configs/instances.dart';
 import '../../model/view_account_network_response.dart';
 import '../../viewmodel/network_viewmodel.dart';
 import '../../../../../../../utils/pallets.dart';
 
 import '../../../../../../../helper/helper_handler.dart';
-import '../../../../../../../utils/pallets.dart';
 import '../../model/generation_model.dart';
 
 class MatrixDisplayWidget extends StatelessWidget {

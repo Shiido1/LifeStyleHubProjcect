@@ -4,7 +4,6 @@ import '../../../../../../../helper/helper_handler.dart';
 import '../../viewmodel/network_viewmodel.dart';
 import '../../../profile/dao/profile_dao.dart';
 import '../../../profile/model/users_profile_model.dart';
-import '../../../../widget/multi_color_widget.dart';
 import '../../../../widget/view_all_widget.dart';
 import '../../../../../../widgets/text_views.dart';
 import '../../../../../../../utils/pallets.dart';
@@ -119,7 +118,6 @@ class _MyLeadWiseTabState extends State<MyLeadWiseTab> {
               ))
         ],
       );
-      ;
     });
   }
 }

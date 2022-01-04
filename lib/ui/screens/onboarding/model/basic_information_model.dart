@@ -74,14 +74,14 @@ class User {
   int? id;
   String? name;
   String? email;
-  dynamic? emailVerifiedAt;
+  dynamic emailVerifiedAt;
   String? phoneNo;
   String? state;
   String? address;
   String? sex;
   String? dob;
   String? status;
-  dynamic? referredBy;
+  dynamic referredBy;
   AffiliateId? affiliateId;
   String? trialEnds;
   int? isAdmin;

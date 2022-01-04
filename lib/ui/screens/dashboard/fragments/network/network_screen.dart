@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/data/tabs_data.dart';
-import '../../../../../helper/configs/instances.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'viewmodel/network_viewmodel.dart';
 import 'widget/my_downline/my_downline.dart';
 import 'widget/my_lead/my_lead_wise.dart';
 import 'package:provider/provider.dart';
-import '../../../../../helper/helper_handler.dart';
-import '../../widget/second_icon.dart';
-import '../../../../widgets/buttons.dart';
-import '../../../../widgets/edit_form_widget.dart';
-import '../../../../widgets/text_views.dart';
-import '../../../../../utils/pallets.dart';
 
 import 'model/view_account_model.dart';
 import 'network_package.dart';

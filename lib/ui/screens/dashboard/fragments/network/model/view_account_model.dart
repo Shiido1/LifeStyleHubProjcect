@@ -74,7 +74,7 @@ class Package {
   int? downlines;
   String? subscription;
   String? description;
-  dynamic? image;
+  dynamic image;
   int? uplinePointAcc;
   int? referralPoints;
   int? directBonus;
@@ -82,7 +82,7 @@ class Package {
   int? checkoutPoints;
   int? value;
   String? rewards;
-  dynamic? terms;
+  dynamic terms;
   String? createdAt;
   String? updatedAt;
 

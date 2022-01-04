@@ -11,7 +11,6 @@ import '../../../widgets/date_picker.dart';
 import '../../../widgets/edit_form_widget.dart';
 import '../../../widgets/text_views.dart';
 import '../../../../utils/pallets.dart';
-import '../../../../utils/validators.dart';
 import 'package:provider/provider.dart';
 
 class BasicInformationWidget extends StatefulWidget {
@@ -39,7 +38,9 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
 
   InformationViewModel? _informationViewModel;
   bool _dateSelected = false;
+  // ignore: unused_field
   bool _sexSelected = false;
+  // ignore: unused_field
   bool _stateSelected = false;
 
   @override

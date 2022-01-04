@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
 import '../dao/marketting_dao.dart';
@@ -51,6 +50,7 @@ class MarkettingViewmodel extends BaseViewModel {
   Future<void> createMarketting(Map map) async {
     try {
       _showLoading();
+      // ignore: unused_local_variable
       final _reponse = await _markettingRepository.createMarketting(map);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());

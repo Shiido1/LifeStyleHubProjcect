@@ -31,7 +31,7 @@ class User {
   int? id;
   String? name;
   String? email;
-  dynamic? emailVerifiedAt;
+  dynamic emailVerifiedAt;
   String? phoneNo;
   int? countryId;
   String? state;
@@ -182,9 +182,9 @@ class Bank {
   String? name;
   String? accountName;
   String? accountNo;
-  dynamic? currency;
-  dynamic? sortCode;
-  dynamic? swiftCode;
+  dynamic currency;
+  dynamic sortCode;
+  dynamic swiftCode;
   String? createdAt;
   String? updatedAt;
 

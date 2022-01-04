@@ -1,7 +1,6 @@
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import '../provider/_base_viewmodels.dart';
-import 'configs/instances.dart';
 
 class VideoPlayer extends BaseViewModel {
   late BetterPlayerController betterPlayerController;

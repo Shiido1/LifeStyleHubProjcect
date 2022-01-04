@@ -1,9 +1,5 @@
 import 'dart:async';
-import 'dart:io';
-
-import 'package:dio/dio.dart';
 import '../../../../helper/helper_handler.dart';
-import '../../../../helper/configs/constants.dart';
 import '../../../../helper/configs/instances.dart';
 import '../model/basic_information_model.dart';
 import '../model/work_information_model.dart';

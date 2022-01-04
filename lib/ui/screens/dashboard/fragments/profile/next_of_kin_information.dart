@@ -10,14 +10,12 @@ import '../../../../widgets/bottom_count_down.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../../../../widgets/custom_dialog_menu_pop.dart';
-import '../../../../widgets/date_picker.dart';
 import '../../../../widgets/edit_form_widget.dart';
 import '../../../../widgets/overlay.dart';
 import '../../../../../utils/pallets.dart';
 import '../../../../../utils/validators.dart';
 
 import 'viewmodel/profile_viewmodel.dart';
-import 'widget/custom_radio_button.dart';
 
 class NextOfKinInformationScreen extends StatefulWidget {
   const NextOfKinInformationScreen({Key? key}) : super(key: key);

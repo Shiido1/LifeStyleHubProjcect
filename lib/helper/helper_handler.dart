@@ -10,11 +10,7 @@ import '../ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import '../ui/widgets/bottom_count_down.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-
-import '../ui/screens/login/model/login_model.dart';
 import '../utils/pallets.dart';
-import 'configs/constants.dart';
-import 'configs/instances.dart';
 
 /// get device width
 double getDeviceWidth(BuildContext context) {

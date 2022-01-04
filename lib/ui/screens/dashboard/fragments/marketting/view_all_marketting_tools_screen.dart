@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../../../../../helper/configs/instances.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'viewmodel/marketting_viewmodel.dart';
-import '../ticket/widget/filter_modal.dart';
 import '../../../../widgets/custom_appbar.dart';
-import '../../../../widgets/edit_form_widget.dart';
 import '../../../../widgets/image_loader.dart';
 import '../../../../../utils/pallets.dart';
 import 'package:page_transition/page_transition.dart';

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/utils/images.dart';
-import '../../../../../../../helper/helper_handler.dart';
 import '../../../../../../../helper/routes/navigation.dart';
 import '../../dao/profile_dao.dart';
 import '../../model/users_profile_model.dart';

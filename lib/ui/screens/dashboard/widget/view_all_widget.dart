@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../widgets/text_views.dart';
 import '../../../../utils/pallets.dart';
 
+// ignore: must_be_immutable
 class ViewAllButton extends StatelessWidget {
   final String? title;
   bool showViewAll;

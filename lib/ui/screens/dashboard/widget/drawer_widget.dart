@@ -230,6 +230,7 @@ void _tap(
     BuildContext? context,
     int? newIndex,
     int? providerIndex,
+    // ignore: unused_element
     bool? drawer = true}) {
   if (newIndex == providerIndex && tab!.isFromDrawer) {
     PageRouter.goBack(context!);

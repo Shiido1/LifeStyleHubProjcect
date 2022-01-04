@@ -6,7 +6,6 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../../../../../../database/hive_database.dart';
 import '../model/my_accounts_model.dart';
-import '../model/view_packages_model.dart';
 
 AccountPackageDao? accountPackageDao;
 

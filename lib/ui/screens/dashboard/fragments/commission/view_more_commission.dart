@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -29,7 +31,9 @@ class ViewMoreCommissionScreen extends StatefulWidget {
 }
 
 class _ViewMoreCommissionScreenState extends State<ViewMoreCommissionScreen> {
+  // ignore: unused_field
   int? _value = 0;
+  // ignore: unused_field
   List<String> _valueList = [
     'Open Commission',
     'Closed Commission',

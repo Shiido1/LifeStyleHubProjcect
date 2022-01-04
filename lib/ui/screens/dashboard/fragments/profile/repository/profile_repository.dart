@@ -54,6 +54,7 @@ class ProfileRepository {
   /// updates a users bank informations
   Future<dynamic> updateUsersBankInformation(Map body) async {
     try {
+      // ignore: unused_local_variable
       final _response = await apiBaseHelper.post(
           map: body, url: Paths.updateUsersBank, options: await getDioHeader());
       return null;

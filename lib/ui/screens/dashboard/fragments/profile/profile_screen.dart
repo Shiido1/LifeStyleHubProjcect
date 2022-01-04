@@ -7,9 +7,7 @@ import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart
 
 import '../../../../../database/hive_database.dart';
 import '../../../bank/account/add_bank_screen.dart';
-import 'change_transaction_pin.dart';
 import 'model/users_profile_model.dart';
-import '../../../login/login_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../../../helper/configs/instances.dart';
@@ -39,6 +37,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final _profileProvider = ChangeNotifierProvider((_) => ProfileViewmodel());
   final _tabViewProvider = ChangeNotifierProvider((_) => TabViewModel());
+  // ignore: unused_field
   TabViewModel? _tabViewModel;
   ProfileViewmodel? _profileViewmodel;
 

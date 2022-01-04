@@ -4,9 +4,6 @@ import '../data/enum.dart';
 import '../viewmodel/marketting_viewmodel.dart';
 import '../../../widget/view_all_widget.dart';
 import '../../../../../widgets/image_loader.dart';
-import '../../../../../widgets/text_views.dart';
-import '../../../../../../utils/pallets.dart';
-
 import '../marketting_details_screen.dart';
 import '../view_all_marketting_tools_screen.dart';
 

@@ -29,10 +29,10 @@ class CommissionHistory {
   int? lastPage;
   String? lastPageUrl;
   List<Links>? links;
-  dynamic? nextPageUrl;
+  dynamic nextPageUrl;
   String? path;
   int? perPage;
-  dynamic? prevPageUrl;
+  dynamic prevPageUrl;
   int? to;
   int? total;
 
@@ -87,7 +87,7 @@ class CommissionHistory {
 }
 
 class Links {
-  dynamic? url;
+  dynamic url;
   String? label;
   bool? active;
 

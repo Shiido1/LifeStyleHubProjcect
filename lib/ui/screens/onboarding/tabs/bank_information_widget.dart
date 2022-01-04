@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../helper/configs/instances.dart';
 import '../../../../helper/helper_handler.dart';
 import '../viewmodel/information_viewmodel.dart';
 import '../viewmodel/tab_viewmodel.dart';

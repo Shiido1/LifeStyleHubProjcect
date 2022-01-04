@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
 import '../dao/commission_dao.dart';
 import '../repository/commission_repository.dart';
-import '../../marketting/dao/marketting_dao.dart';
-import '../../marketting/model/get_resources_model.dart';
-import '../../marketting/repository/marketting_repository.dart';
-import '../../../../../../utils/pallets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 CommissionRepository _commissionRepository = CommissionRepository();
@@ -89,6 +84,7 @@ class CommissionViewmodel extends BaseViewModel {
     }
   }
 
+  // ignore: unused_field
   int _page = 1;
   bool isPagination = false;
 

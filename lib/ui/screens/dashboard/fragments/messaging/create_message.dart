@@ -7,11 +7,8 @@ import '../../../../../helper/helper_handler.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../../../../widgets/edit_form_widget.dart';
-import '../../../../widgets/modal.dart';
 import '../../../../widgets/overlay.dart';
-import '../../../../widgets/text_views.dart';
 import '../../../../../utils/pallets.dart';
-import '../../../../../utils/validators.dart';
 
 import 'enum/message_enum.dart';
 import 'viewmodel/messaging_viewmodel.dart';
