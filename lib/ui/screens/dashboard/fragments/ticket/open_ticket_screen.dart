@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/dao/ticket_dao.dart';
 import '../../../../../helper/routes/navigation.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -243,8 +244,10 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
     if (_globalFormKey.currentState!.validate()) {
       final _mappedData = await _getMappedData();
       _ticketViewmodel!.createTicket(_mappedData);
+      
     } else
       setState(() => _autoValidate = true);
+    
   }
 
   Future<FormData> _getMappedData() async {

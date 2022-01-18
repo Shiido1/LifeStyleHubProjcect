@@ -72,7 +72,7 @@ class _MyGenerationTabState extends State<MyGenerationTab> {
                 SizedBox(height: 8),
                 TextView(
                   text:
-                      '\$${provider.myGenerationDownlineResponse?.generationDownlineCount ?? 0}',
+                      '${provider.myGenerationDownlineResponse?.generationDownlineCount ?? 0}',
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
                   color: Pallets.black,

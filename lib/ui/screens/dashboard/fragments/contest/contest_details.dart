@@ -202,7 +202,16 @@ class _ContestDetailsState extends State<ContestDetails> {
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: TextView(
-                      text: 'In process',
+                      text:
+                          getDateTime(contestModel!.enddate!).day!.isNegative &&
+                                  getDateTime(contestModel!.enddate!)
+                                      .hour!
+                                      .isNegative &&
+                                  getDateTime(contestModel!.enddate!)
+                                      .miniute!
+                                      .isNegative
+                              ? 'Done'
+                              : 'In process',
                       fontWeight: FontWeight.w700,
                       fontSize: 14,
                       color: Pallets.white,

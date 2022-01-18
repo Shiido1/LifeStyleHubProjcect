@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/model/my_ticket_status.dart';
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
@@ -33,7 +34,7 @@ class TicketViewmodel extends BaseViewModel {
   /// show loading indicator
   void _showLoading({bool notify = false}) {
     _loading = true;
-  notifyListeners();
+    notifyListeners();
   }
 
   /// hide loading indicator
@@ -46,6 +47,7 @@ class TicketViewmodel extends BaseViewModel {
     try {
       _showLoading(notify: true);
       final _response = await _ticketRepository.createNewTicket(formData);
+      await getAllTickets(refresh: true);
       showsnackBarInfo(_context,
           message: _response.message ?? '', bgColor: Pallets.green600);
     } catch (e) {
@@ -71,6 +73,8 @@ class TicketViewmodel extends BaseViewModel {
       if (ticketDao!.box!.isEmpty || refresh) _showLoading();
       final _response = await _ticketRepository.getMyTicket(search: search);
       ticketDao!.saveTickets(_response.data);
+      ticketDao!.getTicketStatus();
+      logger.d(_response);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
@@ -122,5 +126,12 @@ class TicketViewmodel extends BaseViewModel {
       showsnackBarInfo(this._context, message: e.toString());
     }
     _hideLoading();
+  }
+
+  MyTicketStatusModel? myTicketStatusModel;
+
+  Future getTicketStatus() async {
+    myTicketStatusModel = await ticketDao!.getTicketStatus();
+    notifyListeners();
   }
 }

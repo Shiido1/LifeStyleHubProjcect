@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 // ignore: deprecated_member_use
 import 'package:flutter_riverpod/all.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';

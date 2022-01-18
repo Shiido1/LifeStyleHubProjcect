@@ -94,6 +94,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _getCatchedInfos();
     return Scaffold(
       appBar: getCustomAppBar(context,
           title: _titleList[_index],

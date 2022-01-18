@@ -69,7 +69,7 @@ class _MyLeadWiseTabState extends State<MyLeadWiseTab> {
                 ),
                 SizedBox(height: 8),
                 TextView(
-                  text: '\$${provider.leadWiseTotal}',
+                  text: '${provider.leadWiseTotal}',
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
                   color: Pallets.black,

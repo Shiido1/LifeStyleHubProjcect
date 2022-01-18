@@ -1,5 +1,4 @@
 import 'package:better_player/better_player.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -73,6 +72,7 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
       final _player = watch(_videoPlayerModel);
       if (type == MarketingType.Video)
         _player.playVideo(format(getResourcesModel!.content!.path!));
+        print('print video ${getResourcesModel!.content!.path!}');
 
       return Scaffold(
         appBar: getCustomAppBar(context,

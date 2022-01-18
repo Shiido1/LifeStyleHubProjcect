@@ -32,7 +32,7 @@ class ReceiversText extends StatelessWidget {
                 ),
               )),
           TextView(
-            text: fomartTime(message!.createdAt!),
+            text: fomartTime(DateTime.now().toString()),
             fontSize: 12,
             fontWeight: FontWeight.w700,
             color: Pallets.grey400,

@@ -1,5 +1,6 @@
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/viewmodel/notification_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/otp/provider/pin_viewmodel.dart';
 
@@ -43,5 +44,6 @@ class Providers {
     ChangeNotifierProvider<ReportViewmodel>(create: (_) => ReportViewmodel()),
     ChangeNotifierProvider<MarkettingViewmodel>(create: (_) => MarkettingViewmodel()),
     ChangeNotifierProvider<OTPViewmodel>(create: (_) => OTPViewmodel()),
+    // ChangeNotifierProvider<TicketViewmodel>(create: (_) => TicketViewmodel()),
   ];
 }

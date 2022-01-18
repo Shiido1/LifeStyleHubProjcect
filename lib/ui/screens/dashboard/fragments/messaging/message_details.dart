@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'widget/sender_widget.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -118,6 +118,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
                       }
                       return ReceiversText(message);
                     }).toList(),
+                    Padding(padding: EdgeInsets.only(bottom: 50.w)),
                     SizedBox(
                       height: 23,
                     )
@@ -135,11 +136,11 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
     );
   }
 
-  void _sendMessage(String? v) {
+  Future<void> _sendMessage(String? v) async {
     if (v!.isEmpty) {
       return;
     }
-    _messagingViewmodel!.sendMessage(conversation!.id.toString(), v);
+    await _messagingViewmodel!.sendMessage(conversation!.id.toString(), v);
     _controller.text = '';
     _scrollController.animateTo(
       0.0,

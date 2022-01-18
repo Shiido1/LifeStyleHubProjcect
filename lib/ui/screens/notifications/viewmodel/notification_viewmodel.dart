@@ -41,6 +41,7 @@ class NotificationViewmodel extends BaseViewModel {
       final _response = await _notificationRepository.notification();
       unreadNotifications = _response.unreadNotifications ?? 0;
       notificationList = _response.notifications?.data ?? [];
+      notifyListeners();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

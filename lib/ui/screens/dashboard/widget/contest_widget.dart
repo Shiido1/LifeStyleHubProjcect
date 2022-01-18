@@ -13,6 +13,13 @@ class ContestWidget extends StatelessWidget {
   final ViewContestModel? contest;
 
   ContestWidget({Key? key, required this.contest}) : super(key: key);
+
+  int daysBetween(DateTime from, DateTime to) {
+    from = DateTime(from.year, from.month, from.day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(

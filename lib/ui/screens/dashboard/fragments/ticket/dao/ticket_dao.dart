@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../../../../../database/hive_database.dart';
 import '../../../../../../helper/configs/instances.dart';
@@ -32,6 +31,7 @@ class TicketDao {
 
   Future<MyTicketStatusModel> getTicketStatus() async {
     final _data = await prefManager.getCachedData(key: HiveBoxes.ticket);
+    // _box!.get(_data);
     return MyTicketStatusModel.fromJson(_data);
   }
 
@@ -43,6 +43,7 @@ class TicketDao {
       key: (g) => (g as Data).id.toString(),
       value: (g) => (g as Data).toJson(),
     );
+    logger.d(map);
     await _box!.putAll(map);
   }
 

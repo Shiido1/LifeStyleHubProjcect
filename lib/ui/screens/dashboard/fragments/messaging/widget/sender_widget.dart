@@ -6,7 +6,8 @@ import '../../../../../../utils/pallets.dart';
 
 class SenderText extends StatelessWidget {
   final Data? message;
-  const SenderText(this.message, {Key? key}) : super(key: key);
+  SenderText(this.message, {Key? key}) : super(key: key);
+  DateTime now = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -31,7 +32,7 @@ class SenderText extends StatelessWidget {
                 ),
               )),
           TextView(
-            text: fomartTime(message!.createdAt!),
+            text: fomartTime(now.toString()),
             fontSize: 12,
             fontWeight: FontWeight.w700,
             color: Pallets.grey400,

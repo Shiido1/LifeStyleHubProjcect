@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
@@ -57,26 +58,31 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   child: ListView(
                     children: [
                       ...notification.notificationList
-                          .map((notification) => Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextView(
-                                    text: notification.text ?? '',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                    color: Pallets.grey600,
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  SizedBox(height: 4),
-                                  TextView(
-                                    text: fomartDate(notification.date ?? ''),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                    color: Pallets.grey400,
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ],
+                          .map((notification) => Container(
+                                padding: EdgeInsets.all(8.w),
+                                margin: EdgeInsets.all(8.w),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextView(
+                                      text: notification.text ?? '',
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                      color: Pallets.grey600,
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    SizedBox(height: 4),
+                                    TextView(
+                                      text: fomartDate(notification.date ?? ''),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                      color: Pallets.grey400,
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    SizedBox(height: 10),
+                                  ],
+                                ),
                               ))
                     ],
                   ),

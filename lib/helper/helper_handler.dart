@@ -88,9 +88,9 @@ CountDownTimer getDateTime(String date) {
   DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
   DateTime _duration = _dateFormat.parse(date);
   DateTime presentDate = _dateFormat.parse(DateTime.now().toIso8601String());
-  final _answer = presentDate.difference(_duration);
+  final _answer = _duration.difference(presentDate);
   return CountDownTimer(
-      day: _answer.inDays,
+      day: _answer.inDays-1,
       hour: DateTime.now().hour,
       miniute: DateTime.now().minute);
 }

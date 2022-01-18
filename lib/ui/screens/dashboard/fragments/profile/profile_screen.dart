@@ -60,6 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _getCatchedInfos();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView(
@@ -273,6 +274,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
       logger.e(e);
     }
   }
-
-
 }
