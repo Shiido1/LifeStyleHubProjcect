@@ -244,10 +244,8 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
     if (_globalFormKey.currentState!.validate()) {
       final _mappedData = await _getMappedData();
       _ticketViewmodel!.createTicket(_mappedData);
-      
     } else
       setState(() => _autoValidate = true);
-    
   }
 
   Future<FormData> _getMappedData() async {

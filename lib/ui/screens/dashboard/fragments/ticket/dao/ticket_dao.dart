@@ -43,7 +43,6 @@ class TicketDao {
       key: (g) => (g as Data).id.toString(),
       value: (g) => (g as Data).toJson(),
     );
-    logger.d(map);
     await _box!.putAll(map);
   }
 

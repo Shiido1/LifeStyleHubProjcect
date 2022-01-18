@@ -73,8 +73,6 @@ class TicketViewmodel extends BaseViewModel {
       if (ticketDao!.box!.isEmpty || refresh) _showLoading();
       final _response = await _ticketRepository.getMyTicket(search: search);
       ticketDao!.saveTickets(_response.data);
-      ticketDao!.getTicketStatus();
-      logger.d(_response);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

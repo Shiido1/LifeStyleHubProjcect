@@ -128,18 +128,39 @@ class _TicketScreenState extends State<TicketScreen> {
                                 ],
                               ),
                               SizedBox(height: 32),
-                              ViewAllButton(
-                                title: 'Recent tickets',
-                                viewAll: () => PageRouter.gotoWidget(
-                                    ViewMoreTicketsScreen(), context),
-                              ),
-                              SizedBox(height: 17),
                             ],
                           );
                         }),
-                    ..._response.data!
-                        .map((element) => TicketListWidget(element))
-                        .toList(),
+                    ValueListenableBuilder(
+                      valueListenable: ticketDao!.getListenable()!,
+                      builder: (BuildContext context, Box<dynamic> value,
+                          Widget? child) {
+                        final _ticketList = ticketDao!.convert(value).toList();
+
+                        if (_ticketList.isEmpty) {
+                          return Container();
+                        }
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ViewAllButton(
+                              title: 'Recent tickets',
+                              viewAll: () => PageRouter.gotoWidget(
+                                  ViewMoreTicketsScreen(), context),
+                            ),
+                            SizedBox(height: 17),
+                            ...List.generate(
+                                _ticketList.length > 5 ? 5 : _ticketList.length,
+                                (index) {
+                              final _element = _ticketList[index];
+                              return TicketListWidget(_element);
+                            }).toList(),
+                          ],
+                        );
+                      },
+                    ),
                     SizedBox(height: 33),
                   ],
                 ),
