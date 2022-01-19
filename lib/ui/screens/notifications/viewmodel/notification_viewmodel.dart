@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/model/notification_response.dart';
-import '../../../../helper/helper_handler.dart';
 import '../../../../provider/provider_architecture.dart';
 import '../repository/notification_repository.dart';
 
