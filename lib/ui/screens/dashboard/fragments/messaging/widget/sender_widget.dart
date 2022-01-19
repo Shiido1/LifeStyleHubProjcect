@@ -4,6 +4,7 @@ import '../model/open_message_model.dart';
 import '../../../../../widgets/text_views.dart';
 import '../../../../../../utils/pallets.dart';
 
+// ignore: must_be_immutable
 class SenderText extends StatelessWidget {
   final Data? message;
   SenderText(this.message, {Key? key}) : super(key: key);
