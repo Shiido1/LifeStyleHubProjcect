@@ -43,7 +43,7 @@ class NotificationViewmodel extends BaseViewModel {
       notificationList = _response.notifications?.data ?? [];
       notifyListeners();
     } catch (e) {
-      showsnackBarInfo(this._context, message: e.toString());
+      // showsnackBarInfo(this._context, message: e.toString());
     }
     _hideLoading();
   }

@@ -13,6 +13,7 @@ class NotificationRepository {
           url: Paths.notifications, options: await getDioHeader());
       return NotificationResponse.fromJson(_response);
     } catch (e) {
+      logger.d(e);
       throw e;
     }
   }
