@@ -92,7 +92,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   UsersProfileModel? _profileModel;
 
   void _getCatchedInfos() async {
-    _profileModel = await profileDao!.convert();
+    _profileModel = await profileDao?.convert();
     setState(() {});
   }
 

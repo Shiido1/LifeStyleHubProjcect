@@ -41,7 +41,7 @@ class DashboardViewmodel extends BaseViewModel {
     try {
       if (dashboardDao!.box!.isEmpty) _showLoading();
       final _response = await _dashboardRepository.dashboard(isUser);
-      dashboardDao!.saveDashboard(_response.toJson());
+      return dashboardDao!.saveDashboard(_response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

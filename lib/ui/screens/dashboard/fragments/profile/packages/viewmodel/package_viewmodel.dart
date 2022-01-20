@@ -62,6 +62,7 @@ class PackageViewmodel extends BaseViewModel {
       activePackages = _response.activePackages;
       completedPackages = _response.completedPackages;
       inactivePackages = _response.inactivePackages;
+      
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

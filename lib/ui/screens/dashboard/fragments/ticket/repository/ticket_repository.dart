@@ -26,7 +26,8 @@ class TicketRepository {
   Future<MyTicketStatusModel> postMyTicketStatus() async {
     try {
       final _response = await apiBaseHelper.post(
-          url: '${Paths.tickets}/status', options: await getDioHeader());
+          url: '${Paths.tickets}/status',
+          options: await getDioHeader());
       return MyTicketStatusModel.fromJson(_response);
     } catch (e) {
       throw e;

@@ -51,18 +51,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _initialize() async {
     final _user = await profileDao?.convert();
-    _tabViewModel = Provider.of<TabViewModel>(context, listen: false);
+     _tabViewModel = Provider.of<TabViewModel>(context, listen: false);
     _dashboardViewmodel =
         Provider.of<DashboardViewmodel>(context, listen: false);
     _dashboardViewmodel!.init(context);
 
-    _dashboardViewmodel!.getDashboards(_user?.role == "user");
+    await _dashboardViewmodel!.getDashboards(_user?.role == "user");
     _contestViewModel = Provider.of<ContestViewModel>(context, listen: false);
     _contestViewModel!.init(context);
     _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);
     _packageViewmodel!.init(context);
-    _packageViewmodel!.getPackages();
-    _contestViewModel!.getListContest();
+    await _packageViewmodel!.getPackages();
+    await _contestViewModel!.getListContest();
     setState(() {});
   }
 
@@ -70,13 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
   DashboardModel? _dashboardModel;
 
   void _getCatchedInfos() async {
-    _profileModel = await profileDao!.convert();
-    _dashboardModel = await dashboardDao!.getUsersInformation();
+    _profileModel = await profileDao?.convert();
+    _dashboardModel = await dashboardDao?.getUsersInformation();
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    // _initialize();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
@@ -154,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 5,
                     ),
                     TextView(
-                      onTap: () => _tabViewModel!.switchDrawerIndex(context, 7),
+                      onTap: () => _tabViewModel?.switchDrawerIndex(context, 7),
                       text: 'View all',
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
@@ -179,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainBgColor: Pallets.orange50,
                     smallBgColor: Pallets.orange200,
                     textColor: Pallets.orange500,
-                    onTap: () => _tabViewModel!.switchDrawerIndex(context, 7),
+                    onTap: () => _tabViewModel?.switchDrawerIndex(context, 7),
                   ),
                   SizedBox(
                     width: 16,
@@ -192,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainBgColor: Pallets.blue50,
                     smallBgColor: Pallets.blue200,
                     textColor: Pallets.blue500,
-                    onTap: () => _tabViewModel!.switchDrawerIndex(context, 7),
+                    onTap: () => _tabViewModel?.switchDrawerIndex(context, 7),
                   ),
                 ],
               ),
@@ -209,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ViewAllButton(
                       title: 'Active packages',
                       viewAll: () =>
-                          _tabViewModel!.switchDrawerIndex(context, 7),
+                          _tabViewModel?.switchDrawerIndex(context, 7),
                     ),
                     SizedBox(
                       height: 16,

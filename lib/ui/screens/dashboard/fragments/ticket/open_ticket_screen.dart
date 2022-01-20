@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
+import 'package:page_transition/page_transition.dart';
 import '../../../../../helper/routes/navigation.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -75,12 +77,14 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
             FocusScope.of(context).unfocus();
           },
           child: Scaffold(
-            appBar: getCustomAppBar(context,
-                title: 'Open a ticket',
-                showLeadig: true,
-                centerTitle: true,
-                image: _profileModel?.profilePic ?? '',
-                initial: _profileModel?.name ?? 'LH'),
+            appBar: getCustomAppBar(
+              context,
+              title: 'Open a ticket',
+              showLeadig: true,
+              centerTitle: true,
+              image: _profileModel?.profilePic ?? '',
+              initial: _profileModel?.name ?? 'LH',
+            ),
             body: Form(
               key: _globalFormKey,
               child: ValueListenableBuilder(
@@ -217,7 +221,14 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
                                   fontStyle: FontStyle.normal,
                                   primary: Pallets.grey400,
                                   borderColor: Pallets.grey400,
-                                  onPressed: () => null,
+                                  onPressed: () => PageRouter.gotoWidget(
+                                    DashboardScreen(
+                                      index: 9,
+                                    ),
+                                    context,
+                                    clearStack: true,
+                                    animationType: PageTransitionType.fade,
+                                  ),
                                 ),
                               )
                             ],

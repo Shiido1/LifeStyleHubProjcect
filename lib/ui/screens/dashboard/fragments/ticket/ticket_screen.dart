@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:page_transition/page_transition.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'dao/ticket_dao.dart';
@@ -41,6 +42,7 @@ class _TicketScreenState extends State<TicketScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _ticketViewmodel!.ticketStatus();
     return ValueListenableBuilder(
         valueListenable: ticketDao!.getListenable()!,
         builder: (_, Box<dynamic> box, __) {
@@ -69,8 +71,12 @@ class _TicketScreenState extends State<TicketScreen> {
                       textAlign: TextAlign.center,
                       fontStyle: FontStyle.normal,
                       primary: Pallets.orange600,
-                      onPressed: () =>
-                          PageRouter.gotoWidget(OpenTicketScreen(), context),
+                      onPressed: () => PageRouter.gotoWidget(
+                        OpenTicketScreen(),
+                        context,
+                        clearStack: true,
+                        animationType: PageTransitionType.fade,
+                      ),
                     ),
                     SizedBox(
                       height: 23,
