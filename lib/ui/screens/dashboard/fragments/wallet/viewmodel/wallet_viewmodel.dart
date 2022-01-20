@@ -35,13 +35,13 @@ class WalletViewmodel extends BaseViewModel {
   }
 
   /// show loading indicator
-  void _showLoading({bool notify = false}) {
+  void showLoading({bool notify = false}) {
     _loading = true;
     if (notify) notifyListeners();
   }
 
   /// hide loading indicator
-  void _hideLoading() {
+  void hideLoading() {
     _loading = false;
     notifyListeners();
   }
@@ -49,7 +49,7 @@ class WalletViewmodel extends BaseViewModel {
   /// transfer to wallet
   Future<void> transferToWallet(Map map) async {
     try {
-      _showLoading(notify: true);
+      showLoading(notify: true);
       final _reponse = await _walletRepository.transferToWallet(map);
       showsnackBarInfo(_context,
           message: _reponse.message, bgColor: Pallets.green600);
@@ -57,7 +57,7 @@ class WalletViewmodel extends BaseViewModel {
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
-    _hideLoading();
+    hideLoading();
   }
 
   void awaitTwoProcesses(int index) async {
@@ -67,7 +67,7 @@ class WalletViewmodel extends BaseViewModel {
     } catch (e) {
       logger.e('Error waiting for multiple process -> $e');
     }
-    _hideLoading();
+    hideLoading();
   }
 
   /// check wallet
@@ -78,21 +78,21 @@ class WalletViewmodel extends BaseViewModel {
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }
-    _hideLoading();
+    hideLoading();
   }
 
   /// get wallet transactions
   Future<void> _walletTransactions(int index) async {
     try {
-      if (walletDao!.box!.isEmpty) _showLoading();
+      if (walletDao!.box!.isEmpty) showLoading();
       final _response = await _walletRepository.getWalletTransactions(index);
       _totalPages = _response.walletTransactions!.total;
       walletDao!.saveTransactions(_response.walletTransactions!.data);
       _refreshController.refreshCompleted();
     } catch (e) {
-      _hideLoading();
+      hideLoading();
     }
-    _hideLoading();
+    hideLoading();
   }
 
   /// paginate responses
@@ -107,7 +107,7 @@ class WalletViewmodel extends BaseViewModel {
   /// perform withdrawal
   Future<void> withdrawal(Map map) async {
     try {
-      _showLoading(notify: true);
+      showLoading(notify: true);
       await _walletRepository.withdraw(map);
       showsnackBarInfo(_context,
           message: 'Pending admin\'s approval', bgColor: Pallets.green600);
@@ -115,14 +115,14 @@ class WalletViewmodel extends BaseViewModel {
       showsnackBarInfo(_context,
           message: e.toString(), bgColor: Pallets.red600);
     }
-    _hideLoading();
+    hideLoading();
     PageRouter.goBack(_context);
   }
 
   /// perform transfer
   Future<void> transfer(Map map) async {
     try {
-      _showLoading(notify: true);
+      showLoading(notify: true);
       final _response = await _walletRepository.transfer(map);
       showsnackBarInfo(_context,
           message: _response.fromWalletTransaction?.status ?? 'Successful',
@@ -131,7 +131,7 @@ class WalletViewmodel extends BaseViewModel {
       showsnackBarInfo(_context,
           message: e.toString(), bgColor: Pallets.red600);
     }
-    _hideLoading();
+    hideLoading();
     PageRouter.goBack(_context);
   }
 

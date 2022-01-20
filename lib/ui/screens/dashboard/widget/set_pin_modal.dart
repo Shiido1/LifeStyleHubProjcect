@@ -114,6 +114,7 @@ void showPinModal(BuildContext mContext, PinEnum pinEnum,
                                   _wallet.transfer(_model.toMap());
                                 }
                               }
+                              
                             },
                           ),
                           SizedBox(height: 23)

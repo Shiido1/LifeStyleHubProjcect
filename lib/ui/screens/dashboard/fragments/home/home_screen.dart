@@ -51,18 +51,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _initialize() async {
     final _user = await profileDao?.convert();
-     _tabViewModel = Provider.of<TabViewModel>(context, listen: false);
+    _tabViewModel = Provider.of<TabViewModel>(context, listen: false);
     _dashboardViewmodel =
         Provider.of<DashboardViewmodel>(context, listen: false);
-    _dashboardViewmodel!.init(context);
+    _dashboardViewmodel?.init(context);
 
-    await _dashboardViewmodel!.getDashboards(_user?.role == "user");
+    _dashboardViewmodel?.getDashboards(_user?.role == "user");
     _contestViewModel = Provider.of<ContestViewModel>(context, listen: false);
-    _contestViewModel!.init(context);
+    _contestViewModel?.init(context);
     _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);
-    _packageViewmodel!.init(context);
-    await _packageViewmodel!.getPackages();
-    await _contestViewModel!.getListContest();
+    _packageViewmodel?.init(context);
+    _packageViewmodel?.getPackages();
+    _contestViewModel?.getListContest();
     setState(() {});
   }
 
@@ -77,7 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // _initialize();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(

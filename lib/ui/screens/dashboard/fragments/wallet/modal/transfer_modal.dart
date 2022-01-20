@@ -1,4 +1,3 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/widget/set_pin_modal.dart';
@@ -17,7 +16,7 @@ TextEditingController _phoneNumberController = TextEditingController();
 TextEditingController _amountController = TextEditingController();
 
 final _key = GlobalKey<FormState>();
-String? _countryCode = '+234';
+// String? _countryCode = '+234';
 WalletViewmodel? _walletProvider;
 
 void showTransferModal(BuildContext context) {
@@ -28,10 +27,10 @@ void showTransferModal(BuildContext context) {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        return Consumer<WalletViewmodel>(
-          builder: (context, provider, child) {
+        return Consumer2<WalletViewmodel, OTPViewmodel>(
+          builder: (context, provider, provider1, child) {
             return LoadingOverlay(
-              isLoading: provider.loading,
+              isLoading: provider1.loading,
               child: Container(
                 padding: EdgeInsets.all(23),
                 decoration: BoxDecoration(
@@ -67,44 +66,44 @@ void showTransferModal(BuildContext context) {
                           label: 'Phone No',
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           controller: _phoneNumberController,
-                          keyboardType: TextInputType.number,
-                          prefixWidget: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextView(
-                                  text: provider.country?.phoneCode == null
-                                      ? _countryCode!
-                                      : '+${provider.country?.phoneCode ?? ''}',
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 16,
-                                  color: Pallets.grey900,
-                                  textAlign: TextAlign.left,
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.keyboard_arrow_down_sharp),
-                                  onPressed: () {
-                                    showCountryPicker(
-                                      context: context,
-                                      showPhoneCode: true,
-                                      onSelect: (Country country) {
-                                        _walletProvider!.init(context);
-                                        _walletProvider!.setCountry(country);
-                                      },
-                                      countryListTheme: CountryListThemeData(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(40.0),
-                                          topRight: Radius.circular(40.0),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
+                          keyboardType: TextInputType.phone,
+                          // prefixWidget: Padding(
+                          //   padding: const EdgeInsets.only(left: 16.0),
+                          //   child: Row(
+                          //     mainAxisSize: MainAxisSize.min,
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: [
+                          //       TextView(
+                          //         text: provider.country?.phoneCode == null
+                          //             ? _countryCode!
+                          //             : '+${provider.country?.phoneCode ?? ''}',
+                          //         fontWeight: FontWeight.w700,
+                          //         fontSize: 16,
+                          //         color: Pallets.grey900,
+                          //         textAlign: TextAlign.left,
+                          //       ),
+                          //       IconButton(
+                          //         icon: Icon(Icons.keyboard_arrow_down_sharp),
+                          //         onPressed: () {
+                          //           showCountryPicker(
+                          //             context: context,
+                          //             showPhoneCode: true,
+                          //             onSelect: (Country country) {
+                          //               _walletProvider!.init(context);
+                          //               _walletProvider!.setCountry(country);
+                          //             },
+                          //             countryListTheme: CountryListThemeData(
+                          //               borderRadius: BorderRadius.only(
+                          //                 topLeft: Radius.circular(40.0),
+                          //                 topRight: Radius.circular(40.0),
+                          //               ),
+                          //             ),
+                          //           );
+                          //         },
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                         ),
                         SizedBox(height: 23),
                         EditFormField(
@@ -139,19 +138,18 @@ void showTransferModal(BuildContext context) {
 }
 
 _proceed(BuildContext context) async {
-  String? _phone = _walletProvider!.country?.phoneCode == null
-      ? '$_countryCode${_phoneNumberController.text}'
-      : '+${_walletProvider!.country?.phoneCode}${_phoneNumberController.text}';
+  String? _phone = '${_phoneNumberController.text}';
 
   if (_key.currentState!.validate()) {
     final _otp = Provider.of<OTPViewmodel>(context, listen: false);
     _otp.init(context);
-    final _value = await _otp.generateOTP();
-    if (_value) {
-      PageRouter.goBack(context);
+    // final _value =
+    await _otp.generateOTP();
+    // if (_value) {
+    PageRouter.goBack(context);
 
-      showPinModal(context, PinEnum.transfer,
-          phoneNumber: _phone, amount: _amountController.text);
-    }
+    showPinModal(context, PinEnum.transfer,
+        phoneNumber: _phone, amount: _amountController.text);
+    // }
   }
 }

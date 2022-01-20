@@ -34,13 +34,13 @@ class OTPViewmodel extends BaseViewModel {
   }
 
   /// show loading indicator
-  void _showLoading({bool notify = false}) {
+  void showLoading({bool notify = false}) {
     _loading = true;
     if (notify) notifyListeners();
   }
 
   /// hide loading indicator
-  void _hideLoading() {
+  void hideLoading() {
     _loading = false;
     notifyListeners();
   }
@@ -48,7 +48,7 @@ class OTPViewmodel extends BaseViewModel {
   /// generate OTP
   Future<bool> generateOTP() async {
     try {
-      _showLoading(notify: true);
+      showLoading(notify: true);
       await _pinRepository.generateOTP();
       return true;
     } catch (e) {
@@ -56,7 +56,7 @@ class OTPViewmodel extends BaseViewModel {
           message: e.toString(), bgColor: Pallets.red600);
       logger.d(e);
     }
-    _hideLoading();
+    hideLoading();
     return false;
   }
 }

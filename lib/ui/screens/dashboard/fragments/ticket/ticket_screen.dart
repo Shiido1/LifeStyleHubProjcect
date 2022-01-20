@@ -42,7 +42,7 @@ class _TicketScreenState extends State<TicketScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _ticketViewmodel!.ticketStatus();
+    // _ticketViewmodel!.ticketStatus();
     return ValueListenableBuilder(
         valueListenable: ticketDao!.getListenable()!,
         builder: (_, Box<dynamic> box, __) {
