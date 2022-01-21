@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/widgets/search_widget.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -17,6 +19,7 @@ import 'enum/message_enum.dart';
 import 'message_details.dart';
 import 'model/get_last_messages_model.dart';
 import 'viewmodel/messaging_viewmodel.dart';
+import 'package:html/parser.dart';
 
 class MessagingScreen extends StatefulWidget {
   MessagingScreen({Key? key}) : super(key: key);
@@ -39,6 +42,7 @@ class _MessagingScreenState extends State<MessagingScreen>
       ChangeNotifierProvider((ref) => MessagingViewmodel());
 
   MessagingViewmodel? _messagingViewmodel;
+  String? searching = '';
 
   @override
   void initState() {
@@ -155,6 +159,7 @@ class _MessagingScreenState extends State<MessagingScreen>
           valueListenable: messageDao!.getListenable()!,
           builder: (context, Box<dynamic> box, __) {
             List<Data> _messageList = messageDao!.convert(box).toList();
+            // searchWidget(searching!, _messageList);
             return Consumer(builder: (context, watch, __) {
               final _provider = watch(_messageViewModel);
               if (_provider.loading) {
@@ -189,6 +194,12 @@ class _MessagingScreenState extends State<MessagingScreen>
                               suffixIcon: Icons.search,
                               suffixIconColor: Pallets.orange600,
                               textInputAction: TextInputAction.search,
+                              onChange: (onChange) {
+                                setState(() {
+                                  searching = onChange;
+                                  // searchWidget(searching!, _messageList);
+                                });
+                              },
                               onPasswordToggle: () {
                                 _messagingViewmodel!.getLastMessage(
                                     search: _textEditingController.text,
@@ -220,43 +231,53 @@ class _MessagingScreenState extends State<MessagingScreen>
                       SizedBox(height: 32),
                       Column(
                         children: _messageList
-                            .map((elements) => ListTile(
-                                  contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 0),
-                                  onTap: () => PageRouter.gotoWidget(
-                                      MessageDetailsSms(
-                                          conversation: elements.conversation),
-                                      context),
-                                  leading: CircleAvatar(
-                                    backgroundColor: Pallets.amber500,
-                                    child: TextView(
-                                        text: '',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                  title: TextView(
-                                    text: _formatReceiver(elements.conversation,
-                                            _usersProfileModel!) ??
-                                        '',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: Pallets.grey700,
-                                    textAlign: TextAlign.left,
-                                    maxLines: 1,
-                                    textOverflow: TextOverflow.ellipsis,
-                                  ),
-                                  subtitle: TextView(
-                                    text: elements
-                                            .conversation?.lastMessage?.body ??
-                                        '',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Pallets.grey400,
-                                    textAlign: TextAlign.left,
-                                    maxLines: 1,
-                                    textOverflow: TextOverflow.ellipsis,
-                                  ),
-                                ))
+                            .map((elements) => !_formatReceiver(
+                                            elements.conversation!,
+                                            _usersProfileModel!)!
+                                        .toLowerCase()
+                                        .contains(searching!.toLowerCase()) &&
+                                    !elements.conversation!.lastMessage!.body!
+                                        .toLowerCase()
+                                        .contains(searching!.toLowerCase())
+                                ? Container()
+                                : ListTile(
+                                    contentPadding:
+                                        EdgeInsets.symmetric(horizontal: 0),
+                                    onTap: () => PageRouter.gotoWidget(
+                                        MessageDetailsSms(
+                                            conversation:
+                                                elements.conversation),
+                                        context),
+                                    leading: CircleAvatar(
+                                      backgroundColor: Pallets.amber500,
+                                      child: TextView(
+                                          text: '',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    title: TextView(
+                                      text: _formatReceiver(
+                                              elements.conversation,
+                                              _usersProfileModel!) ??
+                                          '',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: Pallets.grey700,
+                                      textAlign: TextAlign.left,
+                                      maxLines: 1,
+                                      textOverflow: TextOverflow.ellipsis,
+                                    ),
+                                    subtitle: TextView(
+                                      text: _parseHtmlString(elements.conversation?.lastMessage
+                                              ?.body??'').toString(),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Pallets.grey400,
+                                      textAlign: TextAlign.left,
+                                      maxLines: 1,
+                                      textOverflow: TextOverflow.ellipsis,
+                                    ),
+                                  ))
                             .toList(),
                       ),
                       SizedBox(height: 36),
@@ -278,5 +299,18 @@ class _MessagingScreenState extends State<MessagingScreen>
         _receiver = 'Guest';
     }).toList();
     return _receiver ?? 'Guest';
+  }
+
+    //here goes the function 
+String? _parseHtmlString(String htmlString) {
+final document = parse(htmlString);
+final String? parsedString = parse(document.body?.text).documentElement?.text;
+
+return parsedString;
+}
+
+  searchWidget(String search, List<Data> searchText) {
+    Data size = filter<Data>(search, searchText);
+    logger.d(size.toJson());
   }
 }
