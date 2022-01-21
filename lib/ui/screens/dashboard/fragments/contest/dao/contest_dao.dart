@@ -40,7 +40,8 @@ class ContestDao {
         .toList();
   }
 
-  ValueListenable<Box>? getListenable({List<String>? keys}) {
+ Future< ValueListenable<Box>?>? getListenable({List<String>? keys}) async{
+   await openGraphsBox();
     return keys == null ? _box?.listenable() : _box?.listenable(keys: keys);
   }
 

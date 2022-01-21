@@ -209,43 +209,48 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 23,
             ),
-            contestDao!.getListenable() == null
-                ? Container()
-                : ValueListenableBuilder(
-                    valueListenable: contestDao!.getListenable()!,
-                    builder: (_, Box<dynamic> box, __) {
-                      List<ViewContestModel> _contestList =
-                          contestDao!.convert(box).toList();
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ViewAllButton(
-                            title: 'Contest',
-                            viewAll: () =>
-                                _tabViewModel!.switchDrawerIndex(context, 7),
-                          ),
-                          SizedBox(
-                            height: 16,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: List.generate(
-                                  _contestList.length <= 5
-                                      ? _contestList.length
-                                      : 5, (index) {
-                                final _contest = _contestList[index];
-                                return Container(
-                                  margin: EdgeInsets.only(right: 23),
-                                  child: ContestWidget(contest: _contest),
-                                );
-                              }),
+            FutureBuilder(
+                future: contestDao!.getListenable()!,
+                builder: (BuildContext context,
+                    AsyncSnapshot<ValueListenable<Box>?> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting ||
+                      !snapshot.hasData) return Container();
+                  return ValueListenableBuilder(
+                      valueListenable: snapshot.data!,
+                      builder: (_, Box<dynamic> box, __) {
+                        List<ViewContestModel> _contestList =
+                            contestDao!.convert(box).toList();
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ViewAllButton(
+                              title: 'Contest',
+                              viewAll: () =>
+                                  _tabViewModel!.switchDrawerIndex(context, 7),
                             ),
-                          ),
-                        ],
-                      );
-                    }),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: List.generate(
+                                    _contestList.length <= 5
+                                        ? _contestList.length
+                                        : 5, (index) {
+                                  final _contest = _contestList[index];
+                                  return Container(
+                                    margin: EdgeInsets.only(right: 23),
+                                    child: ContestWidget(contest: _contest),
+                                  );
+                                }),
+                              ),
+                            ),
+                          ],
+                        );
+                      });
+                }),
             SizedBox(
               height: 23,
             ),

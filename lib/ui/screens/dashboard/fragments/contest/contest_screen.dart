@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -6,7 +7,6 @@ import 'model/view_contest_model.dart';
 import 'viewmodel/contest_viewmodel.dart';
 import 'widget/contest_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
 
 class ContestScreen extends StatefulWidget {
   const ContestScreen({Key? key}) : super(key: key);
@@ -29,26 +29,33 @@ class _ContestScreenState extends State<ContestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: contestDao!.getListenable()!,
-        builder: (_, Box<dynamic> box, __) {
-          List<ViewContestModel> _contestList =
-              contestDao!.convert(box).toList();
-          return Consumer(builder: (_, watch, __) {
-            final _contestWatch = watch(_contestProvider);
-            return SmartRefresher(
-              controller: _contestWatch.refreshController,
-              onRefresh: () => _contestViewModel!.getListContest(),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ListView(
-                  children: _contestList
-                      .map((contest) => ContestWidget(contest: contest))
-                      .toList(),
-                ),
-              ),
-            );
-          });
+    return FutureBuilder(
+        future: contestDao!.getListenable()!,
+        builder: (BuildContext context,
+            AsyncSnapshot<ValueListenable<Box>?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting ||
+              !snapshot.hasData) return Container();
+          return ValueListenableBuilder(
+              valueListenable:snapshot.data!,
+              builder: (_, Box<dynamic> box, __) {
+                List<ViewContestModel> _contestList =
+                    contestDao!.convert(box).toList();
+                return Consumer(builder: (_, watch, __) {
+                  final _contestWatch = watch(_contestProvider);
+                  return SmartRefresher(
+                    controller: _contestWatch.refreshController,
+                    onRefresh: () => _contestViewModel!.getListContest(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ListView(
+                        children: _contestList
+                            .map((contest) => ContestWidget(contest: contest))
+                            .toList(),
+                      ),
+                    ),
+                  );
+                });
+              });
         });
   }
 }
