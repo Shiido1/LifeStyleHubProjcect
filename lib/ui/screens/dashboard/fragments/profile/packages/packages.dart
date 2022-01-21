@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/widget/active_package_home_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/active_package_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/complete_package_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/inactive_package_dao.dart';
 import '../../../../../../helper/helper_handler.dart';
 import 'package:provider/provider.dart';
 import '../../../widget/active_packages.dart';
@@ -40,15 +44,7 @@ class _PackageScreenState extends State<PackageScreen> {
             showMoreMenu: true,
             centerTitle: true,
             onTap: () => null),
-        body: Consumer<PackageViewmodel>(builder: (_, _packageWatch, __) {
-          if (_packageWatch.loading) {
-            return Center(
-                child: SpinKitCubeGrid(
-              color: Pallets.orange600,
-              size: 50,
-            ));
-          }
-          return SafeArea(
+        body: SafeArea(
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
@@ -90,48 +86,195 @@ class _PackageScreenState extends State<PackageScreen> {
                         child: ListView(
                           children: [
                             if (_tabIndex! == 0)
-                              // TODO 1: Replace the commented code below which fetches information from provider, update it using hive database
-                              // ..._packageWatch.activePackages!
-                              //     .map((package) => ActivePackageWidget(
-                              //           title: package.name ?? '',
-                              //           subtitle: package.type ?? '',
-                              //           percentage: getPercentage(
-                              //               directReferred:
-                              //                   package.downlinesAcquired ?? 0,
-                              //               directRequired:
-                              //                   package.downlinesRequired ?? 0),
-                              //         ))
-                              //     .toList(),
+                              FutureBuilder(
+                                future: activePakageDao!.getListenable(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<ValueListenable<Box>?>
+                                        snapshot) {
+                                  if (snapshot.connectionState ==
+                                          ConnectionState.waiting ||
+                                      !snapshot.hasData) return Container();
 
-                              /// RETURNS COMPLETED PACKAGES
-                              if (_tabIndex! == 1)
-                                ..._packageWatch.completedPackages!
-                                    .map((package) => ActivePackageWidget(
-                                          title: package.name ?? '',
-                                          subtitle: package.type ?? '',
-                                          percentage: getPercentage(
-                                              directReferred:
-                                                  package.downlinesAcquired ??
-                                                      0,
-                                              directRequired:
-                                                  package.downlinesRequired ??
-                                                      0),
-                                        ))
-                                    .toList(),
+                                  return ValueListenableBuilder(
+                                      valueListenable: snapshot.data!,
+                                      builder: (_, Box<dynamic> box, __) {
+                                        final _activePackages = activePakageDao!
+                                            .convert(box)
+                                            .toList();
 
-                            /// RETURNS IN-ACTIVE PACKAGES
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 16,
+                                            ),
+                                            SingleChildScrollView(
+                                              scrollDirection: Axis.vertical,
+                                              child: Column(
+                                                children: List.generate(
+                                                    _activePackages.length <= 5
+                                                        ? _activePackages.length
+                                                        : 5, (index) {
+                                                  final _package =
+                                                      _activePackages[index];
+                                                  return Container(
+                                                    width:
+                                                        getDeviceWidth(context),
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 23.w),
+                                                    child: ActivePackageWidget(
+                                                      title:
+                                                          _package.name ?? '',
+                                                      subtitle:
+                                                          _package.type ?? '',
+                                                      percentage: getPercentage(
+                                                          directReferred: _package
+                                                                  .downlinesAcquired ??
+                                                              0,
+                                                          directRequired: _package
+                                                                  .downlinesRequired ??
+                                                              0),
+                                                    ),
+                                                  );
+                                                }),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                },
+                              ),
+                            if (_tabIndex! == 1)
+                              FutureBuilder(
+                                future: completePackageDao!.getListenable(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<ValueListenable<Box>?>
+                                        snapshot) {
+                                  if (snapshot.connectionState ==
+                                          ConnectionState.waiting ||
+                                      !snapshot.hasData) return Container();
+
+                                  return ValueListenableBuilder(
+                                      valueListenable: snapshot.data!,
+                                      builder: (_, Box<dynamic> box, __) {
+                                        final _completePackages =
+                                            completePackageDao!
+                                                .convert(box)
+                                                .toList();
+
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 16,
+                                            ),
+                                            SingleChildScrollView(
+                                              scrollDirection: Axis.vertical,
+                                              child: Column(
+                                                children: List.generate(
+                                                    _completePackages.length <=
+                                                            5
+                                                        ? _completePackages
+                                                            .length
+                                                        : 5, (index) {
+                                                  final _package =
+                                                      _completePackages[index];
+                                                  return Container(
+                                                    width:
+                                                        getDeviceWidth(context),
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 23.w),
+                                                    child: ActivePackageWidget(
+                                                      title:
+                                                          _package.name ?? '',
+                                                      subtitle:
+                                                          _package.type ?? '',
+                                                      percentage: getPercentage(
+                                                          directReferred: _package
+                                                                  .downlinesAcquired ??
+                                                              0,
+                                                          directRequired: _package
+                                                                  .downlinesRequired ??
+                                                              0),
+                                                    ),
+                                                  );
+                                                }),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                },
+                              ),
+
                             if (_tabIndex! == 2)
-                              ..._packageWatch.inactivePackages!
-                                  .map((package) => ActivePackageWidget(
-                                        title: package.name ?? '',
-                                        subtitle: package.type ?? '',
-                                        percentage: getPercentage(
-                                            directReferred:
-                                                package.downlinesAcquired ?? 0,
-                                            directRequired:
-                                                package.downlinesRequired ?? 0),
-                                      ))
-                                  .toList(),
+                              FutureBuilder(
+                                future: inactivePackageDao!.getListenable(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<ValueListenable<Box>?>
+                                        snapshot) {
+                                  if (snapshot.connectionState ==
+                                          ConnectionState.waiting ||
+                                      !snapshot.hasData) return Container();
+
+                                  return ValueListenableBuilder(
+                                      valueListenable: snapshot.data!,
+                                      builder: (_, Box<dynamic> box, __) {
+                                        final _inactivePackages =
+                                            inactivePackageDao!
+                                                .convert(box)
+                                                .toList();
+
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 16,
+                                            ),
+                                            SingleChildScrollView(
+                                              scrollDirection: Axis.vertical,
+                                              child: Column(
+                                                children: List.generate(
+                                                    _inactivePackages.length <=
+                                                            5
+                                                        ? _inactivePackages
+                                                            .length
+                                                        : 5, (index) {
+                                                  final _package =
+                                                      _inactivePackages[index];
+                                                  return Container(
+                                                    width:
+                                                        getDeviceWidth(context),
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 23.w),
+                                                    child: ActivePackageWidget(
+                                                      title:
+                                                          _package.name ?? '',
+                                                      subtitle:
+                                                          _package.type ?? '',
+                                                      percentage: getPercentage(
+                                                          directReferred: _package
+                                                                  .downlinesAcquired ??
+                                                              0,
+                                                          directRequired: _package
+                                                                  .downlinesRequired ??
+                                                              0),
+                                                    ),
+                                                  );
+                                                }),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                },
+                              ),
                             SizedBox(
                               height: 40,
                             )
@@ -144,7 +287,7 @@ class _PackageScreenState extends State<PackageScreen> {
                 ButtomCountDownWidget()
               ],
             ),
-          );
-        }));
+          )
+        );
   }
 }

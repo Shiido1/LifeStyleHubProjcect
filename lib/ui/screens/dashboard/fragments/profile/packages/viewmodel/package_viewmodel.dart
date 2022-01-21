@@ -9,7 +9,6 @@ import '../model/view_packages_model.dart';
 import 'package:dio/dio.dart';
 import '../../../../../../../helper/helper_handler.dart';
 import '../../../../../../../provider/_base_viewmodels.dart';
-import '../dao/package_dao.dart';
 import '../repository/packages_repository.dart';
 
 PackageRepository _packageRepository = PackageRepository();

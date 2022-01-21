@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 // ignore: deprecated_member_use
-import 'package:flutter_riverpod/all.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/active_package_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/complete_package_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/inactive_package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:page_transition/page_transition.dart';
 import '../ui/screens/bank/account/dao/account_dao.dart';
-
 import '../helper/configs/instances.dart';
 import '../ui/screens/dashboard/dao/dashboardd_dao.dart';
 import '../ui/screens/dashboard/fragments/commission/dao/commission_dao.dart';
@@ -45,6 +44,8 @@ class HiveBoxes {
   static final profile = 'profile';
   static final account = 'account';
   static final activePackage = 'activePackage';
+  static final completePackage = 'completePackage';
+  static final inactivePackage = 'inactivePackage';
 
   static Future openAllBox() async {
     markettingDao = MarketingDao();
@@ -61,6 +62,8 @@ class HiveBoxes {
     profileDao = ProfileDao();
     accountDao = AccountDao();
     activePakageDao = ActivePakageDao();
+    completePackageDao = CompletePackageDao();
+    inactivePackageDao = InactivePackageDao();
   }
 
   static Future clearAllBox() async {
@@ -75,7 +78,9 @@ class HiveBoxes {
     await packageDao!.truncate();
     await accountPackageDao!.truncate();
     await profileDao!.truncate();
-    await accountPackageDao!.truncate();
+    await activePakageDao!.truncate();
+    await completePackageDao!.truncate();
+    await inactivePackageDao!.truncate();
   }
 
   static Future<Box<T>> openBox<T>(String boxName) async {
