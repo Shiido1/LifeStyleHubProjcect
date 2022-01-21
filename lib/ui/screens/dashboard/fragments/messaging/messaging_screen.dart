@@ -195,10 +195,10 @@ class _MessagingScreenState extends State<MessagingScreen>
                               suffixIconColor: Pallets.orange600,
                               textInputAction: TextInputAction.search,
                               onChange: (onChange) {
-                                setState(() {
-                                  searching = onChange;
-                                  // searchWidget(searching!, _messageList);
-                                });
+                                searching = onChange;
+                                _messagingViewmodel!
+                                    .getLastMessage(search: onChange);
+                                setState(() {});
                               },
                               onPasswordToggle: () {
                                 _messagingViewmodel!.getLastMessage(
@@ -268,8 +268,12 @@ class _MessagingScreenState extends State<MessagingScreen>
                                       textOverflow: TextOverflow.ellipsis,
                                     ),
                                     subtitle: TextView(
-                                      text: _parseHtmlString(elements.conversation?.lastMessage
-                                              ?.body??'').toString(),
+                                      text: _parseHtmlString(elements
+                                                  .conversation
+                                                  ?.lastMessage
+                                                  ?.body ??
+                                              '')
+                                          .toString(),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
                                       color: Pallets.grey400,
@@ -301,13 +305,14 @@ class _MessagingScreenState extends State<MessagingScreen>
     return _receiver ?? 'Guest';
   }
 
-    //here goes the function 
-String? _parseHtmlString(String htmlString) {
-final document = parse(htmlString);
-final String? parsedString = parse(document.body?.text).documentElement?.text;
+  //here goes the function
+  String? _parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final String? parsedString =
+        parse(document.body?.text).documentElement?.text;
 
-return parsedString;
-}
+    return parsedString;
+  }
 
   searchWidget(String search, List<Data> searchText) {
     Data size = filter<Data>(search, searchText);
