@@ -1,9 +1,14 @@
 import 'package:better_player/better_player.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/bank/account/dao/account_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/widget/active_package_home_widget.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/active_package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/purchase_package_screen.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/widgets/empty_packages.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/utils/images.dart';
@@ -200,96 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 23,
             ),
-            Consumer<PackageViewmodel>(
-              builder: (_, provider, __) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ViewAllButton(
-                      title: 'Active packages',
-                      viewAll: () =>
-                          _tabViewModel?.switchDrawerIndex(context, 7),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    provider.activePackages!.isEmpty
-                        ? Center(
-                            child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 16.w),
-                            width: getDeviceWidth(context),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                TextView(
-                                  text: 'Active Packages',
-                                  color: Pallets.grey500,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                ImageLoader(
-                                  path: AppImages.emptyFolder,
-                                  height: 80,
-                                  width: 80,
-                                ),
-                                TextView(
-                                  text: ' No active packages',
-                                  color: Pallets.grey400,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                SizedBox(
-                                  height: 20.h,
-                                ),
-                                ButtonWidget(
-                                  buttonText: 'Subscribe now',
-                                  width: 200.w,
-                                  color: Pallets.white,
-                                  fontWeight: FontWeight.w500,
-                                  textAlign: TextAlign.center,
-                                  fontStyle: FontStyle.normal,
-                                  borderColor: Pallets.orange500,
-                                  primary: Pallets.orange500,
-                                  onPressed: () => PageRouter.gotoWidget(
-                                      PurchasePackageScreen(), context),
-                                ),
-                              ],
-                            ),
-                            decoration: BoxDecoration(
-                                color: Pallets.grey100,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.r))),
-                          ))
-                        : SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: List.generate(
-                                  provider.activePackages!.length <= 5
-                                      ? provider.activePackages!.length
-                                      : 5, (index) {
-                                final _package =
-                                    provider.activePackages![index];
-                                return Container(
-                                  margin: EdgeInsets.only(right: 23),
-                                  child: ActivePackageWidget(
-                                    title: _package.name ?? '',
-                                    subtitle: _package.type ?? '',
-                                    percentage: getPercentage(
-                                        directReferred:
-                                            _package.downlinesAcquired ?? 0,
-                                        directRequired:
-                                            _package.downlinesRequired ?? 0),
-                                  ),
-                                );
-                              }),
-                            ),
-                          ),
-                  ],
-                );
-              },
-            ),
+            ActivePackageHomeWidget(tabViewModel: _tabViewModel),
             SizedBox(
               height: 23,
             ),

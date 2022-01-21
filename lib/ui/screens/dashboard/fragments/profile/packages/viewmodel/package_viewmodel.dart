@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/active_package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/payment/list_of_banks.dart'
     as lsh;
 import 'package:lifestyle_hub/utils/pallets.dart';
@@ -50,21 +52,18 @@ class PackageViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
-  List<ActivePackages>? activePackages = [];
   List<ActivePackages>? completedPackages = [];
   List<ActivePackages>? inactivePackages = [];
 
   /// get list of packages
   Future<void> getPackages() async {
     try {
-      if (packageDao!.box!.isEmpty) _showLoading();
       final _response = await _packageRepository.getListOfPackages();
-      activePackages = _response.activePackages;
+      activePakageDao!.saveActivePackages(_response.activePackages ?? []);
       completedPackages = _response.completedPackages;
       inactivePackages = _response.inactivePackages;
-      
     } catch (e) {
-      showsnackBarInfo(this._context, message: e.toString());
+      logger.e(e);
     }
     _hideLoading();
   }

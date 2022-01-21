@@ -64,12 +64,12 @@ class ContestViewModel extends BaseViewModel {
   /// get list of contests
   Future<void> getListContest() async {
     try {
-      if (contestDao!.box!.isEmpty) _showLoading();
+      // if (contestDao!.box!.isEmpty) _showLoading();
       final _response = await _contestRepository.getListContest();
       contestDao!.saveContests(_response.viewContestModelList);
       _refreshController.refreshCompleted();
     } catch (e) {
-      showsnackBarInfo(this._context, message: e.toString());
+      // showsnackBarInfo(this._context, message: e.toString());
       _refreshController.refreshFailed();
     }
     _hideLoading();

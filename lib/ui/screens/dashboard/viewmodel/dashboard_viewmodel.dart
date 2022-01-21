@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import '../../../../helper/helper_handler.dart';
 import '../../../../provider/_base_viewmodels.dart';
 import '../dao/dashboardd_dao.dart';
@@ -39,11 +40,11 @@ class DashboardViewmodel extends BaseViewModel {
   /// get Dashboards
   Future<void> getDashboards(bool isUser) async {
     try {
-      if (dashboardDao!.box!.isEmpty) _showLoading();
       final _response = await _dashboardRepository.dashboard(isUser);
       return dashboardDao!.saveDashboard(_response.toJson());
     } catch (e) {
-      showsnackBarInfo(this._context, message: e.toString());
+      // showsnackBarInfo(this._context, message: e.toString());
+      logger.e(e);
     }
     _hideLoading();
   }

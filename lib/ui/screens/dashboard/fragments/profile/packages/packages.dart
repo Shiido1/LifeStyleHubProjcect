@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/widget/active_package_home_widget.dart';
 import '../../../../../../helper/helper_handler.dart';
 import 'package:provider/provider.dart';
 import '../../../widget/active_packages.dart';
@@ -88,33 +89,35 @@ class _PackageScreenState extends State<PackageScreen> {
                       Expanded(
                         child: ListView(
                           children: [
-                            /// RETURNS ACTIVE PACKAGES
                             if (_tabIndex! == 0)
-                              ..._packageWatch.activePackages!
-                                  .map((package) => ActivePackageWidget(
-                                        title: package.name ?? '',
-                                        subtitle: package.type ?? '',
-                                        percentage: getPercentage(
-                                            directReferred:
-                                                package.downlinesAcquired ?? 0,
-                                            directRequired:
-                                                package.downlinesRequired ?? 0),
-                                      ))
-                                  .toList(),
+                              // TODO 1: Replace the commented code below which fetches information from provider, update it using hive database
+                              // ..._packageWatch.activePackages!
+                              //     .map((package) => ActivePackageWidget(
+                              //           title: package.name ?? '',
+                              //           subtitle: package.type ?? '',
+                              //           percentage: getPercentage(
+                              //               directReferred:
+                              //                   package.downlinesAcquired ?? 0,
+                              //               directRequired:
+                              //                   package.downlinesRequired ?? 0),
+                              //         ))
+                              //     .toList(),
 
-                            /// RETURNS COMPLETED PACKAGES
-                            if (_tabIndex! == 1)
-                              ..._packageWatch.completedPackages!
-                                  .map((package) => ActivePackageWidget(
-                                        title: package.name ?? '',
-                                        subtitle: package.type ?? '',
-                                        percentage: getPercentage(
-                                            directReferred:
-                                                package.downlinesAcquired ?? 0,
-                                            directRequired:
-                                                package.downlinesRequired ?? 0),
-                                      ))
-                                  .toList(),
+                              /// RETURNS COMPLETED PACKAGES
+                              if (_tabIndex! == 1)
+                                ..._packageWatch.completedPackages!
+                                    .map((package) => ActivePackageWidget(
+                                          title: package.name ?? '',
+                                          subtitle: package.type ?? '',
+                                          percentage: getPercentage(
+                                              directReferred:
+                                                  package.downlinesAcquired ??
+                                                      0,
+                                              directRequired:
+                                                  package.downlinesRequired ??
+                                                      0),
+                                        ))
+                                    .toList(),
 
                             /// RETURNS IN-ACTIVE PACKAGES
                             if (_tabIndex! == 2)

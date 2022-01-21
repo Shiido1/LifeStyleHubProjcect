@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/active_package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/login/login_screen.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:page_transition/page_transition.dart';
@@ -43,6 +44,7 @@ class HiveBoxes {
   static final accountPackage = 'accountPackage';
   static final profile = 'profile';
   static final account = 'account';
+  static final activePackage = 'activePackage';
 
   static Future openAllBox() async {
     markettingDao = MarketingDao();
@@ -58,6 +60,7 @@ class HiveBoxes {
     accountPackageDao = AccountPackageDao();
     profileDao = ProfileDao();
     accountDao = AccountDao();
+    activePakageDao = ActivePakageDao();
   }
 
   static Future clearAllBox() async {
@@ -72,6 +75,7 @@ class HiveBoxes {
     await packageDao!.truncate();
     await accountPackageDao!.truncate();
     await profileDao!.truncate();
+    await accountPackageDao!.truncate();
   }
 
   static Future<Box<T>> openBox<T>(String boxName) async {
@@ -111,9 +115,7 @@ class HiveBoxes {
     }
   }
 
-
   static logOut(BuildContext context) async {
-
     await prefManager.remove();
     await HiveBoxes.clearAllBox();
     PageRouter.gotoWidget(LoginScreen(), context,
