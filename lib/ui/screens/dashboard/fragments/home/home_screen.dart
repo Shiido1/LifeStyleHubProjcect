@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/bank/account/dao/account_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/widget/active_package_home_widget.dart';
@@ -257,23 +258,26 @@ class _HomeScreenState extends State<HomeScreen> {
             Consumer<VideoPlayer>(builder: (_, provider, __) {
               String _link =
                   _dashboardModel?.featuredVideo?.content?.path ?? '';
-              if (_link.isNotEmpty) provider.playVideo(_link);
-              if (_link.isEmpty) {
-                return ImageLoader(
-                  isCurvedEdge: true,
-                  curve: 10,
-                  height: 200,
-                  fit: BoxFit.cover,
-                  path: _dashboardModel?.featuredVideo?.featuredImage ?? '',
+              if (_link.isNotEmpty) {
+                provider.playVideo(_link);
+                return BetterPlayerMultipleGestureDetector(
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: BetterPlayer(
+                        controller: provider.betterPlayerController),
+                  ),
                 );
               }
-              return BetterPlayerMultipleGestureDetector(
-                child: AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child:
-                      BetterPlayer(controller: provider.betterPlayerController),
-                ),
-              );
+           
+              return _dashboardModel?.featuredVideo?.featuredImage == null
+                  ? Container()
+                  : ImageLoader(
+                      isCurvedEdge: true,
+                      curve: 10,
+                      height: 200,
+                      fit: BoxFit.cover,
+                      path: _dashboardModel?.featuredVideo?.featuredImage ?? '',
+                    );
             }),
             SizedBox(
               height: getDeviceHeight(context) / 10,
