@@ -113,12 +113,9 @@ class HiveBoxes {
 
 
   static logOut(BuildContext context) async {
-    final _tabViewProvider = ChangeNotifierProvider((_) => TabViewModel());
-    final _tabViewModel = context.read(_tabViewProvider);
 
     await prefManager.remove();
     await HiveBoxes.clearAllBox();
-    _tabViewModel.switchDrawerIndex(context, 0, notify: false);
     PageRouter.gotoWidget(LoginScreen(), context,
         clearStack: true, animationType: PageTransitionType.fade);
   }

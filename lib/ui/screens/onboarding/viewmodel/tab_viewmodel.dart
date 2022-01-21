@@ -27,6 +27,11 @@ class TabViewModel extends BaseViewModel {
         animationType: PageTransitionType.fade);
   }
 
+  void resetIndex() {
+    _index = 0;
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     _index = 0;

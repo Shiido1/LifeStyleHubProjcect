@@ -7,6 +7,7 @@ import 'package:lifestyle_hub/database/hive_database.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/viewmodel/notification_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -80,6 +81,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     eventBus.on().listen((event) async {
       if (event is UserLoggedInEvent && event.logUserOut!) {
+        Provider.of<TabViewModel>(context, listen: false).resetIndex();
         HiveBoxes.logOut(context);
       }
     });
