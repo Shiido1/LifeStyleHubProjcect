@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
@@ -267,21 +268,44 @@ class _MessagingScreenState extends State<MessagingScreen>
                                       maxLines: 1,
                                       textOverflow: TextOverflow.ellipsis,
                                     ),
-                                    subtitle: TextView(
-                                      text: _parseHtmlString(elements
-                                                  .conversation
-                                                  ?.lastMessage
-                                                  ?.body ??
-                                              '')
-                                          .toString(),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Pallets.grey400,
-                                      textAlign: TextAlign.left,
-                                      maxLines: 1,
-                                      textOverflow: TextOverflow.ellipsis,
-                                    ),
-                                  ))
+                                    subtitle:
+                                        Html(data: elements.conversation?.lastMessage?.body ?? '', style: {
+                                      "table": Style(
+                                        backgroundColor: Color.fromARGB(
+                                            0x50, 0xee, 0xee, 0xee),
+                                      ),
+                                      "tr": Style(
+                                        border: Border(
+                                            bottom:
+                                                BorderSide(color: Colors.grey)),
+                                      ),
+                                      "th": Style(
+                                        padding: EdgeInsets.all(6),
+                                        backgroundColor: Colors.grey,
+                                      ),
+                                      "td": Style(
+                                        padding: EdgeInsets.all(6),
+                                        alignment: Alignment.topLeft,
+                                      ),
+                                      'h5': Style(
+                                          maxLines: 2,
+                                          textOverflow: TextOverflow.ellipsis),
+                                    })
+                                    // TextView(
+                                    //   text: _parseHtmlString(elements
+                                    //               .conversation
+                                    //               ?.lastMessage
+                                    //               ?.body ??
+                                    //           '')
+                                    //       .toString(),
+                                    //   fontSize: 14,
+                                    //   fontWeight: FontWeight.w500,
+                                    //   color: Pallets.grey400,
+                                    //   textAlign: TextAlign.left,
+                                    //   maxLines: 1,
+                                    //   textOverflow: TextOverflow.ellipsis,
+                                    // ),
+                                    ))
                             .toList(),
                       ),
                       SizedBox(height: 36),

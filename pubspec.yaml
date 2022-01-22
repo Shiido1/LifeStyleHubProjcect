@@ -14,7 +14,7 @@ dependencies:
   circular_profile_avatar: ^2.0.0
   country_picker: ^2.0.8
   cupertino_icons: ^1.0.2
-  device_preview: ^0.7.4
+  # device_preview: ^0.7.4
   dio: ^4.0.0
   event_bus: ^2.0.0
   fl_chart: ^0.40.2
@@ -38,10 +38,12 @@ dependencies:
   path_provider: ^2.0.2
   pie_chart: ^5.0.1
   pin_code_fields: ^7.3.0
-  provider: ^5.0.0
+  provider: ^6.0.0
   pull_to_refresh: ^2.0.0
   share: ^2.0.4
   shared_preferences: ^2.0.6
+  flutter_html: ^2.2.1
+  
 
 jsonToDart:
   outputFolder: lib/models #default: lib/
