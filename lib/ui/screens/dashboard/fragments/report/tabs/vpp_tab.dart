@@ -49,37 +49,35 @@ class _VPPTabState extends State<VPPTab> {
       VoidCallback? voidCallback,
       bool? isAdded = false,
       Widget? widget}) {
-    return Expanded(
-      child: Container(
-        width: getDeviceWidth(context),
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: containerColor,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextView(
-              text: '$point',
-              fontWeight: FontWeight.w700,
-              fontSize: 24,
-              color: Pallets.black,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 8),
-            TextView(
-              text: text!,
-              fontWeight: FontWeight.w700,
-              color: textColor,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 16),
-            Visibility(
-                visible: isAdded!,
-                child: InkWell(onTap: voidCallback, child: widget))
-          ],
-        ),
+    return Container(
+      width: getDeviceWidth(context),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: containerColor,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextView(
+            text: '$point',
+            fontWeight: FontWeight.w700,
+            fontSize: 24,
+            color: Pallets.black,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 8),
+          TextView(
+            text: text!,
+            fontWeight: FontWeight.w700,
+            color: textColor,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 16),
+          Visibility(
+              visible: isAdded!,
+              child: InkWell(onTap: voidCallback, child: widget))
+        ],
       ),
     );
   }
@@ -94,21 +92,23 @@ class _VPPTabState extends State<VPPTab> {
             SizedBox(height: 32),
             Row(
               children: [
-                _container(
-                    point: provider.reportPromotionSummaryModel
-                            ?.totalFreeTrialMembers ??
-                        0,
-                    text: 'Free trial\nmembers',
-                    textColor: Pallets.blue500,
-                    containerColor: Pallets.blue50),
+                Expanded(
+                    child: _container(
+                        point: provider.reportPromotionSummaryModel
+                                ?.totalFreeTrialMembers ??
+                            0,
+                        text: 'Free trial\nmembers',
+                        textColor: Pallets.blue500,
+                        containerColor: Pallets.blue50)),
                 SizedBox(width: 16),
-                _container(
-                    point: provider.reportPromotionSummaryModel
-                            ?.totalUpgradedMembers ??
-                        0,
-                    text: 'Upgraded\nmembers',
-                    textColor: Pallets.green500,
-                    containerColor: Pallets.green50),
+                Expanded(
+                    child: _container(
+                        point: provider.reportPromotionSummaryModel
+                                ?.totalUpgradedMembers ??
+                            0,
+                        text: 'Upgraded\nmembers',
+                        textColor: Pallets.green500,
+                        containerColor: Pallets.green50)),
               ],
             ),
             SizedBox(height: 16),
@@ -121,7 +121,8 @@ class _VPPTabState extends State<VPPTab> {
             SizedBox(height: 24),
             Row(
               children: [
-                _container(
+                Expanded(
+                    child: _container(
                   point: provider
                           .reportPromotionSummaryModel?.totalFreeTrialMembers ??
                       0,
@@ -153,22 +154,23 @@ class _VPPTabState extends State<VPPTab> {
                       )
                     ],
                   ),
-                ),
+                )),
                 SizedBox(width: 16),
-                _container(
-                    point: provider.reportPromotionSummaryModel
-                            ?.totalUpgradedMembers ??
-                        0,
-                    isAdded: true,
-                    widget: TextView(
-                      text: '',
-                      fontWeight: FontWeight.w500,
-                      color: Pallets.lime700,
-                      fontSize: 12,
-                    ),
-                    text: 'Active Members',
-                    textColor: Pallets.grey500,
-                    containerColor: Pallets.lime50),
+                Expanded(
+                    child: _container(
+                        point: provider.reportPromotionSummaryModel
+                                ?.totalUpgradedMembers ??
+                            0,
+                        isAdded: true,
+                        widget: TextView(
+                          text: '',
+                          fontWeight: FontWeight.w500,
+                          color: Pallets.lime700,
+                          fontSize: 12,
+                        ),
+                        text: 'Active Members',
+                        textColor: Pallets.grey500,
+                        containerColor: Pallets.lime50)),
               ],
             ),
             Visibility(
@@ -199,6 +201,10 @@ class _VPPTabState extends State<VPPTab> {
                     height: 300,
                     child: LineChart(
                       LineChartData(
+                        maxX: 11,
+                        maxY: 3,
+                        minX: 0,
+                        minY: 0,
                         borderData: FlBorderData(show: false),
                         titlesData: flTitle(context),
                         gridData: flGrid(context),
@@ -254,7 +260,7 @@ class _VPPTabState extends State<VPPTab> {
                       aspectRatio: 2.5,
                       child: PieChart(
                         PieChartData(
-                          borderData: FlBorderData(show: false),
+                          borderData: FlBorderData(show: true),
                           centerSpaceRadius: 50,
                           sections: provider.pieAnalysisData,
                         ),
@@ -263,6 +269,25 @@ class _VPPTabState extends State<VPPTab> {
                   ),
                 ],
               ),
+            ),
+            SizedBox(height: 32),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextView(
+                  text: 'Upgraded members',
+                  fontWeight: FontWeight.w700,
+                  textAlign: TextAlign.left,
+                  fontSize: 16,
+                ),
+                TextView(
+                  text: 'View all',
+                  fontWeight: FontWeight.w500,
+                  textAlign: TextAlign.left,
+                  color: Pallets.grey400,
+                  fontSize: 14,
+                ),
+              ],
             ),
             SizedBox(height: 16),
             Column(
@@ -277,6 +302,9 @@ class _VPPTabState extends State<VPPTab> {
                           money: element.commission)))
                   .toList(),
             ),
+            SizedBox(
+              height: 50,
+            )
           ],
         ),
       );

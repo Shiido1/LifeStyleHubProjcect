@@ -20,7 +20,6 @@ import 'enum/message_enum.dart';
 import 'message_details.dart';
 import 'model/get_last_messages_model.dart';
 import 'viewmodel/messaging_viewmodel.dart';
-import 'package:html/parser.dart';
 
 class MessagingScreen extends StatefulWidget {
   MessagingScreen({Key? key}) : super(key: key);
@@ -160,7 +159,6 @@ class _MessagingScreenState extends State<MessagingScreen>
           valueListenable: messageDao!.getListenable()!,
           builder: (context, Box<dynamic> box, __) {
             List<Data> _messageList = messageDao!.convert(box).toList();
-            // searchWidget(searching!, _messageList);
             return Consumer(builder: (context, watch, __) {
               final _provider = watch(_messageViewModel);
               if (_provider.loading) {
@@ -291,20 +289,6 @@ class _MessagingScreenState extends State<MessagingScreen>
                                           maxLines: 2,
                                           textOverflow: TextOverflow.ellipsis),
                                     })
-                                    // TextView(
-                                    //   text: _parseHtmlString(elements
-                                    //               .conversation
-                                    //               ?.lastMessage
-                                    //               ?.body ??
-                                    //           '')
-                                    //       .toString(),
-                                    //   fontSize: 14,
-                                    //   fontWeight: FontWeight.w500,
-                                    //   color: Pallets.grey400,
-                                    //   textAlign: TextAlign.left,
-                                    //   maxLines: 1,
-                                    //   textOverflow: TextOverflow.ellipsis,
-                                    // ),
                                     ))
                             .toList(),
                       ),
@@ -327,15 +311,6 @@ class _MessagingScreenState extends State<MessagingScreen>
         _receiver = 'Guest';
     }).toList();
     return _receiver ?? 'Guest';
-  }
-
-  //here goes the function
-  String? _parseHtmlString(String htmlString) {
-    final document = parse(htmlString);
-    final String? parsedString =
-        parse(document.body?.text).documentElement?.text;
-
-    return parsedString;
   }
 
   searchWidget(String search, List<Data> searchText) {

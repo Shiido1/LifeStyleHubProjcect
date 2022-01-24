@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart' as freeMember;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_promotion_income_analysis_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_summary_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/upgraded_member_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/upgraded_member_model.dart' as upgrade;
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../../../helper/configs/instances.dart';
@@ -21,6 +21,13 @@ class ReportViewmodel extends BaseViewModel {
   BuildContext get buildContext => _context;
 
   bool get loading => _loading;
+
+  ReportPromotionSummaryModel? reportPromotionSummaryModel;
+  List<freeMember.Data>? freeTrialMembers;
+  List<upgrade.Data>? upgradedMembers;
+  List<PackageSignupBonus>? promotionIncomeAnalysis = [];
+  List<FlSpot> analysisData = [];
+  List<PieChartSectionData> pieAnalysisData = [];
 
   final RefreshController _refreshController = RefreshController();
 
@@ -43,8 +50,6 @@ class ReportViewmodel extends BaseViewModel {
     notifyListeners();
   }
 
-  ReportPromotionSummaryModel? reportPromotionSummaryModel;
-
   /// get users profile
   Future<void> reportPromotionSummary() async {
     try {
@@ -58,12 +63,12 @@ class ReportViewmodel extends BaseViewModel {
   }
 
   /// get trial members
-  List<FreeTrialMembers>? freeTrialMembers = [];
+
   Future<void> reportPromotionTrialMembers() async {
     try {
-      if (freeTrialMembers!.isEmpty) _showLoading();
+      if (freeTrialMembers==null) _showLoading();
       final _response = await _reportRepository.freeTrialMembers();
-      freeTrialMembers = _response.freeTrialMembers ?? [];
+      freeTrialMembers = _response.freeTrialMembers?.data??[];
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
@@ -71,12 +76,12 @@ class ReportViewmodel extends BaseViewModel {
   }
 
   /// get trial members
-  List<UpgradedMembers>? upgradedMembers = [];
+
   Future<void> reportPromotionUpgradedMembers() async {
     try {
-      if (upgradedMembers!.isEmpty) _showLoading();
+      if (upgradedMembers == null) _showLoading();
       final _response = await _reportRepository.upgradedMembers();
-      upgradedMembers = _response.upgradedMembers ?? [];
+      upgradedMembers = _response.upgradedMembers?.data ?? [];
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
@@ -84,15 +89,12 @@ class ReportViewmodel extends BaseViewModel {
   }
 
   /// get promotion income analysis
-  List<ReportPromotionIncomeAnalysisModel>? promotionIncomeAnalysis = [];
-  List<FlSpot> analysisData = [];
-  List<PieChartSectionData> pieAnalysisData = [];
 
   Future<void> promotionIncome() async {
     try {
       if (promotionIncomeAnalysis!.isEmpty) _showLoading();
       final _response = await _reportRepository.promotionIncomeAnalysis();
-      promotionIncomeAnalysis =  _response.reportPromotionIncomeAnalysisModel ?? [];
+      promotionIncomeAnalysis = _response.packageSignupBonus ?? [];
       if (pieAnalysisData.isNotEmpty) {
         pieAnalysisData.clear();
       }
@@ -100,7 +102,8 @@ class ReportViewmodel extends BaseViewModel {
         analysisData
             .add(FlSpot(item.month!.toDouble(), item.amount!.toDouble()));
 
-            
+        logger.d('show me $analysisData on console');
+        logger.d('show me u${_response.packageSignupBonus!.length} on console');
         pieAnalysisData.add(PieChartSectionData(
             color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
             value: item.amount!.toDouble(),
