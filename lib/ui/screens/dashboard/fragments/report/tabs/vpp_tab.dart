@@ -260,7 +260,7 @@ class _VPPTabState extends State<VPPTab> {
                       aspectRatio: 2.5,
                       child: PieChart(
                         PieChartData(
-                          borderData: FlBorderData(show: true),
+                          borderData: FlBorderData(show: false),
                           centerSpaceRadius: 50,
                           sections: provider.pieAnalysisData,
                         ),

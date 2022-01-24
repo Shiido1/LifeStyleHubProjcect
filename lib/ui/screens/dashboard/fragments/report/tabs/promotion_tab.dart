@@ -65,7 +65,7 @@ class _PromotionTabState extends State<PromotionTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ReportViewmodel?>(builder: (_, provider, __) {
+    return Consumer<ReportViewmodel>(builder: (_, provider, __) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: ListView(
@@ -75,7 +75,7 @@ class _PromotionTabState extends State<PromotionTab> {
               children: [
                 Expanded(
                     child: _container(
-                        point: provider?.reportPromotionSummaryModel
+                        point: provider.reportPromotionSummaryModel
                                 ?.totalFreeTrialMembers ??
                             0,
                         text: 'Free trial\nmembers',
@@ -84,7 +84,7 @@ class _PromotionTabState extends State<PromotionTab> {
                 SizedBox(width: 16),
                 Expanded(
                   child: _container(
-                      point: provider?.reportPromotionSummaryModel
+                      point: provider.reportPromotionSummaryModel
                               ?.totalUpgradedMembers ??
                           0,
                       text: 'Upgraded\nmembers',
@@ -96,12 +96,12 @@ class _PromotionTabState extends State<PromotionTab> {
             SizedBox(height: 16),
             _container(
                 point:
-                    provider?.reportPromotionSummaryModel?.totalCommission ?? 0,
+                    provider.reportPromotionSummaryModel?.totalCommission ?? 0,
                 text: 'Total\nCommission',
                 textColor: Pallets.lightBlue500,
                 containerColor: Pallets.lightBlue50),
             Visibility(
-              visible: provider!.analysisData.isEmpty ? false : true,
+              visible: provider.analysisData.isEmpty ? false : true,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,13 +214,14 @@ class _PromotionTabState extends State<PromotionTab> {
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
-                children: provider.freeTrialMembers!
+                children: provider.freeTrialMembers != null?
+                provider.freeTrialMembers!
                     .map((element) => MemberCard(
                         element: MemberCardModel(
                             name: element.name,
                             phoneNo: element.phoneNo,
                             date: element.date)))
-                    .toList()),
+                    .toList():[]),
             Visibility(
               visible: provider.pieAnalysisData.isEmpty ? false : true,
               child: Column(
@@ -240,7 +241,7 @@ class _PromotionTabState extends State<PromotionTab> {
                       aspectRatio: 2.5,
                       child: PieChart(
                         PieChartData(
-                          borderData: FlBorderData(show: true),
+                          borderData: FlBorderData(show: false),
                           centerSpaceRadius: 50,
                           sections: provider.pieAnalysisData,
                         ),
