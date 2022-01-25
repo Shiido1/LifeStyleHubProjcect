@@ -2,10 +2,16 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart' as freeMember;
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart'
+    as freeMember;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_promotion_income_analysis_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_summary_model.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/upgraded_member_model.dart' as upgrade;
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_vpp_analysis_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_vpp_upgraded_analysis_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_vpp_upgraded_analysis_model.dart'
+    as vppmodel;
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/upgraded_member_model.dart'
+    as upgrade;
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../../../helper/configs/instances.dart';
@@ -23,11 +29,16 @@ class ReportViewmodel extends BaseViewModel {
   bool get loading => _loading;
 
   ReportPromotionSummaryModel? reportPromotionSummaryModel;
+  List<freeMember.Analytics>? freeMemberModel;
   List<freeMember.Data>? freeTrialMembers;
   List<upgrade.Data>? upgradedMembers;
+  List<upgrade.Analytics>? upgradedMembersAnalysis;
   List<PackageSignupBonus>? promotionIncomeAnalysis = [];
   List<FlSpot> analysisData = [];
   List<PieChartSectionData> pieAnalysisData = [];
+  VVPFreeMemberTrail? vvpFreeMemberTrail;
+  VVPUpgradedAnalysisModel? vvpUpgradedAnalysisModel;
+  List<vppmodel.Vpp>? vpp;
 
   final RefreshController _refreshController = RefreshController();
 
@@ -66,13 +77,32 @@ class ReportViewmodel extends BaseViewModel {
 
   Future<void> reportPromotionTrialMembers() async {
     try {
-      if (freeTrialMembers==null) _showLoading();
+      if (freeTrialMembers == null) _showLoading();
       final _response = await _reportRepository.freeTrialMembers();
-      freeTrialMembers = _response.freeTrialMembers?.data??[];
+      freeTrialMembers = _response.freeTrialMembers?.data ?? [];
+      freeMemberModel = _response.analytics ?? [];
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
     _hideLoading();
+  }
+
+  Map<String, double> convertedMap() {
+    Map<String, double> _map = Map<String, double>();
+    freeMemberModel?.map((e) {
+      if (e.name != "Total") _map[e.name!] = e.signups!.toDouble();
+    }).toList();
+    // notifyListeners();
+    return _map;
+  }
+
+  Map<String, double> convertedUpgradedMemberMap() {
+    Map<String, double> _map = Map<String, double>();
+    upgradedMembersAnalysis?.map((e) {
+      if (e.name != "Total") _map[e.name!] = e.signups!.toDouble();
+    }).toList();
+    // notifyListeners();
+    return _map;
   }
 
   /// get trial members
@@ -82,6 +112,7 @@ class ReportViewmodel extends BaseViewModel {
       if (upgradedMembers == null) _showLoading();
       final _response = await _reportRepository.upgradedMembers();
       upgradedMembers = _response.upgradedMembers?.data ?? [];
+      upgradedMembersAnalysis = _response.analytics ?? [];
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
@@ -101,9 +132,6 @@ class ReportViewmodel extends BaseViewModel {
       for (var item in promotionIncomeAnalysis!) {
         analysisData
             .add(FlSpot(item.month!.toDouble(), item.amount!.toDouble()));
-
-        logger.d('show me $analysisData on console');
-        logger.d('show me u${_response.packageSignupBonus!.length} on console');
         pieAnalysisData.add(PieChartSectionData(
             color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
             value: item.amount!.toDouble(),
@@ -114,5 +142,48 @@ class ReportViewmodel extends BaseViewModel {
       logger.wtf('An unexpected error occurred! => $e');
     }
     _hideLoading();
+  }
+
+  /// get vpp trial members
+
+  Future<void> reportPromotionVppTrialMembers() async {
+    try {
+      if (vvpFreeMemberTrail == null) _showLoading();
+      final _response = await _reportRepository.vppFreeMembeAnalysis();
+      vvpFreeMemberTrail = _response;
+    } catch (e) {
+      logger.wtf('An unexpected error occurred! => $e');
+    }
+    _hideLoading();
+  }
+
+  Future<void> reportPromotionVppUpgradedMembers() async {
+    try {
+      if (vvpUpgradedAnalysisModel == null) _showLoading();
+      final _response = await _reportRepository.vppUpgradedAnalysis();
+      vvpUpgradedAnalysisModel = _response;
+      logger.d('print respone for upgrade members $vvpUpgradedAnalysisModel');
+    } catch (e) {
+      logger.wtf('An unexpected error occurred! => $e');
+    }
+    _hideLoading();
+  }
+
+  Map<String, double> convertedVppMap() {
+    Map<String, double> _map = Map<String, double>();
+    vvpFreeMemberTrail?.vppAnalytics?.vpp?.map((e) {
+      _map[e.name!] = e.signups!.toDouble();
+    }).toList();
+    // notifyListeners();
+    return _map;
+  }
+
+  Map<String, double> convertedVppUpgradedMap() {
+    Map<String, double> _map = Map<String, double>();
+    vvpUpgradedAnalysisModel?.vppAnalytics?.vpp?.map((e) {
+      _map[e.name!] = e.signups!.toDouble();
+    }).toList();
+    // notifyListeners();
+    return _map;
   }
 }

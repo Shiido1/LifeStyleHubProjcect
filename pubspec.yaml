@@ -14,7 +14,6 @@ dependencies:
   circular_profile_avatar: ^2.0.0
   country_picker: ^2.0.8
   cupertino_icons: ^1.0.2
-  # device_preview: ^0.7.4
   dio: ^4.0.0
   event_bus: ^2.0.0
   fl_chart: ^0.40.2
@@ -36,7 +35,7 @@ dependencies:
   observable_ish: ^3.0.0
   page_transition: ^2.0.2
   path_provider: ^2.0.2
-  pie_chart: ^5.0.1
+  pie_chart: ^5.1.0
   pin_code_fields: ^7.3.0
   provider: ^6.0.0
   pull_to_refresh: ^2.0.0

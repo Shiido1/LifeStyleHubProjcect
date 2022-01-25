@@ -1,15 +1,16 @@
-import 'dart:math';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/vpp/vpp_profile.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/analytical_graph.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/card.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/left_tile.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:pie_chart/pie_chart.dart' as pieChart;
+import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 
 class VPPTab extends StatefulWidget {
@@ -30,16 +31,25 @@ class _VPPTabState extends State<VPPTab> {
     _reportViewmodel!.reportPromotionTrialMembers();
     _reportViewmodel!.reportPromotionUpgradedMembers();
     _reportViewmodel!.promotionIncome();
+    _reportViewmodel!.reportPromotionVppTrialMembers();
+    _reportViewmodel!.reportPromotionVppUpgradedMembers();
     super.initState();
   }
 
-  final List<FlSpot> dummyData1 = List.generate(3, (index) {
-    return FlSpot(index.toDouble(), index * Random().nextDouble());
-  });
+  // final List<FlSpot> dummyData1 = List.generate(3, (index) {
+  //   return FlSpot(index.toDouble(), index * Random().nextDouble());
+  // });
 
-  final List<FlSpot> dummyData2 = List.generate(10, (index) {
-    return FlSpot(index.toDouble(), index * Random().nextDouble());
-  });
+  // final List<FlSpot> dummyData2 = List.generate(10, (index) {
+  //   return FlSpot(index.toDouble(), index * Random().nextDouble());
+  // });
+
+  Map<String, double> dataMap = {
+    'flutter': 5,
+    'vscode': 4,
+    'reactr': 3,
+    'android studio': 2,
+  };
 
   _container(
       {required int? point,
@@ -233,13 +243,15 @@ class _VPPTabState extends State<VPPTab> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: provider.freeTrialMembers!
-                  .map((element) => MemberCard(
-                      element: MemberCardModel(
-                          name: element.name,
-                          phoneNo: element.phoneNo,
-                          date: element.date)))
-                  .toList(),
+              children: provider.freeMemberModel != null
+                  ? provider.freeTrialMembers!
+                      .map((element) => MemberCard(
+                          element: MemberCardModel(
+                              name: element.name,
+                              phoneNo: element.phoneNo,
+                              date: element.date)))
+                      .toList()
+                  : [],
             ),
             Visibility(
               visible: provider.pieAnalysisData.isEmpty ? false : true,
@@ -256,19 +268,40 @@ class _VPPTabState extends State<VPPTab> {
                   ),
                   SizedBox(height: 16),
                   Container(
-                    child: AspectRatio(
-                      aspectRatio: 2.5,
-                      child: PieChart(
-                        PieChartData(
-                          borderData: FlBorderData(show: false),
-                          centerSpaceRadius: 50,
-                          sections: provider.pieAnalysisData,
-                        ),
+                    child: pieChart.PieChart(
+                      chartType: ChartType.ring,
+                      chartRadius: 245,
+                      dataMap: provider.convertedVppMap(),
+                      legendOptions: LegendOptions(
+                        showLegendsInRow: false,
+                        legendPosition: LegendPosition.bottom,
+                        showLegends: false,
+                        legendShape: BoxShape.circle,
+                      ),
+                      chartValuesOptions: ChartValuesOptions(
+                        showChartValueBackground: false,
+                        showChartValues: false,
+                        showChartValuesInPercentage: false,
+                        showChartValuesOutside: false,
                       ),
                     ),
                   ),
                 ],
               ),
+            ),
+            SizedBox(height: 28),
+            Column(
+              children: provider.vvpFreeMemberTrail?.vppAnalytics?.vpp != null
+                  ? provider.vvpFreeMemberTrail!.vppAnalytics!.vpp!
+                      .map((e) => AnalyticalGraph(
+                            element: AnalyticsModel(
+                                color: Pallets.amber400,
+                                textClick: e.commission ?? 0,
+                                textName: e.name ?? '',
+                                textSignup: e.signups ?? 0),
+                          ))
+                      .toList()
+                  : [],
             ),
             SizedBox(height: 32),
             Row(
@@ -293,15 +326,71 @@ class _VPPTabState extends State<VPPTab> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: provider.upgradedMembers!
-                  .map((element) => MemberCard(
-                      element: MemberCardModel(
-                          name: element.name,
-                          phoneNo: element.phoneNo,
-                          date: element.date,
-                          money: element.commission)))
-                  .toList(),
+              children: provider
+                          .vvpUpgradedAnalysisModel?.upgradedMembers?.data !=
+                      null
+                  ? provider.vvpUpgradedAnalysisModel!.upgradedMembers!.data!
+                      .map((element) => MemberCard(
+                          element: MemberCardModel(
+                              name: element.name,
+                              phoneNo: element.phoneNo,
+                              date: element.date,
+                              money: element.amount)))
+                      .toList()
+                  : [],
             ),
+            Visibility(
+              visible: provider.pieAnalysisData.isEmpty ? false : true,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 24),
+                  TextView(
+                    text: 'Analytics ',
+                    fontWeight: FontWeight.w700,
+                    textAlign: TextAlign.left,
+                    fontSize: 16,
+                  ),
+                  SizedBox(height: 16),
+                  Container(
+                    child: pieChart.PieChart(
+                      chartType: ChartType.ring,
+                      chartRadius: 245,
+                      dataMap: provider.convertedVppUpgradedMap(),
+                      legendOptions: LegendOptions(
+                        showLegendsInRow: false,
+                        legendPosition: LegendPosition.bottom,
+                        showLegends: false,
+                        legendShape: BoxShape.circle,
+                      ),
+                      chartValuesOptions: ChartValuesOptions(
+                        showChartValueBackground: false,
+                        showChartValues: false,
+                        showChartValuesInPercentage: false,
+                        showChartValuesOutside: false,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 28),
+            Column(
+              children:
+                  provider.vvpUpgradedAnalysisModel?.vppAnalytics?.vpp != null
+                      ? provider.vvpUpgradedAnalysisModel!.vppAnalytics!.vpp!
+                          .map((e) => AnalyticalGraph(
+                                element: AnalyticsModel(
+                                    color: Pallets.amber400,
+                                    textClick: e.commission ?? 0,
+                                    textName: e.name ?? '',
+                                    textSignup: e.signups ?? 0),
+                              ))
+                          .toList()
+                      : [],
+            ),
+            SizedBox(height: 32),
             SizedBox(
               height: 50,
             )

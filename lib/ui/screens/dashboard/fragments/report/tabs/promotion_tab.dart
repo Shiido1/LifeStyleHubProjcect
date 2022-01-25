@@ -1,12 +1,16 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/analytical_graph.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/card.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/left_tile.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
+import 'package:pie_chart/pie_chart.dart' as pieChart;
 
 class PromotionTab extends StatefulWidget {
   PromotionTab({Key? key}) : super(key: key);
@@ -17,6 +21,7 @@ class PromotionTab extends StatefulWidget {
 
 class _PromotionTabState extends State<PromotionTab> {
   ReportViewmodel? _reportViewmodel;
+  Analytics? analytics;
 
   @override
   void initState() {
@@ -214,14 +219,15 @@ class _PromotionTabState extends State<PromotionTab> {
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
-                children: provider.freeTrialMembers != null?
-                provider.freeTrialMembers!
-                    .map((element) => MemberCard(
-                        element: MemberCardModel(
-                            name: element.name,
-                            phoneNo: element.phoneNo,
-                            date: element.date)))
-                    .toList():[]),
+                children: provider.freeTrialMembers != null
+                    ? provider.freeTrialMembers!
+                        .map((element) => MemberCard(
+                            element: MemberCardModel(
+                                name: element.name,
+                                phoneNo: element.phoneNo,
+                                date: element.date)))
+                        .toList()
+                    : []),
             Visibility(
               visible: provider.pieAnalysisData.isEmpty ? false : true,
               child: Column(
@@ -237,19 +243,41 @@ class _PromotionTabState extends State<PromotionTab> {
                   ),
                   SizedBox(height: 16),
                   Container(
-                    child: AspectRatio(
-                      aspectRatio: 2.5,
-                      child: PieChart(
-                        PieChartData(
-                          borderData: FlBorderData(show: false),
-                          centerSpaceRadius: 50,
-                          sections: provider.pieAnalysisData,
-                        ),
+                    child: pieChart.PieChart(
+                      chartType: ChartType.disc,
+                      chartRadius: 245,
+                      dataMap: provider.convertedMap(),
+                      legendOptions: LegendOptions(
+                        showLegendsInRow: false,
+                        legendPosition: LegendPosition.bottom,
+                        showLegends: false,
+                        legendShape: BoxShape.circle,
+                      ),
+                      chartValuesOptions: ChartValuesOptions(
+                        showChartValueBackground: false,
+                        showChartValues: false,
+                        showChartValuesInPercentage: false,
+                        showChartValuesOutside: false,
                       ),
                     ),
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 28,
+            ),
+            Column(
+              children: provider.freeMemberModel != null
+                  ? provider.freeMemberModel!
+                      .map((e) => AnalyticalGraph(
+                            element: AnalyticsModel(
+                                textClick: e.clicks!,
+                                textName: e.name!,
+                                textSignup: e.signups),
+                          ))
+                      .toList()
+                  : [],
             ),
             SizedBox(height: 32),
             Row(
@@ -278,13 +306,65 @@ class _PromotionTabState extends State<PromotionTab> {
                   ? provider.upgradedMembers!
                       .map((element) => MemberCard(
                           element: MemberCardModel(
-                              name: element.name ?? '',
-                              phoneNo: element.phoneNo ?? '',
-                              date: element.date ?? '',
-                              money: element.commission ?? 0)))
+                              name: element.name,
+                              phoneNo: element.phoneNo,
+                              date: element.date,
+                              money: element.commission)))
                       .toList()
                   : [],
             ),
+            Visibility(
+              visible: provider.pieAnalysisData.isEmpty ? false : true,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 24),
+                  TextView(
+                    text: 'Analytics ',
+                    fontWeight: FontWeight.w700,
+                    textAlign: TextAlign.left,
+                    fontSize: 16,
+                  ),
+                  SizedBox(height: 16),
+                  Container(
+                    child: pieChart.PieChart(
+                      chartType: ChartType.disc,
+                      chartRadius: 245,
+                      dataMap: provider.convertedUpgradedMemberMap(),
+                      legendOptions: LegendOptions(
+                        showLegendsInRow: false,
+                        legendPosition: LegendPosition.bottom,
+                        showLegends: false,
+                        legendShape: BoxShape.circle,
+                      ),
+                      chartValuesOptions: ChartValuesOptions(
+                        showChartValueBackground: false,
+                        showChartValues: false,
+                        showChartValuesInPercentage: false,
+                        showChartValuesOutside: false,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 28,
+            ),
+            Column(
+              children: provider.upgradedMembersAnalysis != null
+                  ? provider.upgradedMembersAnalysis!
+                      .map((e) => AnalyticalGraph(
+                            element: AnalyticsModel(
+                                textClick: e.clicks!,
+                                textName: e.name!,
+                                textSignup: e.signups),
+                          ))
+                      .toList()
+                  : [],
+            ),
+            SizedBox(height: 32),
             SizedBox(
               height: 50,
             )

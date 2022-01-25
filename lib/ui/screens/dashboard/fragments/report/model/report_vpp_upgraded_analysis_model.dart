@@ -1,12 +1,12 @@
-class VVPFreeMemberTrail {
-  FreeTrialMembers? freeTrialMembers;
+class VVPUpgradedAnalysisModel {
+  UpgradedMembers? upgradedMembers;
   VppAnalytics? vppAnalytics;
 
-  VVPFreeMemberTrail({this.freeTrialMembers, this.vppAnalytics});
+  VVPUpgradedAnalysisModel({this.upgradedMembers, this.vppAnalytics});
 
-  VVPFreeMemberTrail.fromJson(Map<String, dynamic> json) {
-    freeTrialMembers = json['free_trial_members'] != null
-        ? new FreeTrialMembers.fromJson(json['free_trial_members'])
+  VVPUpgradedAnalysisModel.fromJson(Map<String, dynamic> json) {
+    upgradedMembers = json['upgraded_members'] != null
+        ? new UpgradedMembers.fromJson(json['upgraded_members'])
         : null;
     vppAnalytics = json['vpp_analytics'] != null
         ? new VppAnalytics.fromJson(json['vpp_analytics'])
@@ -15,8 +15,8 @@ class VVPFreeMemberTrail {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.freeTrialMembers != null) {
-      data['free_trial_members'] = this.freeTrialMembers!.toJson();
+    if (this.upgradedMembers != null) {
+      data['upgraded_members'] = this.upgradedMembers!.toJson();
     }
     if (this.vppAnalytics != null) {
       data['vpp_analytics'] = this.vppAnalytics!.toJson();
@@ -25,7 +25,7 @@ class VVPFreeMemberTrail {
   }
 }
 
-class FreeTrialMembers {
+class UpgradedMembers {
   int? currentPage;
   List<Data>? data;
   String? firstPageUrl;
@@ -40,7 +40,7 @@ class FreeTrialMembers {
   int? to;
   int? total;
 
-  FreeTrialMembers(
+  UpgradedMembers(
       {this.currentPage,
       this.data,
       this.firstPageUrl,
@@ -55,7 +55,7 @@ class FreeTrialMembers {
       this.to,
       this.total});
 
-  FreeTrialMembers.fromJson(Map<String, dynamic> json) {
+  UpgradedMembers.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
       data = <Data>[];
@@ -106,17 +106,30 @@ class FreeTrialMembers {
 
 class Data {
   String? date;
-  Null name;
-  Null phoneNo;
+  String? name;
+  String? phoneNo;
+  String? package;
   String? medium;
+  int? amount;
+  String? status;
 
-  Data({this.date, this.name, this.phoneNo, this.medium});
+  Data(
+      {this.date,
+      this.name,
+      this.phoneNo,
+      this.package,
+      this.medium,
+      this.amount,
+      this.status});
 
   Data.fromJson(Map<String, dynamic> json) {
     date = json['date'];
     name = json['name'];
     phoneNo = json['phone_no'];
+    package = json['package'];
     medium = json['medium'];
+    amount = json['amount'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -124,7 +137,10 @@ class Data {
     data['date'] = this.date;
     data['name'] = this.name;
     data['phone_no'] = this.phoneNo;
+    data['package'] = this.package;
     data['medium'] = this.medium;
+    data['amount'] = this.amount;
+    data['status'] = this.status;
     return data;
   }
 }

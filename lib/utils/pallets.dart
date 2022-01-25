@@ -4,6 +4,7 @@ class Pallets {
   Pallets._();
 
   static Color black = Color(0xff000000);
+  static Color dark = Color(0xff263238);
   static Color amber50 = Color(0xffFFFBEB);
   static Color green500 = Color(0xff22C55E);
   static Color green600 = Color(0xff16A34A);
