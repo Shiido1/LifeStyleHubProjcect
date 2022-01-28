@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/src/provider.dart';
 import '../../../../../utils/pallets.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'viewmodel/marketting_viewmodel.dart';
@@ -29,7 +30,7 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
 
   @override
   void initState() {
-    _marketting = context.read(_markettingViewModel);
+    _marketting = context.read();
     _marketting!.init(context);
     _marketting!.getMarketing();
     super.initState();
@@ -43,7 +44,7 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
           List<Data> _marketing = markettingDao!.convert(box);
           _marketting!.sortContentByType(_marketing);
           return Consumer(builder: (context, watch, child) {
-            final _response = watch(_markettingViewModel);
+            final _response = watch.watch(_markettingViewModel);
             if (_response.loading) {
               return Center(
                 child: SpinKitCubeGrid(

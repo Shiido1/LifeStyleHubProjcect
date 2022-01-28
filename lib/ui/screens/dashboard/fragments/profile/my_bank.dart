@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/src/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import '../../../bank/account/add_bank_screen.dart';
@@ -31,7 +32,7 @@ class _BankListScreenState extends State<BankListScreen> {
 
   @override
   void initState() {
-    _accountViewmodel = context.read(_accountProvider);
+    _accountViewmodel = context.read();
     _accountViewmodel!.init(context);
     _accountViewmodel!.getMyBankAccounts();
     super.initState();
@@ -53,7 +54,7 @@ class _BankListScreenState extends State<BankListScreen> {
               centerTitle: true,
             ),
             body: Consumer(builder: (_, watch, __) {
-              final _accountWatcher = watch(_accountProvider);
+              final _accountWatcher = watch.watch(_accountProvider);
               if (_accountWatcher.loading) {
                 return Center(
                     child: SpinKitCubeGrid(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/src/provider.dart';
 
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../utils/pallets.dart';
@@ -27,7 +28,7 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
 
   @override
   void initState() {
-    _pointHistoryViewmodel = context.read(_pointHistoryProvider);
+    _pointHistoryViewmodel = context.read();
     _pointHistoryViewmodel!.init(context);
     _pointHistoryViewmodel!.getPointHistory();
     super.initState();
@@ -40,7 +41,7 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
       builder: (BuildContext context, Box<dynamic> box, Widget? child) {
         PointHistoryModel _point = pointHistoryDao!.convert(box);
         return Consumer(builder: (context, watch, _) {
-          final _pointWatch = watch(_pointHistoryProvider);
+          final _pointWatch = watch.watch(_pointHistoryProvider);
           if (_pointWatch.loading) {
             return Center(
               child: CircularProgressIndicator(),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
 import '../../../helper/helper_handler.dart';
 import '../../../helper/routes/navigation.dart';
 import '../../../helper/routes/routes.dart';
@@ -12,7 +12,6 @@ import '../../widgets/text_views.dart';
 import '../../../utils/images.dart';
 import '../../../utils/pallets.dart';
 import '../../../utils/validators.dart';
-
 import 'viewmodel/login_viewmodel.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,12 +31,12 @@ class _LoginScreenState extends State<LoginScreen> {
   String _passwordValueDetector = '';
   bool _onPasswordToggle = true;
 
-  final _loginNotifier = ChangeNotifierProvider((ref) => LoginViewModel());
+  // final _loginNotifier = ChangeNotifierProvider((ref) => LoginViewModel());
   LoginViewModel? _loginViewModel;
 
   @override
   void initState() {
-    _loginViewModel = context.read(_loginNotifier);
+    _loginViewModel = Provider.of<LoginViewModel>(context,listen: false);
     _loginViewModel!.init(context);
     _initControllers();
     super.initState();
@@ -63,9 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
+    return Consumer<LoginViewModel>(
       builder: (context, watch, child) {
-        _loginViewModel = watch(_loginNotifier);
+        // _loginViewModel = watch(_loginNotifier);
         return LoadingOverlay(
           isLoading: _loginViewModel!.loading,
           child: Scaffold(

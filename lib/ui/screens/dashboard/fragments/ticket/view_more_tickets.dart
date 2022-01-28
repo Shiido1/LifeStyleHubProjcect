@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/src/provider.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import 'dao/ticket_dao.dart';
@@ -41,7 +42,7 @@ class _ViewMoreTicketsScreenState extends State<ViewMoreTicketsScreen> {
   @override
   void initState() {
     _getCatchedInfos();
-    _ticketViewmodel = context.read(_ticketNotifier);
+    _ticketViewmodel = context.read();
     _ticketViewmodel!.init(context);
     _ticketViewmodel!.getAllTickets();
     super.initState();
@@ -68,7 +69,7 @@ class _ViewMoreTicketsScreenState extends State<ViewMoreTicketsScreen> {
             builder: (_, Box<dynamic> box, __) {
               List<Data> _ticket = ticketDao!.convert(box);
               return Consumer(builder: (context, watch, child) {
-                final _response = watch(_ticketNotifier);
+                final _response = watch.watch(_ticketNotifier);
                 if (_response.loading) {
                   return Center(
                     child: SpinKitCubeGrid(

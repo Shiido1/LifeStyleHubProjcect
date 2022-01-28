@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
+import 'package:provider/src/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
@@ -38,7 +39,7 @@ class _CreateMessageScreenState extends State<CreateMessageScreen> {
 
   @override
   void initState() {
-    _messagingViewmodel = context.read(_messageViewModel);
+    _messagingViewmodel = context.read();
     _messagingViewmodel!.init(context);
     _getCatchedInfos();
     super.initState();
@@ -62,7 +63,7 @@ class _CreateMessageScreenState extends State<CreateMessageScreen> {
             initial: _profileModel?.name ?? 'LH'),
         body: Consumer(
           builder: (context, watch, child) {
-            final _provider = watch(_messageViewModel);
+            final _provider = watch.watch(_messageViewModel);
             return Form(
               key: _globalFormKey,
               child: LoadingOverlay(

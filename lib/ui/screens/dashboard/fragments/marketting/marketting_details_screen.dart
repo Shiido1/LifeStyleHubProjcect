@@ -2,6 +2,7 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/src/provider.dart';
 import 'package:share/share.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -55,7 +56,7 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
 
   @override
   void initState() {
-    _marketting = context.read(_markettingViewModel);
+    _marketting = context.read();
     _marketting!.init(context);
     _getCatchedInfos();
     super.initState();
@@ -69,7 +70,7 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final _player = watch(_videoPlayerModel);
+      final _player = watch.watch(_videoPlayerModel);
       if (type == MarketingType.Video)
         _player.playVideo(format(getResourcesModel!.content!.path!));
         print('print video ${getResourcesModel!.content!.path!}');

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/src/provider.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
@@ -34,7 +35,7 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
 
   @override
   void initState() {
-    _marketting = context.read(_markettingViewModel);
+    _marketting = context.read();
     _marketting!.init(context);
     _marketting!.getMarketingViewAll(_getType());
     _getCatchedInfos();
@@ -65,7 +66,7 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
           image: _profileModel?.profilePic ?? '',
           initial: _profileModel?.name ?? 'LH'),
       body: Consumer(builder: (context, watch, child) {
-        final _response = watch(_markettingViewModel);
+        final _response = watch.watch(_markettingViewModel);
         if (_response.loading && !_response.isPagination) {
           return Center(
             child: SpinKitCubeGrid(

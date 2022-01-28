@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
+import 'package:provider/src/provider.dart';
 
 import '../../../../../database/hive_database.dart';
 import '../../../bank/account/add_bank_screen.dart';
@@ -44,8 +45,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     _getCatchedInfos();
-    _tabViewModel = context.read(_tabViewProvider);
-    _profileViewmodel = context.read(_profileProvider);
+    _tabViewModel = context.read();
+    _profileViewmodel = context.read();
     _profileViewmodel!.init(context);
     _profileViewmodel!.getUsersProfile();
     super.initState();

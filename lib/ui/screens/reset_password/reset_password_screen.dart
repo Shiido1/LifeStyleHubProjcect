@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/src/provider.dart';
 import '../../../helper/helper_handler.dart';
 import '../../../helper/routes/navigation.dart';
 import '../../../helper/routes/routes.dart';
@@ -33,7 +34,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   void initState() {
-    _resetPasswordViewModel = context.read(_resetNotifier);
+    _resetPasswordViewModel = context.read();
     _resetPasswordViewModel!.init(context);
     _initControllers();
     super.initState();
@@ -58,7 +59,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (_, watch, __) {
-      final _resetWatch = watch(_resetNotifier);
+      final _resetWatch = watch.watch(_resetNotifier);
       return LoadingOverlay(
         isLoading: _resetWatch.loading,
         child: Scaffold(

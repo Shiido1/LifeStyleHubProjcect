@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/src/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'dao/wallet_dao.dart';
@@ -29,7 +30,7 @@ class _WalletScreenState extends State<WalletScreen> {
 
   @override
   void initState() {
-    _walletViewmodel = context.read(_walletProvider);
+    _walletViewmodel = context.read();
     _walletViewmodel!.init(context);
     _refresh();
     super.initState();
@@ -48,7 +49,7 @@ class _WalletScreenState extends State<WalletScreen> {
       builder: (BuildContext context, Box<dynamic> box, Widget? child) {
         List<Data> walletList = walletDao!.convert(box).toList();
         return Consumer(builder: (context, watch, _) {
-          final _wallet = watch(_walletProvider);
+          final _wallet = watch.watch(_walletProvider);
           if (_wallet.loading) {
             return Center(
               child: SpinKitCubeGrid(

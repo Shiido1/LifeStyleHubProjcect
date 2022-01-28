@@ -16,6 +16,7 @@ import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/utils/image_picker.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:lifestyle_hub/utils/validators.dart';
+import 'package:provider/src/provider.dart';
 
 class VPPInformationsScreen extends StatefulWidget {
   final Data? lead;
@@ -48,7 +49,7 @@ class _VPPInformationsScreenState extends State<VPPInformationsScreen> {
 
   @override
   void initState() {
-    _networkViewModel = context.read(_networkProvider);
+    _networkViewModel = context.read();
     _networkViewModel!.init(context);
     _initializeControllers();
     super.initState();
@@ -70,7 +71,7 @@ class _VPPInformationsScreenState extends State<VPPInformationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (_, watch, __) {
-      final _profileWatcher = watch(_networkProvider);
+      final _profileWatcher = watch.watch(_networkProvider);
       return LoadingOverlay(
         isLoading: _profileWatcher.loading,
         child: Scaffold(

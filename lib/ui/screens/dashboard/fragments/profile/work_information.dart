@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/src/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'model/users_profile_model.dart';
 import '../../../../widgets/bottom_count_down.dart';
@@ -42,7 +43,7 @@ class _WorkInformationScreenState extends State<WorkInformationScreen> {
   @override
   void initState() {
     _initializeControllers();
-    _profileViewmodel = context.read(_profileProvider);
+    _profileViewmodel = context.read();
     _profileViewmodel!.init(context);
     super.initState();
   }
@@ -56,7 +57,7 @@ class _WorkInformationScreenState extends State<WorkInformationScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (_, watch, __) {
-      final _profileWatcher = watch(_profileProvider);
+      final _profileWatcher = watch.watch(_profileProvider);
       return LoadingOverlay(
         isLoading: _profileWatcher.loading,
         child: Scaffold(

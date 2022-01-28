@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/src/provider.dart';
 import 'widget/sender_widget.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -39,7 +40,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
 
   @override
   void initState() {
-    _messagingViewmodel = context.read(_messageViewModel);
+    _messagingViewmodel = context.read();
     _messagingViewmodel!.init(context);
     _messagingViewmodel!.openMessage(conversation!.id.toString());
     _currentItemSelected = _dropdownValues.first;
@@ -67,7 +68,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
           centerTitle: true,
           onTap: () => null),
       body: Consumer(builder: (context, watch, child) {
-        final _cachedMessage = watch(_messageViewModel);
+        final _cachedMessage = watch.watch(_messageViewModel);
         _cachedMessage.getCachedMessage(conversation!.id.toString());
 
         return Stack(

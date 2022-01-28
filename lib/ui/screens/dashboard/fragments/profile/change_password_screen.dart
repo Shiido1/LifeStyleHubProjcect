@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/src/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'model/change_password.dart';
 import '../../../../widgets/bottom_count_down.dart';
@@ -32,7 +33,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   void initState() {
-    _profileViewmodel = context.read(_profileProvider);
+    _profileViewmodel = context.read();
     _profileViewmodel!.init(context);
     super.initState();
   }
@@ -48,7 +49,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           showImage: false,
         ),
         body: Consumer(builder: (_, watch, __) {
-          final _profileWatch = watch(_profileProvider);
+          final _profileWatch = watch.watch(_profileProvider);
           return LoadingOverlay(
             isLoading: _profileWatch.loading,
             child: SafeArea(

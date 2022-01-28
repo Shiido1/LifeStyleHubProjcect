@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/src/provider.dart';
 import '../../../helper/helper_handler.dart';
 import '../../../helper/routes/navigation.dart';
 import '../../../helper/routes/routes.dart';
@@ -45,11 +46,11 @@ class _SignupScreenState extends State<SignupScreen> {
   RegisterViewModel? _registerViewModel;
 
   final _registerNotifier =
-      ChangeNotifierProvider((ref) => RegisterViewModel());
+  StateProvider((ref) => RegisterViewModel());
 
   @override
   void initState() {
-    _registerViewModel = context.read(_registerNotifier);
+    _registerViewModel = context.read();
     _registerViewModel!.init(context);
     super.initState();
   }
@@ -58,7 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, watch, child) {
-        _registerViewModel = watch(_registerNotifier);
+        _registerViewModel = watch.watch(_registerNotifier);
         return LoadingOverlay(
           isLoading: _registerViewModel!.loading,
           child: Scaffold(

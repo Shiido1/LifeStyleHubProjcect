@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/src/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'dao/ticket_dao.dart';
@@ -33,7 +34,7 @@ class _TicketScreenState extends State<TicketScreen> {
 
   @override
   void initState() {
-    _ticketViewmodel = context.read(_ticketNotifier);
+    _ticketViewmodel = context.read();
     _ticketViewmodel!.init(context);
     _ticketViewmodel!.getAllTickets();
     _ticketViewmodel!.ticketStatus();
@@ -49,7 +50,7 @@ class _TicketScreenState extends State<TicketScreen> {
           List<Data> _ticket = ticketDao!.convert(box);
           _ticketViewmodel!.fetchFiveItems(_ticket);
           return Consumer(builder: (context, watch, child) {
-            final _response = watch(_ticketNotifier);
+            final _response = watch.watch(_ticketNotifier);
             if (_response.loading) {
               return Center(
                 child: SpinKitCubeGrid(

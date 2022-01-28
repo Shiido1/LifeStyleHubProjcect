@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/src/provider.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
@@ -26,7 +27,7 @@ class _AllWalletScreenState extends State<AllWalletScreen> {
 
   @override
   void initState() {
-    _walletViewmodel = context.read(_walletProvider);
+    _walletViewmodel = context.read();
     _walletViewmodel!.init(context);
     _refresh();
     _getCatchedInfos();
@@ -58,7 +59,7 @@ class _AllWalletScreenState extends State<AllWalletScreen> {
         builder: (BuildContext context, Box<dynamic> box, Widget? child) {
           List<Data> walletList = walletDao!.convert(box).toList();
           return Consumer(builder: (context, watch, _) {
-            final _wallet = watch(_walletProvider);
+            final _wallet = watch.watch(_walletProvider);
             if (_wallet.loading) {
               return Center(
                 child: CircularProgressIndicator(),

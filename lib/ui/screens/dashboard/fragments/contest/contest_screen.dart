@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/src/provider.dart';
 import 'dao/contest_dao.dart';
 import 'model/view_contest_model.dart';
 import 'viewmodel/contest_viewmodel.dart';
@@ -21,7 +22,7 @@ class _ContestScreenState extends State<ContestScreen> {
 
   @override
   void initState() {
-    _contestViewModel = context.read(_contestProvider);
+    _contestViewModel = context.read();
     _contestViewModel!.init(context);
     _contestViewModel!.getListContest();
     super.initState();
@@ -41,7 +42,7 @@ class _ContestScreenState extends State<ContestScreen> {
                 List<ViewContestModel> _contestList =
                     contestDao!.convert(box).toList();
                 return Consumer(builder: (_, watch, __) {
-                  final _contestWatch = watch(_contestProvider);
+                  final _contestWatch = watch.watch(_contestProvider);
                   return SmartRefresher(
                     controller: _contestWatch.refreshController,
                     onRefresh: () => _contestViewModel!.getListContest(),

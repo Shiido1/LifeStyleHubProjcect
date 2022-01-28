@@ -20,6 +20,7 @@ import '../repository/report_repository.dart';
 
 ReportRepository _reportRepository = ReportRepository();
 
+late double amountValue;
 class ReportViewmodel extends BaseViewModel {
   late BuildContext _context;
   bool _loading = false;
@@ -39,6 +40,10 @@ class ReportViewmodel extends BaseViewModel {
   VVPFreeMemberTrail? vvpFreeMemberTrail;
   VVPUpgradedAnalysisModel? vvpUpgradedAnalysisModel;
   List<vppmodel.Vpp>? vpp;
+
+  double? signUpValue;
+
+
 
   final RefreshController _refreshController = RefreshController();
 
@@ -60,6 +65,8 @@ class ReportViewmodel extends BaseViewModel {
     _loading = false;
     notifyListeners();
   }
+
+
 
   /// get users profile
   Future<void> reportPromotionSummary() async {
@@ -172,6 +179,8 @@ class ReportViewmodel extends BaseViewModel {
   Map<String, double> convertedVppMap() {
     Map<String, double> _map = Map<String, double>();
     vvpFreeMemberTrail?.vppAnalytics?.vpp?.map((e) {
+      print('printing problem from DAY BFR yesterday ${e.signups.toString()}');
+
       _map[e.name!] = e.signups!.toDouble();
     }).toList();
     // notifyListeners();
@@ -182,6 +191,9 @@ class ReportViewmodel extends BaseViewModel {
     Map<String, double> _map = Map<String, double>();
     vvpUpgradedAnalysisModel?.vppAnalytics?.vpp?.map((e) {
       _map[e.name!] = e.signups!.toDouble();
+      print('printing problem from yesterday ${e.commission.toString()}');
+      amountValue = e.commission!.toDouble();
+      logger.d('print amount in code $amountValue');
     }).toList();
     // notifyListeners();
     return _map;

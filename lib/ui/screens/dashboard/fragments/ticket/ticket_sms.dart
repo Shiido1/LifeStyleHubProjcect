@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/src/provider.dart';
 import 'viewmodel/ticket_viewmodel.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../../../../widgets/image_loader.dart';
@@ -30,7 +31,7 @@ class _TicketDetailsSmsState extends State<TicketDetailsSms> {
 
   @override
   void initState() {
-    _ticketViewmodel = context.read(_ticketNotifier);
+    _ticketViewmodel = context.read();
     _ticketViewmodel!.init(context);
     super.initState();
   }
@@ -50,7 +51,7 @@ class _TicketDetailsSmsState extends State<TicketDetailsSms> {
           onTap: () => showOpenedTicketMenuModal(context, element)),
       body: Consumer(builder: (context, watch, child) {
         // ignore: unused_local_variable
-        final _response = watch(_ticketNotifier);
+        final _response = watch.watch(_ticketNotifier);
 
         return Stack(
           children: [

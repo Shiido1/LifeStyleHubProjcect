@@ -5,6 +5,7 @@ import 'package:lifestyle_hub/utils/pallets.dart';
 
 _leftTitles(BuildContext context) {
   return SideTitles(
+    interval: 200,
       showTitles: true,
       getTitles: (value) {
         switch (value.toInt()) {
@@ -64,7 +65,7 @@ flTitle(BuildContext context) {
     topTitles: SideTitles(showTitles: false),
     rightTitles: SideTitles(
       showTitles: true,
-      reservedSize: getDeviceWidth(context) / 112,
+      reservedSize: getDeviceWidth(context) / 100,
       getTitles: (value) {
         // switch (value.toInt()) {
         //   case 1:
@@ -91,7 +92,7 @@ flGrid(BuildContext context) {
     getDrawingHorizontalLine: (value) {
       return FlLine(
         color: Pallets.grey100,
-        strokeWidth: 1,
+        strokeWidth: 2,
       );
     },
   );

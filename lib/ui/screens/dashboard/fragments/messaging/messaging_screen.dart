@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/widgets/search_widget.dart';
+import 'package:provider/src/provider.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -46,7 +47,7 @@ class _MessagingScreenState extends State<MessagingScreen>
 
   @override
   void initState() {
-    _messagingViewmodel = context.read(_messageViewModel);
+    _messagingViewmodel = context.read();
     _messagingViewmodel!.init(context);
     _messagingViewmodel!.getLastMessage();
 
@@ -160,7 +161,7 @@ class _MessagingScreenState extends State<MessagingScreen>
           builder: (context, Box<dynamic> box, __) {
             List<Data> _messageList = messageDao!.convert(box).toList();
             return Consumer(builder: (context, watch, __) {
-              final _provider = watch(_messageViewModel);
+              final _provider = watch.watch(_messageViewModel);
               if (_provider.loading) {
                 return Center(
                   child: SpinKitCubeGrid(

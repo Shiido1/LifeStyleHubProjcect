@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/src/provider.dart';
 import '../../../../../helper/configs/constants.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
@@ -41,7 +42,7 @@ class _NextOfKinInformationScreenState
 
   @override
   void initState() {
-    _profileViewmodel = context.read(_profileProvider);
+    _profileViewmodel = context.read();
     _profileViewmodel!.init(context);
     _getCatchedInfos();
     super.initState();
@@ -67,7 +68,7 @@ class _NextOfKinInformationScreenState
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (_, watch, __) {
-      final _profileWatcher = watch(_profileProvider);
+      final _profileWatcher = watch.watch(_profileProvider);
       return LoadingOverlay(
         isLoading: _profileWatcher.loading,
         child: Scaffold(

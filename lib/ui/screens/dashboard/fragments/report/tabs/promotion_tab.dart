@@ -242,7 +242,7 @@ class _PromotionTabState extends State<PromotionTab> {
                     fontSize: 16,
                   ),
                   SizedBox(height: 16),
-                  Container(
+                  provider.freeMemberModel==null?Container():Container(
                     child: pieChart.PieChart(
                       chartType: ChartType.disc,
                       chartRadius: 245,
@@ -327,7 +327,7 @@ class _PromotionTabState extends State<PromotionTab> {
                     fontSize: 16,
                   ),
                   SizedBox(height: 16),
-                  Container(
+                  provider.upgradedMembersAnalysis==null?Container():Container(
                     child: pieChart.PieChart(
                       chartType: ChartType.disc,
                       chartRadius: 245,

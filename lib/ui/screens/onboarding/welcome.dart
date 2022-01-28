@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/src/provider.dart';
 import '../../../helper/configs/constants.dart';
 import '../../../helper/helper_handler.dart';
 import '../login/model/login_model.dart';
@@ -27,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   void initState() {
-    _login = context.read(_loginNotifier);
+    _login = context.read();
     _login!.init(context);
     _loginUser();
     super.initState();

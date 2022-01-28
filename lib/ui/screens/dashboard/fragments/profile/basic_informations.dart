@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/src/provider.dart';
 import '../../../../../helper/configs/constants.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
@@ -45,7 +46,7 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
   @override
   void initState() {
     _getCatchedInfos();
-    _profileViewmodel = context.read(_profileProvider);
+    _profileViewmodel = context.read();
     _profileViewmodel!.init(context);
     super.initState();
   }
@@ -75,7 +76,7 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (_, watch, __) {
-      final _profileWatcher = watch(_profileProvider);
+      final _profileWatcher = watch.watch(_profileProvider);
       return LoadingOverlay(
         isLoading: _profileWatcher.loading,
         child: Scaffold(

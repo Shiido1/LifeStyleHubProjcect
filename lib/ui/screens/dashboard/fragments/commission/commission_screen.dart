@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/src/provider.dart';
 import '../../../../../helper/routes/navigation.dart';
 import '../integrated/dao/point_dao.dart';
 import '../integrated/model/point_history_model.dart';
@@ -38,11 +39,11 @@ class _CommissionScreenState extends State<CommissionScreen> {
 
   @override
   void initState() {
-    _commissionViewmodel = context.read(_commissionProvider);
+    _commissionViewmodel = context.read();
     _commissionViewmodel!.init(context);
     _commissionViewmodel!.getCommissions();
-    _pointHistoryViewmodel = context.read(_pointHistoryProvider);
-    _pointHistoryViewmodel!.init(context);
+    _pointHistoryViewmodel = context.read();
+    _pointHistoryViewmodel?.init(context);
     _pointHistoryViewmodel!.getPointHistory();
     super.initState();
   }
@@ -54,7 +55,7 @@ class _CommissionScreenState extends State<CommissionScreen> {
       builder: (BuildContext context, Box<dynamic> box, Widget? child) {
         CommissionModel? _commissionModel = commissionDao!.convert(box);
         return Consumer(builder: (context, watch, _) {
-          final _commission = watch(_commissionProvider);
+          final _commission = watch.watch(_commissionProvider);
           if (_commission.loading) {
             return Center(
               child: SpinKitCubeGrid(

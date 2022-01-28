@@ -1,4 +1,3 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
@@ -6,7 +5,8 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/vpp/vpp_pro
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/analytical_graph.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/card.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/left_tile.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/chart/bar_chart.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/chart_container.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:pie_chart/pie_chart.dart' as pieChart;
@@ -35,21 +35,6 @@ class _VPPTabState extends State<VPPTab> {
     _reportViewmodel!.reportPromotionVppUpgradedMembers();
     super.initState();
   }
-
-  // final List<FlSpot> dummyData1 = List.generate(3, (index) {
-  //   return FlSpot(index.toDouble(), index * Random().nextDouble());
-  // });
-
-  // final List<FlSpot> dummyData2 = List.generate(10, (index) {
-  //   return FlSpot(index.toDouble(), index * Random().nextDouble());
-  // });
-
-  Map<String, double> dataMap = {
-    'flutter': 5,
-    'vscode': 4,
-    'reactr': 3,
-    'android studio': 2,
-  };
 
   _container(
       {required int? point,
@@ -206,33 +191,40 @@ class _VPPTabState extends State<VPPTab> {
                       )
                     ],
                   ),
-                  SizedBox(height: 44),
                   Container(
                     height: 300,
-                    child: LineChart(
-                      LineChartData(
-                        maxX: 11,
-                        maxY: 3,
-                        minX: 0,
-                        minY: 0,
-                        borderData: FlBorderData(show: false),
-                        titlesData: flTitle(context),
-                        gridData: flGrid(context),
-                        lineBarsData: [
-                          LineChartBarData(
-                            spots: provider.analysisData,
-                            isCurved: true,
-                            barWidth: 3,
-                            colors: [Pallets.blue500],
-                          ),
-                        ],
-                      ),
+                    child: ListView(
+                      padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+                      children: <Widget>[
+                        ChartContainer(
+                            title: 'Bar Chart',
+                            chart: provider.vvpUpgradedAnalysisModel==null?Container():BarChartContent()
+                        ),
+                      ],
                     ),
+                    // child: LineChart(
+                    //   LineChartData(
+                    //     maxX: 11,
+                    //     maxY: 3,
+                    //     minX: 0,
+                    //     minY: 0,
+                    //     borderData: FlBorderData(show: false),
+                    //     titlesData: flTitle(context),
+                    //     gridData: flGrid(context),
+                    //     lineBarsData: [
+                    //       LineChartBarData(
+                    //         spots: provider.analysisData,
+                    //         isCurved: true,
+                    //         barWidth: 3,
+                    //         colors: [Pallets.blue500],
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 24),
             TextView(
               text: 'Free trial members',
               fontWeight: FontWeight.w700,
@@ -267,7 +259,7 @@ class _VPPTabState extends State<VPPTab> {
                     fontSize: 16,
                   ),
                   SizedBox(height: 16),
-                  Container(
+                  provider.vvpFreeMemberTrail==null?Container():Container(
                     child: pieChart.PieChart(
                       chartType: ChartType.ring,
                       chartRadius: 245,
@@ -353,7 +345,7 @@ class _VPPTabState extends State<VPPTab> {
                     fontSize: 16,
                   ),
                   SizedBox(height: 16),
-                  Container(
+                  provider.vvpUpgradedAnalysisModel==null?Container():Container(
                     child: pieChart.PieChart(
                       chartType: ChartType.ring,
                       chartRadius: 245,
@@ -382,7 +374,6 @@ class _VPPTabState extends State<VPPTab> {
                       ? provider.vvpUpgradedAnalysisModel!.vppAnalytics!.vpp!
                           .map((e) => AnalyticalGraph(
                                 element: AnalyticsModel(
-                                    color: Pallets.amber400,
                                     textClick: e.commission ?? 0,
                                     textName: e.name ?? '',
                                     textSignup: e.signups ?? 0),
