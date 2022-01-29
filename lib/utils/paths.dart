@@ -53,5 +53,9 @@ class Paths {
       'api/reports/vpp/free-trial-members';
   static String reportPromotionVppUpgradedMember =
       'api/reports/vpp/upgraded-members';
+  static String freeSignUpMember =
+      '/api/reports/vpp/free-trial-members/signups';
+  static String upgradeSignUpMember =
+      '/api/reports/vpp/upgraded-members/signups';
   static String generateOTP = 'api/otp';
 }

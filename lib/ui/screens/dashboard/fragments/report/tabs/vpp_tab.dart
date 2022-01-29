@@ -33,6 +33,8 @@ class _VPPTabState extends State<VPPTab> {
     _reportViewmodel!.promotionIncome();
     _reportViewmodel!.reportPromotionVppTrialMembers();
     _reportViewmodel!.reportPromotionVppUpgradedMembers();
+    _reportViewmodel!.vppUpgradedMembersBarChartData();
+
     super.initState();
   }
 
@@ -198,7 +200,7 @@ class _VPPTabState extends State<VPPTab> {
                       children: <Widget>[
                         ChartContainer(
                             title: 'Bar Chart',
-                            chart: provider.vvpUpgradedAnalysisModel==null?Container():BarChartContent()
+                            chart: provider.freeSignUpModel==null?Container():BarChartContent()
                         ),
                       ],
                     ),

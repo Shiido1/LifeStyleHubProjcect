@@ -1,8 +1,10 @@
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_sign_up_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_promotion_income_analysis_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_summary_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_vpp_analysis_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/report_vpp_upgraded_analysis_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/upgrade_sign_up.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/upgraded_member_model.dart';
 
 import '../../../../../../helper/configs/instances.dart';
@@ -73,4 +75,31 @@ class ReportRepository {
       throw e;
     }
   }
+
+  Future<FreeSignUpModel> freeSignUpModel(String year)async{
+    var map ={"year":year};
+    try {
+      final _response = await apiBaseHelper.get(
+          url: Paths.freeSignUpMember,
+          queryParameters: map,
+          options: await getDioHeader());
+      return FreeSignUpModel.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<UpgradeSignUpModel> upgradeSignUpModel(String year)async{
+    var map ={"year":year};
+    try {
+      final _response = await apiBaseHelper.get(
+          url: Paths.upgradeSignUpMember,
+          queryParameters: map,
+          options: await getDioHeader());
+      return UpgradeSignUpModel.fromJson(_response);
+    } catch (e) {
+      throw e;
+    }
+  }
+
 }

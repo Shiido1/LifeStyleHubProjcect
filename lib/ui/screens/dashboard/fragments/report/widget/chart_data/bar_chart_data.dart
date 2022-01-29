@@ -4,6 +4,8 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/re
 import 'package:lifestyle_hub/utils/pallets.dart';
 
 
+
+
 List<BarChartGroupData> barChartGroupData = [
   BarChartGroupData(x: 0, barRods: [
   BarChartRodData(y: amountValue, borderRadius:BorderRadius.zero,colors: [Pallets.orange600, Pallets.orange600]),
