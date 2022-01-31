@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/vpp/vpp_profile.dart';
@@ -6,7 +7,8 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/re
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/analytical_graph.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/card.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/chart/bar_chart.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/chart_container.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/chart/income_bar_chart.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/sign_up_chart_container.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:pie_chart/pie_chart.dart' as pieChart;
@@ -22,6 +24,7 @@ class VPPTab extends StatefulWidget {
 
 class _VPPTabState extends State<VPPTab> {
   ReportViewmodel? _reportViewmodel;
+  bool? isChart = true;
 
   @override
   void initState() {
@@ -34,7 +37,8 @@ class _VPPTabState extends State<VPPTab> {
     _reportViewmodel!.reportPromotionVppTrialMembers();
     _reportViewmodel!.reportPromotionVppUpgradedMembers();
     _reportViewmodel!.vppUpgradedMembersBarChartData();
-
+    _reportViewmodel!.freeSignUpModelRes();
+    _reportViewmodel!.upGradedMemmberModelRes();
     super.initState();
   }
 
@@ -81,6 +85,14 @@ class _VPPTabState extends State<VPPTab> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+        BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width,
+            maxHeight: MediaQuery.of(context).size.height),
+        designSize: Size(360, 690),
+        context: context,
+        minTextAdapt: true,
+        orientation: Orientation.portrait);
     return Consumer<ReportViewmodel>(builder: (_, provider, __) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -181,7 +193,7 @@ class _VPPTabState extends State<VPPTab> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TextView(
-                        text: 'Income chart',
+                        text: isChart == true ? 'SignUp chart' : 'Income Chart',
                         fontWeight: FontWeight.w700,
                         textAlign: TextAlign.left,
                         fontSize: 16,
@@ -193,40 +205,71 @@ class _VPPTabState extends State<VPPTab> {
                       )
                     ],
                   ),
-                  Container(
-                    height: 300,
-                    child: ListView(
-                      padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
-                      children: <Widget>[
-                        ChartContainer(
-                            title: 'Bar Chart',
-                            chart: provider.freeSignUpModel==null?Container():BarChartContent()
+                  isChart == true
+                      ? Container(
+                          height: 300,
+                          child: ChartContainer(
+                              title: 'Bar Chart',
+                              chart: provider.freeSignUpModel == null
+                                  ? Container()
+                                  : BarChartContent()),
+                        )
+                      : Container(
+                          height: 300,
+                          child: ChartContainer(
+                              title: 'Bar Chart',
+                              chart: provider.upgradeSignUpModel == null
+                                  ? Container()
+                                  : IncomeBarChartContent()),
                         ),
-                      ],
-                    ),
-                    // child: LineChart(
-                    //   LineChartData(
-                    //     maxX: 11,
-                    //     maxY: 3,
-                    //     minX: 0,
-                    //     minY: 0,
-                    //     borderData: FlBorderData(show: false),
-                    //     titlesData: flTitle(context),
-                    //     gridData: flGrid(context),
-                    //     lineBarsData: [
-                    //       LineChartBarData(
-                    //         spots: provider.analysisData,
-                    //         isCurved: true,
-                    //         barWidth: 3,
-                    //         colors: [Pallets.blue500],
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () => setState(() {
+                          isChart = true;
+                        }),
+                        child: Container(
+                          padding: EdgeInsets.all(8.w),
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Pallets.white,
+                            size: 20,
+                          ),
+                          decoration: BoxDecoration(
+                              color: Pallets.orange500,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8))),
+                        ),
+                      ),
+                      TextView(
+                        text: isChart == true ? 'Signup chart' : 'Income Chart',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
+                      InkWell(
+                        onTap: () => setState(() {
+                          isChart = false;
+                        }),
+                        child: Container(
+                          padding: EdgeInsets.all(8.w),
+                          child: Icon(
+                            Icons.arrow_forward,
+                            color: Pallets.white,
+                            size: 20,
+                          ),
+                          decoration: BoxDecoration(
+                              color: Pallets.orange500,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8))),
+                        ),
+                      )
+                    ],
+                  )
                 ],
               ),
             ),
+            SizedBox(height: 16),
             TextView(
               text: 'Free trial members',
               fontWeight: FontWeight.w700,
@@ -261,25 +304,27 @@ class _VPPTabState extends State<VPPTab> {
                     fontSize: 16,
                   ),
                   SizedBox(height: 16),
-                  provider.vvpFreeMemberTrail==null?Container():Container(
-                    child: pieChart.PieChart(
-                      chartType: ChartType.ring,
-                      chartRadius: 245,
-                      dataMap: provider.convertedVppMap(),
-                      legendOptions: LegendOptions(
-                        showLegendsInRow: false,
-                        legendPosition: LegendPosition.bottom,
-                        showLegends: false,
-                        legendShape: BoxShape.circle,
-                      ),
-                      chartValuesOptions: ChartValuesOptions(
-                        showChartValueBackground: false,
-                        showChartValues: false,
-                        showChartValuesInPercentage: false,
-                        showChartValuesOutside: false,
-                      ),
-                    ),
-                  ),
+                  provider.vvpFreeMemberTrail == null
+                      ? Container()
+                      : Container(
+                          child: pieChart.PieChart(
+                            chartType: ChartType.ring,
+                            chartRadius: 245,
+                            dataMap: provider.convertedVppMap(),
+                            legendOptions: LegendOptions(
+                              showLegendsInRow: false,
+                              legendPosition: LegendPosition.bottom,
+                              showLegends: false,
+                              legendShape: BoxShape.circle,
+                            ),
+                            chartValuesOptions: ChartValuesOptions(
+                              showChartValueBackground: false,
+                              showChartValues: false,
+                              showChartValuesInPercentage: false,
+                              showChartValuesOutside: false,
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ),
@@ -347,25 +392,27 @@ class _VPPTabState extends State<VPPTab> {
                     fontSize: 16,
                   ),
                   SizedBox(height: 16),
-                  provider.vvpUpgradedAnalysisModel==null?Container():Container(
-                    child: pieChart.PieChart(
-                      chartType: ChartType.ring,
-                      chartRadius: 245,
-                      dataMap: provider.convertedVppUpgradedMap(),
-                      legendOptions: LegendOptions(
-                        showLegendsInRow: false,
-                        legendPosition: LegendPosition.bottom,
-                        showLegends: false,
-                        legendShape: BoxShape.circle,
-                      ),
-                      chartValuesOptions: ChartValuesOptions(
-                        showChartValueBackground: false,
-                        showChartValues: false,
-                        showChartValuesInPercentage: false,
-                        showChartValuesOutside: false,
-                      ),
-                    ),
-                  ),
+                  provider.vvpUpgradedAnalysisModel == null
+                      ? Container()
+                      : Container(
+                          child: pieChart.PieChart(
+                            chartType: ChartType.ring,
+                            chartRadius: 245,
+                            dataMap: provider.convertedVppUpgradedMap(),
+                            legendOptions: LegendOptions(
+                              showLegendsInRow: false,
+                              legendPosition: LegendPosition.bottom,
+                              showLegends: false,
+                              legendShape: BoxShape.circle,
+                            ),
+                            chartValuesOptions: ChartValuesOptions(
+                              showChartValueBackground: false,
+                              showChartValues: false,
+                              showChartValuesInPercentage: false,
+                              showChartValuesOutside: false,
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';
@@ -28,14 +27,11 @@ class ViewAllMarkettingScreen extends StatefulWidget {
 }
 
 class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
-  final _markettingViewModel =
-      ChangeNotifierProvider((ref) => MarkettingViewmodel());
-
   MarkettingViewmodel? _marketting;
 
   @override
   void initState() {
-    _marketting = context.read();
+    _marketting = Provider.of<MarkettingViewmodel>(context, listen: false);
     _marketting!.init(context);
     _marketting!.getMarketingViewAll(_getType());
     _getCatchedInfos();
@@ -65,9 +61,9 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
           centerTitle: true,
           image: _profileModel?.profilePic ?? '',
           initial: _profileModel?.name ?? 'LH'),
-      body: Consumer(builder: (context, watch, child) {
-        final _response = watch.watch(_markettingViewModel);
-        if (_response.loading && !_response.isPagination) {
+      body: Consumer<MarkettingViewmodel>(builder: (context, watch, child) {
+        // final _response = watch.watch(_markettingViewModel);
+        if (watch.loading && !watch.isPagination) {
           return Center(
             child: SpinKitCubeGrid(
               color: Pallets.orange600,
@@ -90,7 +86,7 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
                 //   controller: null,
                 //   keyboardType: TextInputType.emailAddress,
                 // ),
-                ..._response.getResourceModelList!.map((element) {
+                ...watch.getResourceModelList!.map((element) {
                   return Container(
                     margin: EdgeInsets.only(bottom: 16),
                     child: Column(

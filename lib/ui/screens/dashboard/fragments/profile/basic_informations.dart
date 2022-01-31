@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/configs/constants.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
@@ -32,7 +31,6 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
   bool _stateSelected = false;
   int? _radioID = 0;
 
-  final _profileProvider = ChangeNotifierProvider((_) => ProfileViewmodel());
   ProfileViewmodel? _profileViewmodel;
 
   TextEditingController? _fullNameController;
@@ -46,7 +44,7 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
   @override
   void initState() {
     _getCatchedInfos();
-    _profileViewmodel = context.read();
+    _profileViewmodel = Provider.of<ProfileViewmodel>(context, listen: false);
     _profileViewmodel!.init(context);
     super.initState();
   }
@@ -75,10 +73,9 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (_, watch, __) {
-      final _profileWatcher = watch.watch(_profileProvider);
+    return Consumer<ProfileViewmodel>(builder: (_, watch, __) {
       return LoadingOverlay(
-        isLoading: _profileWatcher.loading,
+        isLoading: watch.loading,
         child: Scaffold(
           appBar: getCustomAppBar(context,
               title: 'Basic information',

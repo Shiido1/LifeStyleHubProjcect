@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import '../../../bank/account/add_bank_screen.dart';
@@ -24,15 +23,14 @@ class BankListScreen extends StatefulWidget {
 }
 
 class _BankListScreenState extends State<BankListScreen> {
-  final _accountProvider =
-      ChangeNotifierProvider((_) => BankAccountViewmodel());
   BankAccountViewmodel? _accountViewmodel;
 
   final List<String> _optionsList = ['Edit details', 'Delete bank'];
 
   @override
   void initState() {
-    _accountViewmodel = context.read();
+    _accountViewmodel =
+        Provider.of<BankAccountViewmodel>(context, listen: false);
     _accountViewmodel!.init(context);
     _accountViewmodel!.getMyBankAccounts();
     super.initState();
@@ -53,9 +51,8 @@ class _BankListScreenState extends State<BankListScreen> {
               showImage: false,
               centerTitle: true,
             ),
-            body: Consumer(builder: (_, watch, __) {
-              final _accountWatcher = watch.watch(_accountProvider);
-              if (_accountWatcher.loading) {
+            body: Consumer<BankAccountViewmodel>(builder: (_, watch, __) {
+              if (watch.loading) {
                 return Center(
                     child: SpinKitCubeGrid(
                   color: Pallets.orange600,

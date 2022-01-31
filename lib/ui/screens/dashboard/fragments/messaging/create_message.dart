@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
@@ -32,14 +31,12 @@ class _CreateMessageScreenState extends State<CreateMessageScreen> {
   bool _autoValidate = false;
   var _globalFormKey = GlobalKey<FormState>();
 
-  final _messageViewModel =
-      ChangeNotifierProvider((ref) => MessagingViewmodel());
-
   MessagingViewmodel? _messagingViewmodel;
 
   @override
   void initState() {
-    _messagingViewmodel = context.read();
+    _messagingViewmodel =
+        Provider.of<MessagingViewmodel>(context, listen: false);
     _messagingViewmodel!.init(context);
     _getCatchedInfos();
     super.initState();
@@ -61,13 +58,12 @@ class _CreateMessageScreenState extends State<CreateMessageScreen> {
             centerTitle: true,
             image: _profileModel?.profilePic ?? '',
             initial: _profileModel?.name ?? 'LH'),
-        body: Consumer(
+        body: Consumer<MessagingViewmodel>(
           builder: (context, watch, child) {
-            final _provider = watch.watch(_messageViewModel);
             return Form(
               key: _globalFormKey,
               child: LoadingOverlay(
-                isLoading: _provider.loading,
+                isLoading: watch.loading,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ListView(

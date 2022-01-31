@@ -5,7 +5,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_m
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/analytical_graph.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/card.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/left_tile.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/chart/line_chart/line_chart.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -136,12 +136,18 @@ class _PromotionTabState extends State<PromotionTab> {
                     child: LineChart(
                       LineChartData(
                         maxX: 11,
-                        maxY: 3,
+                        maxY: 5000,
                         minX: 0,
                         minY: 0,
-                        borderData: FlBorderData(show: false),
-                        titlesData: flTitle(context),
-                        gridData: flGrid(context),
+                        titlesData: flLineTitle(context),
+                        gridData: flLineGrid(context),
+                        borderData: FlBorderData(
+                            border: const Border(
+                          top: BorderSide.none,
+                          right: BorderSide.none,
+                          left: BorderSide.none,
+                          bottom: BorderSide.none,
+                        )),
                         lineBarsData: [
                           LineChartBarData(
                             spots: provider.analysisData,
@@ -154,7 +160,7 @@ class _PromotionTabState extends State<PromotionTab> {
                     ),
                   ),
                   SizedBox(
-                    height: 16,
+                    height: 32,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -242,25 +248,27 @@ class _PromotionTabState extends State<PromotionTab> {
                     fontSize: 16,
                   ),
                   SizedBox(height: 16),
-                  provider.freeMemberModel==null?Container():Container(
-                    child: pieChart.PieChart(
-                      chartType: ChartType.disc,
-                      chartRadius: 245,
-                      dataMap: provider.convertedMap(),
-                      legendOptions: LegendOptions(
-                        showLegendsInRow: false,
-                        legendPosition: LegendPosition.bottom,
-                        showLegends: false,
-                        legendShape: BoxShape.circle,
-                      ),
-                      chartValuesOptions: ChartValuesOptions(
-                        showChartValueBackground: false,
-                        showChartValues: false,
-                        showChartValuesInPercentage: false,
-                        showChartValuesOutside: false,
-                      ),
-                    ),
-                  ),
+                  provider.freeMemberModel == null
+                      ? Container()
+                      : Container(
+                          child: pieChart.PieChart(
+                            chartType: ChartType.disc,
+                            chartRadius: 245,
+                            dataMap: provider.convertedMap(),
+                            legendOptions: LegendOptions(
+                              showLegendsInRow: false,
+                              legendPosition: LegendPosition.bottom,
+                              showLegends: false,
+                              legendShape: BoxShape.circle,
+                            ),
+                            chartValuesOptions: ChartValuesOptions(
+                              showChartValueBackground: false,
+                              showChartValues: false,
+                              showChartValuesInPercentage: false,
+                              showChartValuesOutside: false,
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ),
@@ -327,25 +335,27 @@ class _PromotionTabState extends State<PromotionTab> {
                     fontSize: 16,
                   ),
                   SizedBox(height: 16),
-                  provider.upgradedMembersAnalysis==null?Container():Container(
-                    child: pieChart.PieChart(
-                      chartType: ChartType.disc,
-                      chartRadius: 245,
-                      dataMap: provider.convertedUpgradedMemberMap(),
-                      legendOptions: LegendOptions(
-                        showLegendsInRow: false,
-                        legendPosition: LegendPosition.bottom,
-                        showLegends: false,
-                        legendShape: BoxShape.circle,
-                      ),
-                      chartValuesOptions: ChartValuesOptions(
-                        showChartValueBackground: false,
-                        showChartValues: false,
-                        showChartValuesInPercentage: false,
-                        showChartValuesOutside: false,
-                      ),
-                    ),
-                  ),
+                  provider.upgradedMembersAnalysis == null
+                      ? Container()
+                      : Container(
+                          child: pieChart.PieChart(
+                            chartType: ChartType.disc,
+                            chartRadius: 245,
+                            dataMap: provider.convertedUpgradedMemberMap(),
+                            legendOptions: LegendOptions(
+                              showLegendsInRow: false,
+                              legendPosition: LegendPosition.bottom,
+                              showLegends: false,
+                              legendShape: BoxShape.circle,
+                            ),
+                            chartValuesOptions: ChartValuesOptions(
+                              showChartValueBackground: false,
+                              showChartValues: false,
+                              showChartValuesInPercentage: false,
+                              showChartValuesOutside: false,
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ),

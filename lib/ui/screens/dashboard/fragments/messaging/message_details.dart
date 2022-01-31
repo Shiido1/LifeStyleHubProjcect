@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'widget/sender_widget.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -30,9 +29,6 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
 
   _MessageDetailsSmsState(this.conversation);
 
-  final _messageViewModel =
-      ChangeNotifierProvider((ref) => MessagingViewmodel());
-
   MessagingViewmodel? _messagingViewmodel;
 
   final TextEditingController _controller = TextEditingController();
@@ -40,7 +36,8 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
 
   @override
   void initState() {
-    _messagingViewmodel = context.read();
+    _messagingViewmodel =
+        Provider.of<MessagingViewmodel>(context, listen: false);
     _messagingViewmodel!.init(context);
     _messagingViewmodel!.openMessage(conversation!.id.toString());
     _currentItemSelected = _dropdownValues.first;
@@ -67,9 +64,9 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
           showMoreMenu: true,
           centerTitle: true,
           onTap: () => null),
-      body: Consumer(builder: (context, watch, child) {
-        final _cachedMessage = watch.watch(_messageViewModel);
-        _cachedMessage.getCachedMessage(conversation!.id.toString());
+      body: Consumer<MessagingViewmodel>(builder: (context, watch, child) {
+        // final _cachedMessage = watch.watch(_messageViewModel);
+        // _cachedMessage.getCachedMessage(conversation!.id.toString());
 
         return Stack(
           children: [
@@ -113,7 +110,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
                         ),
                       ),
                     ),
-                    ..._cachedMessage.openedMessage.map((message) {
+                    ...watch.openedMessage.map((message) {
                       if (message.sender?.id == _usersProfileModel!.id) {
                         return SenderText(message);
                       }

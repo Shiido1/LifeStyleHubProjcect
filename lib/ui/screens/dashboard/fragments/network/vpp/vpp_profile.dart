@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
@@ -16,7 +15,7 @@ import 'package:lifestyle_hub/ui/widgets/overlay.dart';
 import 'package:lifestyle_hub/utils/image_picker.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:lifestyle_hub/utils/validators.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class VPPInformationsScreen extends StatefulWidget {
   final Data? lead;
@@ -30,7 +29,6 @@ class VPPInformationsScreen extends StatefulWidget {
 }
 
 class _VPPInformationsScreenState extends State<VPPInformationsScreen> {
-  final _networkProvider = ChangeNotifierProvider((_) => NetworkViewModel());
   NetworkViewModel? _networkViewModel;
 
   TextEditingController? _fullNameController;
@@ -49,7 +47,7 @@ class _VPPInformationsScreenState extends State<VPPInformationsScreen> {
 
   @override
   void initState() {
-    _networkViewModel = context.read();
+    _networkViewModel = Provider.of<NetworkViewModel>(context, listen: false);
     _networkViewModel!.init(context);
     _initializeControllers();
     super.initState();
@@ -70,10 +68,9 @@ class _VPPInformationsScreenState extends State<VPPInformationsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (_, watch, __) {
-      final _profileWatcher = watch.watch(_networkProvider);
+    return Consumer<NetworkViewModel>(builder: (_, watch, __) {
       return LoadingOverlay(
-        isLoading: _profileWatcher.loading,
+        isLoading: watch.loading,
         child: Scaffold(
           appBar: getCustomAppBar(context,
               title: '${widget.isUpdate! ? 'Update' : 'Register'} VPP',

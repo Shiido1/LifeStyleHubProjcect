@@ -1,3 +1,20 @@
+class UpgradedSignUpList {
+  final List<UpgradeSignUpModel>? upgrade;
+
+  UpgradedSignUpList({
+    this.upgrade,
+  });
+
+  factory UpgradedSignUpList.fromJson(List<dynamic> parsedJson) {
+    List<UpgradeSignUpModel> upgrade = [];
+
+    upgrade = parsedJson.map((i) => UpgradeSignUpModel.fromJson(i)).toList();
+    return new UpgradedSignUpList(
+      upgrade: upgrade,
+    );
+  }
+}
+
 class UpgradeSignUpModel {
   String? year;
   String? month;

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/configs/constants.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
@@ -28,7 +27,6 @@ class NextOfKinInformationScreen extends StatefulWidget {
 
 class _NextOfKinInformationScreenState
     extends State<NextOfKinInformationScreen> {
-  final _profileProvider = ChangeNotifierProvider((_) => ProfileViewmodel());
   ProfileViewmodel? _profileViewmodel;
 
   TextEditingController? _fullNameController;
@@ -67,10 +65,9 @@ class _NextOfKinInformationScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (_, watch, __) {
-      final _profileWatcher = watch.watch(_profileProvider);
+    return Consumer<ProfileViewmodel>(builder: (_, watch, __) {
       return LoadingOverlay(
-        isLoading: _profileWatcher.loading,
+        isLoading: watch.loading,
         child: Scaffold(
           appBar: getCustomAppBar(context,
               title: 'Next of kin',

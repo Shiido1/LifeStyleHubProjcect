@@ -45,249 +45,240 @@ class _PackageScreenState extends State<PackageScreen> {
             centerTitle: true,
             onTap: () => null),
         body: SafeArea(
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Pallets.orange50),
-                        child: Row(
-                          children: [
-                            Tabs(
-                              defaultID: 0,
-                              dynamicID: _tabIndex,
-                              title: 'Active',
-                              onTap: () => setState(() => _tabIndex = 0),
-                            ),
-                            Tabs(
-                              defaultID: 1,
-                              dynamicID: _tabIndex,
-                              title: 'Completed',
-                              onTap: () => setState(() => _tabIndex = 1),
-                            ),
-                            Tabs(
-                              defaultID: 2,
-                              dynamicID: _tabIndex,
-                              title: 'Inactive',
-                              onTap: () => setState(() => _tabIndex = 2),
-                            ),
-                          ],
-                        ),
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Pallets.orange50),
+                      child: Row(
+                        children: [
+                          Tabs(
+                            defaultID: 0,
+                            dynamicID: _tabIndex,
+                            title: 'Active',
+                            onTap: () => setState(() => _tabIndex = 0),
+                          ),
+                          Tabs(
+                            defaultID: 1,
+                            dynamicID: _tabIndex,
+                            title: 'Completed',
+                            onTap: () => setState(() => _tabIndex = 1),
+                          ),
+                          Tabs(
+                            defaultID: 2,
+                            dynamicID: _tabIndex,
+                            title: 'Inactive',
+                            onTap: () => setState(() => _tabIndex = 2),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 23,
+                    ),
+                    SizedBox(
+                      height: 23,
+                    ),
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          if (_tabIndex! == 0)
+                            FutureBuilder(
+                              future: activePakageDao!.getListenable(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<ValueListenable<Box>?>
+                                      snapshot) {
+                                if (snapshot.connectionState ==
+                                        ConnectionState.waiting ||
+                                    !snapshot.hasData) return Container();
+
+                                return ValueListenableBuilder(
+                                    valueListenable: snapshot.data!,
+                                    builder: (_, Box<dynamic> box, __) {
+                                      final _activePackages = activePakageDao!
+                                          .convert(box)
+                                          .toList();
+
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.vertical,
+                                            child: Column(
+                                              children: List.generate(
+                                                  _activePackages.length <= 5
+                                                      ? _activePackages.length
+                                                      : 5, (index) {
+                                                final _package =
+                                                    _activePackages[index];
+                                                return Container(
+                                                  width:
+                                                      getDeviceWidth(context),
+                                                  padding: EdgeInsets.only(
+                                                      bottom: 23.w),
+                                                  child: ActivePackageWidget(
+                                                    title: _package.name ?? '',
+                                                    subtitle:
+                                                        _package.type ?? '',
+                                                    percentage: getPercentage(
+                                                        directReferred: _package
+                                                                .downlinesAcquired ??
+                                                            0,
+                                                        directRequired: _package
+                                                                .downlinesRequired ??
+                                                            0),
+                                                  ),
+                                                );
+                                              }),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                            ),
+                          if (_tabIndex! == 1)
+                            FutureBuilder(
+                              future: completePackageDao!.getListenable(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<ValueListenable<Box>?>
+                                      snapshot) {
+                                if (snapshot.connectionState ==
+                                        ConnectionState.waiting ||
+                                    !snapshot.hasData) return Container();
+
+                                return ValueListenableBuilder(
+                                    valueListenable: snapshot.data!,
+                                    builder: (_, Box<dynamic> box, __) {
+                                      final _completePackages =
+                                          completePackageDao!
+                                              .convert(box)
+                                              .toList();
+
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.vertical,
+                                            child: Column(
+                                              children: List.generate(
+                                                  _completePackages.length <= 5
+                                                      ? _completePackages.length
+                                                      : 5, (index) {
+                                                final _package =
+                                                    _completePackages[index];
+                                                return Container(
+                                                  width:
+                                                      getDeviceWidth(context),
+                                                  padding: EdgeInsets.only(
+                                                      bottom: 23.w),
+                                                  child: ActivePackageWidget(
+                                                    title: _package.name ?? '',
+                                                    subtitle:
+                                                        _package.type ?? '',
+                                                    percentage: getPercentage(
+                                                        directReferred: _package
+                                                                .downlinesAcquired ??
+                                                            0,
+                                                        directRequired: _package
+                                                                .downlinesRequired ??
+                                                            0),
+                                                  ),
+                                                );
+                                              }),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                            ),
+                          if (_tabIndex! == 2)
+                            FutureBuilder(
+                              future: inactivePackageDao!.getListenable(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<ValueListenable<Box>?>
+                                      snapshot) {
+                                if (snapshot.connectionState ==
+                                        ConnectionState.waiting ||
+                                    !snapshot.hasData) return Container();
+
+                                return ValueListenableBuilder(
+                                    valueListenable: snapshot.data!,
+                                    builder: (_, Box<dynamic> box, __) {
+                                      final _inactivePackages =
+                                          inactivePackageDao!
+                                              .convert(box)
+                                              .toList();
+
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.vertical,
+                                            child: Column(
+                                              children: List.generate(
+                                                  _inactivePackages.length <= 5
+                                                      ? _inactivePackages.length
+                                                      : 5, (index) {
+                                                final _package =
+                                                    _inactivePackages[index];
+                                                return Container(
+                                                  width:
+                                                      getDeviceWidth(context),
+                                                  padding: EdgeInsets.only(
+                                                      bottom: 23.w),
+                                                  child: ActivePackageWidget(
+                                                    title: _package.name ?? '',
+                                                    subtitle:
+                                                        _package.type ?? '',
+                                                    percentage: getPercentage(
+                                                        directReferred: _package
+                                                                .downlinesAcquired ??
+                                                            0,
+                                                        directRequired: _package
+                                                                .downlinesRequired ??
+                                                            0),
+                                                  ),
+                                                );
+                                              }),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                            ),
+                          SizedBox(
+                            height: 40,
+                          )
+                        ],
                       ),
-                      Expanded(
-                        child: ListView(
-                          children: [
-                            if (_tabIndex! == 0)
-                              FutureBuilder(
-                                future: activePakageDao!.getListenable(),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<ValueListenable<Box>?>
-                                        snapshot) {
-                                  if (snapshot.connectionState ==
-                                          ConnectionState.waiting ||
-                                      !snapshot.hasData) return Container();
-
-                                  return ValueListenableBuilder(
-                                      valueListenable: snapshot.data!,
-                                      builder: (_, Box<dynamic> box, __) {
-                                        final _activePackages = activePakageDao!
-                                            .convert(box)
-                                            .toList();
-
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              height: 16,
-                                            ),
-                                            SingleChildScrollView(
-                                              scrollDirection: Axis.vertical,
-                                              child: Column(
-                                                children: List.generate(
-                                                    _activePackages.length <= 5
-                                                        ? _activePackages.length
-                                                        : 5, (index) {
-                                                  final _package =
-                                                      _activePackages[index];
-                                                  return Container(
-                                                    width:
-                                                        getDeviceWidth(context),
-                                                    padding: EdgeInsets.only(
-                                                        bottom: 23.w),
-                                                    child: ActivePackageWidget(
-                                                      title:
-                                                          _package.name ?? '',
-                                                      subtitle:
-                                                          _package.type ?? '',
-                                                      percentage: getPercentage(
-                                                          directReferred: _package
-                                                                  .downlinesAcquired ??
-                                                              0,
-                                                          directRequired: _package
-                                                                  .downlinesRequired ??
-                                                              0),
-                                                    ),
-                                                  );
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                },
-                              ),
-                            if (_tabIndex! == 1)
-                              FutureBuilder(
-                                future: completePackageDao!.getListenable(),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<ValueListenable<Box>?>
-                                        snapshot) {
-                                  if (snapshot.connectionState ==
-                                          ConnectionState.waiting ||
-                                      !snapshot.hasData) return Container();
-
-                                  return ValueListenableBuilder(
-                                      valueListenable: snapshot.data!,
-                                      builder: (_, Box<dynamic> box, __) {
-                                        final _completePackages =
-                                            completePackageDao!
-                                                .convert(box)
-                                                .toList();
-
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              height: 16,
-                                            ),
-                                            SingleChildScrollView(
-                                              scrollDirection: Axis.vertical,
-                                              child: Column(
-                                                children: List.generate(
-                                                    _completePackages.length <=
-                                                            5
-                                                        ? _completePackages
-                                                            .length
-                                                        : 5, (index) {
-                                                  final _package =
-                                                      _completePackages[index];
-                                                  return Container(
-                                                    width:
-                                                        getDeviceWidth(context),
-                                                    padding: EdgeInsets.only(
-                                                        bottom: 23.w),
-                                                    child: ActivePackageWidget(
-                                                      title:
-                                                          _package.name ?? '',
-                                                      subtitle:
-                                                          _package.type ?? '',
-                                                      percentage: getPercentage(
-                                                          directReferred: _package
-                                                                  .downlinesAcquired ??
-                                                              0,
-                                                          directRequired: _package
-                                                                  .downlinesRequired ??
-                                                              0),
-                                                    ),
-                                                  );
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                },
-                              ),
-
-                            if (_tabIndex! == 2)
-                              FutureBuilder(
-                                future: inactivePackageDao!.getListenable(),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<ValueListenable<Box>?>
-                                        snapshot) {
-                                  if (snapshot.connectionState ==
-                                          ConnectionState.waiting ||
-                                      !snapshot.hasData) return Container();
-
-                                  return ValueListenableBuilder(
-                                      valueListenable: snapshot.data!,
-                                      builder: (_, Box<dynamic> box, __) {
-                                        final _inactivePackages =
-                                            inactivePackageDao!
-                                                .convert(box)
-                                                .toList();
-
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              height: 16,
-                                            ),
-                                            SingleChildScrollView(
-                                              scrollDirection: Axis.vertical,
-                                              child: Column(
-                                                children: List.generate(
-                                                    _inactivePackages.length <=
-                                                            5
-                                                        ? _inactivePackages
-                                                            .length
-                                                        : 5, (index) {
-                                                  final _package =
-                                                      _inactivePackages[index];
-                                                  return Container(
-                                                    width:
-                                                        getDeviceWidth(context),
-                                                    padding: EdgeInsets.only(
-                                                        bottom: 23.w),
-                                                    child: ActivePackageWidget(
-                                                      title:
-                                                          _package.name ?? '',
-                                                      subtitle:
-                                                          _package.type ?? '',
-                                                      percentage: getPercentage(
-                                                          directReferred: _package
-                                                                  .downlinesAcquired ??
-                                                              0,
-                                                          directRequired: _package
-                                                                  .downlinesRequired ??
-                                                              0),
-                                                    ),
-                                                  );
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                },
-                              ),
-                            SizedBox(
-                              height: 40,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                ButtomCountDownWidget()
-              ],
-            ),
-          )
-        );
+              ),
+              ButtomCountDownWidget()
+            ],
+          ),
+        ));
   }
 }

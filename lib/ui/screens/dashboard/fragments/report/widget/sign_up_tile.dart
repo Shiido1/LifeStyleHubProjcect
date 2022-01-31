@@ -5,20 +5,12 @@ import 'package:lifestyle_hub/utils/pallets.dart';
 
 _leftTitles(BuildContext context) {
   return SideTitles(
-    interval: 200,
+      interval: 2,
       showTitles: true,
       getTitles: (value) {
         switch (value.toInt()) {
-          case 0:
-            return formatCurrency(0);
-          case 1:
-            return formatCurrency(500);
-          case 2:
-            return formatCurrency(1000);
-          case 3:
-            return '${formatCurrency(10)}k';
         }
-        return formatCurrency(value);
+        return value.toString();
       },
       getTextStyles: (context, size) => TextStyle(fontSize: 14),
       reservedSize: getDeviceWidth(context) / 9);
@@ -59,7 +51,7 @@ _bottomTitles(BuildContext context) {
       margin: 20);
 }
 
-flTitle(BuildContext context) {
+flSignUpTitle(BuildContext context) {
   return FlTitlesData(
     show: true,
     topTitles: SideTitles(showTitles: false),
@@ -67,16 +59,6 @@ flTitle(BuildContext context) {
       showTitles: true,
       reservedSize: getDeviceWidth(context) / 100,
       getTitles: (value) {
-        // switch (value.toInt()) {
-        //   case 1:
-        //     return '0';
-        //   case 2:
-        //     return '500';
-        //   case 3:
-        //     return '1000';
-        //   case 4:
-        //     return '10k';
-        // }
         return '';
       },
     ),
@@ -85,7 +67,7 @@ flTitle(BuildContext context) {
   );
 }
 
-flGrid(BuildContext context) {
+flSignUpGrid(BuildContext context) {
   return FlGridData(
     show: true,
     drawVerticalLine: false,

@@ -1,15 +1,15 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/sign_up_tile.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/widget/income_tile.dart';
 import 'package:provider/provider.dart';
 
-class BarChartContent extends StatefulWidget {
+class IncomeBarChartContent extends StatefulWidget {
   @override
-  State<BarChartContent> createState() => _BarChartContentState();
+  State<IncomeBarChartContent> createState() => _IncomeBarChartContentState();
 }
 
-class _BarChartContentState extends State<BarChartContent> {
+class _IncomeBarChartContentState extends State<IncomeBarChartContent> {
   ReportViewmodel? reportViewmodel;
 
   @override
@@ -24,7 +24,7 @@ class _BarChartContentState extends State<BarChartContent> {
     return Consumer<ReportViewmodel>(builder: (_, reportProvider, __) {
       return BarChart(
         BarChartData(
-            maxY: 10,
+            maxY: 1000,
             minY: 0,
             borderData: FlBorderData(
                 border: const Border(
@@ -33,9 +33,9 @@ class _BarChartContentState extends State<BarChartContent> {
               left: BorderSide.none,
               bottom: BorderSide.none,
             )),
-            barGroups: reportProvider.barChartGroupData,
-            titlesData: flSignUpTitle(context),
-            gridData: flSignUpGrid(context)),
+            barGroups: reportProvider.barChartIncomeGroupData,
+            titlesData: flIncomeTitle(context),
+            gridData: flIncomeGrid(context)),
       );
     });
   }

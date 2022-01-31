@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../utils/pallets.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'viewmodel/marketting_viewmodel.dart';
@@ -23,14 +22,14 @@ class MarkettingScreen extends StatefulWidget {
 }
 
 class _MarkettingScreenState extends State<MarkettingScreen> {
-  final _markettingViewModel =
-      ChangeNotifierProvider((ref) => MarkettingViewmodel());
+//   final _markettingViewModel =
+//       ChangeNotifierProvider((ref) => MarkettingViewmodel());
 
   MarkettingViewmodel? _marketting;
 
   @override
   void initState() {
-    _marketting = context.read();
+    _marketting = Provider.of<MarkettingViewmodel>(context, listen: false);
     _marketting!.init(context);
     _marketting!.getMarketing();
     super.initState();
@@ -43,9 +42,10 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
         builder: (_, Box<dynamic> box, __) {
           List<Data> _marketing = markettingDao!.convert(box);
           _marketting!.sortContentByType(_marketing);
-          return Consumer(builder: (context, watch, child) {
-            final _response = watch.watch(_markettingViewModel);
-            if (_response.loading) {
+          return Consumer<MarkettingViewmodel>(
+              builder: (context, watch, child) {
+            // final _response = watch.watch(_markettingViewModel);
+            if (watch.loading) {
               return Center(
                 child: SpinKitCubeGrid(
                   color: Pallets.orange600,
@@ -59,10 +59,10 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
                 onRefresh: () => _marketting!.getMarketing(),
                 child: ListView(
                   children: [
-                    SingleContentWidget(markettingViewmodel: _response),
-                    VideoContents(response: _response),
-                    BannerContents(response: _response),
-                    PostContents(response: _response),
+                    SingleContentWidget(markettingViewmodel: watch),
+                    VideoContents(response: watch),
+                    BannerContents(response: watch),
+                    PostContents(response: watch),
                     SizedBox(height: getDeviceHeight(context) / 6)
                   ],
                 ),
@@ -70,6 +70,5 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
             );
           });
         });
-  
   }
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/widgets/search_widget.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -39,15 +38,13 @@ class _MessagingScreenState extends State<MessagingScreen>
   Curve _curve = Curves.easeInOut;
   double _fabHeight = 56.0;
 
-  final _messageViewModel =
-      ChangeNotifierProvider((ref) => MessagingViewmodel());
-
   MessagingViewmodel? _messagingViewmodel;
   String? searching = '';
 
   @override
   void initState() {
-    _messagingViewmodel = context.read();
+    _messagingViewmodel =
+        Provider.of<MessagingViewmodel>(context, listen: false);
     _messagingViewmodel!.init(context);
     _messagingViewmodel!.getLastMessage();
 
@@ -160,8 +157,8 @@ class _MessagingScreenState extends State<MessagingScreen>
           valueListenable: messageDao!.getListenable()!,
           builder: (context, Box<dynamic> box, __) {
             List<Data> _messageList = messageDao!.convert(box).toList();
-            return Consumer(builder: (context, watch, __) {
-              final _provider = watch.watch(_messageViewModel);
+            return Consumer<MessagingViewmodel>(
+                builder: (context, _provider, __) {
               if (_provider.loading) {
                 return Center(
                   child: SpinKitCubeGrid(
@@ -289,8 +286,7 @@ class _MessagingScreenState extends State<MessagingScreen>
                                       'h5': Style(
                                           maxLines: 2,
                                           textOverflow: TextOverflow.ellipsis),
-                                    })
-                                    ))
+                                    })))
                             .toList(),
                       ),
                       SizedBox(height: 36),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../utils/pallets.dart';
@@ -21,14 +20,12 @@ class IntegratedPointScreen extends StatefulWidget {
 }
 
 class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
-  final _pointHistoryProvider =
-      ChangeNotifierProvider((ref) => PointHistoryViewmodel());
-
   PointHistoryViewmodel? _pointHistoryViewmodel;
 
   @override
   void initState() {
-    _pointHistoryViewmodel = context.read();
+    _pointHistoryViewmodel =
+        Provider.of<PointHistoryViewmodel>(context, listen: false);
     _pointHistoryViewmodel!.init(context);
     _pointHistoryViewmodel!.getPointHistory();
     super.initState();
@@ -40,8 +37,8 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
       valueListenable: pointHistoryDao!.getListenable()!,
       builder: (BuildContext context, Box<dynamic> box, Widget? child) {
         PointHistoryModel _point = pointHistoryDao!.convert(box);
-        return Consumer(builder: (context, watch, _) {
-          final _pointWatch = watch.watch(_pointHistoryProvider);
+        return Consumer<PointHistoryViewmodel>(
+            builder: (context, _pointWatch, _) {
           if (_pointWatch.loading) {
             return Center(
               child: CircularProgressIndicator(),
@@ -133,7 +130,9 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
                                           children: [
                                             Expanded(
                                               child: TextView(
-                                                text: 'Subscribed for ${point.package} ?? ''',
+                                                text:
+                                                    'Subscribed for ${point.package} ?? '
+                                                    '',
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 14,
                                                 color: Pallets.grey500,

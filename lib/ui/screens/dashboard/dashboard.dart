@@ -77,7 +77,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   _DashboardScreenState(this._index);
 
-
   @override
   void initState() {
     eventBus.on().listen((event) async {
@@ -96,7 +95,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   void _getCatchedInfos() async {
     _profileModel = await profileDao?.convert();
-    
+
     setState(() {});
   }
 

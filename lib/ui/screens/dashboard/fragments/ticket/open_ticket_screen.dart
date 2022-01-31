@@ -3,11 +3,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/routes/navigation.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -34,10 +33,7 @@ class OpenTicketScreen extends StatefulWidget {
 }
 
 class _OpenTicketScreenState extends State<OpenTicketScreen> {
-  final _ticketNotifier = ChangeNotifierProvider((ref) => TicketViewmodel());
-
   TicketViewmodel? _ticketViewmodel;
-  final _deptNotifier = ChangeNotifierProvider((_) => TicketViewmodel());
 
   final TextEditingController _subjectDeptController = TextEditingController();
   final TextEditingController _subjectController = TextEditingController();
@@ -51,8 +47,8 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
 
   @override
   void initState() {
-    _ticketViewmodel = context.read();
-    _ticketViewmodel = context.read();
+    _ticketViewmodel = Provider.of<TicketViewmodel>(context, listen: false);
+    // _ticketViewmodel = context.read();
     _ticketViewmodel!.init(context);
     _ticketViewmodel!.getTicketDepartments();
     _getCatchedInfos();
@@ -68,11 +64,9 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final _response = watch.watch(_ticketNotifier);
-
+    return Consumer<TicketViewmodel>(builder: (context, watch, child) {
       return LoadingOverlay(
-        isLoading: _response.loading,
+        isLoading: watch.loading,
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();

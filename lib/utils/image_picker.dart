@@ -85,7 +85,7 @@ class ImagePickerHandler {
     }
 
     if (action == null) return;
-    final _getFile = await handleProfileAction(context!, action: action);
+    var _getFile = await handleProfileAction(context!, action: action);
     file!(_getFile!);
   }
 

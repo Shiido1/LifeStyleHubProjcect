@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
-import 'package:provider/src/provider.dart';
-
+import 'package:provider/provider.dart';
 import '../../../../../database/hive_database.dart';
 import '../../../bank/account/add_bank_screen.dart';
 import 'model/users_profile_model.dart';
@@ -36,8 +34,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final _profileProvider = ChangeNotifierProvider((_) => ProfileViewmodel());
-  final _tabViewProvider = ChangeNotifierProvider((_) => TabViewModel());
   // ignore: unused_field
   TabViewModel? _tabViewModel;
   ProfileViewmodel? _profileViewmodel;
@@ -45,8 +41,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     _getCatchedInfos();
-    _tabViewModel = context.read();
-    _profileViewmodel = context.read();
+    _tabViewModel = Provider.of<TabViewModel>(context, listen: false);
+    _profileViewmodel = Provider.of<ProfileViewmodel>(context, listen: false);
     _profileViewmodel!.init(context);
     _profileViewmodel!.getUsersProfile();
     super.initState();
@@ -55,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   UsersProfileModel? _profileModel;
 
   void _getCatchedInfos() async {
-    _profileModel = await profileDao!.convert();
+    _profileModel = await profileDao?.convert();
     setState(() {});
   }
 

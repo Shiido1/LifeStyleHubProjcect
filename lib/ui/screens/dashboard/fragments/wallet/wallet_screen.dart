@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'dao/wallet_dao.dart';
@@ -24,13 +23,11 @@ class WalletScreen extends StatefulWidget {
 }
 
 class _WalletScreenState extends State<WalletScreen> {
-  final _walletProvider = ChangeNotifierProvider((ref) => WalletViewmodel());
-
   WalletViewmodel? _walletViewmodel;
 
   @override
   void initState() {
-    _walletViewmodel = context.read();
+    _walletViewmodel = Provider.of<WalletViewmodel>(context, listen: false);
     _walletViewmodel!.init(context);
     _refresh();
     super.initState();
@@ -48,9 +45,8 @@ class _WalletScreenState extends State<WalletScreen> {
       valueListenable: walletDao!.getListenable()!,
       builder: (BuildContext context, Box<dynamic> box, Widget? child) {
         List<Data> walletList = walletDao!.convert(box).toList();
-        return Consumer(builder: (context, watch, _) {
-          final _wallet = watch.watch(_walletProvider);
-          if (_wallet.loading) {
+        return Consumer<WalletViewmodel>(builder: (context, wallet, _) {
+          if (wallet.loading) {
             return Center(
               child: SpinKitCubeGrid(
                 color: Pallets.orange600,
@@ -60,10 +56,10 @@ class _WalletScreenState extends State<WalletScreen> {
           return Padding(
               padding: const EdgeInsets.all(16.0),
               child: SmartRefresher(
-                controller: _wallet.refreshController,
+                controller: wallet.refreshController,
                 enablePullUp: true,
                 onRefresh: () => _refresh(),
-                onLoading: () => _wallet.paginate(),
+                onLoading: () => wallet.paginate(),
                 child: ListView(
                   children: [
                     WalletBalanceWidget(),

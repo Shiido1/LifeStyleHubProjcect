@@ -1,5 +1,9 @@
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/viewmodel/point_history_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/viewmodel/messaging_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/viewmodel/profile_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/ticket/viewmodel/ticket_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/viewmodel/notification_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/otp/provider/pin_viewmodel.dart';
 
@@ -41,8 +45,14 @@ class Providers {
     ChangeNotifierProvider<NotificationViewmodel>(
         create: (_) => NotificationViewmodel()),
     ChangeNotifierProvider<ReportViewmodel>(create: (_) => ReportViewmodel()),
-    ChangeNotifierProvider<MarkettingViewmodel>(create: (_) => MarkettingViewmodel()),
+    ChangeNotifierProvider<MarkettingViewmodel>(
+        create: (_) => MarkettingViewmodel()),
     ChangeNotifierProvider<OTPViewmodel>(create: (_) => OTPViewmodel()),
-    // ChangeNotifierProvider<TicketViewmodel>(create: (_) => TicketViewmodel()),
+    ChangeNotifierProvider<TicketViewmodel>(create: (_) => TicketViewmodel()),
+    ChangeNotifierProvider<ProfileViewmodel>(create: (_) => ProfileViewmodel()),
+    ChangeNotifierProvider<MessagingViewmodel>(
+        create: (_) => MessagingViewmodel()),
+    ChangeNotifierProvider<PointHistoryViewmodel>(
+        create: (_) => PointHistoryViewmodel()),
   ];
 }

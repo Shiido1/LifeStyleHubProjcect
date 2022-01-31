@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/routes/navigation.dart';
 import '../integrated/dao/point_dao.dart';
 import '../integrated/model/point_history_model.dart';
@@ -27,23 +26,19 @@ class CommissionScreen extends StatefulWidget {
 }
 
 class _CommissionScreenState extends State<CommissionScreen> {
-  final _commissionProvider =
-      ChangeNotifierProvider((ref) => CommissionViewmodel());
-
   CommissionViewmodel? _commissionViewmodel;
-
-  final _pointHistoryProvider =
-      ChangeNotifierProvider((ref) => PointHistoryViewmodel());
 
   PointHistoryViewmodel? _pointHistoryViewmodel;
 
   @override
   void initState() {
-    _commissionViewmodel = context.read();
+    _commissionViewmodel =
+        Provider.of<CommissionViewmodel>(context, listen: false);
     _commissionViewmodel!.init(context);
     _commissionViewmodel!.getCommissions();
-    _pointHistoryViewmodel = context.read();
-    _pointHistoryViewmodel?.init(context);
+    _pointHistoryViewmodel =
+        Provider.of<PointHistoryViewmodel>(context, listen: false);
+    _pointHistoryViewmodel!.init(context);
     _pointHistoryViewmodel!.getPointHistory();
     super.initState();
   }
@@ -54,9 +49,8 @@ class _CommissionScreenState extends State<CommissionScreen> {
       valueListenable: commissionDao!.getListenable()!,
       builder: (BuildContext context, Box<dynamic> box, Widget? child) {
         CommissionModel? _commissionModel = commissionDao!.convert(box);
-        return Consumer(builder: (context, watch, _) {
-          final _commission = watch.watch(_commissionProvider);
-          if (_commission.loading) {
+        return Consumer<CommissionViewmodel>(builder: (context, watch, _) {
+          if (watch.loading) {
             return Center(
               child: SpinKitCubeGrid(
                 color: Pallets.orange600,

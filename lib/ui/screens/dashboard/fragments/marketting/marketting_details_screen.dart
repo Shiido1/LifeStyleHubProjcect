@@ -1,8 +1,9 @@
+// ignore_for_file: unused_field
+
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -19,15 +20,11 @@ import '../../../../../utils/pallets.dart';
 import 'model/get_resources_model.dart';
 import 'viewmodel/marketting_viewmodel.dart';
 
-// ignore: must_be_immutable
+// ignore: must_be_immutable, duplicate_ignore
 class MarkettingDetailScreen extends StatefulWidget {
   Data? getResourcesModel;
   MarketingType type;
-  // ignore: unused_field
-  final _markettingViewModel =
-      ChangeNotifierProvider((ref) => MarkettingViewmodel());
 
-  // ignore: unused_field
   MarkettingViewmodel? _marketting;
 
   MarkettingDetailScreen(
@@ -42,11 +39,9 @@ class MarkettingDetailScreen extends StatefulWidget {
 }
 
 class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
-  final _videoPlayerModel = ChangeNotifierProvider((ref) => VideoPlayer());
+  VideoPlayer? _videoPlayerModel;
   Data? getResourcesModel;
   MarketingType? type;
-  final _markettingViewModel =
-      ChangeNotifierProvider((ref) => MarkettingViewmodel());
 
   MarkettingViewmodel? _marketting;
 
@@ -56,7 +51,8 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
 
   @override
   void initState() {
-    _marketting = context.read();
+    _marketting = Provider.of<MarkettingViewmodel>(context, listen: false);
+    _videoPlayerModel = Provider.of<VideoPlayer>(context, listen: false);
     _marketting!.init(context);
     _getCatchedInfos();
     super.initState();
@@ -69,11 +65,11 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final _player = watch.watch(_videoPlayerModel);
+    return Consumer2<VideoPlayer, MarkettingViewmodel>(
+        builder: (context, player, market, child) {
       if (type == MarketingType.Video)
-        _player.playVideo(format(getResourcesModel!.content!.path!));
-        print('print video ${getResourcesModel!.content!.path!}');
+        player.playVideo(format(getResourcesModel!.content!.path!));
+      print('print video ${getResourcesModel!.content!.path!}');
 
       return Scaffold(
         appBar: getCustomAppBar(context,
@@ -138,7 +134,7 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
                       child: AspectRatio(
                         aspectRatio: 16 / 9,
                         child: BetterPlayer(
-                            controller: _player.betterPlayerController),
+                            controller: player.betterPlayerController),
                       ),
                       onTap: () {
                         print("Tap!");

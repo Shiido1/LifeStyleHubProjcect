@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../helper/helper_handler.dart';
 import '../../../helper/routes/navigation.dart';
 import '../../../helper/routes/routes.dart';
@@ -28,13 +27,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   String _emailValueDetector = '';
 
-  final _resetNotifier =
-      ChangeNotifierProvider((ref) => ResetPasswordViewModel());
   ResetPasswordViewModel? _resetPasswordViewModel;
 
   @override
   void initState() {
-    _resetPasswordViewModel = context.read();
+    _resetPasswordViewModel =
+        Provider.of<ResetPasswordViewModel>(context, listen: false);
     _resetPasswordViewModel!.init(context);
     _initControllers();
     super.initState();
@@ -58,10 +56,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (_, watch, __) {
-      final _resetWatch = watch.watch(_resetNotifier);
+    return Consumer<ResetPasswordViewModel>(builder: (_, watch, __) {
       return LoadingOverlay(
-        isLoading: _resetWatch.loading,
+        isLoading: watch.loading,
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,

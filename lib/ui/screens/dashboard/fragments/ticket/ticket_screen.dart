@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'dao/ticket_dao.dart';
@@ -28,13 +27,11 @@ class TicketScreen extends StatefulWidget {
 }
 
 class _TicketScreenState extends State<TicketScreen> {
-  final _ticketNotifier = ChangeNotifierProvider((ref) => TicketViewmodel());
-
   TicketViewmodel? _ticketViewmodel;
 
   @override
   void initState() {
-    _ticketViewmodel = context.read();
+    _ticketViewmodel = Provider.of<TicketViewmodel>(context, listen: false);
     _ticketViewmodel!.init(context);
     _ticketViewmodel!.getAllTickets();
     _ticketViewmodel!.ticketStatus();
@@ -49,9 +46,9 @@ class _TicketScreenState extends State<TicketScreen> {
         builder: (_, Box<dynamic> box, __) {
           List<Data> _ticket = ticketDao!.convert(box);
           _ticketViewmodel!.fetchFiveItems(_ticket);
-          return Consumer(builder: (context, watch, child) {
-            final _response = watch.watch(_ticketNotifier);
-            if (_response.loading) {
+          return Consumer<TicketViewmodel>(builder: (context, watch, child) {
+            // final _response = watch.watch(_ticketNotifier);
+            if (watch.loading) {
               return Center(
                 child: SpinKitCubeGrid(
                   color: Pallets.orange600,

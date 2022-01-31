@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../helper/configs/constants.dart';
 import '../../../helper/helper_handler.dart';
 import '../login/model/login_model.dart';
@@ -24,11 +23,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   LoginViewModel? _login;
   Timer? _timer;
 
-  final _loginNotifier = ChangeNotifierProvider((ref) => LoginViewModel());
-
   @override
   void initState() {
-    _login = context.read();
+    _login = Provider.of<LoginViewModel>(context, listen: false);
     _login!.init(context);
     _loginUser();
     super.initState();

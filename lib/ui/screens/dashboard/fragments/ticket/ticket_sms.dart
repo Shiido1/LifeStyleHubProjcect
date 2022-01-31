@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'viewmodel/ticket_viewmodel.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../../../../widgets/image_loader.dart';
@@ -22,7 +21,6 @@ class TicketDetailsSms extends StatefulWidget {
 }
 
 class _TicketDetailsSmsState extends State<TicketDetailsSms> {
-  final _ticketNotifier = ChangeNotifierProvider((ref) => TicketViewmodel());
   final Data? element;
 
   TicketViewmodel? _ticketViewmodel;
@@ -31,7 +29,7 @@ class _TicketDetailsSmsState extends State<TicketDetailsSms> {
 
   @override
   void initState() {
-    _ticketViewmodel = context.read();
+    _ticketViewmodel = Provider.of<TicketViewmodel>(context, listen: false);
     _ticketViewmodel!.init(context);
     super.initState();
   }
@@ -49,9 +47,9 @@ class _TicketDetailsSmsState extends State<TicketDetailsSms> {
           showMoreMenu: true,
           centerTitle: true,
           onTap: () => showOpenedTicketMenuModal(context, element)),
-      body: Consumer(builder: (context, watch, child) {
-        // ignore: unused_local_variable
-        final _response = watch.watch(_ticketNotifier);
+      body: Consumer<TicketViewmodel>(builder: (context, watch, child) {
+        // // ignore: unused_local_variable
+        // final _response = watch.watch(_ticketNotifier);
 
         return Stack(
           children: [

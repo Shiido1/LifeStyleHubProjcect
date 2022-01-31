@@ -1,3 +1,20 @@
+class FreeSignUpList {
+  final List<FreeSignUpModel>? freeSignup;
+
+  FreeSignUpList({
+    this.freeSignup,
+  });
+
+  factory FreeSignUpList.fromJson(List<dynamic> parsedJson) {
+    List<FreeSignUpModel> freeSign = [];
+
+    freeSign = parsedJson.map((i) => FreeSignUpModel.fromJson(i)).toList();
+    return new FreeSignUpList(
+      freeSignup: freeSign,
+    );
+  }
+}
+
 class FreeSignUpModel {
   String? year;
   String? month;

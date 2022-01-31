@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as riverPod;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lifestyle_hub/core/network/app_config.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +16,7 @@ void main() async {
   await initializeDatabase();
   await SessionManager().init();
   AppConfig.environment = Environment.staging;
-  runApp(riverPod.ProviderScope(child: MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

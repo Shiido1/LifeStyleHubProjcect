@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'model/change_password.dart';
 import '../../../../widgets/bottom_count_down.dart';
@@ -24,7 +23,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   var _globalFormKey = GlobalKey<FormState>();
   var _passwordKey = GlobalKey<FormState>();
   bool _autoValidate = false;
-  final _profileProvider = ChangeNotifierProvider((_) => ProfileViewmodel());
   ProfileViewmodel? _profileViewmodel;
 
   final TextEditingController _current = TextEditingController();
@@ -33,7 +31,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   void initState() {
-    _profileViewmodel = context.read();
+    _profileViewmodel = Provider.of<ProfileViewmodel>(context, listen: false);
     _profileViewmodel!.init(context);
     super.initState();
   }
@@ -48,10 +46,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           centerTitle: true,
           showImage: false,
         ),
-        body: Consumer(builder: (_, watch, __) {
-          final _profileWatch = watch.watch(_profileProvider);
+        body: Consumer<ProfileViewmodel>(builder: (_, watch, __) {
           return LoadingOverlay(
-            isLoading: _profileWatch.loading,
+            isLoading: watch.loading,
             child: SafeArea(
               child: Stack(
                 children: [

@@ -54,8 +54,7 @@ class ReportRepository {
     }
   }
 
-  Future<VVPFreeMemberTrail>
-      vppFreeMembeAnalysis() async {
+  Future<VVPFreeMemberTrail> vppFreeMembeAnalysis() async {
     try {
       final _response = await apiBaseHelper.get(
           url: Paths.reportPromotionVppMember, options: await getDioHeader());
@@ -65,41 +64,42 @@ class ReportRepository {
     }
   }
 
-  Future<VVPUpgradedAnalysisModel>
-      vppUpgradedAnalysis() async {
+  Future<VVPUpgradedAnalysisModel> vppUpgradedAnalysis() async {
     try {
       final _response = await apiBaseHelper.get(
-          url: Paths.reportPromotionVppUpgradedMember, options: await getDioHeader());
+          url: Paths.reportPromotionVppUpgradedMember,
+          options: await getDioHeader());
       return VVPUpgradedAnalysisModel.fromJson(_response);
     } catch (e) {
       throw e;
     }
   }
 
-  Future<FreeSignUpModel> freeSignUpModel(String year)async{
-    var map ={"year":year};
+  Future<FreeSignUpList> freeSignUpModel() async {
+    var map = {"year": "2022"};
     try {
       final _response = await apiBaseHelper.get(
           url: Paths.freeSignUpMember,
           queryParameters: map,
           options: await getDioHeader());
-      return FreeSignUpModel.fromJson(_response);
+      // return FreeSignUpList.fromJson(_response);
+      return FreeSignUpList.fromJson(_response);
+      // return FreeSignUpModel.fromJson(_response[0]);
     } catch (e) {
       throw e;
     }
   }
 
-  Future<UpgradeSignUpModel> upgradeSignUpModel(String year)async{
-    var map ={"year":year};
+  Future<UpgradedSignUpList> upgradeSignUpModel() async {
+    var map = {"year": "2022"};
     try {
       final _response = await apiBaseHelper.get(
           url: Paths.upgradeSignUpMember,
           queryParameters: map,
           options: await getDioHeader());
-      return UpgradeSignUpModel.fromJson(_response);
+      return UpgradedSignUpList.fromJson(_response);
     } catch (e) {
       throw e;
     }
   }
-
 }
