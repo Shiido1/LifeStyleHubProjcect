@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart'
     as freeMember;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_sign_up_model.dart';
@@ -213,13 +214,13 @@ class ReportViewmodel extends BaseViewModel {
   }
 
   freeSignUpModelRes() async {
-    // DateTime now = DateTime.now();
-    // DateFormat formatter = DateFormat('yyyy-MM-dd');
-    // String formatted = formatter.format(now);
-    // String year = formatted.substring(0, 4);
+    DateTime now = DateTime.now();
+    DateFormat formatter = DateFormat('yyyy-MM-dd');
+    String formatted = formatter.format(now);
+    String year = formatted.substring(0, 4);
     try {
       if (freeSignUpModel == null) _showLoading();
-      final _response = await _reportRepository.freeSignUpModel();
+      final _response = await _reportRepository.freeSignUpModel(year: year);
       freeSignUpModel = _response;
       await _getBarData(_response.freeSignup);
 
@@ -244,9 +245,13 @@ class ReportViewmodel extends BaseViewModel {
   }
 
   upGradedMemmberModelRes() async {
+    DateTime now = DateTime.now();
+    DateFormat formatter = DateFormat('yyyy-MM-dd');
+    String formatted = formatter.format(now);
+    String year = formatted.substring(0, 4);
     try {
       if (upgradeSignUpModel == null) _showLoading();
-      final _response = await _reportRepository.upgradeSignUpModel();
+      final _response = await _reportRepository.upgradeSignUpModel(year: year);
       upgradeSignUpModel = _response;
       await _getIncomeBarData(_response.upgrade);
     } catch (e) {

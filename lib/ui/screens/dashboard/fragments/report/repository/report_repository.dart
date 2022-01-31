@@ -75,8 +75,8 @@ class ReportRepository {
     }
   }
 
-  Future<FreeSignUpList> freeSignUpModel() async {
-    var map = {"year": "2022"};
+  Future<FreeSignUpList> freeSignUpModel({String? year}) async {
+    var map = {"year": "$year"};
     try {
       final _response = await apiBaseHelper.get(
           url: Paths.freeSignUpMember,
@@ -90,8 +90,8 @@ class ReportRepository {
     }
   }
 
-  Future<UpgradedSignUpList> upgradeSignUpModel() async {
-    var map = {"year": "2022"};
+  Future<UpgradedSignUpList> upgradeSignUpModel({String? year}) async {
+    var map = {"year": "$year"};
     try {
       final _response = await apiBaseHelper.get(
           url: Paths.upgradeSignUpMember,

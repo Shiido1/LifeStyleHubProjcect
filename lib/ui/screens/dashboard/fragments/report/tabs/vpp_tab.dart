@@ -243,10 +243,10 @@ class _VPPTabState extends State<VPPTab> {
                         ),
                       ),
                       TextView(
-                        text: isChart == true ? 'Signup chart' : 'Income Chart',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                      ),
+                          text:
+                              isChart == true ? 'Signup chart' : 'Income Chart',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15),
                       InkWell(
                         onTap: () => setState(() {
                           isChart = false;
