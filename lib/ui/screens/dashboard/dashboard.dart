@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/database/hive_database.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/leadership/leadership_page.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/viewmodel/notification_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
 import 'package:page_transition/page_transition.dart';
@@ -49,6 +50,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     HomeScreen(),
     MarkettingScreen(),
     NetworkScreen(),
+    LeadershipScreen(),
     CommissionScreen(),
     ContestScreen(),
     ReportScreen(),
@@ -63,6 +65,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     'Dashboard',
     'Marketting Tools',
     'My network',
+    'Leadership program',
     'My commission',
     'Contest & Reward',
     'Report',

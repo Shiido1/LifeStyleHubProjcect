@@ -139,20 +139,20 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 newIndex: _tabNotifier.index!,
               ),
               CustomDrawerTabs(
-                title: 'My commission',
-                image: 'assets/svgs/stack.svg',
+                visibility: profileModel?.role == "user",
+                title: 'Leadership program',
+                image: 'assets/svgs/leadership.svg',
                 onTap: () => _tap(
                     tab: _tabNotifier,
                     context: context,
                     newIndex: 3,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 3,
-                newIndex: index,
+                newIndex: _tabNotifier.index!,
               ),
               CustomDrawerTabs(
-                visibility: profileModel?.role == "user",
-                title: 'Contest & Reward',
-                image: 'assets/svgs/trophy.svg',
+                title: 'My commission',
+                image: 'assets/svgs/stack.svg',
                 onTap: () => _tap(
                     tab: _tabNotifier,
                     context: context,
@@ -162,8 +162,9 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 newIndex: index,
               ),
               CustomDrawerTabs(
-                title: 'Report',
-                image: 'assets/svgs/report.svg',
+                visibility: profileModel?.role == "user",
+                title: 'Contest & Reward',
+                image: 'assets/svgs/trophy.svg',
                 onTap: () => _tap(
                     tab: _tabNotifier,
                     context: context,
@@ -173,14 +174,25 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 newIndex: index,
               ),
               CustomDrawerTabs(
-                title: 'Wallet',
-                image: 'assets/svgs/wallet.svg',
+                title: 'Report',
+                image: 'assets/svgs/report.svg',
                 onTap: () => _tap(
                     tab: _tabNotifier,
                     context: context,
                     newIndex: 6,
                     providerIndex: _tabNotifier.index),
                 defaultIndex: 6,
+                newIndex: index,
+              ),
+              CustomDrawerTabs(
+                title: 'Wallet',
+                image: 'assets/svgs/wallet.svg',
+                onTap: () => _tap(
+                    tab: _tabNotifier,
+                    context: context,
+                    newIndex: 7,
+                    providerIndex: _tabNotifier.index),
+                defaultIndex: 7,
                 newIndex: _tabNotifier.index!,
               ),
               CustomDrawerTabs(
@@ -190,9 +202,9 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 onTap: () => _tap(
                     tab: _tabNotifier,
                     context: context,
-                    newIndex: 7,
+                    newIndex: 8,
                     providerIndex: _tabNotifier.index),
-                defaultIndex: 7,
+                defaultIndex: 8,
                 newIndex: index,
               ),
               CustomDrawerTabs(
@@ -201,9 +213,9 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 onTap: () => _tap(
                     tab: _tabNotifier,
                     context: context,
-                    newIndex: 8,
+                    newIndex: 9,
                     providerIndex: _tabNotifier.index),
-                defaultIndex: 8,
+                defaultIndex: 9,
                 newIndex: index,
               ),
               CustomDrawerTabs(
@@ -212,9 +224,9 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 onTap: () => _tap(
                     tab: _tabNotifier,
                     context: context,
-                    newIndex: 9,
+                    newIndex: 10,
                     providerIndex: _tabNotifier.index),
-                defaultIndex: 9,
+                defaultIndex: 10,
                 newIndex: index,
               )
             ],
