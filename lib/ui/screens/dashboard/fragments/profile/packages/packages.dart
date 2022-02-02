@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/active_package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/complete_package_dao.dart';
@@ -36,6 +35,12 @@ class _PackageScreenState extends State<PackageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // ScreenUtil.init(
+    //     BoxConstraints(
+    //         maxWidth: MediaQuery.of(context).size.width,
+    //         maxHeight: MediaQuery.of(context).size.height),
+    //     designSize: Size(360, 690),
+    //     orientation: Orientation.portrait);
     return Scaffold(
         appBar: getCustomAppBar(context,
             title: 'Packages',
@@ -49,7 +54,7 @@ class _PackageScreenState extends State<PackageScreen> {
             alignment: Alignment.bottomCenter,
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16),
                 child: Column(
                   children: [
                     Container(
@@ -97,9 +102,9 @@ class _PackageScreenState extends State<PackageScreen> {
 
                                 return ValueListenableBuilder(
                                     valueListenable: snapshot.data!,
-                                    builder: (_, Box<dynamic> box, __) {
+                                    builder: (_, Box<dynamic>? box, __) {
                                       final _activePackages = activePakageDao!
-                                          .convert(box)
+                                          .convert(box!)
                                           .toList();
 
                                       return Column(
@@ -123,7 +128,7 @@ class _PackageScreenState extends State<PackageScreen> {
                                                   width:
                                                       getDeviceWidth(context),
                                                   padding: EdgeInsets.only(
-                                                      bottom: 23.w),
+                                                      bottom: 23),
                                                   child: ActivePackageWidget(
                                                     title: _package.name ?? '',
                                                     subtitle:
@@ -184,7 +189,7 @@ class _PackageScreenState extends State<PackageScreen> {
                                                   width:
                                                       getDeviceWidth(context),
                                                   padding: EdgeInsets.only(
-                                                      bottom: 23.w),
+                                                      bottom: 23),
                                                   child: ActivePackageWidget(
                                                     title: _package.name ?? '',
                                                     subtitle:
@@ -218,10 +223,10 @@ class _PackageScreenState extends State<PackageScreen> {
 
                                 return ValueListenableBuilder(
                                     valueListenable: snapshot.data!,
-                                    builder: (_, Box<dynamic> box, __) {
+                                    builder: (_, Box<dynamic>? box, __) {
                                       final _inactivePackages =
                                           inactivePackageDao!
-                                              .convert(box)
+                                              .convert(box!)
                                               .toList();
 
                                       return Column(
@@ -245,7 +250,7 @@ class _PackageScreenState extends State<PackageScreen> {
                                                   width:
                                                       getDeviceWidth(context),
                                                   padding: EdgeInsets.only(
-                                                      bottom: 23.w),
+                                                      bottom: 23),
                                                   child: ActivePackageWidget(
                                                     title: _package.name ?? '',
                                                     subtitle:

@@ -12,6 +12,7 @@ import '../../widgets/text_views.dart';
 import '../../../utils/images.dart';
 import '../../../utils/pallets.dart';
 import '../../../utils/validators.dart';
+
 import 'viewmodel/login_viewmodel.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -31,12 +32,11 @@ class _LoginScreenState extends State<LoginScreen> {
   String _passwordValueDetector = '';
   bool _onPasswordToggle = true;
 
-  // final _loginNotifier = ChangeNotifierProvider((ref) => LoginViewModel());
   LoginViewModel? _loginViewModel;
 
   @override
   void initState() {
-    _loginViewModel = Provider.of<LoginViewModel>(context,listen: false);
+    _loginViewModel = Provider.of<LoginViewModel>(context, listen: false);
     _loginViewModel!.init(context);
     _initControllers();
     super.initState();
@@ -64,7 +64,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Consumer<LoginViewModel>(
       builder: (context, watch, child) {
-        // _loginViewModel = watch(_loginNotifier);
         return LoadingOverlay(
           isLoading: _loginViewModel!.loading,
           child: Scaffold(

@@ -26,7 +26,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   TextEditingController? _emailController;
 
   String _emailValueDetector = '';
-
   ResetPasswordViewModel? _resetPasswordViewModel;
 
   @override

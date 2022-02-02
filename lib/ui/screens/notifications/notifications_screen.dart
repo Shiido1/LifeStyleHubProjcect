@@ -29,12 +29,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(360, 690),
-        orientation: Orientation.portrait);
     return Scaffold(
       appBar: getCustomAppBar(context,
           title: 'Notification',
@@ -45,9 +39,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            Consumer<NotificationViewmodel>(
+            Consumer<NotificationViewmodel?>(
               builder: (context, notification, child) {
-                if (notification.notificationList.isEmpty) {
+                if (notification!.notificationList.isEmpty) {
                   return Center(
                     child: TextView(
                       text: 'No Notification',
@@ -60,13 +54,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 }
 
                 return Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.0),
                   child: ListView(
                     children: [
                       ...notification.notificationList
                           .map((notification) => Container(
-                                padding: EdgeInsets.all(8.w),
-                                margin: EdgeInsets.all(8.w),
+                                padding: EdgeInsets.all(8),
+                                margin: EdgeInsets.all(8),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
