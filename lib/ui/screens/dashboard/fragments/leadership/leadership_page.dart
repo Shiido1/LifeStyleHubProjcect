@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/leadership/leadership/senior_leadership_screen.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
@@ -23,18 +25,28 @@ class _LeadershipScreenState extends State<LeadershipScreen> {
           child: Column(
             children: [
               SingleChildScrollView(
+                padding: EdgeInsets.only(right: 50),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
                     leadershipWidget(
                         image: 'assets/svgs/senior_leadership_icon.svg',
-                        text: 'Senior Leader'),
+                        text: 'Senior Leader',
+                        screen: SeniorLeaderShipScreenPage(
+                          title: 'Senior Leader',
+                        )),
                     leadershipWidget(
                         image: 'assets/svgs/executive_leadership_icon.svg',
-                        text: 'Executive Leader'),
+                        text: 'Executive Leader',
+                        screen: SeniorLeaderShipScreenPage(
+                          title: 'Executive Leader',
+                        )),
                     leadershipWidget(
                         image: 'assets/svgs/rhodium_leader_icon.svg',
-                        text: 'Rhodium Leader'),
+                        text: 'Rhodium Leader',
+                        screen: SeniorLeaderShipScreenPage(
+                          title: 'Rhodium Leader',
+                        )),
                   ],
                 ),
               ),
@@ -240,126 +252,116 @@ class _LeadershipScreenState extends State<LeadershipScreen> {
     );
   }
 
-  leadershipWidget({String? image, String? text}) => Container(
-        width: 350,
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 30),
-        margin: EdgeInsets.only(right: 20),
-        decoration: BoxDecoration(
-            color: Pallets.grey100,
-            borderRadius: BorderRadius.all(Radius.circular(16))),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ImageLoader(
-              path: image!,
-              height: 50,
-              width: 50,
-            ),
-            SizedBox(
-              height: 23,
-            ),
-            TextView(
-              text: text!,
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
-            SizedBox(
-              height: 18,
-            ),
-            TextView(
-              text: 'N1,000,000 Education Grant',
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Pallets.grey600,
-            ),
-            Divider(
-              thickness: 1,
-              color: Pallets.grey600,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextView(
-              text:
-                  'All expenses paid Weekend Get Away for 1 at Inagbe Resort, Lagos',
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Pallets.grey600,
-            ),
-            Divider(
-              thickness: 1,
-              color: Pallets.grey600,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextView(
-              text: '€500 worth of Physical Gold',
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Pallets.grey600,
-            ),
-            Divider(
-              thickness: 1,
-              color: Pallets.grey600,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextView(
-              text: 'Comprehensive Health Insurance for 6months (Family of 4)',
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Pallets.grey600,
-            ),
-            Divider(
-              thickness: 1,
-              color: Pallets.grey600,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextView(
-              text: 'Leadership Award',
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Pallets.grey600,
-            ),
-            Divider(
-              thickness: 1,
-              color: Pallets.grey600,
-            ),
-            SizedBox(
-              height: 18,
-            ),
-            TextView(
-              text: '60% complete',
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Pallets.black,
-            ),
-            Container(
-                alignment: Alignment.topCenter,
-                margin: EdgeInsets.only(bottom: 20, top: 20),
-                child: LinearProgressIndicator(
-                  value: 0.7,
-                  valueColor:
-                      new AlwaysStoppedAnimation<Color>(Pallets.orange600),
-                  backgroundColor: Colors.grey,
-                  minHeight: 8,
-                )),
-            ButtonWidget(
-              width: getDeviceWidth(context),
-              buttonText: 'view details',
-              color: Pallets.white,
-              fontWeight: FontWeight.w500,
-              textAlign: TextAlign.center,
-              fontStyle: FontStyle.normal,
-              primary: Pallets.orange600,
-              onPressed: () {},
-            ),
-          ],
+  leadershipWidget({String? image, String? text, Widget? screen}) =>
+      GestureDetector(
+        onTap: () => PageRouter.gotoWidget(screen!, context),
+        child: Container(
+          width: getDeviceWidth(context) / 2 * 1.85,
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 30),
+          margin: EdgeInsets.only(right: 20),
+          decoration: BoxDecoration(
+              color: Pallets.grey100,
+              borderRadius: BorderRadius.all(Radius.circular(16))),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ImageLoader(
+                path: image!,
+                height: 50,
+                width: 50,
+              ),
+              SizedBox(
+                height: 23,
+              ),
+              TextView(
+                text: text!,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              TextView(
+                text: 'Qualify twice & Produce 2 first generation qualifiers ',
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Pallets.grey600,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextView(
+                          text: '30% complete',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Pallets.black,
+                        ),
+                        Container(
+                            alignment: Alignment.topCenter,
+                            margin: EdgeInsets.only(bottom: 20, top: 20),
+                            child: LinearProgressIndicator(
+                              value: 0.4,
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  Pallets.orange600),
+                              backgroundColor: Colors.grey,
+                              minHeight: 8,
+                            )),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 24,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextView(
+                          text: '60% complete',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Pallets.black,
+                        ),
+                        Container(
+                            alignment: Alignment.topCenter,
+                            margin: EdgeInsets.only(bottom: 20, top: 20),
+                            child: LinearProgressIndicator(
+                              value: 0.7,
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  Pallets.orange600),
+                              backgroundColor: Colors.grey,
+                              minHeight: 8,
+                            )),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ButtonWidget(
+                width: getDeviceWidth(context),
+                buttonText: 'view details',
+                color: Pallets.white,
+                fontWeight: FontWeight.w500,
+                textAlign: TextAlign.center,
+                fontStyle: FontStyle.normal,
+                primary: Pallets.orange600,
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
       );
 }
