@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import '../../../../../../../helper/helper_handler.dart';
 import '../../../../../../widgets/buttons.dart';
 import '../../../../../../widgets/image_loader.dart';
@@ -51,6 +52,7 @@ class ContentCard extends StatelessWidget {
                   : ImageLoader(
                       height: 56,
                       width: 56,
+                      borderColor: Pallets.orange600,
                       path: element?.image ?? '',
                     ),
               SizedBox(width: 30),
@@ -84,10 +86,14 @@ class ContentCard extends StatelessWidget {
           SizedBox(height: 10),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatar(
-                radius: 5,
-                backgroundColor: Pallets.orange600,
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: CircleAvatar(
+                  radius: 5,
+                  backgroundColor: Pallets.orange600,
+                ),
               ),
               SizedBox(width: 20),
               Expanded(
@@ -105,19 +111,39 @@ class ContentCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(
-                radius: 5,
-                backgroundColor: Pallets.orange600,
-              ),
-              SizedBox(width: 20),
-              Expanded(
-                child: TextView(
-                  text: element?.description ?? '',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                  color: Pallets.grey800,
-                  textAlign: TextAlign.left,
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: CircleAvatar(
+                  radius: 5,
+                  backgroundColor: Pallets.orange600,
                 ),
+              ),
+              SizedBox(width: 15),
+              Expanded(
+                // child: TextView(
+                //   text: element?.description ?? '',
+                //   fontWeight: FontWeight.w400,
+                //   fontSize: 14,
+                //   color: Pallets.grey800,
+                //   textAlign: TextAlign.left,
+                // ),
+                child: Html(data: element?.description ?? '', style: {
+                  "table": Style(
+                    backgroundColor: Color.fromARGB(0x50, 0xee, 0xee, 0xee),
+                  ),
+                  "tr": Style(
+                    border: Border(bottom: BorderSide(color: Colors.grey)),
+                  ),
+                  "th": Style(
+                    // padding: EdgeInsets.all(6),
+                    backgroundColor: Colors.grey,
+                  ),
+                  "td": Style(
+                    // padding: EdgeInsets.all(6),
+                    alignment: Alignment.topLeft,
+                  ),
+                  // 'h5': Style(maxLines: 2, textOverflow: TextOverflow.ellipsis),
+                }),
               )
             ],
           ),

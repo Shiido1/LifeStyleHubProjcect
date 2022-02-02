@@ -113,7 +113,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           image: _profileModel?.profilePic ?? '',
           initial: _profileModel?.name ?? 'LH',
           onTap: () => PageRouter.gotoWidget(
-              DashboardScreen(index: 10), context,
+              DashboardScreen(index: 11), context,
               animationType: PageTransitionType.fade, clearStack: true)),
       drawer: getDrawer(context, _index, _profileModel),
       body: SafeArea(
