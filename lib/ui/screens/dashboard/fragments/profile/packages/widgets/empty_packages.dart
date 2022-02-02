@@ -22,8 +22,6 @@ class EmptyPackageWidget extends StatelessWidget {
             maxWidth: MediaQuery.of(context).size.width,
             maxHeight: MediaQuery.of(context).size.height),
         designSize: Size(360, 690),
-        context: context,
-        minTextAdapt: true,
         orientation: Orientation.portrait);
     return Center(
       child: Container(
