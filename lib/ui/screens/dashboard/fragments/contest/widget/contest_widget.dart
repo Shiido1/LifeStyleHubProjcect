@@ -32,12 +32,14 @@ class ContestWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: ImageLoader(
-                    path: contest!.image,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ),
+                  child: contest!.image == ''
+                      ? Container()
+                      : ImageLoader(
+                          path: contest!.image,
+                          height: 100,
+                          width: 100,
+                          fit: BoxFit.cover,
+                        ),
                 ),
                 Expanded(
                   flex: 3,

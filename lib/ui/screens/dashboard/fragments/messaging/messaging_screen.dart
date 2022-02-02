@@ -173,7 +173,7 @@ class _MessagingScreenState extends State<MessagingScreen>
                   enablePullDown: true,
                   enablePullUp: true,
                   onRefresh: () =>
-                      _messagingViewmodel!.getLastMessage(isRefreshing: true),
+                      _messagingViewmodel?.getLastMessage(isRefreshing: true),
                   onLoading: () => _messagingViewmodel!
                       .loadLastPagination(_textEditingController.text),
                   child: ListView(

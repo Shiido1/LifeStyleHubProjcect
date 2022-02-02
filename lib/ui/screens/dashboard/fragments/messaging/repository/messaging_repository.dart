@@ -21,6 +21,7 @@ class MessageRepository {
   }
 
   Future<OpenMessageModel> openMessage(Map map) async {
+    logger.d('print logger id for mapmessage $map');
     try {
       final _response = await apiBaseHelper.post(
           url: Paths.openMessage,

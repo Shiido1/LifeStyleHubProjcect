@@ -252,9 +252,9 @@ class _LeadershipScreenState extends State<LeadershipScreen> {
     );
   }
 
-  leadershipWidget({String? image, String? text, Widget? screen}) =>
+  leadershipWidget({String? image, String? text, required Widget screen}) =>
       GestureDetector(
-        onTap: () => PageRouter.gotoWidget(screen!, context),
+        onTap: () => PageRouter.gotoWidget(screen, context),
         child: Container(
           width: getDeviceWidth(context) / 2 * 1.85,
           padding: EdgeInsets.fromLTRB(20, 20, 20, 30),
@@ -358,7 +358,7 @@ class _LeadershipScreenState extends State<LeadershipScreen> {
                 textAlign: TextAlign.center,
                 fontStyle: FontStyle.normal,
                 primary: Pallets.orange600,
-                onPressed: () {},
+                onPressed: () => PageRouter.gotoWidget(screen, context),
               ),
             ],
           ),

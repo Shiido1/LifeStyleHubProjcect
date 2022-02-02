@@ -20,7 +20,7 @@ class WalletViewmodel extends BaseViewModel {
   bool get loading => _loading;
 
   final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: true);
 
   RefreshController get refreshController => _refreshController;
 

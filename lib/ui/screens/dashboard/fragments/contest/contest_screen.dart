@@ -44,7 +44,7 @@ class _ContestScreenState extends State<ContestScreen> {
                   // final _contestWatch = watch.watch(_contestProvider);
                   return SmartRefresher(
                     controller: watch.refreshController,
-                    onRefresh: () => _contestViewModel!.getListContest(),
+                    onRefresh: () => watch.getListContest(),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: ListView(

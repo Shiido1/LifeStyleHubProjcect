@@ -38,12 +38,14 @@ class ContestWidget extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: ImageLoader(
-                    path: contest!.image,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ),
+                  child: contest!.image == ''
+                      ? Container()
+                      : ImageLoader(
+                          path: contest!.image,
+                          height: 100,
+                          width: 100,
+                          fit: BoxFit.cover,
+                        ),
                 ),
                 SizedBox(
                   width: getDeviceWidth(context) / 18,
@@ -61,7 +63,9 @@ class ContestWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15)),
                         child: Center(
                           child: TextView(
-                            text: getDateTime(contest!.enddate!).day.toString(),
+                            text: getDateTime(contest!.enddate!).day!.isNegative
+                                ? '00'
+                                : getDateTime(contest!.enddate!).day.toString(),
                             fontWeight: FontWeight.w700,
                             fontSize: 24,
                             color: Pallets.black,

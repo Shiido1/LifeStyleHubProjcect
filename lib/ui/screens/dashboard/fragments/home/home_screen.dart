@@ -257,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               }
-           
+
               return _dashboardModel?.featuredVideo?.featuredImage == null
                   ? Container()
                   : ImageLoader(

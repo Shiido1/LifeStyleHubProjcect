@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'widget/sender_widget.dart';
 import '../profile/dao/profile_dao.dart';
@@ -39,7 +38,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
     _messagingViewmodel =
         Provider.of<MessagingViewmodel>(context, listen: false);
     _messagingViewmodel!.init(context);
-    _messagingViewmodel!.openMessage(conversation!.id.toString());
+    _messagingViewmodel!.openMessage(conversation?.id?.toString() ?? '');
     _currentItemSelected = _dropdownValues.first;
     _getProfileData();
     super.initState();
@@ -66,7 +65,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
           onTap: () => null),
       body: Consumer<MessagingViewmodel>(builder: (context, watch, child) {
         // final _cachedMessage = watch.watch(_messageViewModel);
-        // _cachedMessage.getCachedMessage(conversation!.id.toString());
+        watch.getCachedMessage(conversation!.id.toString());
 
         return Stack(
           children: [
@@ -116,7 +115,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
                       }
                       return ReceiversText(message);
                     }).toList(),
-                    Padding(padding: EdgeInsets.only(bottom: 50.w)),
+                    Padding(padding: EdgeInsets.only(bottom: 50)),
                     SizedBox(
                       height: 23,
                     )

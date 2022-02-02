@@ -40,6 +40,12 @@ class _WalletScreenState extends State<WalletScreen> {
   }
 
   @override
+  void dispose() {
+    _walletViewmodel!.refreshController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: walletDao!.getListenable()!,
@@ -54,7 +60,7 @@ class _WalletScreenState extends State<WalletScreen> {
             );
           }
           return Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),
               child: SmartRefresher(
                 controller: wallet.refreshController,
                 enablePullUp: true,

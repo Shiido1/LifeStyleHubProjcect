@@ -127,7 +127,7 @@ class MessagingViewmodel extends BaseViewModel {
     try {
       _showLoading();
       final _response =
-          await _messageRepository.openMessage({'conversation_id': id});
+          await _messageRepository.openMessage({'conversation_id': '$id'});
       messageDao!.saveChat(id, _response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());

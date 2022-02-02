@@ -1,18 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 
-class SeniorLeaderShipScreenPage extends StatelessWidget {
-  const SeniorLeaderShipScreenPage({Key? key, this.title}) : super(key: key);
-  final String? title;
+class SeniorLeaderShipScreenPage extends StatefulWidget {
+  const SeniorLeaderShipScreenPage({Key? key, required this.title})
+      : super(key: key);
+  final String title;
+
+  @override
+  State<SeniorLeaderShipScreenPage> createState() =>
+      _SeniorLeaderShipScreenPageState();
+}
+
+class _SeniorLeaderShipScreenPageState
+    extends State<SeniorLeaderShipScreenPage> {
+  UsersProfileModel? usersProfileModel;
+
+  void _getCatchedInfos() async {
+    usersProfileModel = await profileDao?.convert();
+
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    _getCatchedInfos();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getCustomAppBar(context,
-          centerTitle: true, title: title!, showLeadig: true),
+          centerTitle: true,
+          title: widget.title,
+          showLeadig: true,
+          image: usersProfileModel?.profilePic ?? ''),
       body: Stack(children: [
         SingleChildScrollView(
           padding: EdgeInsets.all(24),

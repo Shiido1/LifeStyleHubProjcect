@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
@@ -17,15 +16,9 @@ class EmptyPackageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(360, 690),
-        orientation: Orientation.portrait);
     return Center(
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 16.w),
+        padding: EdgeInsets.symmetric(vertical: 16),
         width: getDeviceWidth(context),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -34,7 +27,7 @@ class EmptyPackageWidget extends StatelessWidget {
             TextView(
               text: 'Active Packages',
               color: Pallets.grey500,
-              fontSize: 16.sp,
+              fontSize: 16,
               fontWeight: FontWeight.w700,
             ),
             ImageLoader(
@@ -45,15 +38,15 @@ class EmptyPackageWidget extends StatelessWidget {
             TextView(
               text: ' No active packages',
               color: Pallets.grey400,
-              fontSize: 14.sp,
+              fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
             SizedBox(
-              height: 20.h,
+              height: 20,
             ),
             ButtonWidget(
               buttonText: 'Subscribe now',
-              width: 200.w,
+              width: 200,
               color: Pallets.white,
               fontWeight: FontWeight.w500,
               textAlign: TextAlign.center,
@@ -67,7 +60,7 @@ class EmptyPackageWidget extends StatelessWidget {
         ),
         decoration: BoxDecoration(
             color: Pallets.grey100,
-            borderRadius: BorderRadius.all(Radius.circular(10.r))),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
       ),
     );
   }

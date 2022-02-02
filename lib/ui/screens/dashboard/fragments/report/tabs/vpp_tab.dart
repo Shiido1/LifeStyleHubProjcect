@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/vpp/vpp_profile.dart';
@@ -85,12 +84,6 @@ class _VPPTabState extends State<VPPTab> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(360, 690),
-        orientation: Orientation.portrait);
     return Consumer<ReportViewmodel>(builder: (_, provider, __) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -228,7 +221,7 @@ class _VPPTabState extends State<VPPTab> {
                           isChart = true;
                         }),
                         child: Container(
-                          padding: EdgeInsets.all(8.w),
+                          padding: EdgeInsets.all(8),
                           child: Icon(
                             Icons.arrow_back,
                             color: Pallets.white,
@@ -250,7 +243,7 @@ class _VPPTabState extends State<VPPTab> {
                           isChart = false;
                         }),
                         child: Container(
-                          padding: EdgeInsets.all(8.w),
+                          padding: EdgeInsets.all(8),
                           child: Icon(
                             Icons.arrow_forward,
                             color: Pallets.white,
