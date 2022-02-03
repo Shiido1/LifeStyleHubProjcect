@@ -48,7 +48,7 @@ class MessagingViewmodel extends BaseViewModel {
   void sortContentById(List<Data>? data, [UsersProfileModel? user]) {
     _getLastMessages = data!
         .where((element) =>
-            element.conversation!.lastMessage!.sender!.id != user!.id)
+            element.conversation.lastMessage!.sender!.id != user!.id)
         .toList();
   }
 

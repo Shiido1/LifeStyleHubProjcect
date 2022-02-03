@@ -21,7 +21,7 @@ WalletViewmodel? _walletProvider;
 
 void showTransferModal(BuildContext context) {
   _walletProvider = Provider.of<WalletViewmodel>(context, listen: false);
-  _walletProvider!.init(context);
+  _walletProvider!.init(context, _walletProvider!.refreshController);
 
   showModalBottomSheet(
       context: context,

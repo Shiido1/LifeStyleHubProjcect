@@ -97,7 +97,7 @@ void showPinModal(BuildContext mContext, PinEnum pinEnum,
                               final _wallet = Provider.of<WalletViewmodel>(
                                   context,
                                   listen: false);
-                              _wallet.init(context);
+                              _wallet.init(context, _wallet.refreshController);
                               final _model = PinModel(
                                   bankID: bankID,
                                   amount: amount,
@@ -114,7 +114,6 @@ void showPinModal(BuildContext mContext, PinEnum pinEnum,
                                   _wallet.transfer(_model.toMap());
                                 }
                               }
-                              
                             },
                           ),
                           SizedBox(height: 23)

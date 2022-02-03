@@ -229,11 +229,11 @@ class _MessagingScreenState extends State<MessagingScreen>
                       Column(
                         children: _messageList
                             .map((elements) => !_formatReceiver(
-                                            elements.conversation!,
+                                            elements.conversation,
                                             _usersProfileModel!)!
                                         .toLowerCase()
                                         .contains(searching!.toLowerCase()) &&
-                                    !elements.conversation!.lastMessage!.body!
+                                    !elements.conversation.lastMessage!.body!
                                         .toLowerCase()
                                         .contains(searching!.toLowerCase())
                                 ? Container()
@@ -265,7 +265,7 @@ class _MessagingScreenState extends State<MessagingScreen>
                                       textOverflow: TextOverflow.ellipsis,
                                     ),
                                     subtitle:
-                                        Html(data: elements.conversation?.lastMessage?.body ?? '', style: {
+                                        Html(data: elements.conversation.lastMessage?.body ?? '', style: {
                                       "table": Style(
                                         backgroundColor: Color.fromARGB(
                                             0x50, 0xee, 0xee, 0xee),
@@ -299,9 +299,9 @@ class _MessagingScreenState extends State<MessagingScreen>
         ));
   }
 
-  String? _formatReceiver(Conversation? conversation, UsersProfileModel user) {
+  String? _formatReceiver(Conversation conversation, UsersProfileModel user) {
     String? _receiver = 'Guest';
-    conversation!.participants!.map((participant) {
+    conversation.participants!.map((participant) {
       if (participant.messageable?.id != user.id)
         _receiver = participant.messageable?.name;
       else

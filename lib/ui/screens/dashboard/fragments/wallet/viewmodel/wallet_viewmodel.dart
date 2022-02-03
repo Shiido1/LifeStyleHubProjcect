@@ -19,7 +19,7 @@ class WalletViewmodel extends BaseViewModel {
 
   bool get loading => _loading;
 
-  final RefreshController _refreshController =
+  RefreshController _refreshController =
       RefreshController(initialRefresh: true);
 
   RefreshController get refreshController => _refreshController;
@@ -30,8 +30,9 @@ class WalletViewmodel extends BaseViewModel {
   int get currentPage => _currentPage;
 
   /// initialize auth viewmodel
-  void init(BuildContext context) {
+  void init(BuildContext context, RefreshController refreshController) {
     this._context = context;
+    this._refreshController = refreshController;
   }
 
   /// show loading indicator
@@ -139,6 +140,13 @@ class WalletViewmodel extends BaseViewModel {
 
   void setCountry(Country? country) {
     this.country = country;
+    notifyListeners();
+  }
+
+  void disposeController() {
+    _refreshController.dispose();
+
+    /// Incase this doesnt work automatically, force it to work by calling
     notifyListeners();
   }
 }

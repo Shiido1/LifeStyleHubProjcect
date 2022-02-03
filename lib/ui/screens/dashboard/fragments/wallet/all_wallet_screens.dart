@@ -25,7 +25,7 @@ class _AllWalletScreenState extends State<AllWalletScreen> {
   @override
   void initState() {
     _walletViewmodel = Provider.of<WalletViewmodel>(context, listen: false);
-    _walletViewmodel!.init(context);
+    _walletViewmodel!.init(context, _walletViewmodel!.refreshController);
     _refresh();
     _getCatchedInfos();
     super.initState();

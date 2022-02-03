@@ -30,7 +30,7 @@ class MessageDao {
 
   Future<open.OpenMessageModel> getChat(String id) async {
     final _data = await prefManager.getStringValues(key: id);
-    return open.OpenMessageModel.fromJson(json.decode(_data!)!);
+    return open.OpenMessageModel.fromJson(json.decode(_data!));
   }
 
   Future<void> saveContents(List<Data>? data) async {

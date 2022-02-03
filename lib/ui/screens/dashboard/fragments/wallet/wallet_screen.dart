@@ -28,7 +28,7 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   void initState() {
     _walletViewmodel = Provider.of<WalletViewmodel>(context, listen: false);
-    _walletViewmodel!.init(context);
+    _walletViewmodel!.init(context, _walletViewmodel!.refreshController);
     _refresh();
     super.initState();
   }
@@ -41,7 +41,7 @@ class _WalletScreenState extends State<WalletScreen> {
 
   @override
   void dispose() {
-    _walletViewmodel!.refreshController.dispose();
+    _walletViewmodel!.disposeController();
     super.dispose();
   }
 

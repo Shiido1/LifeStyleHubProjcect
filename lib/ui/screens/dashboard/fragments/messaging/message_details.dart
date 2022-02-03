@@ -65,7 +65,7 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
           onTap: () => null),
       body: Consumer<MessagingViewmodel>(builder: (context, watch, child) {
         // final _cachedMessage = watch.watch(_messageViewModel);
-        watch.getCachedMessage(conversation!.id.toString());
+        watch.getCachedMessage(conversation?.id?.toString() ?? '');
 
         return Stack(
           children: [
