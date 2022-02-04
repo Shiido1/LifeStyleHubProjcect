@@ -28,12 +28,15 @@ class ViewAllMarkettingScreen extends StatefulWidget {
 
 class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
   MarkettingViewmodel? _marketting;
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
     _marketting = Provider.of<MarkettingViewmodel>(context, listen: false);
     _marketting!.init(context);
     _marketting!.getMarketingViewAll(_getType());
+    _refreshController.refreshCompleted();
     _getCatchedInfos();
     super.initState();
   }
@@ -74,7 +77,7 @@ class _ViewAllMarkettingScreenState extends State<ViewAllMarkettingScreen> {
         return Padding(
           padding: const EdgeInsets.all(16.0),
           child: SmartRefresher(
-            controller: _marketting!.refreshController,
+            controller: _refreshController,
             enablePullUp: true,
             onRefresh: () => _marketting!
                 .getMarketingViewAll(_getType(), isRefreshing: true),

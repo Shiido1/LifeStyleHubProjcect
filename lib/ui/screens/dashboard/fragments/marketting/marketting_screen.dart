@@ -22,8 +22,8 @@ class MarkettingScreen extends StatefulWidget {
 }
 
 class _MarkettingScreenState extends State<MarkettingScreen> {
-//   final _markettingViewModel =
-//       ChangeNotifierProvider((ref) => MarkettingViewmodel());
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   MarkettingViewmodel? _marketting;
 
@@ -32,6 +32,7 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
     _marketting = Provider.of<MarkettingViewmodel>(context, listen: false);
     _marketting!.init(context);
     _marketting!.getMarketing();
+    _refreshController.refreshCompleted();
     super.initState();
   }
 
@@ -55,7 +56,7 @@ class _MarkettingScreenState extends State<MarkettingScreen> {
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: SmartRefresher(
-                controller: _marketting!.refreshController,
+                controller: _refreshController,
                 onRefresh: () => _marketting!.getMarketing(),
                 child: ListView(
                   children: [

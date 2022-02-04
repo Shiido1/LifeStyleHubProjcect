@@ -41,12 +41,16 @@ class _MessagingScreenState extends State<MessagingScreen>
   MessagingViewmodel? _messagingViewmodel;
   String? searching = '';
 
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
   @override
   void initState() {
     _messagingViewmodel =
         Provider.of<MessagingViewmodel>(context, listen: false);
     _messagingViewmodel!.init(context);
     _messagingViewmodel!.getLastMessage();
+    _refreshController.refreshCompleted();
 
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500))
@@ -169,7 +173,7 @@ class _MessagingScreenState extends State<MessagingScreen>
               return Padding(
                 padding: EdgeInsets.all(16),
                 child: SmartRefresher(
-                  controller: _provider.lastMessageController,
+                  controller: _refreshController,
                   enablePullDown: true,
                   enablePullUp: true,
                   onRefresh: () =>
@@ -228,8 +232,8 @@ class _MessagingScreenState extends State<MessagingScreen>
                       SizedBox(height: 32),
                       Column(
                         children: _messageList
-                            .map((elements) => !_formatReceiver(
-                                            elements.conversation,
+                            .map((elements) => _usersProfileModel != null &&
+                                    !_formatReceiver(elements.conversation,
                                             _usersProfileModel!)!
                                         .toLowerCase()
                                         .contains(searching!.toLowerCase()) &&
@@ -253,10 +257,12 @@ class _MessagingScreenState extends State<MessagingScreen>
                                           fontWeight: FontWeight.w400),
                                     ),
                                     title: TextView(
-                                      text: _formatReceiver(
-                                              elements.conversation,
-                                              _usersProfileModel!) ??
-                                          '',
+                                      text: _usersProfileModel != null
+                                          ? _formatReceiver(
+                                                  elements.conversation,
+                                                  _usersProfileModel!) ??
+                                              ''
+                                          : '',
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700,
                                       color: Pallets.grey700,
@@ -264,29 +270,31 @@ class _MessagingScreenState extends State<MessagingScreen>
                                       maxLines: 1,
                                       textOverflow: TextOverflow.ellipsis,
                                     ),
-                                    subtitle:
-                                        Html(data: elements.conversation.lastMessage?.body ?? '', style: {
-                                      "table": Style(
-                                        backgroundColor: Color.fromARGB(
-                                            0x50, 0xee, 0xee, 0xee),
-                                      ),
-                                      "tr": Style(
-                                        border: Border(
-                                            bottom:
-                                                BorderSide(color: Colors.grey)),
-                                      ),
-                                      "th": Style(
-                                        padding: EdgeInsets.all(6),
-                                        backgroundColor: Colors.grey,
-                                      ),
-                                      "td": Style(
-                                        padding: EdgeInsets.all(6),
-                                        alignment: Alignment.topLeft,
-                                      ),
-                                      'h5': Style(
-                                          maxLines: 2,
-                                          textOverflow: TextOverflow.ellipsis),
-                                    })))
+                                    subtitle: Html(
+                                        data: elements.conversation.lastMessage?.body ?? '',
+                                        style: {
+                                          "table": Style(
+                                            backgroundColor: Color.fromARGB(
+                                                0x50, 0xee, 0xee, 0xee),
+                                          ),
+                                          "tr": Style(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.grey)),
+                                          ),
+                                          "th": Style(
+                                            padding: EdgeInsets.all(6),
+                                            backgroundColor: Colors.grey,
+                                          ),
+                                          "td": Style(
+                                            padding: EdgeInsets.all(6),
+                                            alignment: Alignment.topLeft,
+                                          ),
+                                          'h5': Style(
+                                              maxLines: 2,
+                                              textOverflow:
+                                                  TextOverflow.ellipsis),
+                                        })))
                             .toList(),
                       ),
                       SizedBox(height: 36),

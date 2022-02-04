@@ -5,7 +5,6 @@ import '../dao/marketting_dao.dart';
 import '../model/get_resources_model.dart';
 import '../repository/marketting_repository.dart';
 import '../../../../../../utils/pallets.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 MarkettingRepository _markettingRepository = MarkettingRepository();
 
@@ -25,9 +24,9 @@ class MarkettingViewmodel extends BaseViewModel {
 
   Data? get getResourceModel => _getResourceModel;
 
-  final RefreshController _refreshController = RefreshController();
+  // final RefreshController _refreshController = RefreshController();
 
-  RefreshController get refreshController => _refreshController;
+  // RefreshController get refreshController => _refreshController;
 
   /// initialize auth viewmodel
   void init(BuildContext context) {
@@ -64,10 +63,10 @@ class MarkettingViewmodel extends BaseViewModel {
       if (markettingDao!.box!.isEmpty) _showLoading();
       final _response = await _markettingRepository.getMarketting();
       markettingDao!.saveContents(_response.data!);
-      _refreshController.refreshCompleted();
+      // _refreshController.refreshCompleted();
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
-      _refreshController.refreshFailed();
+      // _refreshController.refreshFailed();
     }
     _hideLoading();
   }
@@ -89,8 +88,8 @@ class MarkettingViewmodel extends BaseViewModel {
       if (isLoadMore) _isLoadMore(_response.data!);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
-      _refreshController.refreshFailed();
-      _refreshController.loadFailed();
+      // _refreshController.refreshFailed();
+      // _refreshController.loadFailed();
     }
     _hideLoading();
   }
@@ -98,15 +97,15 @@ class MarkettingViewmodel extends BaseViewModel {
   void _isRefreshing() {
     _page = 1;
     notifyListeners();
-    _refreshController.refreshCompleted();
+    // _refreshController.refreshCompleted();
   }
 
   void _isLoadMore(List list) {
     isPagination = false;
     if (list.isEmpty) {
-      _refreshController.loadNoData();
+      // _refreshController.loadNoData();
     } else {
-      _refreshController.loadComplete();
+      // _refreshController.loadComplete();
     }
   }
 

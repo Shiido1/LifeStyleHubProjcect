@@ -142,7 +142,7 @@ class _OpenTicketScreenState extends State<OpenTicketScreen> {
                             width: MediaQuery.of(context).size.width,
                             child: TextFormField(
                               controller: _messageController,
-                              // ignore: missing_return
+                              // ignore: missing_return, body_might_complete_normally_nullable
                               validator: (String? value) {
                                 if (value!.isEmpty) {
                                   return '';

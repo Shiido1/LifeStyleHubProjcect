@@ -19,10 +19,13 @@ class WalletViewmodel extends BaseViewModel {
 
   bool get loading => _loading;
 
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: true);
+  final RefreshController _refreshController1 =
+      RefreshController(initialRefresh: false);
+  final RefreshController _refreshController2 =
+      RefreshController(initialRefresh: false);
 
-  RefreshController get refreshController => _refreshController;
+  RefreshController get refreshController1 => _refreshController1;
+  RefreshController get refreshController2 => _refreshController2;
 
   int _currentPage = 1;
   int? _totalPages = 0;
@@ -30,9 +33,8 @@ class WalletViewmodel extends BaseViewModel {
   int get currentPage => _currentPage;
 
   /// initialize auth viewmodel
-  void init(BuildContext context, RefreshController refreshController) {
+  void init(BuildContext context) {
     this._context = context;
-    this._refreshController = refreshController;
   }
 
   /// show loading indicator
@@ -89,7 +91,8 @@ class WalletViewmodel extends BaseViewModel {
       final _response = await _walletRepository.getWalletTransactions(index);
       _totalPages = _response.walletTransactions!.total;
       walletDao!.saveTransactions(_response.walletTransactions!.data);
-      _refreshController.refreshCompleted();
+      _refreshController1.refreshCompleted();
+      // _refreshController2.refreshCompleted();
     } catch (e) {
       hideLoading();
     }
@@ -140,13 +143,6 @@ class WalletViewmodel extends BaseViewModel {
 
   void setCountry(Country? country) {
     this.country = country;
-    notifyListeners();
-  }
-
-  void disposeController() {
-    _refreshController.dispose();
-
-    /// Incase this doesnt work automatically, force it to work by calling
     notifyListeners();
   }
 }

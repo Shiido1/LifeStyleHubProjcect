@@ -42,6 +42,7 @@ class PrefManager {
   }
 
   /// get string values
+  // ignore: body_might_complete_normally_nullable
   Future<String?> getStringValues({@required String? key}) async {
     _preferences = await SharedPreferences.getInstance();
     if (_preferences!.containsKey(key!))

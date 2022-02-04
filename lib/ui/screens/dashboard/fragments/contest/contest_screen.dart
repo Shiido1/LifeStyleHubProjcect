@@ -18,12 +18,15 @@ class ContestScreen extends StatefulWidget {
 class _ContestScreenState extends State<ContestScreen> {
   // final _contestProvider = ChangeNotifierProvider((_) => ContestViewModel());
   ContestViewModel? _contestViewModel;
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
     _contestViewModel = Provider.of<ContestViewModel>(context, listen: false);
     _contestViewModel!.init(context);
     _contestViewModel!.getListContest();
+    _refreshController.refreshCompleted();
     super.initState();
   }
 
@@ -43,7 +46,7 @@ class _ContestScreenState extends State<ContestScreen> {
                 return Consumer<ContestViewModel>(builder: (_, watch, __) {
                   // final _contestWatch = watch.watch(_contestProvider);
                   return SmartRefresher(
-                    controller: watch.refreshController,
+                    controller: _refreshController,
                     onRefresh: () => watch.getListContest(),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),

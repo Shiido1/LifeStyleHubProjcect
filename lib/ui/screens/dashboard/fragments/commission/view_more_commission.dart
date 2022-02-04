@@ -43,6 +43,8 @@ class _ViewMoreCommissionScreenState extends State<ViewMoreCommissionScreen> {
   final TextEditingController _textEditingController = TextEditingController();
 
   CommissionViewmodel? _commissionViewmodel;
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -51,6 +53,7 @@ class _ViewMoreCommissionScreenState extends State<ViewMoreCommissionScreen> {
         Provider.of<CommissionViewmodel>(context, listen: false);
     _commissionViewmodel!.init(context);
     _commissionViewmodel!.getCommissions();
+    _refreshController.refreshCompleted();
     super.initState();
   }
 
@@ -88,7 +91,7 @@ class _ViewMoreCommissionScreenState extends State<ViewMoreCommissionScreen> {
                   return Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: SmartRefresher(
-                        controller: _commissionViewmodel!.refreshController,
+                        controller: _refreshController,
                         enablePullUp: true,
                         onRefresh: () => _commissionViewmodel!.getCommissions(),
                         onLoading: () => _commissionViewmodel!

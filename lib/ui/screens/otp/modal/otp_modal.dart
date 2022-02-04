@@ -65,7 +65,7 @@ _proceed(BuildContext context) {
   if (_key.currentState!.validate()) {
     final _walletProvider =
         Provider.of<WalletViewmodel>(context, listen: false);
-    _walletProvider.init(context, _walletProvider.refreshController);
+    _walletProvider.init(context);
 
     // showPinModal(context);
     // _walletProvider.withdtrrawal({

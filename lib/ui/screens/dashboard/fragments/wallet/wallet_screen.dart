@@ -24,25 +24,24 @@ class WalletScreen extends StatefulWidget {
 
 class _WalletScreenState extends State<WalletScreen> {
   WalletViewmodel? _walletViewmodel;
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
     _walletViewmodel = Provider.of<WalletViewmodel>(context, listen: false);
-    _walletViewmodel!.init(context, _walletViewmodel!.refreshController);
+    _walletViewmodel!.init(
+      context,
+    );
     _refresh();
     super.initState();
   }
 
   void _refresh() {
     _walletViewmodel!.awaitTwoProcesses(1);
+    _refreshController.refreshCompleted();
     // _walletViewmodel!.checkWallet();
     // _walletViewmodel!.walletTransactions(1);
-  }
-
-  @override
-  void dispose() {
-    _walletViewmodel!.disposeController();
-    super.dispose();
   }
 
   @override
@@ -62,7 +61,7 @@ class _WalletScreenState extends State<WalletScreen> {
           return Padding(
               padding: EdgeInsets.all(16.0),
               child: SmartRefresher(
-                controller: wallet.refreshController,
+                controller: _refreshController,
                 enablePullUp: true,
                 onRefresh: () => _refresh(),
                 onLoading: () => wallet.paginate(),

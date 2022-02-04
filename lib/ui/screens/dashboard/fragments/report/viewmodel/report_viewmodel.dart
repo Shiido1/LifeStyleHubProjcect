@@ -231,7 +231,7 @@ class ReportViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
-  Future<void>? _getBarData(List<FreeSignUpModel>? freeSignup) {
+  Future<void> _getBarData(List<FreeSignUpModel>? freeSignup) async {
     for (int i = 0; i <= freeSignup!.length; i++) {
       barChartGroupData.add(
         BarChartGroupData(x: i, barRods: [
@@ -260,7 +260,8 @@ class ReportViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
-  Future<void>? _getIncomeBarData(List<UpgradeSignUpModel>? upgradedSignup) {
+  Future<void> _getIncomeBarData(
+      List<UpgradeSignUpModel>? upgradedSignup) async {
     for (int i = 0; i <= upgradedSignup!.length; i++) {
       barChartIncomeGroupData.add(
         BarChartGroupData(x: i, barRods: [

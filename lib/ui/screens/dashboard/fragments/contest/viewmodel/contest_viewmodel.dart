@@ -16,9 +16,9 @@ class ContestViewModel extends BaseViewModel {
 
   bool get loading => _loading;
 
-  final RefreshController _refreshController = RefreshController();
+  // final RefreshController _refreshController = RefreshController();
 
-  RefreshController get refreshController => _refreshController;
+  // RefreshController get refreshController => _refreshController;
 
   /// initialize auth viewmodel
   void init(BuildContext context) {
@@ -67,10 +67,10 @@ class ContestViewModel extends BaseViewModel {
       // if (contestDao!.box!.isEmpty) _showLoading();
       final _response = await _contestRepository.getListContest();
       contestDao!.saveContests(_response.viewContestModelList);
-      _refreshController.refreshCompleted();
+      // _refreshController.refreshCompleted();
     } catch (e) {
       // showsnackBarInfo(this._context, message: e.toString());
-      _refreshController.refreshFailed();
+      // _refreshController.refreshFailed();
     }
     _hideLoading();
   }

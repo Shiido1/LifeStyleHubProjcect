@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/open_message_model.dart'
     as open;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/repository/messaging_repository.dart';
@@ -25,7 +26,7 @@ class MessagingViewmodel extends BaseViewModel {
 
   List<Data>? get getLastMessages => _getLastMessages;
 
-  final RefreshController lastMessageController = RefreshController();
+  // final RefreshController lastMessageController = RefreshController();
 
   /// initialize auth viewmodel
   void init(BuildContext context) {
@@ -91,8 +92,8 @@ class MessagingViewmodel extends BaseViewModel {
       if (isLoadMore) _isLoadMore(_response.data!);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
-      lastMessageController.refreshFailed();
-      lastMessageController.loadFailed();
+      // lastMessageController.refreshFailed();
+      // lastMessageController.loadFailed();
     }
     _hideLoading();
   }
@@ -100,15 +101,15 @@ class MessagingViewmodel extends BaseViewModel {
   void _isRefreshing() {
     _page = 1;
     notifyListeners();
-    lastMessageController.refreshCompleted();
+    // lastMessageController.refreshCompleted();
   }
 
   void _isLoadMore(List list) {
     isPagination = false;
     if (list.isEmpty) {
-      lastMessageController.loadNoData();
+      // lastMessageController.loadNoData();
     } else {
-      lastMessageController.loadComplete();
+      // lastMessageController.loadComplete();
     }
   }
 
@@ -127,7 +128,8 @@ class MessagingViewmodel extends BaseViewModel {
     try {
       _showLoading();
       final _response =
-          await _messageRepository.openMessage({'conversation_id': '$id'});
+          await _messageRepository.openMessage({"conversation_id": id});
+      logger.d('printong response to see problem $_response');
       messageDao!.saveChat(id, _response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
@@ -138,7 +140,6 @@ class MessagingViewmodel extends BaseViewModel {
   /// open last messages
   Future<void> sendMessage(String id, String message) async {
     try {
-      _showLoading();
       await _messageRepository
           .sendMessage({'conversation_id': id, 'message': message});
       openMessage(id);
