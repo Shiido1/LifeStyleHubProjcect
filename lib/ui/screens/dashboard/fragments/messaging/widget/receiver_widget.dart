@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../model/open_message_model.dart';
 import '../../../../../widgets/text_views.dart';
@@ -9,7 +8,6 @@ import '../../../../../../utils/pallets.dart';
 class ReceiversText extends StatelessWidget {
   final Data? message;
   const ReceiversText(this.message, {Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +18,12 @@ class ReceiversText extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-              margin: EdgeInsets.only(top: 10.w, bottom: 10.w, right: 120.w),
+              margin: EdgeInsets.only(top: 10, bottom: 10, right: 120),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Pallets.grey100),
               child: Padding(
-                padding: EdgeInsets.only(top: 4.w, bottom: 4.w),
+                padding: EdgeInsets.only(top: 4, bottom: 4),
                 child: Html(data: message!.body!, style: {
                   "table": Style(
                     backgroundColor: Color.fromARGB(0x50, 0xee, 0xee, 0xee),

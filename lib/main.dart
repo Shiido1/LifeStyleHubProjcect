@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lifestyle_hub/core/network/app_config.dart';
 import 'package:provider/provider.dart';
 
@@ -24,31 +23,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return ScreenUtilInit(
-        designSize: const Size(375, 812),
-        builder: () {
-          return MultiProvider(
-            providers: Providers.getProviders,
-            child: MaterialApp(
-              title: 'LifeStyle Hub',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.deepOrange,
-              ),
-              routes: Routes.getRoutes,
-              home: FutureBuilder(
-                  future: prefManager.doesExists(key: HiveBoxes.profile),
-                  builder: (_, AsyncSnapshot<bool> snap) {
-                    if (snap.connectionState == ConnectionState.waiting) {
-                      return Container();
-                    }
-                    if (!snap.data!) {
-                      return SplashScreen();
-                    }
-                    return DashboardScreen();
-                  }),
-            ),
-          );
-        });
+    return MultiProvider(
+      providers: Providers.getProviders,
+      child: MaterialApp(
+        title: 'LifeStyle Hub',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.deepOrange,
+        ),
+        routes: Routes.getRoutes,
+        home: FutureBuilder(
+            future: prefManager.doesExists(key: HiveBoxes.profile),
+            builder: (_, AsyncSnapshot<bool> snap) {
+              if (snap.connectionState == ConnectionState.waiting) {
+                return Container();
+              }
+              if (!snap.data!) {
+                return SplashScreen();
+              }
+              return DashboardScreen();
+            }),
+      ),
+    );
   }
 }

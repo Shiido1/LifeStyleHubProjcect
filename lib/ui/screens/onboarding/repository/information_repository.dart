@@ -9,6 +9,7 @@ class InformationRepository {
   /// register basic information
   Future<BasicInformationModel> registerBasicInformation(
       {required Map map}) async {
+    logger.d(map);
     final _response = await apiBaseHelper.post(
         url: Paths.basicInformation, map: map, options: await getDioHeader());
     return BasicInformationModel.fromJson(_response);

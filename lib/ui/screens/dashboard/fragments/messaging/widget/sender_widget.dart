@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../model/open_message_model.dart';
 import '../../../../../widgets/text_views.dart';
@@ -21,12 +20,12 @@ class SenderText extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-              margin: EdgeInsets.only(top: 16.w, bottom: 16.w, left: 120.w),
+              margin: EdgeInsets.only(top: 16, bottom: 16, left: 120),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Pallets.orange50),
               child: Padding(
-                padding: EdgeInsets.only(top: 4.w, bottom: 4.w),
+                padding: EdgeInsets.only(top: 4, bottom: 4),
                 child: Html(data: message!.body!, style: {
                   "table": Style(
                     backgroundColor: Color.fromARGB(0x50, 0xee, 0xee, 0xee),

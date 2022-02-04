@@ -36,6 +36,16 @@ Future<Options> getDioHeader() async {
   Map<String, String> _header = Map<String, String>();
   _header[HttpHeaders.authorizationHeader] =
       'Bearer ${SessionManager.instance.authToken}';
+  _header[HttpHeaders.acceptHeader] = 'application/json';
+  _header[HttpHeaders.contentEncodingHeader] = 'gzip, deflate, br';
+  return Options(headers: _header);
+}
+
+/// @ get headers
+Future<Options> getUploadHeader() async {
+  Map<String, String> _header = Map<String, String>();
+  _header[HttpHeaders.authorizationHeader] =
+      'Bearer ${SessionManager.instance.authToken}';
   _header[HttpHeaders.contentTypeHeader] = 'multipart/form-data';
   _header[HttpHeaders.acceptHeader] = 'application/json';
   _header[HttpHeaders.contentEncodingHeader] = 'gzip, deflate, br';
@@ -90,7 +100,7 @@ CountDownTimer getDateTime(String date) {
   DateTime presentDate = _dateFormat.parse(DateTime.now().toIso8601String());
   final _answer = _duration.difference(presentDate);
   return CountDownTimer(
-      day: _answer.inDays-1,
+      day: _answer.inDays - 1,
       hour: DateTime.now().hour,
       miniute: DateTime.now().minute);
 }

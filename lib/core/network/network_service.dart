@@ -126,13 +126,12 @@ class NetworkService {
       final _response = await dio!.post(url!,
           data: formData,
           queryParameters: params,
-          options: options ??
-              Options(headers: {
-                "Authorization": "Bearer " + SessionManager.instance.authToken,
-                "Content-Disposition": "form-data",
-                "Content-Type": "multipart/form-data",
-                'Accept': 'application/json'
-              }), onSendProgress: (sent, total) {
+          options: Options(headers: {
+            "Authorization": "Bearer " + SessionManager.instance.authToken,
+            "Content-Disposition": "form-data",
+            "Content-Type": "multipart/form-data",
+            'Accept': 'application/json'
+          }), onSendProgress: (sent, total) {
         // eventBus
         //     .fire(
         //     FileUploadProgressEvent(FileUploadProgress(sent, total, tag: classTag)));

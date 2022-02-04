@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/model/open_message_model.dart'
     as open;
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/repository/messaging_repository.dart';
@@ -128,7 +127,6 @@ class MessagingViewmodel extends BaseViewModel {
       _showLoading();
       final _response =
           await _messageRepository.openMessage({"conversation_id": id});
-      logger.d('printong response to see problem $_response');
       messageDao!.saveChat(id, _response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
