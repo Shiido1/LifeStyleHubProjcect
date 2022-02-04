@@ -4,7 +4,6 @@ import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../provider/_base_viewmodels.dart';
 import '../dao/contest_dao.dart';
 import '../repository/contest_repository.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 ContestRepository _contestRepository = ContestRepository();
 
