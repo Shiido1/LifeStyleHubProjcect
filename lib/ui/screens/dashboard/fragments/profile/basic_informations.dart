@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../../helper/configs/constants.dart';
 import '../../../../../helper/helper_handler.dart';
-import '../../../../../helper/routes/navigation.dart';
 import 'dao/profile_dao.dart';
 import 'model/users_profile_model.dart';
 import '../../../../widgets/bottom_count_down.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
-import '../../../../widgets/custom_dialog_menu_pop.dart';
 import '../../../../widgets/date_picker.dart';
 import '../../../../widgets/edit_form_widget.dart';
 import '../../../../widgets/overlay.dart';
@@ -28,7 +25,7 @@ class BasicInformationsScreen extends StatefulWidget {
 
 class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
   bool _dateSelected = false;
-  bool _stateSelected = false;
+  // bool _stateSelected = false;
   int? _radioID = 0;
 
   ProfileViewmodel? _profileViewmodel;
@@ -94,6 +91,7 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
                     child: ListView(
                       children: [
                         EditFormField(
+                          textCapitalization: TextCapitalization.words,
                           floatingLabel: 'Full name',
                           label: 'Full name',
                           controller: _fullNameController,
@@ -133,21 +131,21 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
                         EditFormField(
                           floatingLabel: 'State/province',
                           label: 'State',
-                          suffixIcon: Icons.keyboard_arrow_down_sharp,
-                          suffixIconColor: _stateSelected
-                              ? Pallets.activeIconColor
-                              : Pallets.disabledIconColor,
+                          // suffixIcon: Icons.keyboard_arrow_down_sharp,
+                          // suffixIconColor: _stateSelected
+                          //     ? Pallets.activeIconColor
+                          //     : Pallets.disabledIconColor,
                           controller: _stateController,
-                          readOnly: true,
-                          autoValidate: _autoValidate,
-                          onTapped: () => showCustomDialog(context,
-                              title: 'Select state',
-                              items: AppConstants.getStates(), onTap: (value) {
-                            _stateSelected = true;
-                            _stateController!.text = value;
-                            setState(() {});
-                            PageRouter.goBack(context);
-                          }),
+                          // readOnly: true,
+                          // autoValidate: _autoValidate,
+                          // onTapped: () => showCustomDialog(context,
+                          //     title: 'Select state',
+                          //     items: AppConstants.getStates(), onTap: (value) {
+                          //   _stateSelected = true;
+                          //   _stateController!.text = value;
+                          //   setState(() {});
+                          //   PageRouter.goBack(context);
+                          // }),
                         ),
                         SizedBox(height: 40),
                         EditFormField(

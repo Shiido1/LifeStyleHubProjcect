@@ -41,6 +41,7 @@ class _SignupScreenState extends State<SignupScreen> {
   String _emailValueDetector = '';
   String _reEnterPasswordValueDetector = '';
   String _passwordValueDetector = '';
+  bool checkTap = false;
 
   RegisterViewModel? _registerViewModel;
 
@@ -100,8 +101,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         height: 16,
                       ),
                       EditFormField(
-                        floatingLabel: 'Enter referral code (If any)',
-                        label: 'Referral code (if any)',
+                        floatingLabel: 'Enter Sponsor Id (If any)',
+                        label: 'Sponsor Id (if any)',
                         controller: _referralCodeController,
                         keyboardType: TextInputType.text,
                         onChange: (value) =>
@@ -188,9 +189,55 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(
                         height: 23,
                       ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Checkbox(
+                              activeColor: Pallets.orange600,
+                              value: checkTap,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  checkTap = value!;
+                                  print('object $checkTap');
+                                });
+                              }),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: RichText(
+                                      text: TextSpan(children: [
+                                    TextSpan(
+                                        text:
+                                            'By providing us with your information you are consenting to the collection and use of your information in accordance with our ',
+                                        style:
+                                            TextStyle(color: Pallets.grey400)),
+                                    TextSpan(
+                                        text: 'Terms of Service ',
+                                        style: TextStyle(
+                                            color: Pallets.orange600)),
+                                    TextSpan(
+                                        text: 'and ',
+                                        style:
+                                            TextStyle(color: Pallets.grey400)),
+                                    TextSpan(
+                                        text: 'Privacy Policy',
+                                        style: TextStyle(
+                                            color: Pallets.orange600)),
+                                  ])),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 23,
+                      ),
                       ButtonWidget(
                         width: getDeviceWidth(context),
-                        buttonText: 'Get started',
+                        buttonText: 'Start Your Exclusive 14-day trial',
                         color: Pallets.white,
                         fontWeight: FontWeight.w500,
                         textAlign: TextAlign.center,
@@ -241,7 +288,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _registerUser() {
     FocusScope.of(context).unfocus();
-    if (_globalFormKey.currentState!.validate()) {
+    if (_globalFormKey.currentState!.validate() && checkTap == true) {
       _registerViewModel!.register(
           map: RegisterModel.sendData(
               email: _emailController.text,
@@ -250,6 +297,8 @@ class _SignupScreenState extends State<SignupScreen> {
               referral: _referralCodeController.text));
     } else {
       setState(() => _autoValidate = true);
+      showsnackBarInfo(context,
+          message: 'Fill required fields and agree to terms and conditions');
     }
   }
 }

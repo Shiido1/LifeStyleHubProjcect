@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../helper/configs/constants.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
 import '../../../../helper/helper_handler.dart';
 import '../../../../helper/routes/navigation.dart';
 import 'model/temp_basic_information_model.dart';
@@ -80,6 +80,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           height: 23,
         ),
         EditFormField(
+          textCapitalization: TextCapitalization.words,
           floatingLabel: 'Full name',
           label: 'Full name',
           controller: _fullNameController,
@@ -88,6 +89,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           height: 23,
         ),
         EditFormField(
+          textCapitalization: TextCapitalization.words,
           floatingLabel: 'User name',
           label: 'User name',
           controller: _userNameController,
@@ -106,19 +108,38 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
         EditFormField(
           floatingLabel: 'State/province',
           label: 'State',
-          suffixIcon: Icons.keyboard_arrow_down_sharp,
-          suffixIconColor: Pallets.disabledIconColor,
+          // suffixIcon: Icons.keyboard_arrow_down_sharp,
+          // suffixIconColor: Pallets.disabledIconColor,
           controller: _stateController,
-          readOnly: true,
-          onTapped: () => showCustomDialog(context,
-              title: 'Select state',
-              items: AppConstants.getStates(), onTap: (value) {
-            _stateSelected = true;
-            _stateController.text = value;
-            setState(() {});
-            PageRouter.goBack(context);
-          }),
+          // readOnly: true,
+          // onTapped: () => showCustomDialog(context,
+          //     title: 'Select state',
+          //     items: AppConstants.getStates(), onTap: (value) {
+          //   _stateSelected = true;
+          //   _stateController.text = value;
+          //   setState(() {});
+          //   PageRouter.goBack(context);
+          // }),
         ),
+        // SizedBox(
+        //   height: 23,
+        // ),
+        // EditFormField(
+        //   floatingLabel: 'Country',
+        //   label: 'Country',
+        //   // suffixIcon: Icons.keyboard_arrow_down_sharp,
+        //   // suffixIconColor: Pallets.disabledIconColor,
+        //   // controller: _countryController,
+        //   // readOnly: true,
+        //   // onTapped: () => showCustomDialog(context,
+        //   //     title: 'Select state',
+        //   //     items: AppConstants.getStates(), onTap: (value) {
+        //   //   _stateSelected = true;
+        //   //   _stateController.text = value;
+        //   //   setState(() {});
+        //   //   PageRouter.goBack(context);
+        //   // }),
+        // ),
         SizedBox(
           height: 23,
         ),
@@ -179,7 +200,32 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           onPressed: () => _cacheTemporer(_tabViewModel),
         ),
         SizedBox(
-          height: 32,
+          height: 24,
+        ),
+        ButtonWidget(
+          width: getDeviceWidth(context),
+          buttonText: 'Skip & start 14 days free trial',
+          color: Pallets.white,
+          borderColor: Pallets.grey300,
+          fontWeight: FontWeight.w200,
+          textAlign: TextAlign.center,
+          fontStyle: FontStyle.normal,
+          primary: Pallets.grey500,
+          onPressed: () => PageRouter.gotoWidget(DashboardScreen(), context),
+        ),
+
+        // Center(
+        //   child: TextView(
+        //     text: 'Skip & start 14 days free trial',
+        //     fontWeight: FontWeight.w500,
+        //     fontSize: 14,
+        //     color: Pallets.grey500,
+        //     textAlign: TextAlign.center,
+        //     onTap: () => PageRouter.gotoWidget(DashboardScreen(), context),
+        //   ),
+        // ),
+        SizedBox(
+          height: 24,
         ),
       ],
     );

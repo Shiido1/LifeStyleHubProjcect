@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../../helper/configs/instances.dart';
 import 'widget/sender_widget.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -136,12 +135,10 @@ class _MessageDetailsSmsState extends State<MessageDetailsSms> {
   }
 
   Future<void> _sendMessage(String? v) async {
-    logger.d('printing to view idv $v');
     if (v!.isEmpty) {
       return;
     }
     await _messagingViewmodel!.sendMessage(conversation!.id.toString(), v);
-    logger.d('printing to view id b ${conversation!.id.toString()}');
     _controller.text = '';
     _scrollController.animateTo(
       0.0,

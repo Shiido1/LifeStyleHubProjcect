@@ -16,7 +16,7 @@ class Tabs extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: dynamicID == defaultID

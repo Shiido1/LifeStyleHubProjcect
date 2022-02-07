@@ -58,10 +58,12 @@ class _PackageScreenState extends State<PackageScreen> {
                 child: Column(
                   children: [
                     Container(
+                      // width: getDeviceWidth(context),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Pallets.orange50),
                       child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Tabs(
                             defaultID: 0,

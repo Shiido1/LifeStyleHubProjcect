@@ -63,7 +63,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   List<String> _titleList = [
     'Dashboard',
-    'Marketting Tools',
+    'Marketing Tools',
     'My network',
     'Leadership program',
     'My commission',

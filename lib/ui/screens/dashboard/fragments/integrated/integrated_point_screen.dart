@@ -131,7 +131,7 @@ class _IntegratedPointScreenState extends State<IntegratedPointScreen> {
                                             Expanded(
                                               child: TextView(
                                                 text:
-                                                    'Subscribed for ${point.package} ?? '
+                                                    'Subscribed for ${point.package} '
                                                     '',
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 14,

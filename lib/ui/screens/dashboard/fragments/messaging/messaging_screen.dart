@@ -43,6 +43,7 @@ class _MessagingScreenState extends State<MessagingScreen>
 
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+  String? _receiver = 'Guest';
 
   @override
   void initState() {
@@ -249,10 +250,20 @@ class _MessagingScreenState extends State<MessagingScreen>
                                             conversation:
                                                 elements.conversation),
                                         context),
+                                    // leading: CircularImage(
+                                    //   radius: 25,
+                                    //   path:
+                                    //       _usersProfileModel?.profilePic ?? '',
+                                    //   initial:
+                                    //       _usersProfileModel?.profilePic == null
+                                    //           ? _receiver!.substring(0, 1)
+                                    //           : '',
+                                    //   showInitialTextAbovePicture: true,
+                                    // ),
                                     leading: CircleAvatar(
                                       backgroundColor: Pallets.amber500,
                                       child: TextView(
-                                          text: '',
+                                          text: _receiver!.substring(0, 1),
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400),
                                     ),
@@ -308,7 +319,6 @@ class _MessagingScreenState extends State<MessagingScreen>
   }
 
   String? _formatReceiver(Conversation conversation, UsersProfileModel user) {
-    String? _receiver = 'Guest';
     conversation.participants!.map((participant) {
       if (participant.messageable?.id != user.id)
         _receiver = participant.messageable?.name;

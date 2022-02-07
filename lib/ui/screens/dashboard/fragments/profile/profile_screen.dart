@@ -76,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       radius: 70,
                       path: _profileModel?.profilePic ?? '',
                       initial: _profileModel?.profilePic == null
-                          ? _profileModel?.name?.substring(0, 2)
+                          ? _profileModel?.name?.substring(0, 1)
                           : '',
                       showInitialTextAbovePicture: true,
                     ),

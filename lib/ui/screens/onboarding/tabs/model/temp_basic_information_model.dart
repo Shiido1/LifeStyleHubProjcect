@@ -1,4 +1,3 @@
-
 class TempBasicInformationHolder {
   static String? fullName;
   static String? userName;

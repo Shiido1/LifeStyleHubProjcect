@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 5,
                     ),
                     TextView(
-                      onTap: () => _tabViewModel?.switchDrawerIndex(context, 7),
+                      onTap: () => _tabViewModel?.switchDrawerIndex(context, 8),
                       text: 'View all',
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainBgColor: Pallets.orange50,
                     smallBgColor: Pallets.orange200,
                     textColor: Pallets.orange500,
-                    onTap: () => _tabViewModel?.switchDrawerIndex(context, 7),
+                    onTap: () => _tabViewModel?.switchDrawerIndex(context, 4),
                   ),
                   SizedBox(
                     width: 16,

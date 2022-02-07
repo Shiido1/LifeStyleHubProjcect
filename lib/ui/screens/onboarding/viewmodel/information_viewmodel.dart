@@ -41,7 +41,8 @@ class InformationViewModel extends BaseViewModel {
       return true;
     } catch (e) {
       _hideLoading();
-      showsnackBarInfo(this._context, message: e.toString());
+      showsnackBarInfo(this._context,
+          message: e == '' ? e.toString() : "please input required fields");
       return false;
     }
   }

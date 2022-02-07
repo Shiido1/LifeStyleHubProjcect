@@ -23,7 +23,7 @@ class LoginViewModel extends BaseViewModel {
   /// show loading indicator
   void _showLoading() {
     _loading = true;
-    notifyListeners();
+    // notifyListeners();
   }
 
   /// hide loading indicator

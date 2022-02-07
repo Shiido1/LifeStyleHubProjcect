@@ -34,11 +34,11 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                   Center(
                     child: CircularImage(
                       onTap: () => _tap(
-                          tab: _tabNotifier, context: context, newIndex: 10),
+                          tab: _tabNotifier, context: context, newIndex: 11),
                       radius: 30,
                       path: profileModel?.profilePic ?? '',
                       initial: profileModel?.profilePic == null
-                          ? profileModel?.name?.substring(0, 2)
+                          ? profileModel?.name?.substring(0, 1)
                           : '',
                       textSize: 20,
                       showInitialTextAbovePicture: true,

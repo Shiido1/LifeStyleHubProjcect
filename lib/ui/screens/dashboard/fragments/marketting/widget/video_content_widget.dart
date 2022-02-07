@@ -36,7 +36,7 @@ class VideoContents extends StatelessWidget {
                     (element) => Container(
                       margin: EdgeInsets.only(right: 16),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           SizedBox(
