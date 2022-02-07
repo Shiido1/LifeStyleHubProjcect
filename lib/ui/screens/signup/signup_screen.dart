@@ -216,6 +216,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     TextSpan(
                                         text: 'Terms of Service ',
                                         style: TextStyle(
+                                            fontWeight: FontWeight.w600,
                                             color: Pallets.orange600)),
                                     TextSpan(
                                         text: 'and ',
@@ -224,6 +225,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     TextSpan(
                                         text: 'Privacy Policy',
                                         style: TextStyle(
+                                            fontWeight: FontWeight.w600,
                                             color: Pallets.orange600)),
                                   ])),
                                 ),
