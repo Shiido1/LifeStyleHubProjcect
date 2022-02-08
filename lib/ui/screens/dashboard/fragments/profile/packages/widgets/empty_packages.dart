@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/viewmodel/package_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/informations.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/images.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
+import 'package:provider/provider.dart';
 
 import '../purchase_package_screen.dart';
 
-class EmptyPackageWidget extends StatelessWidget {
+class EmptyPackageWidget extends StatefulWidget {
   const EmptyPackageWidget({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<EmptyPackageWidget> createState() => _EmptyPackageWidgetState();
+}
+
+class _EmptyPackageWidgetState extends State<EmptyPackageWidget> {
+  PackageViewmodel? _packageViewmodel;
+
+  @override
+  void initState() {
+    _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);
+    _packageViewmodel!.init(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +70,9 @@ class EmptyPackageWidget extends StatelessWidget {
               fontStyle: FontStyle.normal,
               borderColor: Pallets.orange500,
               primary: Pallets.orange500,
-              onPressed: () =>
-                  PageRouter.gotoWidget(PurchasePackageScreen(), context),
+              onPressed: () => _packageViewmodel!.activePackages!.isEmpty
+                  ? PageRouter.gotoWidget(GetStartedScreen(), context)
+                  : PageRouter.gotoWidget(PurchasePackageScreen(), context),
             ),
           ],
         ),

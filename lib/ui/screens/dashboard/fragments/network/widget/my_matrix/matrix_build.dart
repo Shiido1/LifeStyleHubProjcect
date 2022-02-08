@@ -89,7 +89,7 @@ class MatrixBuild extends StatelessWidget {
           fontStyle: FontStyle.normal,
           primary: Pallets.grey300,
           borderColor: Pallets.grey300,
-          onPressed: () => null,
+          onPressed: () => networkViewModel!.checkOut(),
         ),
       ],
     );

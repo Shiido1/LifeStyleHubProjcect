@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/check_out_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/model/vpp_response.dart';
 
 import '../model/my_downline_response.dart';
@@ -118,6 +119,17 @@ class NetworkRepository {
       return VppResponse.fromJson(_response);
     } catch (e) {
       throw e;
+    }
+  }
+
+  ///check out
+  Future<CheckOutModel> checkout() async {
+    try {
+      final _response = await apiBaseHelper.post(
+          url: Paths.checkout, options: await getDioHeader());
+      return CheckOutModel.fromJson(_response);
+    } catch (e) {
+      throw (e);
     }
   }
 }

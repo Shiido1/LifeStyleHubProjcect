@@ -22,29 +22,29 @@ _bottomTitles(BuildContext context) {
       getTitles: (value) {
         switch (value.toInt()) {
           case 0:
-            return 'J';
+            return 'Jan';
           case 1:
-            return 'F';
+            return 'Feb';
           case 2:
-            return 'M';
+            return 'Mar';
           case 3:
-            return 'A';
+            return 'Apr';
           case 4:
-            return 'M';
+            return 'May';
           case 5:
-            return 'J';
+            return 'Jun';
           case 6:
-            return 'J';
+            return 'Ju;';
           case 7:
-            return 'A';
+            return 'Aug';
           case 8:
-            return 'S';
+            return 'Sep';
           case 9:
-            return 'O';
+            return 'Oct';
           case 10:
-            return 'N';
+            return 'Nov';
           case 11:
-            return 'D';
+            return 'Dec';
         }
         return '';
       },

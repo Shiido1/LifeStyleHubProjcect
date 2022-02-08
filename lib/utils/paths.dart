@@ -6,6 +6,7 @@ class Paths {
   static String openMessage = 'api/chat/open';
   static String sendMessage = 'api/chat/message';
   static String createMessage = 'api/chat/new';
+  static String checkout = 'api/checkout/1/manual';
   static String login = 'api/login';
   static String forgotPassword = 'api/forgot-password';
   static String getMarketting = 'api/resources';
@@ -18,6 +19,7 @@ class Paths {
   static String viewTransferWallet = 'api/wallet-to-wallet';
   static String createUpdateDeleteContest = 'admin/contests';
   static String viewContest = 'api/contests';
+  static String countries = 'api/countries';
   static String register = 'api/register';
   static String basicInformation = 'api/basic';
   static String workAndBanking = 'api/work-banking';
@@ -49,8 +51,7 @@ class Paths {
       'api/reports/promotion/free-trial-members';
   static String reportPromotionUpgradedMember =
       'api/reports/promotion/upgraded-members';
-  static String reportPromotionVppMember =
-      'api/reports/vpp/free-trial-members';
+  static String reportPromotionVppMember = 'api/reports/vpp/free-trial-members';
   static String reportPromotionVppUpgradedMember =
       'api/reports/vpp/upgraded-members';
   static String freeSignUpMember =

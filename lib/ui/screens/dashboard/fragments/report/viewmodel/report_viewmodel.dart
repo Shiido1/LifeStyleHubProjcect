@@ -232,6 +232,7 @@ class ReportViewmodel extends BaseViewModel {
   }
 
   Future<void> _getBarData(List<FreeSignUpModel>? freeSignup) async {
+    if (barChartGroupData.isNotEmpty) barChartGroupData.clear();
     for (int i = 0; i <= freeSignup!.length; i++) {
       barChartGroupData.add(
         BarChartGroupData(x: i, barRods: [
@@ -262,6 +263,7 @@ class ReportViewmodel extends BaseViewModel {
 
   Future<void> _getIncomeBarData(
       List<UpgradeSignUpModel>? upgradedSignup) async {
+    if (barChartIncomeGroupData.isNotEmpty) barChartIncomeGroupData.clear();
     for (int i = 0; i <= upgradedSignup!.length; i++) {
       barChartIncomeGroupData.add(
         BarChartGroupData(x: i, barRods: [

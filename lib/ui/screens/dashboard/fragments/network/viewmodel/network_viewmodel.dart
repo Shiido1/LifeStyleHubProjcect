@@ -187,4 +187,15 @@ class NetworkViewModel extends BaseViewModel {
     }
     _hideLoading();
   }
+
+  Future<void> checkOut() async {
+    try {
+      final _response = await _networkRepository.checkout();
+      showsnackBarInfo(this._context,
+          message: _response.message ?? '', bgColor: Pallets.green500);
+    } catch (e) {
+      showsnackBarInfo(this._context, message: e.toString());
+    }
+    _hideLoading();
+  }
 }

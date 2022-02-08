@@ -1,8 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-// ignore: deprecated_member_use, unused_import
-// import 'package:flutter_riverpod/all.dart';
 import 'package:lifestyle_hub/database/hive_database.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
@@ -90,7 +88,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     });
     _getCatchedInfos();
     Provider.of<NotificationViewmodel>(context, listen: false).notification();
-
     super.initState();
   }
 

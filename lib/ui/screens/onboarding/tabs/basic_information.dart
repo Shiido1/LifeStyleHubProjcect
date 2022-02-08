@@ -29,6 +29,8 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
       TextEditingController(text: TempBasicInformationHolder.phoneNumber ?? '');
   TextEditingController _stateController =
       TextEditingController(text: TempBasicInformationHolder.state ?? '');
+  // TextEditingController _countryController =
+  //     TextEditingController(text: TempBasicInformationHolder.state ?? '');
   TextEditingController _addressController =
       TextEditingController(text: TempBasicInformationHolder.address ?? '');
   TextEditingController _sexController =
@@ -127,18 +129,11 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
         // EditFormField(
         //   floatingLabel: 'Country',
         //   label: 'Country',
-        //   // suffixIcon: Icons.keyboard_arrow_down_sharp,
-        //   // suffixIconColor: Pallets.disabledIconColor,
-        //   // controller: _countryController,
-        //   // readOnly: true,
-        //   // onTapped: () => showCustomDialog(context,
-        //   //     title: 'Select state',
-        //   //     items: AppConstants.getStates(), onTap: (value) {
-        //   //   _stateSelected = true;
-        //   //   _stateController.text = value;
-        //   //   setState(() {});
-        //   //   PageRouter.goBack(context);
-        //   // }),
+        //   suffixIcon: Icons.keyboard_arrow_down_sharp,
+        //   suffixIconColor: Pallets.disabledIconColor,
+        //   controller: _countryController,
+        //   readOnly: true,
+        //   onTapped: () => _informationViewModel!.getCountries(),
         // ),
         SizedBox(
           height: 23,

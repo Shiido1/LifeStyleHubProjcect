@@ -6,6 +6,7 @@ class TempBasicInformationHolder {
   static String? address;
   static String? sex;
   static String? dateOfBirth;
+  static String? countryId;
 
   static String? nxtPhoneNumber;
   static String? nxtRelationship;
@@ -17,6 +18,7 @@ class TempBasicInformationHolder {
     required String username,
     required String phoneNumber,
     required String state,
+    // required String countryId,
     required String address,
     required String sex,
     required String dob,
@@ -37,7 +39,7 @@ class TempBasicInformationHolder {
     data["nok_relation"] = relationshipOfNextOfKin;
     data["nok_phone_no"] = phoneOfNextOfKin;
     data["nok_email"] = emailOfNextOfKin;
-    data["country_id"] = '128';
+    data["country_id"] = '242';
     return data;
   }
 }

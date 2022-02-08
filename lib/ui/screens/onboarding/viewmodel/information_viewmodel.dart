@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/tabs/model/country_model.dart';
 import '../../../../helper/helper_handler.dart';
 import '../../../../helper/routes/navigation.dart';
 import '../../../../helper/routes/routes.dart';
@@ -10,6 +12,7 @@ InformationRepository _informationRepository = InformationRepository();
 class InformationViewModel extends BaseViewModel {
   late BuildContext _context;
   bool _loading = false;
+  CountryModelList? model;
 
   BuildContext get buildContext => _context;
 
@@ -23,7 +26,7 @@ class InformationViewModel extends BaseViewModel {
   /// show loading indicator
   void _showLoading() {
     _loading = true;
-    notifyListeners();
+    // notifyListeners();
   }
 
   /// hide loading indicator
@@ -59,6 +62,18 @@ class InformationViewModel extends BaseViewModel {
       _hideLoading();
       showsnackBarInfo(this._context, message: e.toString());
       return false;
+    }
+  }
+
+  getCountries() async {
+    try {
+      _showLoading();
+      final _response = await _informationRepository.countriesRepo();
+      for (int i = 0; i <= _response.country!.length; i++) logger.d(i);
+      // countries = _response;
+      return _response;
+    } catch (e) {
+      _hideLoading();
     }
   }
 }

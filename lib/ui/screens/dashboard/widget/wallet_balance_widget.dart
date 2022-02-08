@@ -11,6 +11,7 @@ import '../../../../utils/pallets.dart';
 
 class WalletBalanceWidget extends StatelessWidget {
   const WalletBalanceWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -23,6 +24,7 @@ class WalletBalanceWidget extends StatelessWidget {
             return Container();
           }
           ViewWalletModel _model = snapshot.data!;
+
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -43,13 +45,19 @@ class WalletBalanceWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 8),
-                    TextView(
-                      text: '${formatCurrency(_model.wallet?.balance ?? 0)}',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 48,
-                      color: Pallets.grey700,
-                      textAlign: TextAlign.center,
-                    ),
+                    ..._model.wallets!
+                        .map(
+                          (e) => e.type == "fund"
+                              ? TextView(
+                                  text: '${formatCurrency(e.balance ?? 0)}',
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 48,
+                                  color: Pallets.grey700,
+                                  textAlign: TextAlign.center,
+                                )
+                              : SizedBox(),
+                        )
+                        .toList(),
                     SizedBox(height: 16),
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -156,14 +164,17 @@ class WalletBalanceWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 10),
-                    TextView(
-                      text:
-                          '${formatCurrency(_model.wallet?.totalIncome ?? 0)}',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                      color: Pallets.grey700,
-                      textAlign: TextAlign.center,
-                    ),
+                    ..._model.wallets!
+                        .map((e) => e.type == "fund"
+                            ? TextView(
+                                text: '${formatCurrency(e.totalIncome ?? 0)}',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 24,
+                                color: Pallets.grey700,
+                                textAlign: TextAlign.center,
+                              )
+                            : SizedBox())
+                        .toList(),
                   ],
                 ),
               ),
@@ -179,13 +190,17 @@ class WalletBalanceWidget extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 10),
-                  TextView(
-                    text: '${formatCurrency(_model.wallet?.totalDebit ?? 0)}',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 24,
-                    color: Pallets.grey700,
-                    textAlign: TextAlign.center,
-                  ),
+                  ..._model.wallets!
+                      .map((e) => e.type == "fund"
+                          ? TextView(
+                              text: '${formatCurrency(e.totalDebit)}',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 24,
+                              color: Pallets.grey700,
+                              textAlign: TextAlign.center,
+                            )
+                          : SizedBox())
+                      .toList(),
                 ],
               )
             ],

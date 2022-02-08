@@ -1,3 +1,7 @@
+import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/information_viewmodel.dart';
+
+InformationViewModel? informationViewModel;
+
 class AppConstants {
   AppConstants._();
 
@@ -27,7 +31,7 @@ class AppConstants {
       'Cousin',
       'Others'
     ];
-    _relationShip.sort();
+    // _relationShip.sort();
     return _relationShip;
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/active_package_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/complete_package_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/inactive_package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/payment/list_of_banks.dart'
     as lsh;
 import 'package:lifestyle_hub/utils/pallets.dart';
@@ -53,14 +55,19 @@ class PackageViewmodel extends BaseViewModel {
 
   List<ActivePackages>? completedPackages = [];
   List<ActivePackages>? inactivePackages = [];
+  List<ActivePackages>? activePackages = [];
 
   /// get list of packages
   Future<void> getPackages() async {
     try {
       final _response = await _packageRepository.getListOfPackages();
       activePakageDao!.saveActivePackages(_response.activePackages ?? []);
+      completePackageDao!.saveActivePackages(_response.completedPackages ?? []);
+      inactivePackageDao!.saveActivePackages(_response.inactivePackages ?? []);
+      activePackages = _response.activePackages;
       completedPackages = _response.completedPackages;
       inactivePackages = _response.inactivePackages;
+      logger.d(activePackages!.length);
     } catch (e) {
       logger.e(e);
     }
@@ -84,9 +91,9 @@ class PackageViewmodel extends BaseViewModel {
   /// get list of bankz
   List<lsh.LshBankResponse>? list = [];
 
-  Future<void> getLSHBankz() async {
+  Future<void> getLSHBankz({bool isLoading = false}) async {
     try {
-      if (list!.length == 0) _showLoading(notify: true);
+      if (list!.length == 0) _showLoading(notify: isLoading);
       final _response = await _packageRepository.getLSHBankz();
       list = _response.list ?? [];
     } catch (e) {

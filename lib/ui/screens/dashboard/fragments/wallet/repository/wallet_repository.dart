@@ -1,9 +1,10 @@
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_model.dart';
+
 import '../model/withdraw_model.dart';
 
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../model/transfer_to_wallet.dart';
-import '../model/view_wallet_model.dart';
 import '../model/view_wallet_transaction_model.dart';
 import '../../../../../../utils/paths.dart';
 

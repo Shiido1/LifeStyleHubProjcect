@@ -26,13 +26,13 @@ class RegisterViewModel extends BaseViewModel {
   /// show loading indicator
   void _showLoading() {
     _loading = true;
-    notifyListeners();
+    // notifyListeners();
   }
 
   /// hide loading indicator
   void _hideLoading() {
     _loading = false;
-    notifyListeners();
+    // notifyListeners();
   }
 
   /// perform Register request & cache token temporery for other network request
