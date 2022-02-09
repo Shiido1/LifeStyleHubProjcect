@@ -6,7 +6,6 @@ import '../../../../../helper/helper_handler.dart';
 import '../../../../../helper/routes/navigation.dart';
 import 'dao/profile_dao.dart';
 import 'model/users_profile_model.dart';
-import '../../../../widgets/bottom_count_down.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../../../../widgets/custom_dialog_menu_pop.dart';
@@ -142,7 +141,7 @@ class _NextOfKinInformationScreenState
                       ],
                     ),
                   ),
-                  ButtomCountDownWidget()
+                  // ButtomCountDownWidget()
                 ],
               ),
             ),

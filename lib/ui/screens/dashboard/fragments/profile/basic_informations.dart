@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../../../../../helper/helper_handler.dart';
 import 'dao/profile_dao.dart';
 import 'model/users_profile_model.dart';
-import '../../../../widgets/bottom_count_down.dart';
 import '../../../../widgets/buttons.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../../../../widgets/date_picker.dart';
@@ -188,7 +187,7 @@ class _BasicInformationsScreenState extends State<BasicInformationsScreen> {
                       ],
                     ),
                   ),
-                  ButtomCountDownWidget()
+                  // ButtomCountDownWidget()
                 ],
               ),
             ),
