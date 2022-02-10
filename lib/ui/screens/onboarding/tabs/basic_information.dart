@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/dashboard.dart';
+import 'package:lifestyle_hub/ui/screens/onboarding/tabs/model/country_model.dart';
+import 'package:lifestyle_hub/ui/widgets/country.dart';
 import '../../../../helper/helper_handler.dart';
 import '../../../../helper/routes/navigation.dart';
 import 'model/temp_basic_information_model.dart';
@@ -29,8 +31,8 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
       TextEditingController(text: TempBasicInformationHolder.phoneNumber ?? '');
   TextEditingController _stateController =
       TextEditingController(text: TempBasicInformationHolder.state ?? '');
-  // TextEditingController _countryController =
-  //     TextEditingController(text: TempBasicInformationHolder.state ?? '');
+  TextEditingController _countryController =
+      TextEditingController(text: TempBasicInformationHolder.countryId.toString());
   TextEditingController _addressController =
       TextEditingController(text: TempBasicInformationHolder.address ?? '');
   TextEditingController _sexController =
@@ -44,6 +46,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
   bool _sexSelected = false;
   // ignore: unused_field
   bool _stateSelected = false;
+  CountryModel? _countryModel;
 
   @override
   void initState() {
@@ -116,25 +119,30 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
           // readOnly: true,
           // onTapped: () => showCustomDialog(context,
           //     title: 'Select state',
-          //     items: AppConstants.getStates(), onTap: (value) {
+          // items: AppConstants.getStates(), onTap: (value) {
           //   _stateSelected = true;
           //   _stateController.text = value;
           //   setState(() {});
           //   PageRouter.goBack(context);
           // }),
         ),
-        // SizedBox(
-        //   height: 23,
-        // ),
-        // EditFormField(
-        //   floatingLabel: 'Country',
-        //   label: 'Country',
-        //   suffixIcon: Icons.keyboard_arrow_down_sharp,
-        //   suffixIconColor: Pallets.disabledIconColor,
-        //   controller: _countryController,
-        //   readOnly: true,
-        //   onTapped: () => _informationViewModel!.getCountries(),
-        // ),
+        SizedBox(
+          height: 23,
+        ),
+        EditFormField(
+          floatingLabel: 'Country',
+          label: 'Country',
+          suffixIcon: Icons.keyboard_arrow_down_sharp,
+          suffixIconColor: Pallets.disabledIconColor,
+          controller: _countryController,
+          readOnly: true,
+          onTapped: () =>
+              PageRouter.gotoWidget(CountryList(onTap: (CountryModel m) {
+            _countryModel = m;
+            _countryController.text = m.name ?? '';
+            setState(() {});
+          }), context),
+        ),
         SizedBox(
           height: 23,
         ),
@@ -234,6 +242,10 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
     TempBasicInformationHolder.address = _addressController.text;
     TempBasicInformationHolder.sex = _sexController.text;
     TempBasicInformationHolder.dateOfBirth = _dobController.text;
+    TempBasicInformationHolder.countryId = _countryModel?.id;
+
+    /// Use this for country id
+    // _countryModel?.id;
     _tabViewModel.switchIndex(1);
   }
 }
