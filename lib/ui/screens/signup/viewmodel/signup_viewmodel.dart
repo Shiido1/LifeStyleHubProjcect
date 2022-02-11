@@ -24,15 +24,15 @@ class RegisterViewModel extends BaseViewModel {
   }
 
   /// show loading indicator
-  void _showLoading() {
+  void _showLoading({bool notify = false}) {
     _loading = true;
-    // notifyListeners();
+    if (notify) notifyListeners();
   }
 
   /// hide loading indicator
   void _hideLoading() {
     _loading = false;
-    // notifyListeners();
+    notifyListeners();
   }
 
   /// perform Register request & cache token temporery for other network request
@@ -40,7 +40,7 @@ class RegisterViewModel extends BaseViewModel {
   /// other onBoarding are successful
   Future<void> register({required Map map}) async {
     try {
-      _showLoading();
+      _showLoading(notify: false);
       final _response = await _registerRepository.register(map: map);
 
       /// cache users token

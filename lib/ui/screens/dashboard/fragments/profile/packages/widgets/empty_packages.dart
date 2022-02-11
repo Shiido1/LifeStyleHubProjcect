@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/viewmodel/package_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/informations.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
@@ -24,15 +26,25 @@ class EmptyPackageWidget extends StatefulWidget {
 class _EmptyPackageWidgetState extends State<EmptyPackageWidget> {
   PackageViewmodel? _packageViewmodel;
 
+  UsersProfileModel? _profileModel;
+
+  void _getCatchedInfos() async {
+    _profileModel = await profileDao!.convert();
+
+    setState(() {});
+  }
+
   @override
   void initState() {
     _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);
     _packageViewmodel!.init(context);
+    _getCatchedInfos();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    _getCatchedInfos();
     return Center(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 16),
@@ -70,9 +82,13 @@ class _EmptyPackageWidgetState extends State<EmptyPackageWidget> {
               fontStyle: FontStyle.normal,
               borderColor: Pallets.orange500,
               primary: Pallets.orange500,
-              onPressed: () => _packageViewmodel!.activePackages!.isEmpty
-                  ? PageRouter.gotoWidget(GetStartedScreen(), context)
-                  : PageRouter.gotoWidget(PurchasePackageScreen(), context),
+              onPressed: () {
+                _profileModel!.name!.isEmpty &&
+                            _packageViewmodel!.activePackages!.isEmpty ||
+                        _profileModel!.name == null
+                    ? PageRouter.gotoWidget(GetStartedScreen(), context)
+                    : PageRouter.gotoWidget(PurchasePackageScreen(), context);
+              },
             ),
           ],
         ),

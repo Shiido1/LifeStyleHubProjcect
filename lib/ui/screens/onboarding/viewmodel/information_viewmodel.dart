@@ -69,8 +69,8 @@ class InformationViewModel extends BaseViewModel {
       _showLoading();
       final _response = await _informationRepository.countriesRepo();
       countryModel = _response.country ?? [];
+      _hideLoading();
     } catch (e) {
-      notifyListeners();
       throw (e);
     }
   }

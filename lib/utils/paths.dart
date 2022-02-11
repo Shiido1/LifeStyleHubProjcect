@@ -59,4 +59,5 @@ class Paths {
   static String upgradeSignUpMember =
       '/api/reports/vpp/upgraded-members/signups';
   static String generateOTP = 'api/otp';
+  static String leadership = 'api/leadership-program';
 }

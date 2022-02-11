@@ -40,24 +40,24 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _initialize();
-    _getCatchedInfos();
     super.initState();
   }
 
   void _initialize() async {
-    final _user = await profileDao?.convert();
+    final _user = await profileDao!.convert();
     _tabViewModel = Provider.of<TabViewModel>(context, listen: false);
     _dashboardViewmodel =
         Provider.of<DashboardViewmodel>(context, listen: false);
     _dashboardViewmodel?.init(context);
 
-    _dashboardViewmodel?.getDashboards(_user?.role == "user");
+    _dashboardViewmodel?.getDashboards(_user.role == "user");
     _contestViewModel = Provider.of<ContestViewModel>(context, listen: false);
     _contestViewModel?.init(context);
     _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);
     _packageViewmodel?.init(context);
     _packageViewmodel?.getPackages();
     _contestViewModel?.getListContest();
+    _getCatchedInfos();
     setState(() {});
   }
 

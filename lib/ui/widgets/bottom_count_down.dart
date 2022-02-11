@@ -61,7 +61,9 @@ class _ButtomCountDownWidgetState extends State<ButtomCountDownWidget> {
           return Consumer<PackageViewmodel>(
             builder: (context, value, child) {
               return Visibility(
-                visible: value.activePackages!.isEmpty ? true : false,
+                visible: _packageViewmodel!.activePackages!.isEmpty 
+                    ? true
+                    : false,
                 child: Align(
                     alignment: Alignment.bottomCenter,
                     child: GlassContainer(

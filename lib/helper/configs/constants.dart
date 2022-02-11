@@ -1,7 +1,3 @@
-import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/information_viewmodel.dart';
-
-InformationViewModel? informationViewModel;
-
 class AppConstants {
   AppConstants._();
 

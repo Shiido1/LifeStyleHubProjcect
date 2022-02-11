@@ -1,4 +1,5 @@
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/integrated/viewmodel/point_history_viewmodel.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/leadership/viewmodel/leadership_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/viewmodel/marketting_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/messaging/viewmodel/messaging_viewmodel.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/viewmodel/profile_viewmodel.dart';
@@ -54,5 +55,7 @@ class Providers {
         create: (_) => MessagingViewmodel()),
     ChangeNotifierProvider<PointHistoryViewmodel>(
         create: (_) => PointHistoryViewmodel()),
+    ChangeNotifierProvider<LeadershipViewmodel>(
+        create: (_) => LeadershipViewmodel()),
   ];
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
-import 'package:lifestyle_hub/ui/widgets/bottom_count_down.dart';
 import 'package:lifestyle_hub/ui/widgets/custom_appbar.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
@@ -70,7 +69,7 @@ class _SeniorLeaderShipScreenPageState
             ],
           ),
         ),
-        ButtomCountDownWidget()
+        // ButtomCountDownWidget()
       ]),
     );
   }
