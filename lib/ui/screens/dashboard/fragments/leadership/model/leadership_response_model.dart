@@ -81,7 +81,7 @@ class Leaderships {
 class Requirements {
   String? text;
   int? qualify;
-  String? s1stGenQualifiers;
+  dynamic s1stGenQualifiers;
 
   Requirements({this.text, this.qualify, this.s1stGenQualifiers});
 

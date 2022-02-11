@@ -40,7 +40,7 @@ class NetworkViewModel extends BaseViewModel {
 
   ViewAccountNetworkResponse? get accountNetworkResponse =>
       _accountNetworkResponse;
-
+ 
   /// initialize auth viewmodel
   void init(BuildContext context) {
     this._context = context;
