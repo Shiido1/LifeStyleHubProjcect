@@ -21,9 +21,9 @@ class LoginViewModel extends BaseViewModel {
   }
 
   /// show loading indicator
-  void _showLoading() {
+   void _showLoading({bool notify = false}) {
     _loading = true;
-    notifyListeners();
+    if (notify) notifyListeners();
   }
 
   /// hide loading indicator
@@ -35,7 +35,7 @@ class LoginViewModel extends BaseViewModel {
   /// perform login request
   Future<void> login({required Map map}) async {
     try {
-      _showLoading();
+      _showLoading(notify: false);
       await _loginRepository.login(map: map);
       PageRouter.gotoNamed(Routes.dashboard, _context, clearStack: true);
     } catch (e) {

@@ -4,7 +4,7 @@ import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/viewmodel/package_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/informations.dart';
+import 'package:lifestyle_hub/ui/screens/signup/signup_screen.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
@@ -83,10 +83,9 @@ class _EmptyPackageWidgetState extends State<EmptyPackageWidget> {
               borderColor: Pallets.orange500,
               primary: Pallets.orange500,
               onPressed: () {
-                _profileModel!.name!.isEmpty &&
-                            _packageViewmodel!.activePackages!.isEmpty ||
-                        _profileModel!.name == null
-                    ? PageRouter.gotoWidget(GetStartedScreen(), context)
+                _profileModel == null &&
+                            _packageViewmodel!.activePackages!.isEmpty    
+                    ? PageRouter.gotoWidget(SignupScreen(), context)
                     : PageRouter.gotoWidget(PurchasePackageScreen(), context);
               },
             ),

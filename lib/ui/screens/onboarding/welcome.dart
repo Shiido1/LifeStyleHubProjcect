@@ -35,8 +35,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void _loginUser() {
     _login!.login(
         map: LoginModel.sendData(
-            email: AppConstants.tempEmail!,
-            password: AppConstants.tempPassword!));
+            email: AppConstants.tempEmail??'',
+            password: AppConstants.tempPassword??''));
     _startTimer();
   }
 

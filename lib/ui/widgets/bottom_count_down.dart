@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/dao/profile_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/model/users_profile_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/viewmodel/package_viewmodel.dart';
-import 'package:lifestyle_hub/ui/screens/onboarding/informations.dart';
+import 'package:lifestyle_hub/ui/screens/signup/signup_screen.dart';
 import 'package:provider/provider.dart';
 import '../../helper/routes/navigation.dart';
 import '../screens/dashboard/fragments/profile/packages/purchase_package_screen.dart';
@@ -61,9 +61,8 @@ class _ButtomCountDownWidgetState extends State<ButtomCountDownWidget> {
           return Consumer<PackageViewmodel>(
             builder: (context, value, child) {
               return Visibility(
-                visible: _packageViewmodel!.activePackages!.isEmpty 
-                    ? true
-                    : false,
+                visible:
+                    _packageViewmodel!.activePackages!.isEmpty ? true : false,
                 child: Align(
                     alignment: Alignment.bottomCenter,
                     child: GlassContainer(
@@ -171,12 +170,11 @@ class _ButtomCountDownWidgetState extends State<ButtomCountDownWidget> {
                                 fontStyle: FontStyle.normal,
                                 borderColor: Pallets.orange500,
                                 primary: Pallets.orange500,
-                                onPressed: () => _packageViewmodel!
-                                                .activePackages!.isEmpty &&
-                                            _profileModel!.name!.isEmpty ||
-                                        _profileModel!.name == null
+                                onPressed: () => _profileModel == null &&
+                                        _packageViewmodel!
+                                            .activePackages!.isEmpty
                                     ? PageRouter.gotoWidget(
-                                        GetStartedScreen(), context)
+                                        SignupScreen(), context)
                                     : PageRouter.gotoWidget(
                                         PurchasePackageScreen(), context),
                               ),
