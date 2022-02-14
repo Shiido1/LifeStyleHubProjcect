@@ -1,3 +1,4 @@
+
 class LoginModel {
   User? user;
   String? token;
@@ -18,6 +19,7 @@ class LoginModel {
     return data;
   }
 
+
   static Map<String, dynamic> sendData(
       {required String email, required String password}) {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -29,13 +31,13 @@ class LoginModel {
 }
 
 class User {
-  int? id;
+  dynamic? id;
   String? name;
   String? username;
   String? email;
   String? emailVerifiedAt;
   String? phoneNo;
-  int? countryId;
+  dynamic? countryId;
   String? state;
   String? address;
   String? sex;
@@ -45,7 +47,7 @@ class User {
   String? referredBy;
   AffiliateId? affiliateId;
   String? trialEnds;
-  int? isAdmin;
+  dynamic? isAdmin;
   String? role;
   String? createdAt;
   String? updatedAt;
@@ -167,8 +169,8 @@ class AffiliateId {
 }
 
 class Banks {
-  int? id;
-  int? userId;
+  dynamic? id;
+  dynamic? userId;
   String? name;
   String? accountName;
   String? accountNo;
@@ -220,13 +222,12 @@ class Banks {
 }
 
 class Wallets {
-  int? id;
-  int? userId;
+  dynamic? id;
+  dynamic? userId;
   String? type;
-  int? totalIncome;
-  int? totalCredit;
-  int? totalDebit;
-  int? balance;
+  dynamic totalCredit;
+  dynamic totalDebit;
+  dynamic balance;
   String? createdAt;
   String? updatedAt;
 
@@ -234,7 +235,6 @@ class Wallets {
       {this.id,
       this.userId,
       this.type,
-      this.totalIncome,
       this.totalCredit,
       this.totalDebit,
       this.balance,
@@ -245,7 +245,6 @@ class Wallets {
     id = json['id'];
     userId = json['user_id'];
     type = json['type'];
-    totalIncome = json['total_income'];
     totalCredit = json['total_credit'];
     totalDebit = json['total_debit'];
     balance = json['balance'];
@@ -258,7 +257,6 @@ class Wallets {
     data['id'] = this.id;
     data['user_id'] = this.userId;
     data['type'] = this.type;
-    data['total_income'] = this.totalIncome;
     data['total_credit'] = this.totalCredit;
     data['total_debit'] = this.totalDebit;
     data['balance'] = this.balance;

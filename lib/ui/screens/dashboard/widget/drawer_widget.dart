@@ -208,6 +208,7 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
                 newIndex: index,
               ),
               CustomDrawerTabs(
+                
                 title: 'Messaging',
                 image: 'assets/svgs/messaging.svg',
                 onTap: () => _tap(

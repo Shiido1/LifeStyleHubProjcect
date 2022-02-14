@@ -134,30 +134,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
           SizedBox(height: 48),
-          TextView(
-            text: 'Package details',
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-            color: Pallets.grey500,
-            textAlign: TextAlign.left,
-          ),
-          SizedBox(height: 16),
+          // TextView(
+          //   text: 'Package details',
+          //   fontWeight: FontWeight.w500,
+          //   fontSize: 16,
+          //   color: Pallets.grey500,
+          //   textAlign: TextAlign.left,
+          // ),
+          // SizedBox(height: 16),
           CustomTileWidget(
+            visibility: _profileModel?.role == "user",
+            titleText: 'Package details',
             title: 'My packages',
             borderRadius: BorderRadius.circular(10),
             onTap: () => PageRouter.gotoWidget(PackageScreen(), context,
                 animationType: PageTransitionType.fade),
           ),
           SizedBox(height: 32),
-          TextView(
-            text: 'Profile setting',
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-            color: Pallets.grey500,
-            textAlign: TextAlign.left,
-          ),
-          SizedBox(height: 16),
+          // TextView(
+          //   text: 'Profile setting',
+          //   fontWeight: FontWeight.w500,
+          //   fontSize: 16,
+          //   color: Pallets.grey500,
+          //   textAlign: TextAlign.left,
+          // ),
+          // SizedBox(height: 16),
           CustomTileWidget(
+            titleText: 'Profile setting',
             title: 'Basic information',
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10)),
@@ -166,12 +169,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 animationType: PageTransitionType.fade),
           ),
           CustomTileWidget(
+            visibility: _profileModel?.role == "user",
             title: 'Next of Kin information',
             onTap: () => PageRouter.gotoWidget(
                 NextOfKinInformationScreen(), context,
                 animationType: PageTransitionType.fade),
           ),
           CustomTileWidget(
+            visibility: _profileModel?.role == "user",
             title: 'Work information',
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10),
@@ -197,6 +202,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 animationType: PageTransitionType.fade),
           ),
           CustomTileWidget(
+            visibility: _profileModel?.role == "user",
             title: 'Add bank account',
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10),

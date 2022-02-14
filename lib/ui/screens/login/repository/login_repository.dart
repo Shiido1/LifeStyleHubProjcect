@@ -17,6 +17,8 @@ class LoginRepository {
   Future<LoginModel> login({required Map map}) async {
     try {
       final _response = await apiBaseHelper.post(url: Paths.login, map: map);
+
+      logger.d(_response);
       final _login = LoginModel.fromJson(_response);
       final _wallet = Wallets.fromJson(_response);
 

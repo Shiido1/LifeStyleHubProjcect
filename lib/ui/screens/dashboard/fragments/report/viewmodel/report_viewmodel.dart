@@ -145,7 +145,7 @@ class ReportViewmodel extends BaseViewModel {
         analysisData
             .add(FlSpot(item.month!.toDouble(), item.amount!.toDouble()));
 
-        logger.d('printing analysis logger on console $analysisData');
+        logger.d('printing analysis line logger on console $analysisData');
         pieAnalysisData.add(PieChartSectionData(
             color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
             value: item.amount!.toDouble(),
@@ -243,6 +243,7 @@ class ReportViewmodel extends BaseViewModel {
         ]),
       );
     }
+    notifyListeners();
   }
 
   upGradedMemmberModelRes() async {
@@ -254,6 +255,7 @@ class ReportViewmodel extends BaseViewModel {
       if (upgradeSignUpModel == null) _showLoading();
       final _response = await _reportRepository.upgradeSignUpModel(year: year);
       upgradeSignUpModel = _response;
+      logger.d(upgradeSignUpModel);
       await _getIncomeBarData(_response.upgrade);
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');

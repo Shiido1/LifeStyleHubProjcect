@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lifestyle_hub/core/network/app_config.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/downloader_handler.dart';
 import 'package:provider/provider.dart';
 
 import 'core/data/session_manager.dart';
@@ -15,6 +16,7 @@ void main() async {
   await initializeDatabase();
   await SessionManager().init();
   AppConfig.environment = Environment.staging;
+  DownloadHandler.initializeDownload();
   runApp(MyApp());
 }
 

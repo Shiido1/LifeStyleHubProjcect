@@ -3,6 +3,7 @@
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/downloader_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import '../profile/dao/profile_dao.dart';
@@ -26,6 +27,7 @@ class MarkettingDetailScreen extends StatefulWidget {
   MarketingType type;
 
   MarkettingViewmodel? _marketting;
+  DownloadHandler? s;
 
   MarkettingDetailScreen(
       {Key? key,
@@ -154,9 +156,13 @@ class _MarkettingDetailScreenState extends State<MarkettingDetailScreen> {
                   ),
                 ),
                 IconButton(
-                    onPressed: () =>
-                        Share.share(getResourcesModel?.content?.path ?? ''),
-                    icon: const Icon(Icons.share)),
+                    onPressed: () {
+                      DownloadHandler.downloadFile(
+                          context, Uri.parse(getResourcesModel!.content!.path!));
+                      showsnackBarInfo(context, message: 'downloading file');
+                    },
+                    //     Share.share(getResourcesModel?.content?.path ?? ''),
+                    icon: const Icon(Icons.download)),
               ],
             ),
             SizedBox(height: 23),
