@@ -53,8 +53,8 @@ class PackageViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
-  List<ActivePackages>? completedPackages = [];
-  List<ActivePackages>? inactivePackages = [];
+  List<Null>? completedPackages = [];
+  List<InactivePackages>? inactivePackages = [];
   List<ActivePackages>? activePackages = [];
 
   /// get list of packages
@@ -62,7 +62,7 @@ class PackageViewmodel extends BaseViewModel {
     try {
       final _response = await _packageRepository.getListOfPackages();
       activePakageDao!.saveActivePackages(_response.activePackages ?? []);
-      completePackageDao!.saveActivePackages(_response.completedPackages ?? []);
+      // completePackageDao!.saveActivePackages(_response.completedPackages??[]);
       inactivePackageDao!.saveActivePackages(_response.inactivePackages ?? []);
       activePackages = _response.activePackages;
       completedPackages = _response.completedPackages;

@@ -134,14 +134,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
           SizedBox(height: 48),
-          // TextView(
-          //   text: 'Package details',
-          //   fontWeight: FontWeight.w500,
-          //   fontSize: 16,
-          //   color: Pallets.grey500,
-          //   textAlign: TextAlign.left,
-          // ),
-          // SizedBox(height: 16),
           CustomTileWidget(
             visibility: _profileModel?.role == "user",
             titleText: 'Package details',
@@ -151,14 +143,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 animationType: PageTransitionType.fade),
           ),
           SizedBox(height: 32),
-          // TextView(
-          //   text: 'Profile setting',
-          //   fontWeight: FontWeight.w500,
-          //   fontSize: 16,
-          //   color: Pallets.grey500,
-          //   textAlign: TextAlign.left,
-          // ),
-          // SizedBox(height: 16),
           CustomTileWidget(
             titleText: 'Profile setting',
             title: 'Basic information',
@@ -227,14 +211,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: () => PageRouter.gotoWidget(ChangePasswordScreen(), context,
                 animationType: PageTransitionType.fade),
           ),
-          // CustomTileWidget(
-          //   title: 'Change transaction pin',
-          //   borderRadius: BorderRadius.only(
-          //       bottomLeft: Radius.circular(10),
-          //       bottomRight: Radius.circular(10)),
-          //   onTap: () => PageRouter.gotoWidget(ChangePINScreen(), context,
-          //       animationType: PageTransitionType.fade),
-          // ),
           CustomTileWidget(
             title: 'Log out',
             borderRadius: BorderRadius.only(

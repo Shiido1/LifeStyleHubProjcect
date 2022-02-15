@@ -63,7 +63,7 @@
 
 class ViewWalletModel {
   List<Wallets>? wallets = [];
-  int? withdrawn;
+  dynamic withdrawn;
 
   ViewWalletModel({this.wallets, this.withdrawn});
 
@@ -91,10 +91,10 @@ class Wallets {
   int? id;
   int? userId;
   String? type;
-  int? totalIncome;
-  int? totalCredit;
-  int? totalDebit;
-  int? balance;
+  dynamic totalIncome;
+  dynamic totalCredit;
+  dynamic totalDebit;
+  dynamic balance;
   String? createdAt;
   String? updatedAt;
 

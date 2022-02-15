@@ -124,7 +124,7 @@ class Data {
   String? category;
   String? status;
   String? meta;
-  int? amount;
+  dynamic amount;
   String? date;
 
   Data(

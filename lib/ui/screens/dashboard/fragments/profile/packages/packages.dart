@@ -35,12 +35,6 @@ class _PackageScreenState extends State<PackageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ScreenUtil.init(
-    //     BoxConstraints(
-    //         maxWidth: MediaQuery.of(context).size.width,
-    //         maxHeight: MediaQuery.of(context).size.height),
-    //     designSize: Size(360, 690),
-    //     orientation: Orientation.portrait);
     return Scaffold(
         appBar: getCustomAppBar(context,
             title: 'Packages',
@@ -58,12 +52,10 @@ class _PackageScreenState extends State<PackageScreen> {
                 child: Column(
                   children: [
                     Container(
-                      // width: getDeviceWidth(context),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Pallets.orange50),
                       child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Tabs(
                             defaultID: 0,
@@ -80,7 +72,7 @@ class _PackageScreenState extends State<PackageScreen> {
                           Tabs(
                             defaultID: 2,
                             dynamicID: _tabIndex,
-                            title: 'Inactive',
+                            title: 'Archived',
                             onTap: () => setState(() => _tabIndex = 2),
                           ),
                         ],
