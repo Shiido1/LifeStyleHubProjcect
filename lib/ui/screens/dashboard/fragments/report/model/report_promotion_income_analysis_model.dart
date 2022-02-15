@@ -46,9 +46,9 @@ class ReportPromotionIncomeAnalysisModelList {
 }
 
 class PackageSignupBonus {
-  int? year;
+  dynamic year;
   int? month;
-  int? amount;
+  double? amount;
 
   PackageSignupBonus({this.year, this.month, this.amount});
 

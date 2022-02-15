@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/marketting/widget/downloader_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:share/share.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
 import '../../../../../helper/helper_handler.dart';

@@ -95,6 +95,7 @@ class ReportViewmodel extends BaseViewModel {
       final _response = await _reportRepository.freeTrialMembers();
       freeTrialMembers = _response.freeTrialMembers?.data ?? [];
       freeMemberModel = _response.analytics ?? [];
+      logger.d(freeMemberModel!.length);
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
@@ -104,7 +105,8 @@ class ReportViewmodel extends BaseViewModel {
   Map<String, double> convertedMap() {
     Map<String, double> _map = Map<String, double>();
     freeMemberModel?.map((e) {
-      if (e.name != "Total") _map[e.name!] = e.signups!.toDouble();
+      if (e.name != "Total")
+        _map[e.name!] = double.parse(e.signups!.toString());
     }).toList();
     // notifyListeners();
     return _map;
@@ -113,7 +115,8 @@ class ReportViewmodel extends BaseViewModel {
   Map<String, double> convertedUpgradedMemberMap() {
     Map<String, double> _map = Map<String, double>();
     upgradedMembersAnalysis?.map((e) {
-      if (e.name != "Total") _map[e.name!] = e.signups!.toDouble();
+      if (e.name != "Total")
+        _map[e.name!] = double.parse(e.signups!.toString());
     }).toList();
     // notifyListeners();
     return _map;
@@ -138,20 +141,23 @@ class ReportViewmodel extends BaseViewModel {
       if (promotionIncomeAnalysis!.isEmpty) _showLoading();
       final _response = await _reportRepository.promotionIncomeAnalysis();
       promotionIncomeAnalysis = _response.packageSignupBonus ?? [];
+      logger.d('printing aconsole ${promotionIncomeAnalysis!.length}');
+      logger.d('printing aconsole ${pieAnalysisData.length}');
       if (pieAnalysisData.isNotEmpty) {
         pieAnalysisData.clear();
       }
       for (var item in promotionIncomeAnalysis!) {
-        analysisData
-            .add(FlSpot(item.month!.toDouble(), item.amount!.toDouble()));
+      
+        analysisData.add(FlSpot(double.parse(item.month.toString()), double.parse(item.amount.toString())));
 
         logger.d('printing analysis line logger on console $analysisData');
         pieAnalysisData.add(PieChartSectionData(
             color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-            value: item.amount!.toDouble(),
+            value: double.parse(item.amount.toString()),
             showTitle: false,
             radius: 30));
       }
+      logger.d('printing pie analysis logger on console $pieAnalysisData');
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }
@@ -186,7 +192,7 @@ class ReportViewmodel extends BaseViewModel {
     vvpFreeMemberTrail?.vppAnalytics?.vpp?.map((e) {
       print('printing problem from DAY BFR yesterday ${e.signups.toString()}');
 
-      _map[e.name!] = e.signups!.toDouble();
+      _map[e.name!] = double.parse(e.signups!.toString());
     }).toList();
     return _map;
   }
@@ -237,7 +243,11 @@ class ReportViewmodel extends BaseViewModel {
       barChartGroupData.add(
         BarChartGroupData(x: i, barRods: [
           BarChartRodData(
-              y: freeSignup[i].signups?.toDouble() ?? .0,
+              y: double.parse(upgradeSignUpModel!.upgrade![i].signups.toString()),
+              borderRadius: BorderRadius.zero,
+              colors: [Pallets.green200, Pallets.green200]),
+          BarChartRodData(
+              y: double.parse(freeSignup[i].signups.toString()),
               borderRadius: BorderRadius.zero,
               colors: [Pallets.orange600, Pallets.orange600]),
         ]),
@@ -245,6 +255,7 @@ class ReportViewmodel extends BaseViewModel {
     }
     notifyListeners();
   }
+
 
   upGradedMemmberModelRes() async {
     DateTime now = DateTime.now();

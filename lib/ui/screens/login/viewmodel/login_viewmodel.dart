@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import '../../../../helper/helper_handler.dart';
 import '../../../../helper/routes/navigation.dart';
 import '../../../../helper/routes/routes.dart';

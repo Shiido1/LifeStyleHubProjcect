@@ -18,7 +18,7 @@ class FreeSignUpList {
 class FreeSignUpModel {
   String? year;
   String? month;
-  int? signups;
+  dynamic signups;
 
   FreeSignUpModel({this.year, this.month, this.signups});
 

@@ -31,13 +31,13 @@ class LoginModel {
 }
 
 class User {
-  dynamic? id;
+  dynamic id;
   String? name;
   String? username;
   String? email;
   String? emailVerifiedAt;
   String? phoneNo;
-  dynamic? countryId;
+  dynamic countryId;
   String? state;
   String? address;
   String? sex;
@@ -47,7 +47,7 @@ class User {
   String? referredBy;
   AffiliateId? affiliateId;
   String? trialEnds;
-  dynamic? isAdmin;
+  dynamic isAdmin;
   String? role;
   String? createdAt;
   String? updatedAt;
@@ -169,8 +169,8 @@ class AffiliateId {
 }
 
 class Banks {
-  dynamic? id;
-  dynamic? userId;
+  dynamic id;
+  dynamic userId;
   String? name;
   String? accountName;
   String? accountNo;
@@ -222,8 +222,8 @@ class Banks {
 }
 
 class Wallets {
-  dynamic? id;
-  dynamic? userId;
+  dynamic id;
+  dynamic userId;
   String? type;
   dynamic totalCredit;
   dynamic totalDebit;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/network/vpp/vpp_profile.dart';
@@ -174,7 +175,7 @@ class _VPPTabState extends State<VPPTab> {
               ],
             ),
             Visibility(
-              visible: provider.analysisData.isEmpty ? false : true,
+              visible: provider.analysisData.isNotEmpty,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -282,7 +283,7 @@ class _VPPTabState extends State<VPPTab> {
                   : [],
             ),
             Visibility(
-              visible: provider.pieAnalysisData.isEmpty ? false : true,
+              visible: provider.pieAnalysisData.isNotEmpty,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -370,7 +371,7 @@ class _VPPTabState extends State<VPPTab> {
                   : [],
             ),
             Visibility(
-              visible: provider.pieAnalysisData.isEmpty ? false : true,
+              visible: provider.pieAnalysisData.isNotEmpty,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -414,7 +415,7 @@ class _VPPTabState extends State<VPPTab> {
                       ? provider.vvpUpgradedAnalysisModel!.vppAnalytics!.vpp!
                           .map((e) => AnalyticalGraph(
                                 element: AnalyticsModel(
-                                    textClick: e.commission ?? 0,
+                                    textClick: e.commission!.toInt(),
                                     textName: e.name ?? '',
                                     textSignup: e.signups ?? 0),
                               ))

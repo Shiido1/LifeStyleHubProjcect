@@ -82,6 +82,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     eventBus.on().listen((event) async {
       if (event is UserLoggedInEvent && event.logUserOut!) {
+        _index = 0;
+        setState(() {});
         Provider.of<TabViewModel>(context, listen: false).resetIndex();
         HiveBoxes.logOut(context);
       }
@@ -101,7 +103,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // _getCatchedInfos();
     return Scaffold(
       appBar: getCustomAppBar(context,
           title: _titleList[_index],

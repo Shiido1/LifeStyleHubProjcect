@@ -16,6 +16,7 @@ class _BarChartContentState extends State<BarChartContent> {
   void initState() {
     reportViewmodel = Provider.of<ReportViewmodel>(context, listen: false);
     reportViewmodel!.init(context);
+    reportViewmodel!.freeSignUpModelRes();
     super.initState();
   }
 

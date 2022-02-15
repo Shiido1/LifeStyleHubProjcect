@@ -82,9 +82,7 @@ class ReportRepository {
           url: Paths.freeSignUpMember,
           queryParameters: map,
           options: await getDioHeader());
-      // return FreeSignUpList.fromJson(_response);
       return FreeSignUpList.fromJson(_response);
-      // return FreeSignUpModel.fromJson(_response[0]);
     } catch (e) {
       throw e;
     }

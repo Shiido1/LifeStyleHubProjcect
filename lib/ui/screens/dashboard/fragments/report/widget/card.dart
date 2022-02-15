@@ -8,7 +8,7 @@ class MemberCardModel {
   final String? name;
   final String? phoneNo;
   final String? date;
-  final int? money;
+  final dynamic money;
 
   MemberCardModel({this.name, this.phoneNo, this.date, this.money});
 }

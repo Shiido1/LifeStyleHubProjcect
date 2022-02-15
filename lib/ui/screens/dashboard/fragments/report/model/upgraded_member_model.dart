@@ -114,7 +114,7 @@ class Data {
   String? phoneNo;
   String? package;
   String? medium;
-  int? commission;
+  double? commission;
   String? status;
 
   Data(

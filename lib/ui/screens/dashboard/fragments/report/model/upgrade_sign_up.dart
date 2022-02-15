@@ -19,7 +19,7 @@ class UpgradeSignUpModel {
   String? year;
   String? month;
   int? signups;
-  int? income;
+  double? income;
 
   UpgradeSignUpModel({this.year, this.month, this.signups, this.income});
 

@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
@@ -71,6 +72,7 @@ class _PromotionTabState extends State<PromotionTab> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ReportViewmodel>(builder: (_, provider, __) {
+      logger.d(provider.analysisData);
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: ListView(
@@ -106,7 +108,7 @@ class _PromotionTabState extends State<PromotionTab> {
                 textColor: Pallets.lightBlue500,
                 containerColor: Pallets.lightBlue50),
             Visibility(
-              visible: provider.analysisData.isEmpty ? false : true,
+              visible: provider.analysisData.isNotEmpty,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,7 +231,7 @@ class _PromotionTabState extends State<PromotionTab> {
                         .toList()
                     : []),
             Visibility(
-              visible: provider.pieAnalysisData.isEmpty ? false : true,
+              visible: provider.pieAnalysisData.isNotEmpty,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -314,7 +316,7 @@ class _PromotionTabState extends State<PromotionTab> {
                   : [],
             ),
             Visibility(
-              visible: provider.pieAnalysisData.isEmpty ? false : true,
+              visible: provider.pieAnalysisData.isNotEmpty,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,

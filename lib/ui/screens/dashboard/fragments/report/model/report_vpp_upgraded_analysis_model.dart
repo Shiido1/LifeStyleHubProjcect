@@ -1,3 +1,4 @@
+ 
 class VVPUpgradedAnalysisModel {
   UpgradedMembers? upgradedMembers;
   VppAnalytics? vppAnalytics;
@@ -33,10 +34,10 @@ class UpgradedMembers {
   int? lastPage;
   String? lastPageUrl;
   List<Links>? links;
-  Null nextPageUrl;
+  String? nextPageUrl;
   String? path;
   int? perPage;
-  Null prevPageUrl;
+  String? prevPageUrl;
   int? to;
   int? total;
 
@@ -110,7 +111,7 @@ class Data {
   String? phoneNo;
   String? package;
   String? medium;
-  int? amount;
+  double? amount;
   String? status;
 
   Data(
@@ -170,7 +171,7 @@ class Links {
 class VppAnalytics {
   List<Vpp>? vpp;
   int? totalSignups;
-  int? totalCommission;
+  double? totalCommission;
 
   VppAnalytics({this.vpp, this.totalSignups, this.totalCommission});
 
@@ -199,7 +200,7 @@ class VppAnalytics {
 class Vpp {
   String? name;
   int? signups;
-  int? commission;
+  double? commission;
 
   Vpp({this.name, this.signups, this.commission});
 

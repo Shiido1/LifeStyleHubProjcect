@@ -156,8 +156,8 @@ class Links {
 
 class Analytics {
   String? name;
-  int? signups;
-  int? clicks;
+  dynamic signups;
+  dynamic clicks;
 
   Analytics({this.name, this.signups, this.clicks});
 

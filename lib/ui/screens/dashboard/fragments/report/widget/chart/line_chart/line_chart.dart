@@ -21,29 +21,29 @@ _bottomLineTitles(BuildContext context) {
       showTitles: true,
       getTitles: (value) {
         switch (value.toInt()) {
-          case 1:
+          case 0:
             return 'J';
-          case 2:
+          case 1:
             return 'F';
+          case 2:
+            return 'M';
           case 3:
-            return 'M';
-          case 4:
             return 'A';
-          case 5:
+          case 4:
             return 'M';
+          case 5:
+            return 'J';
           case 6:
             return 'J';
           case 7:
-            return 'J';
-          case 8:
             return 'A';
-          case 9:
+          case 8:
             return 'S';
-          case 10:
+          case 9:
             return 'O';
-          case 11:
+          case 10:
             return 'N';
-          case 12:
+          case 11:
             return 'D';
         }
         return '';
