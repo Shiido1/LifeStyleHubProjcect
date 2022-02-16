@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/core/data/session_manager.dart';
+import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/signup/model/register_model.dart';
+import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
 import '../../../../../../../../helper/helper_handler.dart';
 import '../../viewmodel/package_viewmodel.dart';
 import '../../../../../../../widgets/buttons.dart';
@@ -115,7 +115,8 @@ void showPayment(
 
 void walletBalanceModal(
     BuildContext context, int packageID, PackageViewmodel _payment) {
-  final _wallet = Wallet.fromJson(SessionManager.instance.userWallet);
+  LoginModel? _wallet;
+  logger.d(_wallet!.user!.wallets!.length);
   showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -141,7 +142,7 @@ void walletBalanceModal(
                           borderRadius: BorderRadius.circular(10),
                           color: Pallets.orange300),
                       child: TextView(
-                        text: 'Wallet ID (${_wallet.id})',
+                        text: 'Wallet ID ()',
                         fontWeight: FontWeight.w700,
                         fontSize: 12,
                         color: Pallets.white,
@@ -158,7 +159,7 @@ void walletBalanceModal(
                     ),
                     SizedBox(height: 16),
                     TextView(
-                        text: '${formatCurrency(_wallet.balance ?? 0)}',
+                        text: '${formatCurrency(_getTotal(_wallet))}',
                         fontWeight: FontWeight.w700,
                         fontSize: 24,
                         color: Pallets.grey700,
@@ -194,4 +195,12 @@ void walletBalanceModal(
           },
         );
       });
+}
+
+double? _getTotal(LoginModel wallets) {
+  double totalScores = 0.0;
+  wallets.user!.wallets!.forEach((item) {
+    totalScores += item.balance!.toDouble();
+  });
+  return totalScores;
 }

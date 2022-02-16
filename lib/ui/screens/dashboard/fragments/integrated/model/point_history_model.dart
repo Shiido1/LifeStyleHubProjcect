@@ -1,62 +1,40 @@
 class PointHistoryModel {
   String? pointBalance;
+  String? claimedPointBalance;
   PointHistory? pointHistory;
   List<PointBreakdown>? pointBreakdown;
 
   PointHistoryModel(
-      {this.pointBalance, this.pointHistory, this.pointBreakdown});
+      {this.pointBalance,
+      this.claimedPointBalance,
+      this.pointHistory,
+      this.pointBreakdown});
 
-  PointHistoryModel.fromJson(json) {
-    if (json == null) return;
-    if (json["point_balance"] is String)
-      this.pointBalance = json["point_balance"];
-    if (json["point_history"] is Map)
-      this.pointHistory = json["point_history"] == null
-          ? null
-          : PointHistory.fromJson(json["point_history"]);
-    if (json["point_breakdown"] is List)
-      this.pointBreakdown = json["point_breakdown"] == null
-          ? null
-          : (json["point_breakdown"] as List)
-              .map((e) => PointBreakdown.fromJson(e))
-              .toList();
+  PointHistoryModel.fromJson(Map<String, dynamic> json) {
+    pointBalance = json['point_balance'];
+    claimedPointBalance = json['claimed_point_balance'];
+    pointHistory = json['point_history'] != null
+        ? new PointHistory.fromJson(json['point_history'])
+        : null;
+    if (json['point_breakdown'] != null) {
+      pointBreakdown = <PointBreakdown>[];
+      json['point_breakdown'].forEach((v) {
+        pointBreakdown!.add(new PointBreakdown.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["point_balance"] = this.pointBalance;
-    if (this.pointHistory != null)
-      data["point_history"] = this.pointHistory?.toJson();
-    if (this.pointBreakdown != null)
-      data["point_breakdown"] =
-          this.pointBreakdown?.map((e) => e.toJson()).toList();
-    return data;
-  }
-}
-
-class PointBreakdown {
-  String? packageIcon;
-  String? packageName;
-  String? reward;
-  int? checkoutPoints;
-
-  PointBreakdown(
-      {this.packageIcon, this.packageName, this.reward, this.checkoutPoints});
-
-  PointBreakdown.fromJson(json) {
-    if (json["package_icon"] is String) this.packageIcon = json["package_icon"];
-    if (json["package_name"] is String) this.packageName = json["package_name"];
-    if (json["reward"] is String) this.reward = json["reward"];
-    if (json["checkout_points"] is int)
-      this.checkoutPoints = json["checkout_points"];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["package_icon"] = this.packageIcon;
-    data["package_name"] = this.packageName;
-    data["reward"] = this.reward;
-    data["checkout_points"] = this.checkoutPoints;
+    data['point_balance'] = this.pointBalance;
+    data['claimed_point_balance'] = this.claimedPointBalance;
+    if (this.pointHistory != null) {
+      data['point_history'] = this.pointHistory!.toJson();
+    }
+    if (this.pointBreakdown != null) {
+      data['point_breakdown'] =
+          this.pointBreakdown!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
@@ -69,10 +47,10 @@ class PointHistory {
   int? lastPage;
   String? lastPageUrl;
   List<Links>? links;
-  dynamic nextPageUrl;
+  String? nextPageUrl;
   String? path;
   int? perPage;
-  dynamic prevPageUrl;
+  String? prevPageUrl;
   int? to;
   int? total;
 
@@ -91,69 +69,51 @@ class PointHistory {
       this.to,
       this.total});
 
-  PointHistory.fromJson(json) {
-    if (json["current_page"] is int) this.currentPage = json["current_page"];
-    if (json["data"] is List)
-      this.data = json["data"] == null
-          ? null
-          : (json["data"] as List).map((e) => Data.fromJson(e)).toList();
-    if (json["first_page_url"] is String)
-      this.firstPageUrl = json["first_page_url"];
-    if (json["from"] is int) this.from = json["from"];
-    if (json["last_page"] is int) this.lastPage = json["last_page"];
-    if (json["last_page_url"] is String)
-      this.lastPageUrl = json["last_page_url"];
-    if (json["links"] is List)
-      this.links = json["links"] == null
-          ? null
-          : (json["links"] as List).map((e) => Links.fromJson(e)).toList();
-    this.nextPageUrl = json["next_page_url"];
-    if (json["path"] is String) this.path = json["path"];
-    if (json["per_page"] is int) this.perPage = json["per_page"];
-    this.prevPageUrl = json["prev_page_url"];
-    if (json["to"] is int) this.to = json["to"];
-    if (json["total"] is int) this.total = json["total"];
+  PointHistory.fromJson(Map<String, dynamic> json) {
+    currentPage = json['current_page'];
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
+    firstPageUrl = json['first_page_url'];
+    from = json['from'];
+    lastPage = json['last_page'];
+    lastPageUrl = json['last_page_url'];
+    if (json['links'] != null) {
+      links = <Links>[];
+      json['links'].forEach((v) {
+        links!.add(new Links.fromJson(v));
+      });
+    }
+    nextPageUrl = json['next_page_url'];
+    path = json['path'];
+    perPage = json['per_page'];
+    prevPageUrl = json['prev_page_url'];
+    to = json['to'];
+    total = json['total'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["current_page"] = this.currentPage;
-    if (this.data != null)
-      data["data"] = this.data?.map((e) => e.toJson()).toList();
-    data["first_page_url"] = this.firstPageUrl;
-    data["from"] = this.from;
-    data["last_page"] = this.lastPage;
-    data["last_page_url"] = this.lastPageUrl;
-    if (this.links != null)
-      data["links"] = this.links?.map((e) => e.toJson()).toList();
-    data["next_page_url"] = this.nextPageUrl;
-    data["path"] = this.path;
-    data["per_page"] = this.perPage;
-    data["prev_page_url"] = this.prevPageUrl;
-    data["to"] = this.to;
-    data["total"] = this.total;
-    return data;
-  }
-}
-
-class Links {
-  dynamic url;
-  String? label;
-  bool? active;
-
-  Links({this.url, this.label, this.active});
-
-  Links.fromJson(json) {
-    this.url = json["url"];
-    if (json["label"] is String) this.label = json["label"];
-    if (json["active"] is bool) this.active = json["active"];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["url"] = this.url;
-    data["label"] = this.label;
-    data["active"] = this.active;
+    data['current_page'] = this.currentPage;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    data['first_page_url'] = this.firstPageUrl;
+    data['from'] = this.from;
+    data['last_page'] = this.lastPage;
+    data['last_page_url'] = this.lastPageUrl;
+    if (this.links != null) {
+      data['links'] = this.links!.map((v) => v.toJson()).toList();
+    }
+    data['next_page_url'] = this.nextPageUrl;
+    data['path'] = this.path;
+    data['per_page'] = this.perPage;
+    data['prev_page_url'] = this.prevPageUrl;
+    data['to'] = this.to;
+    data['total'] = this.total;
     return data;
   }
 }
@@ -163,25 +123,84 @@ class Data {
   String? name;
   String? email;
   String? package;
+  String? type;
   String? points;
 
-  Data({this.date, this.name, this.email, this.package, this.points});
+  Data(
+      {this.date, this.name, this.email, this.package, this.type, this.points});
 
-  Data.fromJson(json) {
-    if (json["date"] is String) this.date = json["date"];
-    if (json["name"] is String) this.name = json["name"];
-    if (json["email"] is String) this.email = json["email"];
-    if (json["package"] is String) this.package = json["package"];
-    if (json["points"] is String) this.points = json["points"];
+  Data.fromJson(Map<String, dynamic> json) {
+    date = json['date'];
+    name = json['name'];
+    email = json['email'];
+    package = json['package'];
+    type = json['type'];
+    points = json['points'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["date"] = this.date;
-    data["name"] = this.name;
-    data["email"] = this.email;
-    data["package"] = this.package;
-    data["points"] = this.points;
+    data['date'] = this.date;
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['package'] = this.package;
+    data['type'] = this.type;
+    data['points'] = this.points;
+    return data;
+  }
+}
+
+class Links {
+  String? url;
+  String? label;
+  bool? active;
+
+  Links({this.url, this.label, this.active});
+
+  Links.fromJson(Map<String, dynamic> json) {
+    url = json['url'];
+    label = json['label'];
+    active = json['active'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['url'] = this.url;
+    data['label'] = this.label;
+    data['active'] = this.active;
+    return data;
+  }
+}
+
+class PointBreakdown {
+  int? accountId;
+  String? packageIcon;
+  String? packageName;
+  String? reward;
+  int? checkoutPoints;
+
+  PointBreakdown(
+      {this.accountId,
+      this.packageIcon,
+      this.packageName,
+      this.reward,
+      this.checkoutPoints});
+
+  PointBreakdown.fromJson(Map<String, dynamic> json) {
+    accountId = json['account_id'];
+    packageIcon = json['package_icon'];
+    packageName = json['package_name'];
+    reward = json['reward'];
+    checkoutPoints = json['checkout_points'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['account_id'] = this.accountId;
+    data['package_icon'] = this.packageIcon;
+    data['package_name'] = this.packageName;
+    data['reward'] = this.reward;
+    data['checkout_points'] = this.checkoutPoints;
     return data;
   }
 }

@@ -5,7 +5,7 @@ import 'package:lifestyle_hub/utils/pallets.dart';
 
 _leftLineTitles(BuildContext context) {
   return SideTitles(
-      interval: 1000,
+      interval: 25,
       showTitles: true,
       getTitles: (value) {
         switch (value.toInt()) {

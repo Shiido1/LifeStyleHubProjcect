@@ -40,9 +40,9 @@ class PointHistoryViewmodel extends BaseViewModel {
   /// get history
   Future<void> getPointHistory() async {
     try {
-      if (pointHistoryDao!.box!.isEmpty) _showLoading();
+      if (pointHistoryDao!.box!.isEmpty) _showLoading(notify: false);
       final _response = await _pointHistoryRepository.pointHistory();
-      pointHistoryDao!.savePoints(_response.toJson());
+      await pointHistoryDao!.savePoints(_response.toJson());
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

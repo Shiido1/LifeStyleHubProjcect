@@ -5,6 +5,7 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/da
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/inactive_package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/payment/list_of_banks.dart'
     as lsh;
+import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import '../model/package_subcription_response.dart';
 import '../model/view_packages_model.dart';
@@ -42,9 +43,10 @@ class PackageViewmodel extends BaseViewModel {
 
   /// subscribe to package
   Future<void> subscribe(int id, Map map) async {
+    Wallets? wallets;
     try {
       _showLoading(notify: true);
-      final _response = await _packageRepository.payment(id, map);
+      final _response = await _packageRepository.payment(wallets!.id, map);
       showsnackBarInfo(this._context,
           message: _response.message ?? '', bgColor: Pallets.green600);
     } catch (e) {
@@ -53,7 +55,7 @@ class PackageViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
-  List<Null>? completedPackages = [];
+  List<CompletePackages>? completedPackages = [];
   List<InactivePackages>? inactivePackages = [];
   List<ActivePackages>? activePackages = [];
 
@@ -62,7 +64,7 @@ class PackageViewmodel extends BaseViewModel {
     try {
       final _response = await _packageRepository.getListOfPackages();
       activePakageDao!.saveActivePackages(_response.activePackages ?? []);
-      // completePackageDao!.saveActivePackages(_response.completedPackages??[]);
+      completePackageDao!.saveActivePackages(_response.completedPackages ?? []);
       inactivePackageDao!.saveActivePackages(_response.inactivePackages ?? []);
       activePackages = _response.activePackages;
       completedPackages = _response.completedPackages;

@@ -107,7 +107,7 @@ class _TicketDetailsSmsState extends State<TicketDetailsSms> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-                              Text(_currentItemSelected!),
+                              Text(_currentItemSelected??''),
                               Icon(Icons.arrow_drop_down),
                             ],
                           ),

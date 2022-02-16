@@ -241,7 +241,7 @@ class Wallets {
       this.createdAt,
       this.updatedAt});
 
-  Wallets.fromJson(Map<String, dynamic> json) {
+  Wallets.fromJson(Map<dynamic, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     type = json['type'];

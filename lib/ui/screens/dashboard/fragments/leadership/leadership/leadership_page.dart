@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/leadership/leadership/leadership_screen.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/leadership/viewmodel/leadership_viewmodel.dart';
 import 'package:lifestyle_hub/ui/widgets/buttons.dart';
-import 'package:lifestyle_hub/ui/widgets/image_loader.dart';
 import 'package:lifestyle_hub/ui/widgets/text_views.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +53,7 @@ class _LeadershipScreenState extends State<LeadershipScreen> {
                                 progressText: e.progress.toString(),
                                 qualificaionText: e.requirements!.text,
                                 screen: SeniorLeaderShipScreenPage(
-                                  title: e.title??'',
+                                  title: e.title ?? '',
                                   leadership: e,
                                 )))
                             .toList()
@@ -264,9 +264,17 @@ class _LeadershipScreenState extends State<LeadershipScreen> {
     );
   }
 
-  leadershipWidget({String? image, String? text, required Widget screen,String? qualificaionText,double?progress,String?progressText}) =>
+  leadershipWidget(
+          {String? image,
+          String? text,
+          required Widget screen,
+          String? qualificaionText,
+          double? progress,
+          String? progressText}) =>
       GestureDetector(
-        onTap: () => PageRouter.gotoWidget(screen, context),
+        onTap: () {
+          PageRouter.gotoWidget(screen, context);
+        },
         child: Container(
           width: getDeviceWidth(context) / 2 * 1.85,
           padding: EdgeInsets.fromLTRB(20, 20, 20, 30),
@@ -278,11 +286,7 @@ class _LeadershipScreenState extends State<LeadershipScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ImageLoader(
-                path: image!,
-                height: 50,
-                width: 50,
-              ),
+              SvgPicture.network(image!),
               SizedBox(
                 height: 23,
               ),
@@ -303,60 +307,26 @@ class _LeadershipScreenState extends State<LeadershipScreen> {
               SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TextView(
-                          text: '${progressText!}% complete',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Pallets.black,
-                        ),
-                        Container(
-                            alignment: Alignment.topCenter,
-                            margin: EdgeInsets.only(bottom: 20, top: 20),
-                            child: LinearProgressIndicator(
-                              value: progress!,
-                              valueColor: new AlwaysStoppedAnimation<Color>(
-                                  Pallets.orange600),
-                              backgroundColor: Colors.grey,
-                              minHeight: 8,
-                            )),
-                      ],
-                    ),
+                  TextView(
+                    text: '${progressText!}% complete',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Pallets.black,
                   ),
-                  SizedBox(
-                    width: 24,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TextView(
-                          text: '$progressText% complete',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Pallets.black,
-                        ),
-                        Container(
-                            alignment: Alignment.topCenter,
-                            margin: EdgeInsets.only(bottom: 20, top: 20),
-                            child: LinearProgressIndicator(
-                              value: progress,
-                              valueColor: new AlwaysStoppedAnimation<Color>(
-                                  Pallets.orange600),
-                              backgroundColor: Colors.grey,
-                              minHeight: 8,
-                            )),
-                      ],
-                    ),
-                  ),
+                  Container(
+                      alignment: Alignment.topCenter,
+                      margin: EdgeInsets.only(bottom: 20, top: 20),
+                      child: LinearProgressIndicator(
+                        value: progress! / 100,
+                        valueColor: new AlwaysStoppedAnimation<Color>(
+                            Pallets.orange600),
+                        backgroundColor: Colors.grey,
+                        minHeight: 8,
+                      )),
                 ],
               ),
               SizedBox(

@@ -137,8 +137,8 @@ class _PromotionTabState extends State<PromotionTab> {
                     height: 300,
                     child: LineChart(
                       LineChartData(
-                        maxX: 11,
-                        maxY: 3,
+                        maxX: 12,
+                        maxY: 100,
                         minX: 0,
                         minY: 0,
                         borderData: FlBorderData(show: false),
@@ -366,7 +366,6 @@ class _PromotionTabState extends State<PromotionTab> {
                       .toList()
                   : [],
             ),
-            SizedBox(height: 32),
             SizedBox(
               height: 50,
             )

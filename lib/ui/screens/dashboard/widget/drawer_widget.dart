@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/vpp_report_screen.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/notifications_screen.dart';
 import 'package:lifestyle_hub/ui/screens/notifications/viewmodel/notification_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -176,11 +177,11 @@ getDrawer(BuildContext context, int index, UsersProfileModel? profileModel) {
               CustomDrawerTabs(
                 title: 'Report',
                 image: 'assets/svgs/report.svg',
-                onTap: () => _tap(
+                onTap: () => profileModel?.role == "user"?_tap(
                     tab: _tabNotifier,
                     context: context,
                     newIndex: 6,
-                    providerIndex: _tabNotifier.index),
+                    providerIndex: _tabNotifier.index):PageRouter.gotoWidget(VppReportScreen(), context),
                 defaultIndex: 6,
                 newIndex: index,
               ),
