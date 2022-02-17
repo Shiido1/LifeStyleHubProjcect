@@ -113,7 +113,7 @@ class ReportViewmodel extends BaseViewModel {
   }
 
   Map<String, double> convertedUpgradedMemberMap() {
-    Map<String, double> _map = Map<String, double>();
+    Map<String, double>? _map = Map<String, double>();
     upgradedMembersAnalysis?.map((e) {
       if (e.name != "Total")
         _map[e.name!] = double.parse(e.signups!.toString());
@@ -147,8 +147,8 @@ class ReportViewmodel extends BaseViewModel {
         pieAnalysisData.clear();
       }
       for (var item in promotionIncomeAnalysis!) {
-      
-        analysisData.add(FlSpot(double.parse(item.month.toString()), double.parse(item.amount.toString())));
+        analysisData.add(FlSpot(double.parse(item.month.toString()),
+            double.parse(item.amount.toString())));
 
         logger.d('printing analysis line logger on console $analysisData');
         pieAnalysisData.add(PieChartSectionData(
@@ -228,7 +228,7 @@ class ReportViewmodel extends BaseViewModel {
       if (freeSignUpModel == null) _showLoading();
       final _response = await _reportRepository.freeSignUpModel(year: year);
       freeSignUpModel = _response;
-      await _getBarData(_response.freeSignup);
+      _getBarData(_response.freeSignup);
 
       _hideLoading();
     } catch (e) {
@@ -243,7 +243,8 @@ class ReportViewmodel extends BaseViewModel {
       barChartGroupData.add(
         BarChartGroupData(x: i, barRods: [
           BarChartRodData(
-              y: double.parse(upgradeSignUpModel!.upgrade![i].signups.toString()),
+              y: double.parse(
+                  upgradeSignUpModel?.upgrade?[i].signups?.toString() ?? ''),
               borderRadius: BorderRadius.zero,
               colors: [Pallets.green200, Pallets.green200]),
           BarChartRodData(
@@ -252,10 +253,12 @@ class ReportViewmodel extends BaseViewModel {
               colors: [Pallets.orange600, Pallets.orange600]),
         ]),
       );
+
+    logger.d(upgradeSignUpModel?.upgrade?[i].signups?.toString());
+    logger.d(double.parse(freeSignup[i].signups.toString()));
     }
     notifyListeners();
   }
-
 
   upGradedMemmberModelRes() async {
     DateTime now = DateTime.now();
@@ -266,8 +269,7 @@ class ReportViewmodel extends BaseViewModel {
       if (upgradeSignUpModel == null) _showLoading();
       final _response = await _reportRepository.upgradeSignUpModel(year: year);
       upgradeSignUpModel = _response;
-      logger.d(upgradeSignUpModel);
-      await _getIncomeBarData(_response.upgrade);
+      _getIncomeBarData(_response.upgrade);
     } catch (e) {
       logger.wtf('An unexpected error occurred! => $e');
     }

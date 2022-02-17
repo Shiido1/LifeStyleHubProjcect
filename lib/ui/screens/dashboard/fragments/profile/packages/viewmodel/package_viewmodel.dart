@@ -5,7 +5,6 @@ import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/da
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/dao/inactive_package_dao.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/payment/list_of_banks.dart'
     as lsh;
-import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
 import 'package:lifestyle_hub/utils/pallets.dart';
 import '../model/package_subcription_response.dart';
 import '../model/view_packages_model.dart';

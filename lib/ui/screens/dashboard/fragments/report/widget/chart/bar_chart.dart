@@ -25,7 +25,7 @@ class _BarChartContentState extends State<BarChartContent> {
     return Consumer<ReportViewmodel>(builder: (_, reportProvider, __) {
       return BarChart(
         BarChartData(
-            maxY: 10,
+            // maxY: 10,
             minY: 0,
             borderData: FlBorderData(
                 border: const Border(

@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/model/free_member_model.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/report/viewmodel/report_viewmodel.dart';
@@ -72,7 +71,6 @@ class _PromotionTabState extends State<PromotionTab> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ReportViewmodel>(builder: (_, provider, __) {
-      logger.d(provider.analysisData);
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: ListView(
@@ -138,7 +136,7 @@ class _PromotionTabState extends State<PromotionTab> {
                     child: LineChart(
                       LineChartData(
                         maxX: 12,
-                        maxY: 100,
+                        // maxY: 100,
                         minX: 0,
                         minY: 0,
                         borderData: FlBorderData(show: false),
@@ -161,38 +159,10 @@ class _PromotionTabState extends State<PromotionTab> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          returnGraphRow(
-                              color: Pallets.blue500,
-                              text: 'Package signup bonus'),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          returnGraphRow(
-                              color: Pallets.green500,
-                              text: 'Contest & reward'),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          returnGraphRow(
-                              color: Pallets.amber500,
-                              text: 'Leadership bonus'),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          returnGraphRow(
-                              color: Pallets.red500,
-                              text: 'Ecommerce referral'),
-                        ],
-                      ),
+                      returnGraphRow(
+                          color: Pallets.blue500, text: 'Package signup bonus'),
+                      returnGraphRow(
+                          color: Pallets.amber500, text: 'Leadership bonus'),
                     ],
                   ),
                 ],
@@ -355,8 +325,8 @@ class _PromotionTabState extends State<PromotionTab> {
               height: 28,
             ),
             Column(
-              children: provider.upgradedMembersAnalysis != null
-                  ? provider.upgradedMembersAnalysis!
+              children: provider.upgradedMembersAnalysis == null
+                  ?[]: provider.upgradedMembersAnalysis!
                       .map((e) => AnalyticalGraph(
                             element: AnalyticsModel(
                                 textClick: e.clicks!,
@@ -364,7 +334,7 @@ class _PromotionTabState extends State<PromotionTab> {
                                 textSignup: e.signups),
                           ))
                       .toList()
-                  : [],
+                  ,
             ),
             SizedBox(
               height: 50,

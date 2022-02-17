@@ -5,7 +5,7 @@ import 'package:lifestyle_hub/utils/pallets.dart';
 
 _leftLineTitles(BuildContext context) {
   return SideTitles(
-      interval: 25,
+      // interval: 25,
       showTitles: true,
       getTitles: (value) {
         switch (value.toInt()) {
@@ -21,29 +21,29 @@ _bottomLineTitles(BuildContext context) {
       showTitles: true,
       getTitles: (value) {
         switch (value.toInt()) {
-          case 0:
-            return 'J';
           case 1:
-            return 'F';
-          case 2:
-            return 'M';
-          case 3:
-            return 'A';
-          case 4:
-            return 'M';
-          case 5:
             return 'J';
+          case 2:
+            return 'F';
+          case 3:
+            return 'M';
+          case 4:
+            return 'A';
+          case 5:
+            return 'M';
           case 6:
             return 'J';
           case 7:
-            return 'A';
+            return 'J';
           case 8:
-            return 'S';
+            return 'A';
           case 9:
-            return 'O';
+            return 'S';
           case 10:
-            return 'N';
+            return 'O';
           case 11:
+            return 'N';
+          case 12:
             return 'D';
         }
         return '';
