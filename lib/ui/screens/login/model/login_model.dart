@@ -5,7 +5,7 @@ class LoginModel {
 
   LoginModel({this.user, this.token});
 
-  LoginModel.fromJson(Map<String, dynamic> json) {
+  LoginModel.fromJson(Map<dynamic, dynamic> json) {
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     token = json['token'];
   }

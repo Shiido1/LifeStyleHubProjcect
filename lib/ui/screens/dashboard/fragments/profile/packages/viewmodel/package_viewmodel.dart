@@ -43,10 +43,9 @@ class PackageViewmodel extends BaseViewModel {
 
   /// subscribe to package
   Future<void> subscribe(int id, Map map) async {
-    Wallets? wallets;
     try {
       _showLoading(notify: true);
-      final _response = await _packageRepository.payment(wallets!.id, map);
+      final _response = await _packageRepository.payment(id, map);
       showsnackBarInfo(this._context,
           message: _response.message ?? '', bgColor: Pallets.green600);
     } catch (e) {

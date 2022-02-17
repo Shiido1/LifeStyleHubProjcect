@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/login/model/login_model.dart';
 import '../../../../helper/helper_handler.dart';
 import '../../../../helper/routes/navigation.dart';
 import '../../../../helper/routes/routes.dart';
@@ -9,6 +10,7 @@ LoginRepository _loginRepository = LoginRepository();
 
 class LoginViewModel extends BaseViewModel {
   late BuildContext _context;
+  LoginModel? response;
   bool _loading = false;
 
   BuildContext get buildContext => _context;
@@ -36,7 +38,7 @@ class LoginViewModel extends BaseViewModel {
   Future<void> login({required Map map}) async {
     try {
       _showLoading(notify: false);
-      await _loginRepository.login(map: map);
+      response = await _loginRepository.login(map: map);
       PageRouter.gotoNamed(Routes.dashboard, _context, clearStack: true);
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());

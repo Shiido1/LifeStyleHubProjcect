@@ -30,6 +30,7 @@ class WalletDao {
   }
 
   Future<ViewWalletModel>? getWallet() async {
+    
     final _data = await prefManager.getCachedData(key: HiveBoxes.wallet);
     return ViewWalletModel.fromJson(_data);
   }

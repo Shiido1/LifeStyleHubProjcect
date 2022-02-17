@@ -19,11 +19,10 @@ class LoginRepository {
       final _response = await apiBaseHelper.post(url: Paths.login, map: map);
 
       logger.d(_response);
-      final _login = LoginModel.fromJson(_response);
+       final _login = LoginModel.fromJson(_response);
 
       /// cache login data
       SessionManager.instance.authToken = _login.token!;
-
 
       /// requests for users profile
       final _usersInformationResponse =
