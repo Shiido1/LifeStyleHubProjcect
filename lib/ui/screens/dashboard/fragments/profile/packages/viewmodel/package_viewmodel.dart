@@ -53,8 +53,8 @@ class PackageViewmodel extends BaseViewModel {
     _hideLoading();
   }
 
-  List<ActivePackages>? completedPackages = [];
-  List<ActivePackages>? inactivePackages = [];
+  List<CompletePackages>? completedPackages = [];
+  List<InactivePackages>? inactivePackages = [];
   List<ActivePackages>? activePackages = [];
 
   /// get list of packages

@@ -9,13 +9,18 @@ import '../fragments/wallet/model/view_wallet_model.dart';
 import '../../../widgets/text_views.dart';
 import '../../../../utils/pallets.dart';
 
-class WalletBalanceWidget extends StatelessWidget {
+class WalletBalanceWidget extends StatefulWidget {
   const WalletBalanceWidget({Key? key}) : super(key: key);
 
   @override
+  State<WalletBalanceWidget> createState() => _WalletBalanceWidgetState();
+}
+
+class _WalletBalanceWidgetState extends State<WalletBalanceWidget> {
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: walletDao!.getWallet(),
+        future: walletDao!.getWallet()!,
         builder: (context, AsyncSnapshot<ViewWalletModel> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -24,7 +29,6 @@ class WalletBalanceWidget extends StatelessWidget {
             return Container();
           }
           ViewWalletModel _model = snapshot.data!;
-
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -46,17 +50,15 @@ class WalletBalanceWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     ..._model.wallets!
-                        .map(
-                          (e) => e.type == "fund"
-                              ? TextView(
-                                  text: '${formatCurrency(e.balance ?? 0)}',
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 48,
-                                  color: Pallets.grey700,
-                                  textAlign: TextAlign.center,
-                                )
-                              : SizedBox(),
-                        )
+                        .map((e) => e.type == "commission"
+                            ? TextView(
+                                text: '${formatCurrency(e.balance ?? 0)}',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 24,
+                                color: Pallets.grey700,
+                                textAlign: TextAlign.center,
+                              )
+                            : SizedBox())
                         .toList(),
                     SizedBox(height: 16),
                     Row(
@@ -165,9 +167,9 @@ class WalletBalanceWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     ..._model.wallets!
-                        .map((e) => e.type == "fund"
+                        .map((e) => e.type == "commission"
                             ? TextView(
-                                text: '${formatCurrency(e.totalIncome ?? 0)}',
+                                text: '${formatCurrency(e.totalCredit ?? 0)}',
                                 fontWeight: FontWeight.w700,
                                 fontSize: 24,
                                 color: Pallets.grey700,
@@ -190,17 +192,13 @@ class WalletBalanceWidget extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 10),
-                  ..._model.wallets!
-                      .map((e) => e.type == "fund"
-                          ? TextView(
-                              text: '${formatCurrency(e.totalDebit)}',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 24,
-                              color: Pallets.grey700,
-                              textAlign: TextAlign.center,
-                            )
-                          : SizedBox())
-                      .toList(),
+                  TextView(
+                    text: '${formatCurrency(_model.withdrawn)}',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 24,
+                    color: Pallets.grey700,
+                    textAlign: TextAlign.center,
+                  )
                 ],
               )
             ],

@@ -213,21 +213,6 @@ class _MessagingScreenState extends State<MessagingScreen>
                               },
                             ),
                           ),
-                          // SizedBox(
-                          //   width: 10,
-                          // ),
-                          // Container(
-                          //   height: 48,
-                          //   width: 50,
-                          //   decoration: BoxDecoration(
-                          //       borderRadius: BorderRadius.circular(8),
-                          //       color: Pallets.orange500),
-                          //   child: Center(
-                          //       child: ImageLoader(
-                          //           onTap: () => showTicketFiltering(context,
-                          //               callBack: (filter) {}),
-                          //           path: 'assets/svgs/filter.svg')),
-                          // )
                         ],
                       ),
                       SizedBox(height: 32),
@@ -250,16 +235,6 @@ class _MessagingScreenState extends State<MessagingScreen>
                                             conversation:
                                                 elements.conversation),
                                         context),
-                                    // leading: CircularImage(
-                                    //   radius: 25,
-                                    //   path:
-                                    //       _usersProfileModel?.profilePic ?? '',
-                                    //   initial:
-                                    //       _usersProfileModel?.profilePic == null
-                                    //           ? _receiver!.substring(0, 1)
-                                    //           : '',
-                                    //   showInitialTextAbovePicture: true,
-                                    // ),
                                     leading: CircleAvatar(
                                       backgroundColor: Pallets.amber500,
                                       child: TextView(

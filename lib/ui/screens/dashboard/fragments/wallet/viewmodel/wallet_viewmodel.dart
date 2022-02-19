@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_model.dart';
 import '../../../../../../helper/routes/navigation.dart';
 import '../../../../../../helper/configs/instances.dart';
 import '../../../../../../helper/helper_handler.dart';
@@ -14,6 +15,7 @@ WalletRepository _walletRepository = WalletRepository();
 class WalletViewmodel extends BaseViewModel {
   late BuildContext _context;
   bool _loading = false;
+  ViewWalletModel? viewWalletModel;
 
   BuildContext get buildContext => _context;
 
@@ -66,7 +68,7 @@ class WalletViewmodel extends BaseViewModel {
   void awaitTwoProcesses(int index) async {
     try {
       // _hideLoading();
-      await Future.wait([_checkWallet(), _walletTransactions(index)]);
+      await Future.wait([checkWallet(), _walletTransactions(index)]);
     } catch (e) {
       logger.e('Error waiting for multiple process -> $e');
     }
@@ -74,10 +76,12 @@ class WalletViewmodel extends BaseViewModel {
   }
 
   /// check wallet
-  Future<void> _checkWallet() async {
+  Future checkWallet() async {
     try {
       final _reponse = await _walletRepository.viewWallet();
-      walletDao!.cacheWallet(_reponse.toJson());
+      viewWalletModel = _reponse;
+      walletDao!.cacheWallet(viewWalletModel!.toJson());
+      return viewWalletModel;
     } catch (e) {
       showsnackBarInfo(this._context, message: e.toString());
     }

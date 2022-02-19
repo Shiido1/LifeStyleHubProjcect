@@ -24,7 +24,7 @@ class _IncomeBarChartContentState extends State<IncomeBarChartContent> {
     return Consumer<ReportViewmodel>(builder: (_, reportProvider, __) {
       return BarChart(
         BarChartData(
-            maxY: 1000,
+            // maxY: 1000,
             minY: 0,
             borderData: FlBorderData(
                 border: const Border(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
 import '../../../../../../../helper/helper_handler.dart';
 import '../../dao/profile_dao.dart';
 import '../../model/users_profile_model.dart';
@@ -22,10 +23,16 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   PackageViewmodel? _packageViewmodel;
 
+  WalletViewmodel? _viewWalletModel;
+  // Wallets? wallets;
+
   @override
   void initState() {
     _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);
     _packageViewmodel!.init(context);
+
+    _viewWalletModel = Provider.of<WalletViewmodel>(context, listen: false);
+    _viewWalletModel!.init(context);
     _getCatchedInfos();
     super.initState();
   }
@@ -34,6 +41,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void _getCatchedInfos() async {
     _profileModel = await profileDao!.convert();
+    // wallets = Wallets();
     setState(() {});
   }
 
@@ -167,12 +175,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     textAlign: TextAlign.center,
                     fontStyle: FontStyle.normal,
                     primary: Pallets.orange600,
-                    onPressed: () {
-                      final _payment =
-                          Provider.of<PackageViewmodel>(context, listen: false);
-                      _payment.init(context);
-                      showPayment(context, widget.element.id, _payment);
-                    },
+                    onPressed: () => _subscribe(),
                   ),
                 ],
               ),
@@ -181,5 +184,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
       ),
     );
+  }
+
+  _subscribe() {
+    final _payment = Provider.of<PackageViewmodel>(context, listen: false);
+    _payment.init(context);
+    final _viewWallet = Provider.of<WalletViewmodel>(context, listen: false);
+    _viewWallet.init(context);
+    showPayment(context, widget.element.id, _payment, _viewWallet);
   }
 }

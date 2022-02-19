@@ -1,9 +1,10 @@
 class ViewPackagesModelList {
   List<ActivePackages>? activePackages;
-  List<ActivePackages>? completedPackages;
-  List<ActivePackages>? inactivePackages;
+  List<CompletePackages>? completedPackages;
+  List<InactivePackages>? inactivePackages;
 
-  ViewPackagesModelList({this.activePackages, this.completedPackages, this.inactivePackages});
+  ViewPackagesModelList(
+      {this.activePackages, this.completedPackages, this.inactivePackages});
 
   ViewPackagesModelList.fromJson(Map<String, dynamic> json) {
     if (json['active_packages'] != null) {
@@ -13,15 +14,15 @@ class ViewPackagesModelList {
       });
     }
     if (json['completed_packages'] != null) {
-      completedPackages = <ActivePackages>[];
+      completedPackages = <CompletePackages>[];
       json['completed_packages'].forEach((v) {
-        completedPackages!.add((v));
+        completedPackages!.add(new CompletePackages.fromJson(v));
       });
     }
     if (json['inactive_packages'] != null) {
-      inactivePackages = <ActivePackages>[];
+      inactivePackages = <InactivePackages>[];
       json['inactive_packages'].forEach((v) {
-        inactivePackages!.add((v));
+        inactivePackages!.add(new InactivePackages.fromJson(v));
       });
     }
   }
@@ -34,11 +35,11 @@ class ViewPackagesModelList {
     }
     if (this.completedPackages != null) {
       data['completed_packages'] =
-          this.completedPackages!.map((v) => v).toList();
+          this.completedPackages!.map((v) => v.toJson()).toList();
     }
     if (this.inactivePackages != null) {
       data['inactive_packages'] =
-          this.inactivePackages!.map((v) => v).toList();
+          this.inactivePackages!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -54,6 +55,59 @@ class ActivePackages {
       {this.name, this.type, this.downlinesRequired, this.downlinesAcquired});
 
   ActivePackages.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    type = json['type'];
+    downlinesRequired = json['downlines_required'];
+    downlinesAcquired = json['downlines_acquired'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['type'] = this.type;
+    data['downlines_required'] = this.downlinesRequired;
+    data['downlines_acquired'] = this.downlinesAcquired;
+    return data;
+  }
+}
+
+class CompletePackages {
+  String? name;
+  String? type;
+  int? downlinesRequired;
+  int? downlinesAcquired;
+
+  CompletePackages(
+      {this.name, this.type, this.downlinesRequired, this.downlinesAcquired});
+
+  CompletePackages.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    type = json['type'];
+    downlinesRequired = json['downlines_required'];
+    downlinesAcquired = json['downlines_acquired'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['type'] = this.type;
+    data['downlines_required'] = this.downlinesRequired;
+    data['downlines_acquired'] = this.downlinesAcquired;
+    return data;
+  }
+}
+
+
+class InactivePackages {
+  String? name;
+  String? type;
+  int? downlinesRequired;
+  int? downlinesAcquired;
+
+  InactivePackages(
+      {this.name, this.type, this.downlinesRequired, this.downlinesAcquired});
+
+  InactivePackages.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     type = json['type'];
     downlinesRequired = json['downlines_required'];

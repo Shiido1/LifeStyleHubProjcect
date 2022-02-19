@@ -2,8 +2,11 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:lifestyle_hub/helper/routes/navigation.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/contest/widget/active_package_home_widget.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/profile/packages/purchase_package_screen.dart';
 import 'package:lifestyle_hub/ui/screens/onboarding/viewmodel/tab_viewmodel.dart';
+import 'package:lifestyle_hub/ui/widgets/buttons.dart';
 import '../../../../../helper/video_player.dart';
 import '../profile/dao/profile_dao.dart';
 import '../profile/model/users_profile_model.dart';
@@ -52,11 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _dashboardViewmodel?.getDashboards(_user.role == "user");
     _contestViewModel = Provider.of<ContestViewModel>(context, listen: false);
-    _contestViewModel?.init(context);
+    _contestViewModel!.init(context);
     _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);
-    _packageViewmodel?.init(context);
-    _packageViewmodel?.getPackages();
-    _contestViewModel?.getListContest();
+    _packageViewmodel!.init(context);
+    _packageViewmodel!.getPackages();
+    _contestViewModel!.getListContest();
     _getCatchedInfos();
     setState(() {});
   }
@@ -191,6 +194,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
+            ),
+             SizedBox(
+              height: 23,
+            ),
+            ButtonWidget(
+              buttonText: 'Add New Package',
+              width: 200,
+              color: Pallets.white,
+              fontWeight: FontWeight.w500,
+              textAlign: TextAlign.center,
+              fontStyle: FontStyle.normal,
+              borderColor: Pallets.orange500,
+              primary: Pallets.orange500,
+              onPressed: () => PageRouter.gotoWidget(PurchasePackageScreen(), context),
             ),
             SizedBox(
               height: 23,

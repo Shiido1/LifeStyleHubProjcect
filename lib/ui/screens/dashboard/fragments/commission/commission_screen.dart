@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
@@ -67,7 +68,7 @@ class _CommissionScreenState extends State<CommissionScreen> {
                         formatCurrency(_commissionModel.totalCommission ?? 0),
                     claimed: 'Claimed',
                     totalClaimed:
-                        formatCurrency(_commissionModel.totalCommission ?? 0),
+                        formatCurrency(_commissionModel.claimedCommission ?? 0),
                   ),
                   SizedBox(height: 23),
                   TextView(
@@ -78,28 +79,39 @@ class _CommissionScreenState extends State<CommissionScreen> {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(height: 23),
-                  ValueListenableBuilder(
-                      valueListenable: pointHistoryDao!.getListenable()!,
-                      builder: (_, Box<dynamic> box, __) {
-                        PointHistoryModel _point =
-                            pointHistoryDao!.convert(box);
-                        if (_point.pointBreakdown == null) {
-                          return Container();
-                        }
-                        return SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: _point.pointBreakdown!
-                                .map((point) => PointBreakDownWidget(
-                                      packageName: point.packageName ?? '',
-                                      packageIcon: point.packageIcon ?? '',
-                                      packageReward: point.reward ?? '',
-                                      packageCheckOutPoint:
-                                          '${point.checkoutPoints ?? 0}',
-                                    ))
-                                .toList(),
-                          ),
-                        );
+                  FutureBuilder(
+                      future: pointHistoryDao!.getListenable(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<ValueListenable<Box>?> snapshot) {
+                        if (snapshot.connectionState ==
+                                ConnectionState.waiting ||
+                            !snapshot.hasData) return Container();
+
+                        return ValueListenableBuilder(
+                            valueListenable: snapshot.data!,
+                            builder: (_, Box<dynamic> box, __) {
+                              PointHistoryModel _point =
+                                  pointHistoryDao!.convert(box);
+                              if (_point.pointBreakdown == null) {
+                                return Container();
+                              }
+                              return SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: _point.pointBreakdown!
+                                      .map((point) => PointBreakDownWidget(
+                                            packageName:
+                                                point.packageName ?? '',
+                                            packageIcon:
+                                                point.packageIcon ?? '',
+                                            packageReward: point.reward ?? '',
+                                            packageCheckOutPoint:
+                                                '${point.checkoutPoints ?? 0}',
+                                          ))
+                                      .toList(),
+                                ),
+                              );
+                            });
                       }),
                   SizedBox(height: 23),
                   Visibility(

@@ -57,7 +57,7 @@ class _SeniorLeaderShipScreenPageState
                     alignment: Alignment.topCenter,
                     margin: EdgeInsets.only(bottom: 20, top: 20),
                     child: LinearProgressIndicator(
-                      value: widget.leadership.progress!.toDouble(),
+                      value: widget.leadership.progress!.toDouble()/100,
                       valueColor:
                           new AlwaysStoppedAnimation<Color>(Pallets.orange600),
                       backgroundColor: Colors.grey,
@@ -140,7 +140,7 @@ class _SeniorLeaderShipScreenPageState
                               alignment: Alignment.topCenter,
                               margin: EdgeInsets.only(bottom: 20, top: 20),
                               child: LinearProgressIndicator(
-                                value: widget.leadership.progress!.toDouble(),
+                                value: widget.leadership.progress!.toDouble()/100,
                                 valueColor: new AlwaysStoppedAnimation<Color>(
                                     Pallets.orange600),
                                 backgroundColor: Colors.grey,

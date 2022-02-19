@@ -75,7 +75,7 @@ class PrefManager {
 
   Future<dynamic> getCachedData({@required String? key}) async {
     _preferences = await SharedPreferences.getInstance();
-    final _data = await json.decode(_preferences!.getString(key!)!) ?? null;
+    final _data = await json.decode(_preferences?.getString(key??'')??'');
     return _data;
   }
 

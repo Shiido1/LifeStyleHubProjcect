@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/core/data/session_manager.dart';
 import 'package:lifestyle_hub/helper/routes/navigation.dart';
-import 'package:lifestyle_hub/ui/screens/signup/model/register_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/model/view_wallet_model.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
 import '../../../../../../../../helper/helper_handler.dart';
 import '../../viewmodel/package_viewmodel.dart';
 import '../../../../../../../widgets/buttons.dart';
@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 
 import '../lsh_banj_list.dart';
 
-void showPayment(
-    BuildContext context, int packageID, PackageViewmodel _payment) {
+void showPayment(BuildContext context, int packageID, PackageViewmodel _payment,
+    WalletViewmodel _model) {
   showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -69,7 +69,8 @@ void showPayment(
                       primary: Pallets.orange600,
                       onPressed: () {
                         PageRouter.goBack(context);
-                        walletBalanceModal(context, packageID, _payment);
+                        walletBalanceModal(
+                            context, packageID, _payment, _model);
                       },
                     ),
                     SizedBox(height: 32),
@@ -113,15 +114,14 @@ void showPayment(
       });
 }
 
-void walletBalanceModal(
-    BuildContext context, int packageID, PackageViewmodel _payment) {
-  final _wallet = Wallet.fromJson(SessionManager.instance.userWallet);
+void walletBalanceModal(BuildContext context, int packageID,
+    PackageViewmodel _payment, WalletViewmodel _wallets) {
   showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) {
         return Consumer<PackageViewmodel>(
-          builder: (context, provider, child) {
+          builder: (context, provider,  child) {
             return Container(
               padding: EdgeInsets.symmetric(vertical: 30, horizontal: 23),
               decoration: BoxDecoration(
@@ -141,7 +141,7 @@ void walletBalanceModal(
                           borderRadius: BorderRadius.circular(10),
                           color: Pallets.orange300),
                       child: TextView(
-                        text: 'Wallet ID (${_wallet.id})',
+                        text: 'Wallet ID ($packageID)',
                         fontWeight: FontWeight.w700,
                         fontSize: 12,
                         color: Pallets.white,
@@ -158,7 +158,7 @@ void walletBalanceModal(
                     ),
                     SizedBox(height: 16),
                     TextView(
-                        text: '${formatCurrency(_wallet.balance ?? 0)}',
+                        text: '${formatCurrency(_getTotal(_wallets.viewWalletModel?.wallets??[]))}',
                         fontWeight: FontWeight.w700,
                         fontSize: 24,
                         color: Pallets.grey700,
@@ -194,4 +194,13 @@ void walletBalanceModal(
           },
         );
       });
+}
+
+double? _getTotal(List<Wallets> _wallet) {
+  double totalScores = 0.0;
+  _wallet.forEach((item)  {
+    totalScores += item.balance!.toDouble();
+  });
+  
+  return totalScores;
 }

@@ -5,7 +5,7 @@ class LoginModel {
 
   LoginModel({this.user, this.token});
 
-  LoginModel.fromJson(Map<String, dynamic> json) {
+  LoginModel.fromJson(Map<dynamic, dynamic> json) {
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     token = json['token'];
   }
@@ -241,7 +241,7 @@ class Wallets {
       this.createdAt,
       this.updatedAt});
 
-  Wallets.fromJson(Map<String, dynamic> json) {
+  Wallets.fromJson(Map<dynamic, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     type = json['type'];

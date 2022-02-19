@@ -5,7 +5,6 @@ import 'package:lifestyle_hub/utils/pallets.dart';
 
 _leftTitles(BuildContext context) {
   return SideTitles(
-      interval: 2,
       showTitles: true,
       getTitles: (value) {
         switch (value.toInt()) {
@@ -21,30 +20,30 @@ _bottomTitles(BuildContext context) {
       showTitles: true,
       getTitles: (value) {
         switch (value.toInt()) {
-          case 0:
-            return 'Jan';
           case 1:
-            return 'Feb';
+            return 'J';
           case 2:
-            return 'Mar';
+            return 'F';
           case 3:
-            return 'Apr';
+            return 'M';
           case 4:
-            return 'May';
+            return 'A';
           case 5:
-            return 'Jun';
+            return 'M';
           case 6:
-            return 'Ju;';
+            return 'J';
           case 7:
-            return 'Aug';
+            return 'J';
           case 8:
-            return 'Sep';
+            return 'A';
           case 9:
-            return 'Oct';
+            return 'S';
           case 10:
-            return 'Nov';
+            return 'O';
           case 11:
-            return 'Dec';
+            return 'N';
+          case 12:
+            return 'D';
         }
         return '';
       },

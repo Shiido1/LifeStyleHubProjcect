@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lifestyle_hub/helper/configs/instances.dart';
 import 'package:lifestyle_hub/helper/helper_handler.dart';
 import 'package:lifestyle_hub/provider/_base_viewmodels.dart';
 import 'package:lifestyle_hub/ui/screens/dashboard/fragments/leadership/model/leadership_response_model.dart';
@@ -10,7 +9,7 @@ LeadershipRepository _leadershipRepository = LeadershipRepository();
 class LeadershipViewmodel extends BaseViewModel {
   late BuildContext _context;
   bool _loading = false;
- LeaderShipResponseModel? leadership;
+  LeaderShipResponseModel? leadership;
 
   BuildContext get buildContext => _context;
 
@@ -38,7 +37,6 @@ class LeadershipViewmodel extends BaseViewModel {
       // showLoading(notify: false);
       final _response = await _leadershipRepository.leadership();
       leadership = _response;
-      logger.d(_response.toJson());
     } catch (e) {
       // throw(e);
       showsnackBarInfo(this._context, message: e.toString());

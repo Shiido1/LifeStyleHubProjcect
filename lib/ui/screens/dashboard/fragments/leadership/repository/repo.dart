@@ -10,7 +10,6 @@ class LeadershipRepository {
     try {
       final _response = await apiBaseHelper.get(
           url: Paths.leadership, options: await getDioHeader());
-          logger.d(_response);
       return LeaderShipResponseModel.fromJson(_response);
     } catch (e) {
       throw e;

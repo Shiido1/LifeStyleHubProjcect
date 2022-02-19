@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifestyle_hub/ui/screens/dashboard/fragments/wallet/viewmodel/wallet_viewmodel.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../helper/routes/navigation.dart';
 import '../dao/profile_dao.dart';
@@ -21,11 +22,15 @@ class PurchasePackageScreen extends StatefulWidget {
 
 class _PurchasePackageScreenState extends State<PurchasePackageScreen> {
   PackageViewmodel? _packageViewmodel;
+  WalletViewmodel? _viewWalletModel;
 
   @override
   void initState() {
     _packageViewmodel = Provider.of<PackageViewmodel>(context, listen: false);
     _packageViewmodel!.init(context);
+    _viewWalletModel = Provider.of<WalletViewmodel>(context, listen: false);
+    _viewWalletModel!.init(context);
+    _viewWalletModel!.checkWallet();
     _packageViewmodel!.getAvailablePackages();
     _getCatchedInfos();
     super.initState();
@@ -87,7 +92,7 @@ class _PurchasePackageScreenState extends State<PurchasePackageScreen> {
                             indicatorSize: TabBarIndicatorSize.tab,
                             tabs: [
                               Tab(text: 'Extra Luxury'),
-                              Tab(text: 'Solid Refuge'),
+                              Tab(text: ' '),
                             ],
                           ),
                         ),
@@ -109,19 +114,7 @@ class _PurchasePackageScreenState extends State<PurchasePackageScreen> {
                                             : Container())
                                         .toList(),
                                   ),
-                                  ListView(
-                                    children: provider.packageListResponse!
-                                        .map((element) => element.type
-                                                    ?.toLowerCase() !=
-                                                'extra luxury'
-                                            ? ContentCard(element,
-                                                onTap: () =>
-                                                    PageRouter.gotoWidget(
-                                                        PaymentScreen(element),
-                                                        context))
-                                            : Container())
-                                        .toList(),
-                                  ),
+                                  Container()
                                 ]));
                           },
                         )
@@ -131,6 +124,5 @@ class _PurchasePackageScreenState extends State<PurchasePackageScreen> {
         ),
       ),
     );
-  
   }
 }

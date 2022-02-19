@@ -23,19 +23,19 @@ class InactivePackageDao {
   }
 
   Future<void> saveActivePackages(
-      List<ActivePackages>? viewPackagesList) async {
+      List<InactivePackages>? viewPackagesList) async {
     final _map = Map<String, Map>.fromIterable(
       viewPackagesList!,
-      key: (g) => (g as ActivePackages).name.toString(),
-      value: (g) => (g as ActivePackages).toJson(),
+      key: (g) => (g as InactivePackages).name.toString(),
+      value: (g) => (g as InactivePackages).toJson(),
     );
     await _box!.putAll(_map);
   }
 
-  List<ActivePackages> convert(Box box) {
+  List<InactivePackages> convert(Box box) {
     Map<String, dynamic> raw = new Map<String, dynamic>.from(box.toMap());
     return raw.values
-        .map((e) => ActivePackages.fromJson(json.decode(json.encode(e))))
+        .map((e) => InactivePackages.fromJson(json.decode(json.encode(e))))
         .toList();
   }
 

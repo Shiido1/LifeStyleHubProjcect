@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_html/flutter_html.dart';
 import '../../../../../../helper/helper_handler.dart';
 import '../../../../../../helper/routes/navigation.dart';
 import '../model/my_ticket_model.dart';
@@ -63,15 +64,33 @@ class TicketListWidget extends StatelessWidget {
               ],
             ),
             SizedBox(height: 18),
-            TextView(
-              text: element!.message!,
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-              color: Pallets.grey500,
-              textAlign: TextAlign.left,
-              maxLines: 2,
-              textOverflow: TextOverflow.ellipsis,
-            ),
+            // TextView(
+            //   text: element!.message!,
+            //   fontWeight: FontWeight.w500,
+            //   fontSize: 16,
+            //   color: Pallets.grey500,
+            //   textAlign: TextAlign.left,
+            //   maxLines: 2,
+            //   textOverflow: TextOverflow.ellipsis,
+            // ),
+
+            Html(data: element?.message ?? '', style: {
+              "table": Style(
+                backgroundColor: Color.fromARGB(0x50, 0xee, 0xee, 0xee),
+              ),
+              "tr": Style(
+                border: Border(bottom: BorderSide(color: Pallets.grey500)),
+              ),
+              "th": Style(
+                padding: EdgeInsets.all(6),
+                backgroundColor: Pallets.grey500,
+              ),
+              "td": Style(
+                padding: EdgeInsets.all(6),
+                alignment: Alignment.topLeft,
+              ),
+              'h5': Style(maxLines: 2, textOverflow: TextOverflow.ellipsis),
+            }),
             SizedBox(height: 18),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
