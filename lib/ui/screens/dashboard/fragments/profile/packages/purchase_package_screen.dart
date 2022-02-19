@@ -92,7 +92,7 @@ class _PurchasePackageScreenState extends State<PurchasePackageScreen> {
                             indicatorSize: TabBarIndicatorSize.tab,
                             tabs: [
                               Tab(text: 'Extra Luxury'),
-                              Tab(text: 'Solid Refuge'),
+                              Tab(text: ' '),
                             ],
                           ),
                         ),
@@ -114,19 +114,7 @@ class _PurchasePackageScreenState extends State<PurchasePackageScreen> {
                                             : Container())
                                         .toList(),
                                   ),
-                                  ListView(
-                                    children: provider.packageListResponse!
-                                        .map((element) => element.type
-                                                    ?.toLowerCase() !=
-                                                'extra luxury'
-                                            ? ContentCard(element,
-                                                onTap: () =>
-                                                    PageRouter.gotoWidget(
-                                                        PaymentScreen(element),
-                                                        context))
-                                            : Container())
-                                        .toList(),
-                                  ),
+                                  Container()
                                 ]));
                           },
                         )

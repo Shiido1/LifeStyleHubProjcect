@@ -88,6 +88,7 @@ class _VPPTabState extends State<VPPTab> {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: ListView(
+          shrinkWrap: true,
           children: [
             SizedBox(height: 32),
             Row(
@@ -203,7 +204,7 @@ class _VPPTabState extends State<VPPTab> {
                               title: 'Bar Chart',
                               chart: provider.freeSignUpModel == null
                                   ? Container()
-                                  : BarChartContent()),
+                                  : Expanded(child: BarChartContent())),
                         )
                       : Container(
                           height: 300,
@@ -211,7 +212,7 @@ class _VPPTabState extends State<VPPTab> {
                               title: 'Bar Chart',
                               chart: provider.upgradeSignUpModel == null
                                   ? Container()
-                                  : IncomeBarChartContent()),
+                                  : Expanded(child: IncomeBarChartContent())),
                         ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

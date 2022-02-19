@@ -64,12 +64,13 @@ class InformationViewModel extends BaseViewModel {
     }
   }
 
-  void getCountries() async {
+   getCountries() async {
     try {
       _showLoading();
       final _response = await _informationRepository.countriesRepo();
       countryModel = _response.country ?? [];
       _hideLoading();
+      return countryModel;
     } catch (e) {
       throw (e);
     }

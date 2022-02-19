@@ -113,10 +113,10 @@ class ReportViewmodel extends BaseViewModel {
   }
 
   Map<String, double> convertedUpgradedMemberMap() {
-    Map<String, double>? _map = Map<String, double>();
+    Map<String, double> ?_map = Map<String, double>();
     upgradedMembersAnalysis?.map((e) {
       if (e.name != "Total")
-        _map[e.name!] = double.parse(e.signups!.toString());
+        _map[e.name??''] = double.parse(e.signups.toString());
     }).toList();
     // notifyListeners();
     return _map;

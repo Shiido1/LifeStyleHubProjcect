@@ -202,38 +202,40 @@ class _PromotionTabState extends State<PromotionTab> {
                     : []),
             Visibility(
               visible: provider.pieAnalysisData.isNotEmpty,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 24),
-                  TextView(
-                    text: 'Analytics ',
-                    fontWeight: FontWeight.w700,
-                    textAlign: TextAlign.left,
-                    fontSize: 16,
-                  ),
-                  SizedBox(height: 16),
-                  Container(
-                    child: pieChart.PieChart(
-                      chartType: ChartType.disc,
-                      chartRadius: 245,
-                      dataMap: provider.convertedMap(),
-                      legendOptions: LegendOptions(
-                        showLegendsInRow: false,
-                        legendPosition: LegendPosition.bottom,
-                        showLegends: false,
-                        legendShape: BoxShape.circle,
-                      ),
-                      chartValuesOptions: ChartValuesOptions(
-                        showChartValueBackground: false,
-                        showChartValues: false,
-                        showChartValuesInPercentage: false,
-                        showChartValuesOutside: false,
+              child: Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 24),
+                    TextView(
+                      text: 'Analytics ',
+                      fontWeight: FontWeight.w700,
+                      textAlign: TextAlign.left,
+                      fontSize: 16,
+                    ),
+                    SizedBox(height: 16),
+                    Container(
+                      child: pieChart.PieChart(
+                        chartType: ChartType.disc,
+                        chartRadius: 245,
+                        dataMap: provider.convertedMap(),
+                        legendOptions: LegendOptions(
+                          showLegendsInRow: false,
+                          legendPosition: LegendPosition.bottom,
+                          showLegends: false,
+                          legendShape: BoxShape.circle,
+                        ),
+                        chartValuesOptions: ChartValuesOptions(
+                          showChartValueBackground: false,
+                          showChartValues: false,
+                          showChartValuesInPercentage: false,
+                          showChartValuesOutside: false,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -287,38 +289,40 @@ class _PromotionTabState extends State<PromotionTab> {
             ),
             Visibility(
               visible: provider.pieAnalysisData.isNotEmpty,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 24),
-                  TextView(
-                    text: 'Analytics ',
-                    fontWeight: FontWeight.w700,
-                    textAlign: TextAlign.left,
-                    fontSize: 16,
-                  ),
-                  SizedBox(height: 16),
-                  Container(
-                    child: pieChart.PieChart(
-                      chartType: ChartType.disc,
-                      chartRadius: 245,
-                      dataMap: provider.convertedUpgradedMemberMap(),
-                      legendOptions: LegendOptions(
-                        showLegendsInRow: false,
-                        legendPosition: LegendPosition.bottom,
-                        showLegends: false,
-                        legendShape: BoxShape.circle,
-                      ),
-                      chartValuesOptions: ChartValuesOptions(
-                        showChartValueBackground: false,
-                        showChartValues: false,
-                        showChartValuesInPercentage: false,
-                        showChartValuesOutside: false,
+              child: Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 24),
+                    TextView(
+                      text: 'Analytics ',
+                      fontWeight: FontWeight.w700,
+                      textAlign: TextAlign.left,
+                      fontSize: 16,
+                    ),
+                    SizedBox(height: 16),
+                    Container(
+                      child: pieChart.PieChart(
+                        chartType: ChartType.disc,
+                        chartRadius: 245,
+                        dataMap: provider.convertedUpgradedMemberMap(),
+                        legendOptions: LegendOptions(
+                          showLegendsInRow: false,
+                          legendPosition: LegendPosition.bottom,
+                          showLegends: false,
+                          legendShape: BoxShape.circle,
+                        ),
+                        chartValuesOptions: ChartValuesOptions(
+                          showChartValueBackground: false,
+                          showChartValues: false,
+                          showChartValuesInPercentage: false,
+                          showChartValuesOutside: false,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -326,15 +330,15 @@ class _PromotionTabState extends State<PromotionTab> {
             ),
             Column(
               children: provider.upgradedMembersAnalysis == null
-                  ?[]: provider.upgradedMembersAnalysis!
+                  ? []
+                  : provider.upgradedMembersAnalysis!
                       .map((e) => AnalyticalGraph(
                             element: AnalyticsModel(
                                 textClick: e.clicks!,
                                 textName: e.name!,
                                 textSignup: e.signups),
                           ))
-                      .toList()
-                  ,
+                      .toList(),
             ),
             SizedBox(
               height: 50,
